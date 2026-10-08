@@ -44,14 +44,15 @@ part of '../sdl_messagebox.dart';
 /// - [SDL_ShowMessageBox - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_ShowMessageBox)
 ///
 /// {@category messagebox}
-bool sdlxShowMessageBox(SdlxMessageBoxData messageBoxData) {
+int? sdlxShowMessageBox(SdlxMessageBoxData messageBoxData) {
+  int? selectedButtonId;
   final messageBoxDataPointer = messageBoxData.calloc();
   final buttonidPointer = ffi.calloc<Int32>();
   final result = sdlShowMessageBox(messageBoxDataPointer, buttonidPointer);
   if (result) {
-    messageBoxData.selectedButtonId = buttonidPointer.value;
+    selectedButtonId = buttonidPointer.value;
   }
   messageBoxDataPointer.callocAllFree();
   buttonidPointer.callocFree();
-  return result;
+  return selectedButtonId;
 }

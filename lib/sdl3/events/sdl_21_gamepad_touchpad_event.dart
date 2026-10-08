@@ -1,7 +1,7 @@
 part of '../sdl_events.dart';
 
 class SdlxGamepadTouchpadEvent extends SdlxEvent {
-  SdlxGamepadTouchpadEvent({
+  const SdlxGamepadTouchpadEvent({
     super.type = 0,
     super.reserved = 0,
     super.timestamp = 0,
@@ -12,6 +12,19 @@ class SdlxGamepadTouchpadEvent extends SdlxEvent {
     this.y = 0,
     this.pressure = 0,
   });
+
+  factory SdlxGamepadTouchpadEvent.fromPointer(Pointer<SdlEvent> pointer) =>
+      SdlxGamepadTouchpadEvent(
+        type: pointer.ref.gtouchpad.type,
+        reserved: pointer.ref.gtouchpad.reserved,
+        timestamp: pointer.ref.gtouchpad.timestamp,
+        which: pointer.ref.gtouchpad.which,
+        touchpad: pointer.ref.gtouchpad.touchpad,
+        finger: pointer.ref.gtouchpad.finger,
+        x: pointer.ref.gtouchpad.x,
+        y: pointer.ref.gtouchpad.y,
+        pressure: pointer.ref.gtouchpad.pressure,
+      );
 
   factory SdlxGamepadTouchpadEvent.down({
     int reserved = 0,
@@ -76,12 +89,12 @@ class SdlxGamepadTouchpadEvent extends SdlxEvent {
     pressure: pressure,
   );
 
-  int which;
-  int touchpad;
-  int finger;
-  double x;
-  double y;
-  double pressure;
+  final int which;
+  final int touchpad;
+  final int finger;
+  final double x;
+  final double y;
+  final double pressure;
 
   @override
   Pointer<SdlEvent> calloc() {
@@ -97,20 +110,4 @@ class SdlxGamepadTouchpadEvent extends SdlxEvent {
     pointer.ref.gtouchpad.pressure = pressure;
     return pointer;
   }
-
-  @override
-  void loadFromPointer(Pointer<SdlEvent> pointer) {
-    type = pointer.ref.gtouchpad.type;
-    reserved = pointer.ref.gtouchpad.reserved;
-    timestamp = pointer.ref.gtouchpad.timestamp;
-    which = pointer.ref.gtouchpad.which;
-    touchpad = pointer.ref.gtouchpad.touchpad;
-    finger = pointer.ref.gtouchpad.finger;
-    x = pointer.ref.gtouchpad.x;
-    y = pointer.ref.gtouchpad.y;
-    pressure = pointer.ref.gtouchpad.pressure;
-  }
-
-  static SdlxGamepadTouchpadEvent fromPointer(Pointer<SdlEvent> pointer) =>
-      SdlxGamepadTouchpadEvent()..loadFromPointer(pointer);
 }

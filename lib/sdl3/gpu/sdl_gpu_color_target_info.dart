@@ -13,22 +13,21 @@ class SdlxGpuColorTargetInfo {
     this.resolveLayer = 0,
     this.cycle = false,
     this.cycleResolveTexture = false,
-  }) {
-    this.texture = texture ?? nullptr;
-    this.clearColor = clearColor ?? SdlxFColor(0, 0, 0);
-    this.resolveTexture = resolveTexture ?? nullptr;
-  }
-  late Pointer<SdlGpuTexture> texture;
-  int mipLevel;
-  int layerOrDepthPlane;
-  late SdlxFColor clearColor;
-  int loadOp;
-  int storeOp;
-  late Pointer<SdlGpuTexture> resolveTexture;
-  int resolveMipLevel;
-  int resolveLayer;
-  bool cycle;
-  bool cycleResolveTexture;
+  }) : texture = texture ?? nullptr,
+       clearColor = clearColor ?? const SdlxFColor(0, 0, 0),
+       resolveTexture = resolveTexture ?? nullptr;
+
+  final Pointer<SdlGpuTexture> texture;
+  final int mipLevel;
+  final int layerOrDepthPlane;
+  final SdlxFColor clearColor;
+  final int loadOp;
+  final int storeOp;
+  final Pointer<SdlGpuTexture> resolveTexture;
+  final int resolveMipLevel;
+  final int resolveLayer;
+  final bool cycle;
+  final bool cycleResolveTexture;
 
   Pointer<SdlGpuColorTargetInfo> calloc() {
     final pointer = ffi.calloc<SdlGpuColorTargetInfo>();

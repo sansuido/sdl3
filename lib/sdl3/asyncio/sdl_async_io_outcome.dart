@@ -10,30 +10,30 @@ class SdlxAsyncIoOutcome {
     this.bytesRequested = 0,
     this.bytesTransferred = 0,
     Pointer<Void>? userdata,
-  }) {
-    this.asyncio = asyncio ?? nullptr;
-    this.buffer = buffer ?? nullptr;
-    this.userdata = userdata ?? nullptr;
-  }
-  late Pointer<SdlAsyncIo> asyncio;
-  int type;
-  int result;
-  late Pointer<Void> buffer;
-  int offset;
-  int bytesRequested;
-  int bytesTransferred;
-  late Pointer<Void> userdata;
+  }) : asyncio = asyncio ?? nullptr,
+       buffer = buffer ?? nullptr,
+       userdata = userdata ?? nullptr;
 
-  void loadFromPointer(Pointer<SdlAsyncIoOutcome> pointer) {
-    asyncio = pointer.ref.asyncio;
-    type = pointer.ref.type;
-    result = pointer.ref.result;
-    buffer = pointer.ref.buffer;
-    offset = pointer.ref.offset;
-    bytesRequested = pointer.ref.bytesRequested;
-    bytesTransferred = pointer.ref.bytesTransferred;
-    userdata = pointer.ref.userdata;
-  }
+  factory SdlxAsyncIoOutcome.fromPointer(Pointer<SdlAsyncIoOutcome> pointer) =>
+      SdlxAsyncIoOutcome(
+        asyncio: pointer.ref.asyncio,
+        type: pointer.ref.type,
+        result: pointer.ref.result,
+        buffer: pointer.ref.buffer,
+        offset: pointer.ref.offset,
+        bytesRequested: pointer.ref.bytesRequested,
+        bytesTransferred: pointer.ref.bytesTransferred,
+        userdata: pointer.ref.userdata,
+      );
+
+  final Pointer<SdlAsyncIo> asyncio;
+  final int type;
+  final int result;
+  final Pointer<Void> buffer;
+  final int offset;
+  final int bytesRequested;
+  final int bytesTransferred;
+  final Pointer<Void> userdata;
 
   Pointer<SdlAsyncIoOutcome> calloc() {
     final pointer = ffi.calloc<SdlAsyncIoOutcome>();

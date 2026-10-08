@@ -744,7 +744,7 @@ Pointer<NetStreamSocket> netCreateClient(
 /// \threadsafety You should not operate on the same socket from multiple
 /// threads at the same time without supplying a serialization
 /// mechanism. However, different threads may access different
-/// socket at the same time without problems.
+/// sockets at the same time without problems.
 ///
 /// \since This function is available since SDL_net 3.0.0.
 ///
@@ -1553,7 +1553,7 @@ Pointer<NetDatagramSocket> netCreateDatagramSocket(
 /// "connection" to fail at this level, but may report failure for
 /// unrecoverable system-level conditions; once a datagram socket fails, you
 /// should assume it is no longer usable and should destroy it with
-/// SDL_DestroyDatagramSocket().
+/// NET_DestroyDatagramSocket().
 ///
 /// Sending to a NULL address is treated as a request to broadcast a packet.
 /// Note that this will report failure immediately if the socket was not
@@ -1665,7 +1665,7 @@ bool netSendDatagram(
 /// "connection" to fail at this level, but may report failure for
 /// unrecoverable system-level conditions; once a datagram socket fails, you
 /// should assume it is no longer usable and should destroy it with
-/// SDL_DestroyDatagramSocket().
+/// NET_DestroyDatagramSocket().
 ///
 /// \param sock the datagram socket to send data through.
 /// \param dgram a pointer to the datagram packet pointer.

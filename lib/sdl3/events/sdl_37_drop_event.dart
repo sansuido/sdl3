@@ -1,7 +1,7 @@
 part of '../sdl_events.dart';
 
 class SdlxDropEvent extends SdlxEvent {
-  SdlxDropEvent({
+  const SdlxDropEvent({
     super.type = 0,
     super.reserved = 0,
     super.timestamp = 0,
@@ -11,6 +11,26 @@ class SdlxDropEvent extends SdlxEvent {
     this.source = '',
     this.data = '',
   });
+
+  factory SdlxDropEvent.fromPointer(Pointer<SdlEvent> pointer) {
+    final source = pointer.ref.drop.source != nullptr
+        ? pointer.ref.drop.source.toDartString()
+        : '';
+    final data = pointer.ref.drop.data != nullptr
+        ? pointer.ref.drop.data.toDartString()
+        : '';
+
+    return SdlxDropEvent(
+      type: pointer.ref.drop.type,
+      reserved: pointer.ref.drop.reserved,
+      timestamp: pointer.ref.drop.timestamp,
+      windowId: pointer.ref.drop.windowId,
+      x: pointer.ref.drop.x,
+      y: pointer.ref.drop.y,
+      source: source,
+      data: data,
+    );
+  }
 
   factory SdlxDropEvent.begin({
     int reserved = 0,
@@ -107,11 +127,11 @@ class SdlxDropEvent extends SdlxEvent {
     data: data,
   );
 
-  int windowId;
-  double x;
-  double y;
-  String source;
-  String data;
+  final int windowId;
+  final double x;
+  final double y;
+  final String source;
+  final String data;
 
   @override
   bool isTargetWindow(int targetId, {bool ifNoWindow = true}) =>
@@ -134,23 +154,4 @@ class SdlxDropEvent extends SdlxEvent {
     }
     return pointer;
   }
-
-  @override
-  void loadFromPointer(Pointer<SdlEvent> pointer) {
-    type = pointer.ref.drop.type;
-    reserved = pointer.ref.drop.reserved;
-    timestamp = pointer.ref.drop.timestamp;
-    windowId = pointer.ref.drop.windowId;
-    x = pointer.ref.drop.x;
-    y = pointer.ref.drop.y;
-    if (pointer.ref.drop.source != nullptr) {
-      source = pointer.ref.drop.source.toDartString();
-    }
-    if (pointer.ref.drop.data != nullptr) {
-      data = pointer.ref.drop.data.toDartString();
-    }
-  }
-
-  static SdlxDropEvent fromPointer(Pointer<SdlEvent> pointer) =>
-      SdlxDropEvent()..loadFromPointer(pointer);
 }

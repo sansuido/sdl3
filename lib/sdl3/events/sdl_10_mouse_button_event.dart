@@ -1,7 +1,7 @@
 part of '../sdl_events.dart';
 
 class SdlxMouseButtonEvent extends SdlxEvent {
-  SdlxMouseButtonEvent({
+  const SdlxMouseButtonEvent({
     super.type = 0,
     super.reserved = 0,
     super.timestamp = 0,
@@ -13,6 +13,20 @@ class SdlxMouseButtonEvent extends SdlxEvent {
     this.x = 0,
     this.y = 0,
   });
+
+  factory SdlxMouseButtonEvent.fromPointer(Pointer<SdlEvent> pointer) =>
+      SdlxMouseButtonEvent(
+        type: pointer.ref.button.type,
+        reserved: pointer.ref.button.reserved,
+        timestamp: pointer.ref.button.timestamp,
+        windowId: pointer.ref.button.windowId,
+        which: pointer.ref.button.which,
+        button: pointer.ref.button.button,
+        down: pointer.ref.button.down,
+        clicks: pointer.ref.button.clicks,
+        x: pointer.ref.button.x,
+        y: pointer.ref.button.y,
+      );
 
   factory SdlxMouseButtonEvent.down({
     int reserved = 0,
@@ -60,13 +74,13 @@ class SdlxMouseButtonEvent extends SdlxEvent {
     y: y,
   );
 
-  int windowId;
-  int which;
-  int button;
-  bool down;
-  int clicks;
-  double x;
-  double y;
+  final int windowId;
+  final int which;
+  final int button;
+  final bool down;
+  final int clicks;
+  final double x;
+  final double y;
 
   @override
   bool isTargetWindow(int targetId, {bool ifNoWindow = true}) =>
@@ -87,21 +101,4 @@ class SdlxMouseButtonEvent extends SdlxEvent {
     pointer.ref.button.y = y;
     return pointer;
   }
-
-  @override
-  void loadFromPointer(Pointer<SdlEvent> pointer) {
-    type = pointer.ref.button.type;
-    reserved = pointer.ref.button.reserved;
-    timestamp = pointer.ref.button.timestamp;
-    windowId = pointer.ref.button.windowId;
-    which = pointer.ref.button.which;
-    button = pointer.ref.button.button;
-    down = pointer.ref.button.down;
-    clicks = pointer.ref.button.clicks;
-    x = pointer.ref.button.x;
-    y = pointer.ref.button.y;
-  }
-
-  static SdlxMouseButtonEvent fromPointer(Pointer<SdlEvent> pointer) =>
-      SdlxMouseButtonEvent()..loadFromPointer(pointer);
 }

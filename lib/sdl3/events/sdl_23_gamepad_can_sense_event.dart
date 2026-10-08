@@ -1,7 +1,7 @@
 part of '../sdl_events.dart';
 
 class SdlxGamepadCapSenseEvent extends SdlxEvent {
-  SdlxGamepadCapSenseEvent({
+  const SdlxGamepadCapSenseEvent({
     super.type = 0,
     super.reserved = 0,
     super.timestamp = 0,
@@ -9,6 +9,16 @@ class SdlxGamepadCapSenseEvent extends SdlxEvent {
     this.capsense = 0,
     this.down = false,
   });
+
+  factory SdlxGamepadCapSenseEvent.fromPointer(Pointer<SdlEvent> pointer) =>
+      SdlxGamepadCapSenseEvent(
+        type: pointer.ref.gcapsense.type,
+        reserved: pointer.ref.gcapsense.reserved,
+        timestamp: pointer.ref.gcapsense.timestamp,
+        which: pointer.ref.gcapsense.which,
+        capsense: pointer.ref.gcapsense.capsense,
+        down: pointer.ref.gcapsense.down,
+      );
 
   factory SdlxGamepadCapSenseEvent.touch({
     int reserved = 0,
@@ -40,9 +50,9 @@ class SdlxGamepadCapSenseEvent extends SdlxEvent {
     down: down,
   );
 
-  int which;
-  int capsense;
-  bool down;
+  final int which;
+  final int capsense;
+  final bool down;
 
   @override
   Pointer<SdlEvent> calloc() {
@@ -55,17 +65,4 @@ class SdlxGamepadCapSenseEvent extends SdlxEvent {
     pointer.ref.gcapsense.down = down;
     return pointer;
   }
-
-  @override
-  void loadFromPointer(Pointer<SdlEvent> pointer) {
-    type = pointer.ref.gcapsense.type;
-    reserved = pointer.ref.gcapsense.reserved;
-    timestamp = pointer.ref.gcapsense.timestamp;
-    which = pointer.ref.gcapsense.which;
-    capsense = pointer.ref.gcapsense.capsense;
-    down = pointer.ref.gcapsense.down;
-  }
-
-  static SdlxGamepadCapSenseEvent fromPointer(Pointer<SdlEvent> pointer) =>
-      SdlxGamepadCapSenseEvent()..loadFromPointer(pointer);
 }

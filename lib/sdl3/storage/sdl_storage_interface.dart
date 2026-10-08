@@ -14,33 +14,51 @@ class SdlxStorageInterface {
     Pointer<NativeFunction<SdlStorageInterfaceRename>>? rename,
     Pointer<NativeFunction<SdlStorageInterfaceCopy>>? copy,
     Pointer<NativeFunction<SdlStorageInterfaceSpaceRemaining>>? spaceRemaining,
-  }) {
-    this.version = version ?? sizeOf<SdlStorageInterface>();
-    this.close = close ?? nullptr;
-    this.ready = ready ?? nullptr;
-    this.enumerate = enumerate ?? nullptr;
-    this.info = info ?? nullptr;
-    this.readFile = readFile ?? nullptr;
-    this.writeFile = writeFile ?? nullptr;
-    this.mkdir = mkdir ?? nullptr;
-    this.remove = remove ?? nullptr;
-    this.rename = rename ?? nullptr;
-    this.copy = copy ?? nullptr;
-    this.spaceRemaining = spaceRemaining ?? nullptr;
+  }) : version = version ?? sizeOf<SdlStorageInterface>(),
+       close = close ?? nullptr,
+       ready = ready ?? nullptr,
+       enumerate = enumerate ?? nullptr,
+       info = info ?? nullptr,
+       readFile = readFile ?? nullptr,
+       writeFile = writeFile ?? nullptr,
+       mkdir = mkdir ?? nullptr,
+       remove = remove ?? nullptr,
+       rename = rename ?? nullptr,
+       copy = copy ?? nullptr,
+       spaceRemaining = spaceRemaining ?? nullptr;
+
+  factory SdlxStorageInterface.fromPointer(
+    Pointer<SdlStorageInterface> pointer,
+  ) {
+    final ref = pointer.ref;
+    return SdlxStorageInterface(
+      version: ref.version,
+      close: ref.close,
+      ready: ref.ready,
+      enumerate: ref.enumerate,
+      info: ref.info,
+      readFile: ref.readFile,
+      writeFile: ref.writeFile,
+      mkdir: ref.mkdir,
+      remove: ref.remove,
+      rename: ref.rename,
+      copy: ref.copy,
+      spaceRemaining: ref.spaceRemaining,
+    );
   }
 
-  late int version;
-  late Pointer<NativeFunction<SdlStorageInterfaceClose>> close;
-  late Pointer<NativeFunction<SdlStorageInterfaceReady>> ready;
-  late Pointer<NativeFunction<SdlStorageInterfaceEnumerate>> enumerate;
-  late Pointer<NativeFunction<SdlStorageInterfaceInfo>> info;
-  late Pointer<NativeFunction<SdlStorageInterfaceReadFile>> readFile;
-  late Pointer<NativeFunction<SdlStorageInterfaceWriteFile>> writeFile;
-  late Pointer<NativeFunction<SdlStorageInterfaceMkdir>> mkdir;
-  late Pointer<NativeFunction<SdlStorageInterfaceRemove>> remove;
-  late Pointer<NativeFunction<SdlStorageInterfaceRename>> rename;
-  late Pointer<NativeFunction<SdlStorageInterfaceCopy>> copy;
-  late Pointer<NativeFunction<SdlStorageInterfaceSpaceRemaining>>
+  final int version;
+  final Pointer<NativeFunction<SdlStorageInterfaceClose>> close;
+  final Pointer<NativeFunction<SdlStorageInterfaceReady>> ready;
+  final Pointer<NativeFunction<SdlStorageInterfaceEnumerate>> enumerate;
+  final Pointer<NativeFunction<SdlStorageInterfaceInfo>> info;
+  final Pointer<NativeFunction<SdlStorageInterfaceReadFile>> readFile;
+  final Pointer<NativeFunction<SdlStorageInterfaceWriteFile>> writeFile;
+  final Pointer<NativeFunction<SdlStorageInterfaceMkdir>> mkdir;
+  final Pointer<NativeFunction<SdlStorageInterfaceRemove>> remove;
+  final Pointer<NativeFunction<SdlStorageInterfaceRename>> rename;
+  final Pointer<NativeFunction<SdlStorageInterfaceCopy>> copy;
+  final Pointer<NativeFunction<SdlStorageInterfaceSpaceRemaining>>
   spaceRemaining;
 
   Pointer<SdlStorageInterface> calloc() {
@@ -58,20 +76,5 @@ class SdlxStorageInterface {
     pointer.ref.copy = copy;
     pointer.ref.spaceRemaining = spaceRemaining;
     return pointer;
-  }
-
-  void loadFromPointer(Pointer<SdlStorageInterface> pointer) {
-    version = pointer.ref.version;
-    close = pointer.ref.close;
-    ready = pointer.ref.ready;
-    enumerate = pointer.ref.enumerate;
-    info = pointer.ref.info;
-    readFile = pointer.ref.readFile;
-    writeFile = pointer.ref.writeFile;
-    mkdir = pointer.ref.mkdir;
-    remove = pointer.ref.remove;
-    rename = pointer.ref.rename;
-    copy = pointer.ref.copy;
-    spaceRemaining = pointer.ref.spaceRemaining;
   }
 }

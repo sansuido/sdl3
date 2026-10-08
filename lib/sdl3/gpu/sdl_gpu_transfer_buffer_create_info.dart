@@ -1,14 +1,15 @@
 part of '../sdl_gpu.dart';
 
 class SdlxGpuTransferBufferCreateInfo {
-  SdlxGpuTransferBufferCreateInfo({
+  const SdlxGpuTransferBufferCreateInfo({
     this.usage = 0,
     this.size = 0,
     this.props = 0,
   });
-  int usage;
-  int size;
-  int props;
+
+  final int usage;
+  final int size;
+  final int props;
 
   Pointer<SdlGpuTransferBufferCreateInfo> calloc() {
     final pointer = ffi.calloc<SdlGpuTransferBufferCreateInfo>();

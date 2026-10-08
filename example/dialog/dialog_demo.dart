@@ -45,14 +45,18 @@ Future<void> main() async {
             sdlxShowOpenFileDialog(
               callback: dialogFileCall.nativeFunction,
               window: window,
-              filters: [SdlxDialogFileFilter(name: 'All Files', pattern: '*')],
+              filters: [
+                const SdlxDialogFileFilter(name: 'All Files', pattern: '*'),
+              ],
               allowMany: true,
             );
           case SdlkScancode.s:
             sdlxShowSaveFileDialog(
               callback: dialogFileCall.nativeFunction,
               window: window,
-              filters: [SdlxDialogFileFilter(name: 'All Files', pattern: '*')],
+              filters: [
+                const SdlxDialogFileFilter(name: 'All Files', pattern: '*'),
+              ],
               defaultLocation: 'default.txt',
             );
         }

@@ -1,7 +1,7 @@
 part of '../sdl_events.dart';
 
 class SdlxPenTouchEvent extends SdlxEvent {
-  SdlxPenTouchEvent({
+  const SdlxPenTouchEvent({
     super.type = 0,
     super.reserved = 0,
     super.timestamp = 0,
@@ -12,7 +12,23 @@ class SdlxPenTouchEvent extends SdlxEvent {
     this.y = 0,
     this.eraser = false,
     this.down = false,
+    this.devideType = 0,
   });
+
+  factory SdlxPenTouchEvent.fromPointer(Pointer<SdlEvent> pointer) =>
+      SdlxPenTouchEvent(
+        type: pointer.ref.ptouch.type,
+        reserved: pointer.ref.ptouch.reserved,
+        timestamp: pointer.ref.ptouch.timestamp,
+        windowId: pointer.ref.ptouch.windowId,
+        which: pointer.ref.ptouch.which,
+        penState: pointer.ref.ptouch.penState,
+        x: pointer.ref.ptouch.x,
+        y: pointer.ref.ptouch.y,
+        eraser: pointer.ref.ptouch.eraser,
+        down: pointer.ref.ptouch.down,
+        devideType: pointer.ref.ptouch.deviceType,
+      );
 
   factory SdlxPenTouchEvent.down({
     int reserved = 0,
@@ -24,6 +40,7 @@ class SdlxPenTouchEvent extends SdlxEvent {
     double y = 0,
     bool eraser = false,
     bool down = false,
+    int devideType = 0,
   }) => SdlxPenTouchEvent(
     type: SDL_EVENT_PEN_DOWN,
     reserved: reserved,
@@ -35,6 +52,7 @@ class SdlxPenTouchEvent extends SdlxEvent {
     y: y,
     eraser: eraser,
     down: down,
+    devideType: devideType,
   );
 
   factory SdlxPenTouchEvent.up({
@@ -47,6 +65,7 @@ class SdlxPenTouchEvent extends SdlxEvent {
     double y = 0,
     bool eraser = false,
     bool down = false,
+    int devideType = 0,
   }) => SdlxPenTouchEvent(
     type: SDL_EVENT_PEN_UP,
     reserved: reserved,
@@ -58,15 +77,17 @@ class SdlxPenTouchEvent extends SdlxEvent {
     y: y,
     eraser: eraser,
     down: down,
+    devideType: devideType,
   );
 
-  int windowId;
-  int which;
-  int penState;
-  double x;
-  double y;
-  bool eraser;
-  bool down;
+  final int windowId;
+  final int which;
+  final int penState;
+  final double x;
+  final double y;
+  final bool eraser;
+  final bool down;
+  final int devideType;
 
   @override
   bool isTargetWindow(int targetId, {bool ifNoWindow = true}) =>
@@ -85,23 +106,7 @@ class SdlxPenTouchEvent extends SdlxEvent {
     pointer.ref.ptouch.y = y;
     pointer.ref.ptouch.eraser = eraser;
     pointer.ref.ptouch.down = down;
+    pointer.ref.ptouch.deviceType = devideType;
     return pointer;
   }
-
-  @override
-  void loadFromPointer(Pointer<SdlEvent> pointer) {
-    type = pointer.ref.ptouch.type;
-    reserved = pointer.ref.ptouch.reserved;
-    timestamp = pointer.ref.ptouch.timestamp;
-    windowId = pointer.ref.ptouch.windowId;
-    which = pointer.ref.ptouch.which;
-    penState = pointer.ref.ptouch.penState;
-    x = pointer.ref.ptouch.x;
-    y = pointer.ref.ptouch.y;
-    eraser = pointer.ref.ptouch.eraser;
-    down = pointer.ref.ptouch.down;
-  }
-
-  static SdlxPenTouchEvent fromPointer(Pointer<SdlEvent> pointer) =>
-      SdlxPenTouchEvent()..loadFromPointer(pointer);
 }

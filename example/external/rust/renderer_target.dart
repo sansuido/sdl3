@@ -47,20 +47,20 @@ int main() {
       }
     }
     angle += 0.5;
-    final dstrect = SdlxFRect(0, 0, 400, 300);
+    const dstrect = SdlxFRect(0, 0, 400, 300);
     renderer
       ..setTarget(texture)
       ..clear()
-      ..setDrawColor(SdlxColor(0xff, 0, 0))
+      ..setDrawColor(const SdlxColor(0xff, 0, 0))
       ..fillRect(dstrect)
       ..setTarget(nullptr)
-      ..setDrawColor(SdlxColor(0, 0, 0))
+      ..setDrawColor(const SdlxColor(0, 0, 0))
       ..clear()
       ..textureRotated(
         texture,
         dstrect: dstrect,
         angle: angle,
-        center: SdlxFPoint(400, 300),
+        center: const SdlxFPoint(400, 300),
       )
       ..present();
   }

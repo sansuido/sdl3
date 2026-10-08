@@ -22,17 +22,19 @@ int main() {
     return -1;
   }
   final vertices = <SdlxVertex>[
-    SdlxVertex()
-      ..position = SdlxFPoint(400, 150)
-      ..color = SdlxFColor(1, 0, 0),
-    SdlxVertex()
-      ..position = SdlxFPoint(200, 450)
-      ..color = SdlxFColor(0, 0, 1),
-    SdlxVertex()
-      ..position = SdlxFPoint(600, 450)
-      ..color = SdlxFColor(0, 1, 0),
+    const SdlxVertex(
+      position: SdlxFPoint(400, 150),
+      color: SdlxFColor(1, 0, 0),
+    ),
+    const SdlxVertex(
+      position: SdlxFPoint(200, 450),
+      color: SdlxFColor(0, 0, 1),
+    ),
+    const SdlxVertex(
+      position: SdlxFPoint(600, 450),
+      color: SdlxFColor(0, 1, 0),
+    ),
   ];
-
   var running = true;
   while (running) {
     SdlxEvent? event;
@@ -47,7 +49,7 @@ int main() {
       }
     }
     renderer
-      ..setDrawColor(SdlxColor(0, 0, 0))
+      ..setDrawColor(const SdlxColor(0, 0, 0))
       ..clear()
       ..geometry(vertices)
       ..present();

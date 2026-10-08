@@ -1,11 +1,15 @@
 part of '../sdl_rect.dart';
 
 class SdlxFPoint {
-  SdlxFPoint(this.x, this.y);
-  double x;
-  double y;
+  const SdlxFPoint(this.x, this.y);
 
-  static SdlxFPoint get zero => SdlxFPoint(0, 0);
+  factory SdlxFPoint.fromPointer(Pointer<SdlFPoint> pointer) =>
+      SdlxFPoint(pointer.ref.x, pointer.ref.y);
+
+  final double x;
+  final double y;
+
+  static SdlxFPoint get zero => const SdlxFPoint(0, 0);
 
   SdlxPoint toInt() => SdlxPoint(x.toInt(), y.toInt());
 

@@ -1,7 +1,7 @@
 part of '../sdl_events.dart';
 
 class SdlxGamepadAxisEvent extends SdlxEvent {
-  SdlxGamepadAxisEvent({
+  const SdlxGamepadAxisEvent({
     super.type = SDL_EVENT_GAMEPAD_AXIS_MOTION,
     super.reserved = 0,
     super.timestamp = 0,
@@ -10,9 +10,19 @@ class SdlxGamepadAxisEvent extends SdlxEvent {
     this.value = 0,
   });
 
-  int which;
-  int axis;
-  int value;
+  factory SdlxGamepadAxisEvent.fromPointer(Pointer<SdlEvent> pointer) =>
+      SdlxGamepadAxisEvent(
+        type: pointer.ref.gaxis.type,
+        reserved: pointer.ref.gaxis.reserved,
+        timestamp: pointer.ref.gaxis.timestamp,
+        which: pointer.ref.gaxis.which,
+        axis: pointer.ref.gaxis.axis,
+        value: pointer.ref.gaxis.value,
+      );
+
+  final int which;
+  final int axis;
+  final int value;
 
   @override
   Pointer<SdlEvent> calloc() {
@@ -25,17 +35,4 @@ class SdlxGamepadAxisEvent extends SdlxEvent {
     pointer.ref.gaxis.value = value;
     return pointer;
   }
-
-  @override
-  void loadFromPointer(Pointer<SdlEvent> pointer) {
-    type = pointer.ref.gaxis.type;
-    reserved = pointer.ref.gaxis.reserved;
-    timestamp = pointer.ref.gaxis.timestamp;
-    which = pointer.ref.gaxis.which;
-    axis = pointer.ref.gaxis.axis;
-    value = pointer.ref.gaxis.value;
-  }
-
-  static SdlxGamepadAxisEvent fromPointer(Pointer<SdlEvent> pointer) =>
-      SdlxGamepadAxisEvent()..loadFromPointer(pointer);
 }

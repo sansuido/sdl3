@@ -1,17 +1,38 @@
 part of '../sdl_events.dart';
 
 class SdlxClipboardEvent extends SdlxEvent {
-  SdlxClipboardEvent({
+  const SdlxClipboardEvent({
     super.type = SDL_EVENT_CLIPBOARD_UPDATE,
     super.reserved = 0,
     super.timestamp = 0,
     this.owner = false,
-    List<String>? mimeTypes,
-  }) {
-    this.mimeTypes = mimeTypes ?? [];
+    this.mimeTypes = const [],
+  });
+
+  factory SdlxClipboardEvent.fromPointer(Pointer<SdlEvent> pointer) {
+    final ref = pointer.ref.clipboard;
+
+    final mimeTypeList = <String>[];
+    if (ref.mimeTypes != nullptr && ref.numMimeTypes > 0) {
+      for (var i = 0; i < ref.numMimeTypes; i++) {
+        final ptr = ref.mimeTypes[i];
+        if (ptr != nullptr) {
+          mimeTypeList.add(ptr.cast<ffi.Utf8>().toDartString());
+        }
+      }
+    }
+
+    return SdlxClipboardEvent(
+      type: ref.type,
+      reserved: ref.reserved,
+      timestamp: ref.timestamp,
+      owner: ref.owner,
+      mimeTypes: List.unmodifiable(mimeTypeList),
+    );
   }
-  bool owner;
-  late List<String> mimeTypes;
+
+  final bool owner;
+  final List<String> mimeTypes;
 
   @override
   Pointer<SdlEvent> calloc() {
@@ -30,22 +51,4 @@ class SdlxClipboardEvent extends SdlxEvent {
     }
     return pointer;
   }
-
-  @override
-  void loadFromPointer(Pointer<SdlEvent> pointer) {
-    type = pointer.ref.clipboard.type;
-    reserved = pointer.ref.clipboard.reserved;
-    timestamp = pointer.ref.clipboard.timestamp;
-    owner = pointer.ref.clipboard.owner;
-    for (var i = 0; i < pointer.ref.clipboard.numMimeTypes; i++) {
-      if (pointer.ref.clipboard.mimeTypes[i] != nullptr) {
-        mimeTypes.add(
-          pointer.ref.clipboard.mimeTypes[i].cast<ffi.Utf8>().toDartString(),
-        );
-      }
-    }
-  }
-
-  static SdlxClipboardEvent fromPointer(Pointer<SdlEvent> pointer) =>
-      SdlxClipboardEvent()..loadFromPointer(pointer);
 }

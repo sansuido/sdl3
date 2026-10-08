@@ -60,7 +60,7 @@ int main() {
       }
     }
     renderer
-      ..setDrawColor(SdlxColor(0xff, 0xff, 0xff))
+      ..setDrawColor(const SdlxColor(0xff, 0xff, 0xff))
       ..clear();
     if (texture != nullptr) {
       renderer.texture(texture);

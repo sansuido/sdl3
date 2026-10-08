@@ -963,6 +963,9 @@ final class SdlPenProximityEvent extends Struct {
   // [24]+(4)
   @Uint32()
   external int penState;
+  // [28]+(4)
+  @Int32()
+  external int deviceType;
 }
 
 // SDL_PenMotionEvent
@@ -992,6 +995,9 @@ final class SdlPenMotionEvent extends Struct {
   // [32]+(4)
   @Float()
   external double y;
+  // [36]+(4)
+  @Int32()
+  external int deviceType;
 }
 
 // SDL_PenTouchEvent
@@ -1027,6 +1033,9 @@ final class SdlPenTouchEvent extends Struct {
   // [37]+(1)
   @Bool()
   external bool down;
+  // [40]+(4)
+  @Int32()
+  external int deviceType;
 }
 
 // SDL_PenButtonEvent
@@ -1062,6 +1071,9 @@ final class SdlPenButtonEvent extends Struct {
   // [37]+(1)
   @Bool()
   external bool down;
+  // [40]+(4)
+  @Int32()
+  external int deviceType;
 }
 
 // SDL_PenAxisEvent
@@ -1097,6 +1109,9 @@ final class SdlPenAxisEvent extends Struct {
   // [40]+(4)
   @Float()
   external double value;
+  // [44]+(4)
+  @Int32()
+  external int deviceType;
 }
 
 // SDL_DropEvent
@@ -1279,11 +1294,11 @@ final class SdlEvent extends Union {
   external SdlPinchFingerEvent pinch;
   // [0]+(32)
   external SdlPenProximityEvent pproximity;
-  // [0]+(40)
+  // [0]+(48)
   external SdlPenTouchEvent ptouch;
   // [0]+(40)
   external SdlPenMotionEvent pmotion;
-  // [0]+(40)
+  // [0]+(48)
   external SdlPenButtonEvent pbutton;
   // [0]+(48)
   external SdlPenAxisEvent paxis;

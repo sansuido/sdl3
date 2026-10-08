@@ -1,7 +1,7 @@
 part of '../sdl_messagebox.dart';
 
 class SdlxMessageBoxColorScheme {
-  SdlxMessageBoxColorScheme({
+  const SdlxMessageBoxColorScheme({
     required this.background,
     required this.text,
     required this.buttonBorder,
@@ -9,11 +9,11 @@ class SdlxMessageBoxColorScheme {
     required this.buttonSelected,
   });
 
-  SdlxColor background;
-  SdlxColor text;
-  SdlxColor buttonBorder;
-  SdlxColor buttonBackground;
-  SdlxColor buttonSelected;
+  final SdlxColor background;
+  final SdlxColor text;
+  final SdlxColor buttonBorder;
+  final SdlxColor buttonBackground;
+  final SdlxColor buttonSelected;
 
   Pointer<SdlMessageBoxColorScheme> calloc() {
     final pointer = ffi.calloc<SdlMessageBoxColorScheme>();
@@ -38,10 +38,15 @@ class SdlxMessageBoxColorScheme {
 }
 
 class SdlxMessageBoxButtonData {
-  SdlxMessageBoxButtonData({this.flags = 0, this.buttonId = 0, this.text = ''});
-  int flags;
-  int buttonId;
-  String text;
+  const SdlxMessageBoxButtonData({
+    this.flags = 0,
+    this.buttonId = 0,
+    this.text = '',
+  });
+
+  final int flags;
+  final int buttonId;
+  final String text;
 }
 
 class SdlxMessageBoxData {
@@ -50,20 +55,16 @@ class SdlxMessageBoxData {
     Pointer<SdlWindow>? window,
     this.title = '',
     this.message = '',
-    List<SdlxMessageBoxButtonData>? buttons,
+    this.buttons = const [],
     this.colorScheme,
-  }) {
-    this.window = window ?? nullptr;
-    this.buttons = buttons ?? [];
-    selectedButtonId = 0;
-  }
-  int flags;
-  late Pointer<SdlWindow> window;
-  String title;
-  String message;
-  late List<SdlxMessageBoxButtonData> buttons;
-  SdlxMessageBoxColorScheme? colorScheme;
-  late int selectedButtonId;
+  }) : window = window ?? nullptr;
+
+  final int flags;
+  final Pointer<SdlWindow> window;
+  final String title;
+  final String message;
+  final List<SdlxMessageBoxButtonData> buttons;
+  final SdlxMessageBoxColorScheme? colorScheme;
 
   Pointer<SdlMessageBoxData> calloc() {
     final pointer = ffi.calloc<SdlMessageBoxData>();

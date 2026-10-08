@@ -1,9 +1,7 @@
 part of '../sdl_sensor.dart';
 
 class SdlxSensorData {
-  SdlxSensorData({List<double>? data}) {
-    this.data = data ?? [];
-  }
+  const SdlxSensorData({this.data = const []});
 
-  late List<double> data;
+  final List<double> data;
 }

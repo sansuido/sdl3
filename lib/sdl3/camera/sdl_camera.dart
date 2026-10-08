@@ -178,7 +178,7 @@ extension SdlCameraPointerEx on Pointer<SdlCamera> {
   /// - [SDL_GetCameraFormat - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetCameraFormat)
   ///
   /// {@category camera}
-  bool getFormat(SdlxCameraSpec spec) => sdlxGetCameraFormat(this, spec);
+  SdlxCameraSpec? getFormat() => sdlxGetCameraFormat(this);
 
   ///
   /// Acquire a frame.

@@ -426,8 +426,7 @@ extension SdlStoragePointerEx on Pointer<SdlStorage> {
   /// - [SDL_GetStoragePathInfo - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetStoragePathInfo)
   ///
   /// {@category storage}
-  bool getPathInfo(String path, SdlxPathInfo info) =>
-      sdlxGetStoragePathInfo(this, path, info);
+  SdlxPathInfo? getPathInfo(String path) => sdlxGetStoragePathInfo(this, path);
 
   ///
   /// Queries the remaining space in a storage container.

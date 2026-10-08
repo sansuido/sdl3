@@ -1,7 +1,18 @@
 part of '../sdl_events.dart';
 
 class SdlxCommonEvent extends SdlxEvent {
-  SdlxCommonEvent({super.type = 0, super.reserved = 0, super.timestamp = 0});
+  const SdlxCommonEvent({
+    super.type = 0,
+    super.reserved = 0,
+    super.timestamp = 0,
+  });
+
+  factory SdlxCommonEvent.fromPointer(Pointer<SdlEvent> pointer) =>
+      SdlxCommonEvent(
+        type: pointer.ref.common.type,
+        reserved: pointer.ref.common.reserved,
+        timestamp: pointer.ref.common.timestamp,
+      );
 
   @override
   Pointer<SdlEvent> calloc() {
@@ -11,14 +22,4 @@ class SdlxCommonEvent extends SdlxEvent {
     pointer.ref.common.timestamp = timestamp;
     return pointer;
   }
-
-  @override
-  void loadFromPointer(Pointer<SdlEvent> pointer) {
-    type = pointer.ref.common.type;
-    reserved = pointer.ref.common.reserved;
-    timestamp = pointer.ref.common.timestamp;
-  }
-
-  static SdlxCommonEvent fromPointer(Pointer<SdlEvent> pointer) =>
-      SdlxCommonEvent()..loadFromPointer(pointer);
 }

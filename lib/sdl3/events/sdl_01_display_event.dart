@@ -1,7 +1,7 @@
 part of '../sdl_events.dart';
 
 class SdlxDisplayEvent extends SdlxEvent {
-  SdlxDisplayEvent({
+  const SdlxDisplayEvent({
     super.type = 0,
     super.reserved = 0,
     super.timestamp = 0,
@@ -10,9 +10,19 @@ class SdlxDisplayEvent extends SdlxEvent {
     this.data2 = 0,
   });
 
-  int displayId;
-  int data1;
-  int data2;
+  factory SdlxDisplayEvent.fromPointer(Pointer<SdlEvent> pointer) =>
+      SdlxDisplayEvent(
+        type: pointer.ref.display.type,
+        reserved: pointer.ref.display.reserved,
+        timestamp: pointer.ref.display.timestamp,
+        displayId: pointer.ref.display.displayId,
+        data1: pointer.ref.display.data1,
+        data2: pointer.ref.display.data2,
+      );
+
+  final int displayId;
+  final int data1;
+  final int data2;
 
   @override
   Pointer<SdlEvent> calloc() {
@@ -25,17 +35,4 @@ class SdlxDisplayEvent extends SdlxEvent {
     pointer.ref.display.data2 = data2;
     return pointer;
   }
-
-  @override
-  void loadFromPointer(Pointer<SdlEvent> pointer) {
-    type = pointer.ref.display.type;
-    reserved = pointer.ref.display.reserved;
-    timestamp = pointer.ref.display.timestamp;
-    displayId = pointer.ref.display.displayId;
-    data1 = pointer.ref.display.data1;
-    data2 = pointer.ref.display.data2;
-  }
-
-  static SdlxDisplayEvent fromPointer(Pointer<SdlEvent> pointer) =>
-      SdlxDisplayEvent()..loadFromPointer(pointer.cast<SdlEvent>());
 }

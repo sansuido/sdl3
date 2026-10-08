@@ -1,5 +1,20 @@
 # Changelog
 
+## [3.0.0] - 2026-10-08
+- SDL3-2026-10-04
+### Changed
+- **Breaking Change**: Redesigned FFI wrapper objects (`SdlxEvent`, `SdlxHapticEffect`, `SdlxCameraSpec`, etc.) to be **100% immutable**.
+  - Replaced mutable `loadFromPointer` methods and `late` variables with `final` fields and `const` constructors.
+  - Standardized instance creation from native memory using `fromPointer` factory constructors.
+- Refactored output parameter functions (`sdlxGetCameraFormat`, `sdlxConvertEventToRenderCoordinates`, etc.) to return immutable objects or nullable types (`T?`) instead of mutating arguments in place.
+- Replaced mutable lists with `List.unmodifiable` across all event structures (e.g., `SdlxClipboardEvent`, `SdlxTextEditingCandidatesEvent`, `SdlxSensorEvent`).
+### Deprecated
+- Discouraged manual memory management via `callocFree` / `callocAllFree` in favor of automated `Arena` allocation using `toNative(arena)`.
+### Added
+- Added `deviceType` field to pen events (such as `SdlPenProximityEvent`) to identify the pen device category.
+### Updated
+- Dart 3.13.5
+
 ## [2.12.0] - 2026-10-01
 - SDL3-2026-09-27
 ### Changed

@@ -9,15 +9,23 @@ class SdlxUserEvent extends SdlxEvent {
     this.code = 0,
     Pointer<Void>? data1,
     Pointer<Void>? data2,
-  }) {
-    this.data1 = data1 ?? nullptr;
-    this.data2 = data2 ?? nullptr;
-  }
+  }) : data1 = data1 ?? nullptr,
+       data2 = data2 ?? nullptr;
 
-  int windowId;
-  int code;
-  late Pointer<Void> data1;
-  late Pointer<Void> data2;
+  factory SdlxUserEvent.fromPointer(Pointer<SdlEvent> pointer) => SdlxUserEvent(
+    type: pointer.ref.user.type,
+    reserved: pointer.ref.user.reserved,
+    timestamp: pointer.ref.user.timestamp,
+    windowId: pointer.ref.user.windowId,
+    code: pointer.ref.user.code,
+    data1: pointer.ref.user.data1,
+    data2: pointer.ref.user.data2,
+  );
+
+  final int windowId;
+  final int code;
+  final Pointer<Void> data1;
+  final Pointer<Void> data2;
 
   @override
   bool isTargetWindow(int targetId, {bool ifNoWindow = true}) =>
@@ -35,18 +43,4 @@ class SdlxUserEvent extends SdlxEvent {
     pointer.ref.user.data2 = data2;
     return pointer;
   }
-
-  @override
-  void loadFromPointer(Pointer<SdlEvent> pointer) {
-    type = pointer.ref.user.type;
-    reserved = pointer.ref.user.reserved;
-    timestamp = pointer.ref.user.timestamp;
-    windowId = pointer.ref.user.windowId;
-    code = pointer.ref.user.code;
-    data1 = pointer.ref.user.data1;
-    data2 = pointer.ref.user.data2;
-  }
-
-  static SdlxUserEvent fromPointer(Pointer<SdlEvent> pointer) =>
-      SdlxUserEvent()..loadFromPointer(pointer);
 }

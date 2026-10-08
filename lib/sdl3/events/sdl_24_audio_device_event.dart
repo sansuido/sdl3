@@ -1,13 +1,22 @@
 part of '../sdl_events.dart';
 
 class SdlxAudioDeviceEvent extends SdlxEvent {
-  SdlxAudioDeviceEvent({
+  const SdlxAudioDeviceEvent({
     super.type = 0,
     super.reserved = 0,
     super.timestamp = 0,
     this.which = 0,
     this.recording = false,
   });
+
+  factory SdlxAudioDeviceEvent.fromPointer(Pointer<SdlEvent> pointer) =>
+      SdlxAudioDeviceEvent(
+        type: pointer.ref.adevice.type,
+        reserved: pointer.ref.adevice.reserved,
+        timestamp: pointer.ref.adevice.timestamp,
+        which: pointer.ref.adevice.which,
+        recording: pointer.ref.adevice.recording,
+      );
 
   factory SdlxAudioDeviceEvent.added({
     int reserved = 0,
@@ -48,8 +57,8 @@ class SdlxAudioDeviceEvent extends SdlxEvent {
     recording: recording,
   );
 
-  int which;
-  bool recording;
+  final int which;
+  final bool recording;
 
   @override
   Pointer<SdlEvent> calloc() {
@@ -61,16 +70,4 @@ class SdlxAudioDeviceEvent extends SdlxEvent {
     pointer.ref.adevice.recording = recording;
     return pointer;
   }
-
-  @override
-  void loadFromPointer(Pointer<SdlEvent> pointer) {
-    type = pointer.ref.adevice.type;
-    reserved = pointer.ref.adevice.reserved;
-    timestamp = pointer.ref.adevice.timestamp;
-    which = pointer.ref.adevice.which;
-    recording = pointer.ref.adevice.recording;
-  }
-
-  static SdlxAudioDeviceEvent fromPointer(Pointer<SdlEvent> pointer) =>
-      SdlxAudioDeviceEvent()..loadFromPointer(pointer);
 }

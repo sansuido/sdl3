@@ -1,7 +1,7 @@
 part of '../sdl_camera.dart';
 
 class SdlxCameraSpec {
-  SdlxCameraSpec({
+  const SdlxCameraSpec({
     this.format = 0,
     this.colorspace = 0,
     this.width = 0,
@@ -10,21 +10,22 @@ class SdlxCameraSpec {
     this.framerateDenominator = 0,
   });
 
-  int format;
-  int colorspace;
-  int width;
-  int height;
-  int framerateNumerator;
-  int framerateDenominator;
+  factory SdlxCameraSpec.fromPointer(Pointer<SdlCameraSpec> pointer) =>
+      SdlxCameraSpec(
+        format: pointer.ref.format,
+        colorspace: pointer.ref.colorspace,
+        width: pointer.ref.width,
+        height: pointer.ref.height,
+        framerateNumerator: pointer.ref.framerateNumerator,
+        framerateDenominator: pointer.ref.framerateDenominator,
+      );
 
-  void loadFromPointer(Pointer<SdlCameraSpec> pointer) {
-    format = pointer.ref.format;
-    colorspace = pointer.ref.colorspace;
-    width = pointer.ref.width;
-    height = pointer.ref.height;
-    framerateNumerator = pointer.ref.framerateNumerator;
-    framerateDenominator = pointer.ref.framerateDenominator;
-  }
+  final int format;
+  final int colorspace;
+  final int width;
+  final int height;
+  final int framerateNumerator;
+  final int framerateDenominator;
 
   Pointer<SdlCameraSpec> calloc() {
     final pointer = ffi.calloc<SdlCameraSpec>();

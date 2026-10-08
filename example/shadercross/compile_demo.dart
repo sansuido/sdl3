@@ -55,19 +55,21 @@ Uint8List? getShader(
   bool debug = false,
 }) {
   Uint8List? shader;
-  final hlslInfo = SdlxShaderCrossHlslInfo()
-    ..source = source
-    ..shaderStage = stage
-    ..entrypoint = 'main';
+  final hlslInfo = SdlxShaderCrossHlslInfo(
+    source: source,
+    shaderStage: stage,
+    entrypoint: 'main',
+  );
+  var debugProps = 0;
   if (debug) {
-    hlslInfo.props = sdlCreateProperties();
+    debugProps = sdlCreateProperties();
     sdlSetBooleanProperty(
-      hlslInfo.props,
+      debugProps,
       SDL_SHADERCROSS_PROP_SHADER_DEBUG_ENABLE_BOOLEAN,
       true,
     );
     sdlSetStringProperty(
-      hlslInfo.props,
+      debugProps,
       SDL_SHADERCROSS_PROP_SHADER_DEBUG_NAME_STRING,
       'Simple shader',
     );
@@ -81,7 +83,7 @@ Uint8List? getShader(
       shader = sdlxShaderCrossCompileSpirvFromHlsl(hlslInfo);
   }
   if (debug) {
-    sdlDestroyProperties(hlslInfo.props);
+    sdlDestroyProperties(debugProps);
   }
   return shader;
 }
@@ -111,10 +113,11 @@ void test(int stage, String source) {
     if (shader != null) {
       print('size=${shader.length}');
       print('** SPIRV => MSL **');
-      final spirvInfo = SdlxShaderCrossSpirvInfo()
-        ..bytecode = shader
-        ..shaderStage = stage
-        ..entrypoint = 'main';
+      final spirvInfo = SdlxShaderCrossSpirvInfo(
+        bytecode: shader,
+        shaderStage: stage,
+        entrypoint: 'main',
+      );
       final msl = sdlxShaderCrossTranspileMslFromSpirv(spirvInfo);
       if (msl != null) {
         print(msl);

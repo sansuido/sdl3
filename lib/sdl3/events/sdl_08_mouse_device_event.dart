@@ -1,12 +1,20 @@
 part of '../sdl_events.dart';
 
 class SdlxMouseDeviceEvent extends SdlxEvent {
-  SdlxMouseDeviceEvent({
+  const SdlxMouseDeviceEvent({
     super.type = 0,
     super.reserved = 0,
     super.timestamp = 0,
     this.which = 0,
   });
+
+  factory SdlxMouseDeviceEvent.fromPointer(Pointer<SdlEvent> pointer) =>
+      SdlxMouseDeviceEvent(
+        type: pointer.ref.mdevice.type,
+        reserved: pointer.ref.mdevice.reserved,
+        timestamp: pointer.ref.mdevice.timestamp,
+        which: pointer.ref.mdevice.which,
+      );
 
   factory SdlxMouseDeviceEvent.added({
     int reserved = 0,
@@ -30,7 +38,7 @@ class SdlxMouseDeviceEvent extends SdlxEvent {
     which: which,
   );
 
-  int which;
+  final int which;
 
   @override
   Pointer<SdlEvent> calloc() {
@@ -41,15 +49,4 @@ class SdlxMouseDeviceEvent extends SdlxEvent {
     pointer.ref.mdevice.which = which;
     return pointer;
   }
-
-  @override
-  void loadFromPointer(Pointer<SdlEvent> pointer) {
-    type = pointer.ref.mdevice.type;
-    reserved = pointer.ref.mdevice.reserved;
-    timestamp = pointer.ref.mdevice.timestamp;
-    which = pointer.ref.mdevice.which;
-  }
-
-  static SdlxMouseDeviceEvent fromPointer(Pointer<SdlEvent> pointer) =>
-      SdlxMouseDeviceEvent()..loadFromPointer(pointer);
 }

@@ -1,14 +1,16 @@
 part of '../sdl_joystick.dart';
 
 class SdlxVirtualJoystickTouchpadDesc {
-  SdlxVirtualJoystickTouchpadDesc({this.nfingers = 0});
-  int nfingers;
+  const SdlxVirtualJoystickTouchpadDesc({this.nfingers = 0});
+
+  final int nfingers;
 }
 
 class SdlxVirtualJoystickSensorDesc {
-  SdlxVirtualJoystickSensorDesc({this.type = 0, this.rate = 0});
-  int type;
-  double rate;
+  const SdlxVirtualJoystickSensorDesc({this.type = 0, this.rate = 0});
+
+  final int type;
+  final double rate;
 }
 
 class SdlxVirtualJoystickDesc {
@@ -24,8 +26,8 @@ class SdlxVirtualJoystickDesc {
     this.buttonMask = 0,
     this.axisMask = 0,
     this.name = '',
-    List<SdlxVirtualJoystickTouchpadDesc>? touchpads,
-    List<SdlxVirtualJoystickSensorDesc>? sensors,
+    this.touchpads = const [],
+    this.sensors = const [],
     Pointer<Void>? userdata,
     Pointer<NativeFunction<SdlVirtualJoystickDescUpdate>>? update,
     Pointer<NativeFunction<SdlVirtualJoystickDescSetPlayerIndex>>?
@@ -38,48 +40,42 @@ class SdlxVirtualJoystickDesc {
     Pointer<NativeFunction<SdlVirtualJoystickDescSetSensorsEnabled>>?
     setSensorsEnabled,
     Pointer<NativeFunction<SdlVirtualJoystickDescCleanup>>? cleanup,
-  }) {
-    this.version = version ?? sizeOf<SdlVirtualJoystickDesc>();
-    this.touchpads = touchpads ?? [];
-    this.sensors = sensors ?? [];
-    this.userdata = userdata ?? nullptr;
-    this.update = update ?? nullptr;
-    this.setPlayerIndex = setPlayerIndex ?? nullptr;
-    this.rumble = rumble ?? nullptr;
-    this.rumbleTriggers = rumbleTriggers ?? nullptr;
-    this.setLed = setLed ?? nullptr;
-    this.sendEffect = sendEffect ?? nullptr;
-    this.setSensorsEnabled = setSensorsEnabled ?? nullptr;
-    this.cleanup = cleanup ?? nullptr;
-  }
+  }) : version = version ?? sizeOf<SdlVirtualJoystickDesc>(),
+       userdata = userdata ?? nullptr,
+       update = update ?? nullptr,
+       setPlayerIndex = setPlayerIndex ?? nullptr,
+       rumble = rumble ?? nullptr,
+       rumbleTriggers = rumbleTriggers ?? nullptr,
+       setLed = setLed ?? nullptr,
+       sendEffect = sendEffect ?? nullptr,
+       setSensorsEnabled = setSensorsEnabled ?? nullptr,
+       cleanup = cleanup ?? nullptr;
 
-  late int version;
-  int type;
-  int vendorId;
-  int productId;
-  int naxes;
-  int nbuttons;
-  int nballs;
-  int nhats;
-  //  int ntouchpads;
-  //  int nsensors;
-  int buttonMask;
-  int axisMask;
-  String name;
-  late List<SdlxVirtualJoystickTouchpadDesc> touchpads;
-  late List<SdlxVirtualJoystickSensorDesc> sensors;
-  late Pointer<Void> userdata;
-  late Pointer<NativeFunction<SdlVirtualJoystickDescUpdate>> update;
-  late Pointer<NativeFunction<SdlVirtualJoystickDescSetPlayerIndex>>
+  final int version;
+  final int type;
+  final int vendorId;
+  final int productId;
+  final int naxes;
+  final int nbuttons;
+  final int nballs;
+  final int nhats;
+  final int buttonMask;
+  final int axisMask;
+  final String name;
+  final List<SdlxVirtualJoystickTouchpadDesc> touchpads;
+  final List<SdlxVirtualJoystickSensorDesc> sensors;
+  final Pointer<Void> userdata;
+  final Pointer<NativeFunction<SdlVirtualJoystickDescUpdate>> update;
+  final Pointer<NativeFunction<SdlVirtualJoystickDescSetPlayerIndex>>
   setPlayerIndex;
-  late Pointer<NativeFunction<SdlVirtualJoystickDescRumble>> rumble;
-  late Pointer<NativeFunction<SdlVirtualJoystickDescRumbleTriggers>>
+  final Pointer<NativeFunction<SdlVirtualJoystickDescRumble>> rumble;
+  final Pointer<NativeFunction<SdlVirtualJoystickDescRumbleTriggers>>
   rumbleTriggers;
-  late Pointer<NativeFunction<SdlVirtualJoystickDescSetLed>> setLed;
-  late Pointer<NativeFunction<SdlVirtualJoystickDescSendEffect>> sendEffect;
-  late Pointer<NativeFunction<SdlVirtualJoystickDescSetSensorsEnabled>>
+  final Pointer<NativeFunction<SdlVirtualJoystickDescSetLed>> setLed;
+  final Pointer<NativeFunction<SdlVirtualJoystickDescSendEffect>> sendEffect;
+  final Pointer<NativeFunction<SdlVirtualJoystickDescSetSensorsEnabled>>
   setSensorsEnabled;
-  late Pointer<NativeFunction<SdlVirtualJoystickDescCleanup>> cleanup;
+  final Pointer<NativeFunction<SdlVirtualJoystickDescCleanup>> cleanup;
 
   Pointer<SdlVirtualJoystickDesc> calloc() {
     final pointer = ffi.calloc<SdlVirtualJoystickDesc>();

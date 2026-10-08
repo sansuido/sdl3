@@ -1,14 +1,12 @@
 part of '../sdl_mixer.dart';
 
 class MixxStereoGains {
-  MixxStereoGains({this.left = 0, this.right = 0});
-  double left;
-  double right;
+  const MixxStereoGains({this.left = 0, this.right = 0});
 
-  void loadFromPointer(Pointer<MixStereoGains> pointer) {
-    left = pointer.ref.left;
-    right = pointer.ref.right;
-  }
+  factory MixxStereoGains.fromPointer(Pointer<MixStereoGains> pointer) =>
+      MixxStereoGains(left: pointer.ref.left, right: pointer.ref.right);
+  final double left;
+  final double right;
 
   Pointer<MixStereoGains> calloc() {
     final pointer = ffi.calloc<MixStereoGains>();

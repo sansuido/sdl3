@@ -51,18 +51,27 @@ part of '../sdl_locale.dart';
 /// - [SDL_GetPreferredLocales - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetPreferredLocales)
 ///
 /// {@category locale}
-List<SdlxLocale> sdlxGetPreferredLocales() {
-  final result = <SdlxLocale>[];
-  final countPointer = ffi.calloc<Int32>();
+List<SdlxLocale> sdlxGetPreferredLocales() => ffi.using((arena) {
+  final countPointer = arena<Int32>();
   final localesPointer = sdlGetPreferredLocales(countPointer);
-  if (localesPointer != nullptr) {
-    if (countPointer != nullptr && countPointer.value > 0) {
-      for (var i = 0; i < countPointer.value; i++) {
-        result.add(SdlxLocale()..loadFromPointer(localesPointer[i]));
+
+  if (localesPointer == nullptr) {
+    return const [];
+  }
+
+  try {
+    final count = countPointer.value;
+    final result = <SdlxLocale>[];
+
+    for (var i = 0; i < count; i++) {
+      final localePointer = localesPointer[i];
+      if (localePointer != nullptr) {
+        result.add(SdlxLocale.fromPointer(localePointer));
       }
     }
+
+    return List<SdlxLocale>.unmodifiable(result);
+  } finally {
     sdlFree(localesPointer.cast<Void>());
   }
-  countPointer.callocFree();
-  return result;
-}
+});

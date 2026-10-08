@@ -3,24 +3,17 @@ part of '../sdl_render.dart';
 class SdlxGpuRenderStateCreateInfo {
   SdlxGpuRenderStateCreateInfo({
     Pointer<SdlGpuShader>? fragmentShader,
-    List<SdlxGpuTextureSamplerBinding>? samplerBindings,
-    List<Pointer<SdlGpuTexture>>? storageTextures,
-    List<Pointer<SdlGpuBuffer>>? storageBuffers,
+    this.samplerBindings = const [],
+    this.storageTextures = const [],
+    this.storageBuffers = const [],
     this.props = 0,
-  }) {
-    this.fragmentShader = fragmentShader ?? nullptr;
-    this.samplerBindings = samplerBindings ?? [];
-    this.storageTextures = storageTextures ?? [];
-    this.storageBuffers = storageBuffers ?? [];
-  }
-  late Pointer<SdlGpuShader> fragmentShader;
-  //int numSamplerBindings;
-  late List<SdlxGpuTextureSamplerBinding> samplerBindings;
-  //int numStorageTextures;
-  late List<Pointer<SdlGpuTexture>> storageTextures;
-  //int numStorageBuffers;
-  late List<Pointer<SdlGpuBuffer>> storageBuffers;
-  int props;
+  }) : fragmentShader = fragmentShader ?? nullptr;
+
+  final Pointer<SdlGpuShader> fragmentShader;
+  final List<SdlxGpuTextureSamplerBinding> samplerBindings;
+  final List<Pointer<SdlGpuTexture>> storageTextures;
+  final List<Pointer<SdlGpuBuffer>> storageBuffers;
+  final int props;
 
   Pointer<SdlGpuRenderStateCreateInfo> calloc() {
     final pointer = ffi.calloc<SdlGpuRenderStateCreateInfo>();

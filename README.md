@@ -222,15 +222,15 @@ yamahara
 ### guid
 - [ ] SdlGuid
 ### haptic
-- [ ] SdlHaptic
-- [ ] SdlHapticDirection
-- [ ] SdlHapticConstant
-- [ ] SdlHapticPeriodic
-- [ ] SdlHapticCondition
-- [ ] SdlHapticRamp
-- [ ] SdlHapticLeftRight
-- [ ] SdlHapticCustom
-- [ ] SdlHapticEffect
+- [x] [SdlHaptic](./lib/sdl3/haptic/sdl_haptic.dart)
+- [x] [SdlHapticDirection](./lib/sdl3/haptic/sdl_haptic_effect.dart)
+- [x] [SdlHapticConstant](./lib/sdl3/haptic/sdl_haptic_effect.dart)
+- [x] [SdlHapticPeriodic](./lib/sdl3/haptic/sdl_haptic_effect.dart)
+- [x] [SdlHapticCondition](./lib/sdl3/haptic/sdl_haptic_effect.dart)
+- [x] [SdlHapticRamp](./lib/sdl3/haptic/sdl_haptic_effect.dart)
+- [x] [SdlHapticLeftRight](./lib/sdl3/haptic/sdl_haptic_effect.dart)
+- [x] [SdlHapticCustom](./lib/sdl3/haptic/sdl_haptic_effect.dart)
+- [x] [SdlHapticEffect](./lib/sdl3/haptic/sdl_haptic_effect.dart)
 ### hidapi
 - [x] [SdlHidDevice](./lib/sdl3/hidapi/sdl_hid_device.dart)
 - [x] [SdlHidDeviceInfo](./lib/sdl3/hidapi/sdl_hid_device_info.dart)

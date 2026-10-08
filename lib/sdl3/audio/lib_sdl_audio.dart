@@ -139,23 +139,24 @@ List<int> sdlxGetAudioRecordingDevices() {
 /// - [SDL_GetAudioDeviceFormat - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetAudioDeviceFormat)
 ///
 /// {@category audio}
-bool sdlxGetAudioDeviceFormat(int devid, SdlxAudioSpec spec) {
-  final specPointer = spec.calloc();
-  final sampleFramesPointer = ffi.calloc<Int32>();
-  final result = sdlGetAudioDeviceFormat(
-    devid,
-    specPointer,
-    sampleFramesPointer,
-  );
-  if (result) {
-    spec
-      ..loadFromPointer(specPointer)
-      ..sampleFrames = sampleFramesPointer.value;
-  }
-  specPointer.callocFree();
-  sampleFramesPointer.callocFree();
-  return result;
-}
+({SdlxAudioSpec spec, int sampleFrames})? sdlxGetAudioDeviceFormat(int devid) =>
+    ffi.using((arena) {
+      final specPointer = arena<SdlAudioSpec>();
+      final sampleFramesPointer = arena<Int32>();
+
+      final result = sdlGetAudioDeviceFormat(
+        devid,
+        specPointer,
+        sampleFramesPointer,
+      );
+
+      if (!result) return null;
+
+      return (
+        spec: SdlxAudioSpec.fromPointer(specPointer),
+        sampleFrames: sampleFramesPointer.value,
+      );
+    });
 
 ///
 /// Get the current channel map of an audio device.
@@ -462,41 +463,72 @@ Pointer<SdlAudioStream> sdlxCreateAudioStream(
 /// - [SDL_GetAudioStreamFormat - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetAudioStreamFormat)
 ///
 /// {@category audio}
-bool sdlxGetAudioStreamFormat(
+(SdlxAudioSpec srcSpec, SdlxAudioSpec dstSpec)? sdlxGetAudioStreamFormat(
   Pointer<SdlAudioStream> stream,
-  SdlxAudioSpec? srcSpec,
-  SdlxAudioSpec? dstSpec,
-) {
-  Pointer<SdlAudioSpec> srcSpecPointer = nullptr;
-  Pointer<SdlAudioSpec> dstSpecPointer = nullptr;
-  if (srcSpec != null) {
-    srcSpecPointer = srcSpec.calloc();
-  }
-  if (dstSpec != null) {
-    dstSpecPointer = dstSpec.calloc();
-  }
+) => ffi.using((arena) {
+  final srcSpecPointer = arena<SdlAudioSpec>();
+  final dstSpecPointer = arena<SdlAudioSpec>();
+
   final result = sdlGetAudioStreamFormat(
     stream,
     srcSpecPointer,
     dstSpecPointer,
   );
-  if (result) {
-    if (srcSpec != null) {
-      srcSpec.loadFromPointer(srcSpecPointer);
-    }
-    if (dstSpec != null) {
-      dstSpec.loadFromPointer(dstSpecPointer);
-    }
-  }
-  if (srcSpecPointer != nullptr) {
-    srcSpecPointer.callocFree();
-  }
-  if (dstSpecPointer != nullptr) {
-    dstSpecPointer.callocFree();
-  }
-  return result;
-}
 
+  if (!result) return null;
+
+  return (
+    SdlxAudioSpec.fromPointer(srcSpecPointer),
+    SdlxAudioSpec.fromPointer(dstSpecPointer),
+  );
+});
+
+///
+/// Change the input and output formats of an audio stream.
+///
+/// Future calls to and SDL_GetAudioStreamAvailable and SDL_GetAudioStreamData
+/// will reflect the new format, and future calls to SDL_PutAudioStreamData
+/// must provide data in the new input formats.
+///
+/// Data that was previously queued in the stream will still be operated on in
+/// the format that was current when it was added, which is to say you can put
+/// the end of a sound file in one format to a stream, change formats for the
+/// next sound file, and start putting that new data while the previous sound
+/// file is still queued, and everything will still play back correctly.
+///
+/// If a stream is bound to a device, then the format of the side of the stream
+/// bound to a device cannot be changed (src_spec for recording devices,
+/// dst_spec for playback devices). Attempts to make a change to this side will
+/// be ignored, but this will not report an error. The other side's format can
+/// be changed.
+///
+/// `src_spec` and `dst_spec` may each be NULL; a NULL spec signals not to
+/// change the current format for that side of the stream.
+///
+/// \param stream the stream the format is being changed.
+/// \param src_spec the new format of the audio input; if NULL, it is not
+/// changed.
+/// \param dst_spec the new format of the audio output; if NULL, it is not
+/// changed.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
+///
+/// \threadsafety It is safe to call this function from any thread, as it holds
+/// a stream-specific mutex while running.
+///
+/// \since This function is available since SDL 3.2.0.
+///
+/// \sa SDL_GetAudioStreamFormat
+/// \sa SDL_SetAudioStreamFrequencyRatio
+///
+/// ```c
+/// extern SDL_DECLSPEC bool SDLCALL SDL_SetAudioStreamFormat(SDL_AudioStream *stream, const SDL_AudioSpec *src_spec, const SDL_AudioSpec *dst_spec)
+/// ```
+///
+/// See also:
+/// - [SDL_SetAudioStreamFormat - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SetAudioStreamFormat)
+///
+/// {@category audio}
 bool sdlxSetAudioStreamFormat(
   Pointer<SdlAudioStream> stream,
   SdlxAudioSpec? srcSpec,
@@ -948,44 +980,51 @@ TypedData? sdlxGetAudioStreamData(
   Pointer<SdlAudioStream> stream,
   int maxLenInBytes,
 ) {
-  final spec = SdlxAudioSpec();
-  final success = sdlxGetAudioStreamFormat(stream, spec, null);
-  if (!success) {
+  final formatResult = sdlxGetAudioStreamFormat(stream);
+  if (formatResult == null) {
     return null;
   }
-  final format = spec.format;
+
+  final (dstSpec, _) = formatResult;
+  final format = dstSpec.format;
+
   final bufPointer = sdlMalloc(maxLenInBytes).cast<Uint8>();
   if (bufPointer == nullptr) {
     return null;
   }
-  final bytesRead = sdlGetAudioStreamData(
-    stream,
-    bufPointer.cast(),
-    maxLenInBytes,
-  );
-  if (bytesRead <= 0) {
+
+  try {
+    final bytesRead = sdlGetAudioStreamData(
+      stream,
+      bufPointer.cast(),
+      maxLenInBytes,
+    );
+
+    if (bytesRead <= 0) {
+      return null;
+    }
+
+    final byteBuffer = bufPointer.asTypedList(bytesRead).buffer;
+    switch (format) {
+      case SDL_AUDIO_S8:
+        return Int8List.fromList(byteBuffer.asInt8List());
+      case SDL_AUDIO_U8:
+        return Uint8List.fromList(bufPointer.asTypedList(bytesRead));
+      case SDL_AUDIO_S16LE:
+      case SDL_AUDIO_S16BE:
+        return Int16List.fromList(byteBuffer.asInt16List());
+      case SDL_AUDIO_S32LE:
+      case SDL_AUDIO_S32BE:
+        return Int32List.fromList(byteBuffer.asInt32List());
+      case SDL_AUDIO_F32LE:
+      case SDL_AUDIO_F32BE:
+        return Float32List.fromList(byteBuffer.asFloat32List());
+      default:
+        return null;
+    }
+  } finally {
     sdlFree(bufPointer.cast<Void>());
-    return null;
   }
-  TypedData? result;
-  final byteBuffer = bufPointer.asTypedList(bytesRead).buffer;
-  switch (format) {
-    case SDL_AUDIO_S8:
-      result = Int8List.fromList(byteBuffer.asInt8List());
-    case SDL_AUDIO_U8:
-      result = Uint8List.fromList(bufPointer.asTypedList(bytesRead));
-    case SDL_AUDIO_S16LE:
-    case SDL_AUDIO_S16BE:
-      result = Int16List.fromList(byteBuffer.asInt16List());
-    case SDL_AUDIO_S32LE:
-    case SDL_AUDIO_S32BE:
-      result = Int32List.fromList(byteBuffer.asInt32List());
-    case SDL_AUDIO_F32LE:
-    case SDL_AUDIO_F32BE:
-      result = Float32List.fromList(byteBuffer.asFloat32List());
-  }
-  sdlFree(bufPointer.cast<Void>());
-  return result;
 }
 
 ///
@@ -1164,34 +1203,33 @@ Pointer<SdlAudioStream> sdlxOpenAudioDeviceStream(
 /// - [SDL_LoadWAV_IO - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_LoadWAV_IO)
 ///
 /// {@category audio}
-Uint8List? sdlxLoadWavIo(
-  Pointer<SdlIoStream> src,
-  SdlxAudioSpec spec, {
+({Uint8List audioBuf, SdlxAudioSpec spec})? sdlxLoadWavIo(
+  Pointer<SdlIoStream> src, {
   bool closeio = false,
-}) {
-  Uint8List? result;
-  final specPointer = spec.calloc();
-  final audioBufPointer = ffi.calloc<Pointer<Uint8>>();
-  final audioLenPointer = ffi.calloc<Uint32>();
-  final bl = sdlLoadWavIo(
+}) => ffi.using((arena) {
+  final specPointer = arena<SdlAudioSpec>();
+  final audioBufPointer = arena<Pointer<Uint8>>();
+  final audioLenPointer = arena<Uint32>();
+
+  final success = sdlLoadWavIo(
     src,
     closeio,
     specPointer,
     audioBufPointer,
     audioLenPointer,
   );
-  if (bl) {
-    spec.loadFromPointer(specPointer);
-    result = Uint8List.fromList(
-      audioBufPointer.value.asTypedList(audioLenPointer.value),
-    );
-    sdlFree(audioBufPointer.value.cast<Void>());
-  }
-  specPointer.callocFree();
-  audioBufPointer.callocFree();
-  audioLenPointer.callocFree();
-  return result;
-}
+
+  if (!success) return null;
+
+  final bufPtr = audioBufPointer.value;
+  final len = audioLenPointer.value;
+
+  final audioData = Uint8List.fromList(bufPtr.asTypedList(len));
+
+  sdlFree(bufPtr.cast<Void>());
+
+  return (audioBuf: audioData, spec: SdlxAudioSpec.fromPointer(specPointer));
+});
 
 ///
 /// Loads a WAV from a file path.
@@ -1235,21 +1273,30 @@ Uint8List? sdlxLoadWavIo(
 /// - [SDL_LoadWAV - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_LoadWAV)
 ///
 /// {@category audio}
-Uint8List? sdlxLoadWav(String path, SdlxAudioSpec spec) {
-  Uint8List? result;
-  final specPointer = spec.calloc();
-  final audioBufPointer = ffi.calloc<Pointer<Uint8>>();
-  final audioLenPointer = ffi.calloc<Uint32>();
-  final bl = sdlLoadWav(path, specPointer, audioBufPointer, audioLenPointer);
-  if (bl) {
-    spec.loadFromPointer(specPointer);
-    result = Uint8List.fromList(
-      audioBufPointer.value.asTypedList(audioLenPointer.value),
-    );
-    sdlFree(audioBufPointer.value.cast<Void>());
-  }
-  specPointer.callocFree();
-  audioBufPointer.callocFree();
-  audioLenPointer.callocFree();
-  return result;
-}
+({Uint8List audioBuf, SdlxAudioSpec spec})? sdlxLoadWav(String path) =>
+    ffi.using((arena) {
+      final specPointer = arena<SdlAudioSpec>();
+      final audioBufPointer = arena<Pointer<Uint8>>();
+      final audioLenPointer = arena<Uint32>();
+
+      final success = sdlLoadWav(
+        path,
+        specPointer,
+        audioBufPointer,
+        audioLenPointer,
+      );
+
+      if (!success) return null;
+
+      final bufPtr = audioBufPointer.value;
+      final len = audioLenPointer.value;
+
+      final audioData = Uint8List.fromList(bufPtr.asTypedList(len));
+
+      sdlFree(bufPtr.cast<Void>());
+
+      return (
+        audioBuf: audioData,
+        spec: SdlxAudioSpec.fromPointer(specPointer),
+      );
+    });

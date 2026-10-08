@@ -1,4 +1,3 @@
-// https://github.com/aminosbh/sdl2-audio-sample/blob/master/src/main.c
 /*
  * Copyright (c) 2018, 2019 Amine Ben Hassouna <amine.benhassouna@gmail.com>
  * All rights reserved.
@@ -46,18 +45,17 @@ class WavExample {
   bool load(String filename) {
     var result = false;
     final rwops = sdlIoFromFile(filename, 'rb');
-    final spec = SdlxAudioSpec();
     if (rwops != nullptr) {
-      final buffer = sdlxLoadWavIo(rwops, spec, closeio: true);
-      if (buffer != null) {
+      final wavData = sdlxLoadWavIo(rwops, closeio: true);
+      if (wavData != null) {
         stream = sdlxOpenAudioDeviceStream(
           SDL_AUDIO_DEVICE_DEFAULT_OUTPUT,
-          spec,
+          wavData.spec,
           nullptr,
           nullptr,
         );
         if (stream != nullptr) {
-          result = sdlxPutAudioStreamData(stream, buffer);
+          result = sdlxPutAudioStreamData(stream, wavData.audioBuf);
         }
       }
     }
@@ -138,7 +136,7 @@ int main() {
       40,
       squareRect.h / 2,
     );
-    final pauseRect2 = SdlxFRect.fromRect(pauseRect1)..x += 40 * 2;
+    final pauseRect2 = pauseRect1.moveBy(const SdlxFPoint(40 * 2, 0));
     var running = true;
     while (running) {
       SdlxEvent? event;
@@ -160,13 +158,13 @@ int main() {
         }
       }
       renderer
-        ..setDrawColor(SdlxColor(0xff, 0xff, 0xff))
+        ..setDrawColor(const SdlxColor(0xff, 0xff, 0xff))
         ..clear()
-        ..setDrawColor(SdlxColor(0x19, 0x71, 0xa9))
+        ..setDrawColor(const SdlxColor(0x19, 0x71, 0xa9))
         ..fillRect(squareRect);
       if (wav.paused()) {
         renderer
-          ..setDrawColor(SdlxColor(0xff, 0xff, 0xff))
+          ..setDrawColor(const SdlxColor(0xff, 0xff, 0xff))
           ..fillRect(pauseRect1)
           ..fillRect(pauseRect2);
       }

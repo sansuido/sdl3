@@ -1,18 +1,41 @@
 part of '../sdl_pixels.dart';
 
 class SdlxFColor {
-  SdlxFColor(this.r, this.g, this.b, [this.a = 1.0]);
+  const SdlxFColor(this.r, this.g, this.b, [this.a = 1.0]);
 
-  double r;
-  double g;
-  double b;
-  double a;
+  factory SdlxFColor.fromStringCode(String code) {
+    final hex = code.startsWith('#') ? code.substring(1) : code;
 
-  static SdlxFColor fromStringCode(String code) =>
-      SdlxFColor(0, 0, 0)..loadFromStringCode(code);
+    var rInt = 0;
+    var gInt = 0;
+    var bInt = 0;
+    var aInt = 255;
+
+    if (hex.length == 3 || hex.length == 4) {
+      rInt = int.parse(hex[0] * 2, radix: 16);
+      gInt = int.parse(hex[1] * 2, radix: 16);
+      bInt = int.parse(hex[2] * 2, radix: 16);
+      if (hex.length == 4) {
+        aInt = int.parse(hex[3] * 2, radix: 16);
+      }
+    } else if (hex.length == 6 || hex.length == 8) {
+      rInt = int.parse(hex.substring(0, 2), radix: 16);
+      gInt = int.parse(hex.substring(2, 4), radix: 16);
+      bInt = int.parse(hex.substring(4, 6), radix: 16);
+      if (hex.length == 8) {
+        aInt = int.parse(hex.substring(6, 8), radix: 16);
+      }
+    }
+
+    return SdlxFColor(rInt / 255.0, gInt / 255.0, bInt / 255.0, aInt / 255.0);
+  }
+
+  final double r;
+  final double g;
+  final double b;
+  final double a;
 
   static int _dtoi(double v) => (v * 255).round().clamp(0, 255);
-  static double _itod(int v) => v / 255;
   static String _vtos(double v) => _dtoi(v).toRadixString(16).padLeft(2, '0');
 
   SdlxColor toInt() => SdlxColor(_dtoi(r), _dtoi(g), _dtoi(b), _dtoi(a));
@@ -34,52 +57,6 @@ class SdlxFColor {
       result = result.toUpperCase();
     }
     return result;
-  }
-
-  void loadFromStringCode(String code) {
-    var code0 = code;
-    final items = List<int>.generate(4, (code) => 0);
-    items[3] = 0xff;
-    var shift = 1;
-    if (code0.startsWith('#')) {
-      code0 = code0.substring(1);
-    }
-    if (code0.length >= 6) {
-      shift = 2;
-    }
-    var itemIndex = 0;
-    for (var pos = 0; pos < code0.length; pos += shift) {
-      for (var calc = 0; calc < shift; calc++) {
-        final c = code0[pos + calc].toLowerCase();
-        var value = 0;
-        switch (c) {
-          case 'a':
-          case 'b':
-          case 'c':
-          case 'd':
-          case 'e':
-          case 'f':
-            value = c.codeUnitAt(0) - 'a'.codeUnitAt(0) + 10;
-          default:
-            value = c.codeUnitAt(0) - '0'.codeUnitAt(0);
-        }
-        if (calc == 0) {
-          switch (shift) {
-            case 1:
-              items[itemIndex] += value * 32;
-            case 2:
-              items[itemIndex] += value * 16;
-          }
-        } else {
-          items[itemIndex] += value;
-        }
-      }
-      itemIndex++;
-    }
-    a = _itod(items[3]);
-    b = _itod(items[2]);
-    g = _itod(items[1]);
-    r = _itod(items[0]);
   }
 
   SdlxFColor moveTowards(SdlxFColor target, double dt, {double speed = 1.0}) {

@@ -108,12 +108,12 @@ Pointer<SdlIoStream> createMemoryId(String textData) {
   mem.ref.position = 0;
 
   final callbacks = MemoryStreamCallbacks();
-  final iface = SdlxIoStreamInterface()
-    ..size = callbacks.sizeCall.nativeFunction
-    ..seek = callbacks.seekCall.nativeFunction
-    ..read = callbacks.readCall.nativeFunction
-    ..close = callbacks.closeCall.nativeFunction;
-
+  final iface = SdlxIoStreamInterface(
+    size: callbacks.sizeCall.nativeFunction,
+    seek: callbacks.seekCall.nativeFunction,
+    read: callbacks.readCall.nativeFunction,
+    close: callbacks.closeCall.nativeFunction,
+  );
   return sdlxOpenIo(iface, mem.cast<Void>());
 }
 

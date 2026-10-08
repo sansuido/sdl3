@@ -10,10 +10,23 @@ class Chara {
     this.angle = 0,
     this.flip = SDL_FLIP_NONE,
   });
-  late SdlxFRect srcrect;
-  late SdlxFRect dstrect;
-  late double angle;
-  late int flip;
+
+  final SdlxFRect srcrect;
+  final SdlxFRect dstrect;
+  final double angle;
+  final int flip;
+
+  Chara copyWith({
+    SdlxFRect? srcrect,
+    SdlxFRect? dstrect,
+    double? angle,
+    int? flip,
+  }) => Chara(
+    srcrect ?? this.srcrect,
+    dstrect ?? this.dstrect,
+    angle: angle ?? this.angle,
+    flip: flip ?? this.flip,
+  );
 }
 
 int main() {
@@ -43,17 +56,36 @@ int main() {
   // King - walk animation
   // Soldier - walk animation
   final charas = <Chara>[
-    Chara(SdlxFRect(0, 0, 32, 32), SdlxFRect(0, 0, 32 * 4, 32 * 4)),
     Chara(
-      SdlxFRect(0, 32, 32, 32),
-      SdlxFRect(0, 0, 32 * 4, 32 * 4),
+      const SdlxFRect(0, 0, 32, 32),
+      const SdlxFRect(
+        0,
+        0,
+        32 * 4,
+        32 * 4,
+      ).withCenter(const SdlxFPoint(-64, 120)),
+    ),
+    Chara(
+      const SdlxFRect(0, 32, 32, 32),
+      const SdlxFRect(
+        0,
+        0,
+        32 * 4,
+        32 * 4,
+      ).withCenter(const SdlxFPoint(0, 240)),
       flip: SDL_FLIP_HORIZONTAL,
     ),
-    Chara(SdlxFRect(0, 64, 32, 32), SdlxFRect(0, 0, 32 * 4, 32 * 4)),
+    Chara(
+      const SdlxFRect(0, 64, 32, 32),
+      const SdlxFRect(
+        0,
+        0,
+        32 * 4,
+        32 * 4,
+      ).withCenter(const SdlxFPoint(440, 360)),
+    ),
   ];
-  charas[0].dstrect.center = SdlxFPoint(-64, 120);
-  charas[1].dstrect.center = SdlxFPoint(0, 240);
-  charas[2].dstrect.center = SdlxFPoint(440, 360);
+
   while (running) {
     SdlxEvent? event;
     while ((event = sdlxPollEvent()) != null) {
@@ -67,14 +99,36 @@ int main() {
       }
     }
     final ticks = sdlGetTicks();
-    charas[0].srcrect.x = 32 * ((ticks / 100) % 4).floor().toDouble();
-    charas[0].dstrect.x = 1 * ((ticks / 14) % 768).floor() - 128;
-    charas[1].srcrect.x = 32 * ((ticks / 100) % 4).floor().toDouble();
-    charas[1].dstrect.x = (1 * ((ticks / 12) % 768).floor() - 672) * -1;
-    charas[2].srcrect.x = 32 * ((ticks / 100) % 4).floor().toDouble();
-    charas[2].dstrect.x = 1 * ((ticks / 10) % 768).floor() - 128;
+
+    charas[0] = charas[0].copyWith(
+      srcrect: charas[0].srcrect.copyWith(
+        x: 32 * ((ticks / 100) % 4).floorToDouble(),
+      ),
+      dstrect: charas[0].dstrect.copyWith(
+        x: (1 * ((ticks / 14) % 768).floor() - 128).toDouble(),
+      ),
+    );
+
+    charas[1] = charas[1].copyWith(
+      srcrect: charas[1].srcrect.copyWith(
+        x: 32 * ((ticks / 100) % 4).floorToDouble(),
+      ),
+      dstrect: charas[1].dstrect.copyWith(
+        x: ((1 * ((ticks / 12) % 768).floor() - 672) * -1).toDouble(),
+      ),
+    );
+
+    charas[2] = charas[2].copyWith(
+      srcrect: charas[2].srcrect.copyWith(
+        x: 32 * ((ticks / 100) % 4).floorToDouble(),
+      ),
+      dstrect: charas[2].dstrect.copyWith(
+        x: (1 * ((ticks / 10) % 768).floor() - 128).toDouble(),
+      ),
+    );
+
     renderer
-      ..setDrawColor(SdlxColor(0, 0, 0))
+      ..setDrawColor(const SdlxColor(0, 0, 0))
       ..clear();
     // copy the frame to the canvas
     for (final chara in charas) {

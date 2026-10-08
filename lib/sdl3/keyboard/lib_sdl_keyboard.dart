@@ -162,20 +162,17 @@ bool sdlxSetTextInputArea(
 /// - [SDL_GetTextInputArea - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetTextInputArea)
 ///
 /// {@category keyboard}
-({int cursor, SdlxRect rect})? sdlxGetTextInputArea(Pointer<SdlWindow> window) {
-  SdlxRect? rect;
-  int? cursor;
-  final rectPointer = ffi.calloc<SdlRect>();
-  final cursorPointer = ffi.calloc<Int32>();
-  final bl = sdlGetTextInputArea(window, rectPointer, cursorPointer);
-  if (bl) {
-    rect = SdlxRect()..loadFromPointer(rectPointer);
-    cursor = cursorPointer.value;
-  }
-  cursorPointer.callocFree();
-  rectPointer.callocFree();
-  if (!bl) {
+({int cursor, SdlxRect rect})? sdlxGetTextInputArea(
+  Pointer<SdlWindow> window,
+) => ffi.using((arena) {
+  final rectPointer = arena<SdlRect>();
+  final cursorPointer = arena<Int32>();
+
+  final result = sdlGetTextInputArea(window, rectPointer, cursorPointer);
+
+  if (!result) {
     return null;
   }
-  return (cursor: cursor!, rect: rect!);
-}
+
+  return (cursor: cursorPointer.value, rect: SdlxRect.fromPointer(rectPointer));
+});

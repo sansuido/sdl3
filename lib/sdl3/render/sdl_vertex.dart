@@ -1,15 +1,15 @@
 part of '../sdl_render.dart';
 
 class SdlxVertex {
-  SdlxVertex({SdlxFPoint? position, SdlxFColor? color, SdlxFPoint? texCoord}) {
-    this.position = position ?? SdlxFPoint(0, 0);
-    this.color = color ?? SdlxFColor(0, 0, 0);
-    this.texCoord = texCoord ?? SdlxFPoint(0, 0);
-  }
+  const SdlxVertex({
+    this.position = const SdlxFPoint(0, 0),
+    this.color = const SdlxFColor(0, 0, 0),
+    this.texCoord = const SdlxFPoint(0, 0),
+  });
 
-  late SdlxFPoint position;
-  late SdlxFColor color;
-  late SdlxFPoint texCoord;
+  final SdlxFPoint position;
+  final SdlxFColor color;
+  final SdlxFPoint texCoord;
 
   Pointer<SdlVertex> calloc() {
     final pointer = ffi.calloc<SdlVertex>();

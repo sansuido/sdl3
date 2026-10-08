@@ -12,19 +12,18 @@ class SdlxGpuDepthStencilTargetInfo {
     this.clearStencil = 0,
     this.mipLevel = 0,
     this.layer = 0,
-  }) {
-    this.texture = texture ?? nullptr;
-  }
-  late Pointer<SdlGpuTexture> texture;
-  double clearDepth;
-  int loadOp;
-  int storeOp;
-  int stencilLoadOp;
-  int stencilStoreOp;
-  bool cycle;
-  int clearStencil;
-  int mipLevel;
-  int layer;
+  }) : texture = texture ?? nullptr;
+
+  final Pointer<SdlGpuTexture> texture;
+  final double clearDepth;
+  final int loadOp;
+  final int storeOp;
+  final int stencilLoadOp;
+  final int stencilStoreOp;
+  final bool cycle;
+  final int clearStencil;
+  final int mipLevel;
+  final int layer;
 
   Pointer<SdlGpuDepthStencilTargetInfo> calloc() {
     final pointer = ffi.calloc<SdlGpuDepthStencilTargetInfo>();

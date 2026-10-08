@@ -22,10 +22,10 @@ int main() {
     return -1;
   }
   final lines = <SdlxFPoint>[
-    SdlxFPoint(320, 200),
-    SdlxFPoint(300, 240),
-    SdlxFPoint(340, 240),
-    SdlxFPoint(320, 200),
+    const SdlxFPoint(320, 200),
+    const SdlxFPoint(300, 240),
+    const SdlxFPoint(340, 240),
+    const SdlxFPoint(320, 200),
   ];
   var running = true;
   while (running) {
@@ -43,9 +43,9 @@ int main() {
       }
     }
     renderer
-      ..setDrawColor(SdlxColor(0, 0, 0))
+      ..setDrawColor(const SdlxColor(0, 0, 0))
       ..clear()
-      ..setDrawColor(SdlxColor(255, 255, 255))
+      ..setDrawColor(const SdlxColor(255, 255, 255))
       ..lines(lines)
       ..present();
   }

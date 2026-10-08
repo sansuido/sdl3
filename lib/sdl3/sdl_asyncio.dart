@@ -4,7 +4,6 @@ import 'package:ffi/ffi.dart' as ffi;
 
 import 'dylib.dart' as dylib;
 import 'sdl.dart';
-import 'sdl_dart.dart';
 
 part 'asyncio/lib_sdl_asyncio.dart';
 part 'asyncio/sdl_async_io.dart';

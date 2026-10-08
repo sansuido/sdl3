@@ -1,7 +1,7 @@
 part of '../sdl_events.dart';
 
 class SdlxTextEditingEvent extends SdlxEvent {
-  SdlxTextEditingEvent({
+  const SdlxTextEditingEvent({
     super.type = SDL_EVENT_TEXT_EDITING,
     super.reserved = 0,
     super.timestamp = 0,
@@ -11,10 +11,25 @@ class SdlxTextEditingEvent extends SdlxEvent {
     this.length = 0,
   });
 
-  int windowId;
-  String text;
-  int start;
-  int length;
+  factory SdlxTextEditingEvent.fromPointer(Pointer<SdlEvent> pointer) {
+    final text = pointer.ref.edit.text != nullptr
+        ? pointer.ref.edit.text.cast<ffi.Utf8>().toDartString()
+        : '';
+    return SdlxTextEditingEvent(
+      type: pointer.ref.edit.type,
+      reserved: pointer.ref.edit.reserved,
+      timestamp: pointer.ref.edit.timestamp,
+      windowId: pointer.ref.edit.windowId,
+      text: text,
+      start: pointer.ref.edit.start,
+      length: pointer.ref.edit.length,
+    );
+  }
+
+  final int windowId;
+  final String text;
+  final int start;
+  final int length;
 
   @override
   bool isTargetWindow(int targetId, {bool ifNoWindow = true}) =>
@@ -34,20 +49,4 @@ class SdlxTextEditingEvent extends SdlxEvent {
     pointer.ref.edit.length = length;
     return pointer;
   }
-
-  @override
-  void loadFromPointer(Pointer<SdlEvent> pointer) {
-    type = pointer.ref.edit.type;
-    reserved = pointer.ref.edit.reserved;
-    timestamp = pointer.ref.edit.timestamp;
-    windowId = pointer.ref.edit.windowId;
-    if (pointer.ref.edit.text != nullptr) {
-      text = pointer.ref.edit.text.toDartString();
-    }
-    start = pointer.ref.edit.start;
-    length = pointer.ref.edit.length;
-  }
-
-  static SdlxTextEditingEvent fromPointer(Pointer<SdlEvent> pointer) =>
-      SdlxTextEditingEvent()..loadFromPointer(pointer);
 }

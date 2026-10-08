@@ -1,7 +1,7 @@
 part of '../sdl_events.dart';
 
 class SdlxTextInputEvent extends SdlxEvent {
-  SdlxTextInputEvent({
+  const SdlxTextInputEvent({
     super.type = SDL_EVENT_TEXT_INPUT,
     super.reserved = 0,
     super.timestamp = 0,
@@ -9,8 +9,21 @@ class SdlxTextInputEvent extends SdlxEvent {
     this.text = '',
   });
 
-  int windowId;
-  String text;
+  factory SdlxTextInputEvent.fromPointer(Pointer<SdlEvent> pointer) {
+    final text = pointer.ref.text.text != nullptr
+        ? pointer.ref.text.text.cast<ffi.Utf8>().toDartString()
+        : '';
+    return SdlxTextInputEvent(
+      type: pointer.ref.text.type,
+      reserved: pointer.ref.text.reserved,
+      timestamp: pointer.ref.text.timestamp,
+      windowId: pointer.ref.text.windowId,
+      text: text,
+    );
+  }
+
+  final int windowId;
+  final String text;
 
   @override
   bool isTargetWindow(int targetId, {bool ifNoWindow = true}) =>
@@ -28,18 +41,4 @@ class SdlxTextInputEvent extends SdlxEvent {
     }
     return pointer;
   }
-
-  @override
-  void loadFromPointer(Pointer<SdlEvent> pointer) {
-    type = pointer.ref.text.type;
-    reserved = pointer.ref.text.reserved;
-    timestamp = pointer.ref.text.timestamp;
-    windowId = pointer.ref.text.windowId;
-    if (pointer.ref.text.text != nullptr) {
-      text = pointer.ref.text.text.toDartString();
-    }
-  }
-
-  static SdlxTextInputEvent fromPointer(Pointer<SdlEvent> pointer) =>
-      SdlxTextInputEvent()..loadFromPointer(pointer);
 }

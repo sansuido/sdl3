@@ -928,7 +928,7 @@ SdlxFRect? sdlxGetRenderLogicalPresentationRect(Pointer<SdlRenderer> renderer) {
   final rectPointer = ffi.calloc<SdlFRect>();
   final result = sdlGetRenderLogicalPresentationRect(renderer, rectPointer);
   if (result) {
-    rect = SdlxFRect()..loadFromPointer(rectPointer);
+    rect = SdlxFRect.fromPointer(rectPointer);
   }
   rectPointer.callocFree();
   return rect;
@@ -1101,18 +1101,18 @@ SdlxFRect? sdlxGetRenderLogicalPresentationRect(Pointer<SdlRenderer> renderer) {
 /// - [SDL_ConvertEventToRenderCoordinates - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_ConvertEventToRenderCoordinates)
 ///
 /// {@category render}
-bool sdlxConvertEventToRenderCoordinates(
+SdlxEvent? sdlxConvertEventToRenderCoordinates(
   Pointer<SdlRenderer> renderer,
   SdlxEvent event,
-) {
-  final eventPointer = event.calloc();
-  final result = sdlConvertEventToRenderCoordinates(renderer, eventPointer);
-  if (result) {
-    event.loadFromPointer(eventPointer);
-  }
-  eventPointer.callocAllFree();
-  return result;
-}
+) => ffi.using((arena) {
+  final eventPointer = event.toNative(arena);
+
+  final success = sdlConvertEventToRenderCoordinates(renderer, eventPointer);
+
+  if (!success) return null;
+
+  return SdlxEvent.fromPointer(eventPointer);
+});
 
 ///
 /// Set the drawing area for rendering on the current target.
@@ -1187,16 +1187,17 @@ bool sdlxSetRenderViewport(Pointer<SdlRenderer> renderer, SdlxRect? rect) {
 /// - [SDL_GetRenderViewport - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetRenderViewport)
 ///
 /// {@category render}
-SdlxRect? sdlxGetRenderViewport(Pointer<SdlRenderer> renderer) {
-  SdlxRect? rect;
-  final rectPointer = ffi.calloc<SdlRect>();
-  final result = sdlGetRenderViewport(renderer, rectPointer);
-  if (result) {
-    rect = SdlxRect()..loadFromPointer(rectPointer);
-  }
-  rectPointer.callocFree();
-  return rect;
-}
+SdlxRect? sdlxGetRenderViewport(Pointer<SdlRenderer> renderer) =>
+    ffi.using((arena) {
+      final rectPointer = arena<SdlRect>();
+      final result = sdlGetRenderViewport(renderer, rectPointer);
+
+      if (!result) {
+        return null;
+      }
+
+      return SdlxRect.fromPointer(rectPointer);
+    });
 
 ///
 /// Set the drawing area for rendering on the current target.
@@ -1277,7 +1278,7 @@ SdlxFRect? sdlxGetRenderViewportFloat(Pointer<SdlRenderer> renderer) {
   final rectPointer = ffi.calloc<SdlFRect>();
   final result = sdlGetRenderViewportFloat(renderer, rectPointer);
   if (result) {
-    rect = SdlxFRect()..loadFromPointer(rectPointer);
+    rect = SdlxFRect.fromPointer(rectPointer);
   }
   rectPointer.callocFree();
   return rect;
@@ -1311,16 +1312,17 @@ SdlxFRect? sdlxGetRenderViewportFloat(Pointer<SdlRenderer> renderer) {
 /// - [SDL_GetRenderSafeArea - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetRenderSafeArea)
 ///
 /// {@category render}
-SdlxRect? sdlxGetRenderSafeArea(Pointer<SdlRenderer> renderer) {
-  SdlxRect? rect;
-  final rectPointer = ffi.calloc<SdlRect>();
-  final result = sdlGetRenderSafeArea(renderer, rectPointer);
-  if (result) {
-    rect = SdlxRect()..loadFromPointer(rectPointer);
-  }
-  rectPointer.callocFree();
-  return rect;
-}
+SdlxRect? sdlxGetRenderSafeArea(Pointer<SdlRenderer> renderer) =>
+    ffi.using((arena) {
+      final rectPointer = arena<SdlRect>();
+      final result = sdlGetRenderSafeArea(renderer, rectPointer);
+
+      if (!result) {
+        return null;
+      }
+
+      return SdlxRect.fromPointer(rectPointer);
+    });
 
 ///
 /// Set the clip rectangle for rendering on the specified target.
@@ -1390,16 +1392,17 @@ bool sdlxSetRenderClipRect(Pointer<SdlRenderer> renderer, SdlxRect? rect) {
 /// - [SDL_GetRenderClipRect - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetRenderClipRect)
 ///
 /// {@category render}
-SdlxRect? sdlxGetRenderClipRect(Pointer<SdlRenderer> renderer) {
-  SdlxRect? rect;
-  final rectPointer = ffi.calloc<SdlRect>();
-  final result = sdlGetRenderClipRect(renderer, rectPointer);
-  if (result) {
-    rect = SdlxRect()..loadFromPointer(rectPointer);
-  }
-  rectPointer.callocFree();
-  return rect;
-}
+SdlxRect? sdlxGetRenderClipRect(Pointer<SdlRenderer> renderer) =>
+    ffi.using((arena) {
+      final rectPointer = arena<SdlRect>();
+      final result = sdlGetRenderClipRect(renderer, rectPointer);
+
+      if (!result) {
+        return null;
+      }
+
+      return SdlxRect.fromPointer(rectPointer);
+    });
 
 ///
 /// Set the clip rectangle for rendering on the specified target.
@@ -1475,7 +1478,7 @@ SdlxFRect? sdlxGetRenderClipRectFloat(Pointer<SdlRenderer> renderer) {
   final rectPointer = ffi.calloc<SdlFRect>();
   final result = sdlGetRenderClipRectFloat(renderer, rectPointer);
   if (result) {
-    rect = SdlxFRect()..loadFromPointer(rectPointer);
+    rect = SdlxFRect.fromPointer(rectPointer);
   }
   rectPointer.callocFree();
   return rect;
@@ -1627,31 +1630,32 @@ bool sdlxSetRenderDrawColorFloat(
 /// - [SDL_GetRenderDrawColor - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetRenderDrawColor)
 ///
 /// {@category render}
-bool sdlxGetRenderDrawColor(Pointer<SdlRenderer> renderer, SdlxColor color) {
-  final rPointer = ffi.calloc<Uint8>();
-  final gPointer = ffi.calloc<Uint8>();
-  final bPointer = ffi.calloc<Uint8>();
-  final aPointer = ffi.calloc<Uint8>();
-  final result = sdlGetRenderDrawColor(
-    renderer,
-    rPointer,
-    gPointer,
-    bPointer,
-    aPointer,
-  );
-  if (result) {
-    color
-      ..r = rPointer.value
-      ..g = gPointer.value
-      ..b = bPointer.value
-      ..a = aPointer.value;
-  }
-  rPointer.callocFree();
-  gPointer.callocFree();
-  bPointer.callocFree();
-  aPointer.callocFree();
-  return result;
-}
+SdlxColor? sdlxGetRenderDrawColor(Pointer<SdlRenderer> renderer) =>
+    ffi.using((arena) {
+      final rPointer = arena<Uint8>();
+      final gPointer = arena<Uint8>();
+      final bPointer = arena<Uint8>();
+      final aPointer = arena<Uint8>();
+
+      final result = sdlGetRenderDrawColor(
+        renderer,
+        rPointer,
+        gPointer,
+        bPointer,
+        aPointer,
+      );
+
+      if (!result) {
+        return null;
+      }
+
+      return SdlxColor(
+        rPointer.value,
+        gPointer.value,
+        bPointer.value,
+        aPointer.value,
+      );
+    });
 
 ///
 /// Get the color used for drawing operations (Rect, Line and Clear).
@@ -1683,34 +1687,32 @@ bool sdlxGetRenderDrawColor(Pointer<SdlRenderer> renderer, SdlxColor color) {
 /// - [SDL_GetRenderDrawColorFloat - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetRenderDrawColorFloat)
 ///
 /// {@category render}
-bool sdlxGetRenderDrawColorFloat(
-  Pointer<SdlRenderer> renderer,
-  SdlxFColor color,
-) {
-  final rPointer = ffi.calloc<Float>();
-  final gPointer = ffi.calloc<Float>();
-  final bPointer = ffi.calloc<Float>();
-  final aPointer = ffi.calloc<Float>();
-  final result = sdlGetRenderDrawColorFloat(
-    renderer,
-    rPointer,
-    gPointer,
-    bPointer,
-    aPointer,
-  );
-  if (result) {
-    color
-      ..r = rPointer.value
-      ..g = gPointer.value
-      ..b = bPointer.value
-      ..a = aPointer.value;
-  }
-  rPointer.callocFree();
-  gPointer.callocFree();
-  bPointer.callocFree();
-  aPointer.callocFree();
-  return result;
-}
+SdlxFColor? sdlxGetRenderDrawColorFloat(Pointer<SdlRenderer> renderer) =>
+    ffi.using((arena) {
+      final rPointer = arena<Float>();
+      final gPointer = arena<Float>();
+      final bPointer = arena<Float>();
+      final aPointer = arena<Float>();
+
+      final result = sdlGetRenderDrawColorFloat(
+        renderer,
+        rPointer,
+        gPointer,
+        bPointer,
+        aPointer,
+      );
+
+      if (!result) {
+        return null;
+      }
+
+      return SdlxFColor(
+        rPointer.value,
+        gPointer.value,
+        bPointer.value,
+        aPointer.value,
+      );
+    });
 
 ///
 /// Get the color scale used for render operations.

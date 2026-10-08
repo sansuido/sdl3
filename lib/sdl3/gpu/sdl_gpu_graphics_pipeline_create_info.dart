@@ -1,48 +1,45 @@
 part of '../sdl_gpu.dart';
 
 class SdlxGpuVertexBufferDescription {
-  SdlxGpuVertexBufferDescription({
+  const SdlxGpuVertexBufferDescription({
     this.slot = 0,
     this.pitch = 0,
     this.inputRate = 0,
     this.instanceStepRate = 0,
   });
-  int slot;
-  int pitch;
-  int inputRate;
-  int instanceStepRate;
+
+  final int slot;
+  final int pitch;
+  final int inputRate;
+  final int instanceStepRate;
 }
 
 class SdlxGpuVertexAttribute {
-  SdlxGpuVertexAttribute({
+  const SdlxGpuVertexAttribute({
     this.location = 0,
     this.bufferSlot = 0,
     this.format = 0,
     this.offset = 0,
   });
-  int location;
-  int bufferSlot;
-  int format;
-  int offset;
+
+  final int location;
+  final int bufferSlot;
+  final int format;
+  final int offset;
 }
 
 class SdlxGpuVertexInputState {
-  SdlxGpuVertexInputState({
-    List<SdlxGpuVertexBufferDescription>? vertexBufferDescriptions,
-    List<SdlxGpuVertexAttribute>? vertexAttributes,
-  }) {
-    this.vertexBufferDescriptions = vertexBufferDescriptions ?? [];
-    this.vertexAttributes = vertexAttributes ?? [];
-  }
+  const SdlxGpuVertexInputState({
+    this.vertexBufferDescriptions = const [],
+    this.vertexAttributes = const [],
+  });
 
-  late List<SdlxGpuVertexBufferDescription> vertexBufferDescriptions;
-  //int numVertexBuffers;
-  late List<SdlxGpuVertexAttribute> vertexAttributes;
-  //int numVertexAttributes
+  final List<SdlxGpuVertexBufferDescription> vertexBufferDescriptions;
+  final List<SdlxGpuVertexAttribute> vertexAttributes;
 }
 
 class SdlxGpuRasterizerState {
-  SdlxGpuRasterizerState({
+  const SdlxGpuRasterizerState({
     this.fillMode = 0,
     this.cullMode = 0,
     this.frontFace = 0,
@@ -53,66 +50,67 @@ class SdlxGpuRasterizerState {
     this.enableDepthClip = false,
   });
 
-  int fillMode;
-  int cullMode;
-  int frontFace;
-  double depthBiasAntFactor;
-  double depthBiasClamp;
-  double depthBiasSlopeFactor;
-  bool enableDepthBias;
-  bool enableDepthClip;
+  final int fillMode;
+  final int cullMode;
+  final int frontFace;
+  final double depthBiasAntFactor;
+  final double depthBiasClamp;
+  final double depthBiasSlopeFactor;
+  final bool enableDepthBias;
+  final bool enableDepthClip;
 }
 
 class SdlxGpuMultisampleState {
-  SdlxGpuMultisampleState({
+  const SdlxGpuMultisampleState({
     this.sampleCount = 0,
     this.sampleMask = 0,
     this.enableMask = false,
     this.enableAlphaToCoverage = false,
   });
-  int sampleCount;
-  int sampleMask;
-  bool enableMask;
-  bool enableAlphaToCoverage;
+
+  final int sampleCount;
+  final int sampleMask;
+  final bool enableMask;
+  final bool enableAlphaToCoverage;
 }
 
 class SdlxGpuStencilOpState {
-  SdlxGpuStencilOpState({
+  const SdlxGpuStencilOpState({
     this.failOp = 0,
     this.passOp = 0,
     this.depthFailOp = 0,
     this.compareOp = 0,
   });
-  int failOp;
-  int passOp;
-  int depthFailOp;
-  int compareOp;
+
+  final int failOp;
+  final int passOp;
+  final int depthFailOp;
+  final int compareOp;
 }
 
 class SdlxGpuDepthStencilState {
-  SdlxGpuDepthStencilState({
+  const SdlxGpuDepthStencilState({
     this.compareOp = 0,
     this.compareMask = 0,
     this.writeMask = 0,
     this.enableDepthTest = false,
     this.enableDepthWrite = false,
     this.enableStencilTest = false,
-  }) {
-    backStencilState = SdlxGpuStencilOpState();
-    frontStencilState = SdlxGpuStencilOpState();
-  }
-  int compareOp;
-  late SdlxGpuStencilOpState backStencilState;
-  late SdlxGpuStencilOpState frontStencilState;
-  int compareMask;
-  int writeMask;
-  bool enableDepthTest;
-  bool enableDepthWrite;
-  bool enableStencilTest;
+  }) : backStencilState = const SdlxGpuStencilOpState(),
+       frontStencilState = const SdlxGpuStencilOpState();
+
+  final int compareOp;
+  final SdlxGpuStencilOpState backStencilState;
+  final SdlxGpuStencilOpState frontStencilState;
+  final int compareMask;
+  final int writeMask;
+  final bool enableDepthTest;
+  final bool enableDepthWrite;
+  final bool enableStencilTest;
 }
 
 class SdlxGpuColorTargetBlendState {
-  SdlxGpuColorTargetBlendState({
+  const SdlxGpuColorTargetBlendState({
     this.srcColorBlendfactor = 0,
     this.dstColorBlendfactor = 0,
     this.colorBlendOp = 0,
@@ -123,37 +121,36 @@ class SdlxGpuColorTargetBlendState {
     this.enableBlend = false,
     this.enableColorWriteMask = false,
   });
-  int srcColorBlendfactor;
-  int dstColorBlendfactor;
-  int colorBlendOp;
-  int srcAlphaBlendfactor;
-  int dstAlphaBlendfactor;
-  int alphaBlendOp;
-  int colorWriteMask;
-  bool enableBlend;
-  bool enableColorWriteMask;
+
+  final int srcColorBlendfactor;
+  final int dstColorBlendfactor;
+  final int colorBlendOp;
+  final int srcAlphaBlendfactor;
+  final int dstAlphaBlendfactor;
+  final int alphaBlendOp;
+  final int colorWriteMask;
+  final bool enableBlend;
+  final bool enableColorWriteMask;
 }
 
 class SdlxGpuColorTargetDescription {
-  SdlxGpuColorTargetDescription({this.format = 0}) {
-    blendState = SdlxGpuColorTargetBlendState();
-  }
-  int format;
-  late SdlxGpuColorTargetBlendState blendState;
+  const SdlxGpuColorTargetDescription({this.format = 0})
+    : blendState = const SdlxGpuColorTargetBlendState();
+
+  final int format;
+  final SdlxGpuColorTargetBlendState blendState;
 }
 
 class SdlxGpuGraphicsPipelineTargetInfo {
   SdlxGpuGraphicsPipelineTargetInfo({
-    List<SdlxGpuColorTargetDescription>? colorTargetDescriptions,
+    this.colorTargetDescriptions = const [],
     this.depthStencilFormat = 0,
     this.hasDepthStencilTarget = false,
-  }) {
-    this.colorTargetDescriptions = colorTargetDescriptions ?? [];
-  }
-  late List<SdlxGpuColorTargetDescription> colorTargetDescriptions;
-  //int numColorTargets;
-  int depthStencilFormat;
-  bool hasDepthStencilTarget;
+  });
+
+  final List<SdlxGpuColorTargetDescription> colorTargetDescriptions;
+  final int depthStencilFormat;
+  final bool hasDepthStencilTarget;
 }
 
 class SdlxGpuGraphicsPipelineCreateInfo {
@@ -162,25 +159,23 @@ class SdlxGpuGraphicsPipelineCreateInfo {
     Pointer<SdlGpuShader>? fragmentShader,
     this.primitiveType = 0,
     this.props = 0,
-  }) {
-    this.vertexShader = vertexShader ?? nullptr;
-    this.fragmentShader = fragmentShader ?? nullptr;
-    vertexInputState = SdlxGpuVertexInputState();
-    rasterizerState = SdlxGpuRasterizerState();
-    multisampleState = SdlxGpuMultisampleState();
-    depthStencilState = SdlxGpuDepthStencilState();
-    targetInfo = SdlxGpuGraphicsPipelineTargetInfo();
-  }
+  }) : vertexShader = vertexShader ?? nullptr,
+       fragmentShader = fragmentShader ?? nullptr,
+       vertexInputState = const SdlxGpuVertexInputState(),
+       rasterizerState = const SdlxGpuRasterizerState(),
+       multisampleState = const SdlxGpuMultisampleState(),
+       depthStencilState = const SdlxGpuDepthStencilState(),
+       targetInfo = SdlxGpuGraphicsPipelineTargetInfo();
 
-  late Pointer<SdlGpuShader> vertexShader;
-  late Pointer<SdlGpuShader> fragmentShader;
-  int primitiveType;
-  late SdlxGpuVertexInputState vertexInputState;
-  late SdlxGpuRasterizerState rasterizerState;
-  late SdlxGpuMultisampleState multisampleState;
-  late SdlxGpuDepthStencilState depthStencilState;
-  late SdlxGpuGraphicsPipelineTargetInfo targetInfo;
-  int props;
+  final Pointer<SdlGpuShader> vertexShader;
+  final Pointer<SdlGpuShader> fragmentShader;
+  final int primitiveType;
+  final SdlxGpuVertexInputState vertexInputState;
+  final SdlxGpuRasterizerState rasterizerState;
+  final SdlxGpuMultisampleState multisampleState;
+  final SdlxGpuDepthStencilState depthStencilState;
+  final SdlxGpuGraphicsPipelineTargetInfo targetInfo;
+  final int props;
 
   Pointer<SdlGpuGraphicsPipelineCreateInfo> calloc() {
     final pointer = ffi.calloc<SdlGpuGraphicsPipelineCreateInfo>();

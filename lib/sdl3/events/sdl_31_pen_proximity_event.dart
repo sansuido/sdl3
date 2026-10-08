@@ -1,14 +1,26 @@
 part of '../sdl_events.dart';
 
 class SdlxPenProximityEvent extends SdlxEvent {
-  SdlxPenProximityEvent({
+  const SdlxPenProximityEvent({
     super.type = 0,
     super.reserved = 0,
     super.timestamp = 0,
     this.windowId = 0,
     this.which = 0,
     this.penState = 0,
+    this.deviceType = 0,
   });
+
+  factory SdlxPenProximityEvent.fromPointer(Pointer<SdlEvent> pointer) =>
+      SdlxPenProximityEvent(
+        type: pointer.ref.pproximity.type,
+        reserved: pointer.ref.pproximity.reserved,
+        timestamp: pointer.ref.pproximity.timestamp,
+        windowId: pointer.ref.pproximity.windowId,
+        which: pointer.ref.pproximity.which,
+        penState: pointer.ref.pproximity.penState,
+        deviceType: pointer.ref.pproximity.deviceType,
+      );
 
   factory SdlxPenProximityEvent.onIn({
     int reserved = 0,
@@ -16,6 +28,7 @@ class SdlxPenProximityEvent extends SdlxEvent {
     int windowId = 0,
     int which = 0,
     int penState = 0,
+    int deviceType = 0,
   }) => SdlxPenProximityEvent(
     type: SDL_EVENT_PEN_PROXIMITY_IN,
     reserved: reserved,
@@ -23,6 +36,7 @@ class SdlxPenProximityEvent extends SdlxEvent {
     windowId: windowId,
     which: which,
     penState: penState,
+    deviceType: deviceType,
   );
 
   factory SdlxPenProximityEvent.onOut({
@@ -31,6 +45,7 @@ class SdlxPenProximityEvent extends SdlxEvent {
     int windowId = 0,
     int which = 0,
     int penState = 0,
+    int deviceType = 0,
   }) => SdlxPenProximityEvent(
     type: SDL_EVENT_PEN_PROXIMITY_OUT,
     reserved: reserved,
@@ -38,11 +53,13 @@ class SdlxPenProximityEvent extends SdlxEvent {
     windowId: windowId,
     which: which,
     penState: penState,
+    deviceType: deviceType,
   );
 
-  int windowId;
-  int which;
-  int penState;
+  final int windowId;
+  final int which;
+  final int penState;
+  final int deviceType;
 
   @override
   bool isTargetWindow(int targetId, {bool ifNoWindow = true}) =>
@@ -57,19 +74,7 @@ class SdlxPenProximityEvent extends SdlxEvent {
     pointer.ref.pproximity.windowId = windowId;
     pointer.ref.pproximity.which = which;
     pointer.ref.pproximity.penState = penState;
+    pointer.ref.pproximity.deviceType = deviceType;
     return pointer;
   }
-
-  @override
-  void loadFromPointer(Pointer<SdlEvent> pointer) {
-    type = pointer.ref.pproximity.type;
-    reserved = pointer.ref.pproximity.reserved;
-    timestamp = pointer.ref.pproximity.timestamp;
-    windowId = pointer.ref.pproximity.windowId;
-    which = pointer.ref.pproximity.which;
-    penState = pointer.ref.pproximity.penState;
-  }
-
-  static SdlxPenProximityEvent fromPointer(Pointer<SdlEvent> pointer) =>
-      SdlxPenProximityEvent()..loadFromPointer(pointer);
 }

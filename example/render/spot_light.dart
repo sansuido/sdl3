@@ -74,15 +74,15 @@ int main() {
     {
       renderer
         ..setTarget(lightsLayer)
-        ..setDrawColorFloat(SdlxFColor(0, 0, 0))
+        ..setDrawColorFloat(const SdlxFColor(0, 0, 0))
         ..clear();
-      final size = SdlxFPoint(200, 200);
+      const size = SdlxFPoint(200, 200);
       final mouseState = sdlxGetMouseState();
       renderer.textureRotated(
         lightTexture,
         dstrect: SdlxFRect.fromCenter(
-          SdlxFPoint(mouseState.x, mouseState.y),
-          size,
+          center: SdlxFPoint(mouseState.x, mouseState.y),
+          size: size,
         ),
         angle: angle,
       );
@@ -115,7 +115,7 @@ int main() {
     // render everythings
     {
       renderer
-        ..setDrawColorFloat(SdlxFColor(0, 0, 0))
+        ..setDrawColorFloat(const SdlxFColor(0, 0, 0))
         ..clear()
         ..texture(bgTexture)
         ..texture(shadowLayer)

@@ -49,7 +49,7 @@ int main() {
     }
     tick++;
     renderer
-      ..setDrawColor(SdlxColor(0, 0, 0))
+      ..setDrawColor(const SdlxColor(0, 0, 0))
       ..clear()
       ..present();
   }

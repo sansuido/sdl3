@@ -103,19 +103,15 @@ int? sdlxGetCurrentTime() {
 /// - [SDL_TimeToDateTime - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_TimeToDateTime)
 ///
 /// {@category time}
-bool sdlxTimeToDateTime(
-  int ticks,
-  SdlxDateTime dateTime, {
-  bool localTime = false,
-}) {
-  final dateTimePointer = dateTime.calloc();
-  final result = sdlTimeToDateTime(ticks, dateTimePointer, localTime);
-  if (result) {
-    dateTime.loadFromPointer(dateTimePointer);
-  }
-  dateTimePointer.callocFree();
-  return result;
-}
+SdlxDateTime? sdlxTimeToDateTime(int ticks, {bool localTime = false}) =>
+    ffi.using((arena) {
+      final dateTimePointer = arena<SdlDateTime>();
+      final success = sdlTimeToDateTime(ticks, dateTimePointer, localTime);
+
+      if (!success) return null;
+
+      return SdlxDateTime.fromPointer(dateTimePointer);
+    });
 
 ///
 /// Converts a calendar time to an SDL_Time in nanoseconds since the epoch.

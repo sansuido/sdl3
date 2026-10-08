@@ -144,15 +144,12 @@ Pointer<MixMixer> mixxCreateMixer(SdlxAudioSpec spec) {
 /// - [MIX_GetMixerFormat - SDL3 Wiki](https://wiki.libsdl.org/SDL3/MIX_GetMixerFormat)
 ///
 /// {@category mixer}
-bool mixxGetMixerFormat(Pointer<MixMixer> mixer, SdlxAudioSpec spec) {
-  final specPointer = spec.calloc();
-  final result = mixGetMixerFormat(mixer, specPointer);
-  if (result) {
-    spec.loadFromPointer(specPointer);
-  }
-  specPointer.callocFree();
-  return result;
-}
+SdlxAudioSpec? mixxGetMixerFormat(Pointer<MixMixer> mixer) =>
+    ffi.using((arena) {
+      final specPointer = arena<SdlAudioSpec>();
+      final result = mixGetMixerFormat(mixer, specPointer);
+      return result ? SdlxAudioSpec.fromPointer(specPointer) : null;
+    });
 
 ///
 /// Load raw PCM data from an SDL_IOStream.
@@ -358,15 +355,12 @@ Pointer<MixAudio> mixxLoadRawAudioNoCopy(
 /// - [MIX_GetAudioFormat - SDL3 Wiki](https://wiki.libsdl.org/SDL3/MIX_GetAudioFormat)
 ///
 /// {@category mixer}
-bool mixxGetAudioFormat(Pointer<MixAudio> audio, SdlxAudioSpec spec) {
-  final specPointer = spec.calloc();
-  final result = mixGetAudioFormat(audio, specPointer);
-  if (result) {
-    spec.loadFromPointer(specPointer);
-  }
-  specPointer.callocFree();
-  return result;
-}
+SdlxAudioSpec? mixxGetAudioFormat(Pointer<MixAudio> audio) =>
+    ffi.using((arena) {
+      final specPointer = arena<SdlAudioSpec>();
+      final result = mixGetAudioFormat(audio, specPointer);
+      return result ? SdlxAudioSpec.fromPointer(specPointer) : null;
+    });
 
 ///
 /// Set a MIX_Track's input to an SDL_IOStream providing raw PCM data.
@@ -716,15 +710,15 @@ bool mixxSetTrack3DPosition(Pointer<MixTrack> track, MixxPoint3D? position) {
 /// - [MIX_GetTrack3DPosition - SDL3 Wiki](https://wiki.libsdl.org/SDL3/MIX_GetTrack3DPosition)
 ///
 /// {@category mixer}
-bool mixxGetTrack3DPosition(Pointer<MixTrack> track, MixxPoint3D position) {
-  final positionPointer = position.calloc();
-  final result = mixGetTrack3DPosition(track, positionPointer);
-  if (result) {
-    position.loadFromPointer(positionPointer);
-  }
-  positionPointer.callocFree();
-  return result;
-}
+MixxPoint3D? mixxGetTrack3DPosition(Pointer<MixTrack> track) =>
+    ffi.using((arena) {
+      final positionPointer = arena<MixPoint3D>();
+      final success = mixGetTrack3DPosition(track, positionPointer);
+
+      if (!success) return null;
+
+      return MixxPoint3D.fromPointer(positionPointer);
+    });
 
 ///
 /// Generate mixer output when not driving an audio device.
@@ -830,18 +824,13 @@ int mixxGenerate(Pointer<MixMixer> mixer, TypedData buffer) {
 /// - [MIX_GetAudioDecoderFormat - SDL3 Wiki](https://wiki.libsdl.org/SDL3/MIX_GetAudioDecoderFormat)
 ///
 /// {@category mixer}
-bool mixxGetAudioDecoderFormat(
+SdlxAudioSpec? mixxGetAudioDecoderFormat(
   Pointer<MixAudioDecoder> audiodecoder,
-  SdlxAudioSpec spec,
-) {
-  final specPointer = spec.calloc();
+) => ffi.using((arena) {
+  final specPointer = arena<SdlAudioSpec>();
   final result = mixGetAudioDecoderFormat(audiodecoder, specPointer);
-  if (result) {
-    spec.loadFromPointer(specPointer);
-  }
-  specPointer.callocFree();
-  return result;
-}
+  return result ? SdlxAudioSpec.fromPointer(specPointer) : null;
+});
 
 ///
 /// Decode more audio from a MIX_AudioDecoder.

@@ -1,14 +1,14 @@
 part of '../sdl_notification.dart';
 
 class SdlxNotificationActionButton extends SdlxNotificationAction {
-  SdlxNotificationActionButton({
+  const SdlxNotificationActionButton({
     super.type = SDL_NOTIFICATION_ACTION_TYPE_BUTTON,
     this.actionId = '',
     this.actionLabel = '',
   });
 
-  String actionId;
-  String actionLabel;
+  final String actionId;
+  final String actionLabel;
 
   @override
   void toPointer(Pointer<SdlNotificationAction> pointer) {

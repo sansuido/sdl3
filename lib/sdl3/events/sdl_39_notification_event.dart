@@ -1,15 +1,29 @@
 part of '../sdl_events.dart';
 
 class SdlxNotificationEvent extends SdlxEvent {
-  SdlxNotificationEvent({
+  const SdlxNotificationEvent({
     super.type = SDL_EVENT_NOTIFICATION_ACTION_INVOKED,
     super.reserved = 0,
     super.timestamp = 0,
     this.which = 0,
     this.actionId = '',
   });
-  int which;
-  String actionId;
+
+  factory SdlxNotificationEvent.fromPointer(Pointer<SdlEvent> pointer) {
+    final actionId = pointer.ref.notification.actionId != nullptr
+        ? pointer.ref.notification.actionId.toDartString()
+        : '';
+    return SdlxNotificationEvent(
+      type: pointer.ref.notification.type,
+      reserved: pointer.ref.notification.reserved,
+      timestamp: pointer.ref.notification.timestamp,
+      which: pointer.ref.notification.which,
+      actionId: actionId,
+    );
+  }
+
+  final int which;
+  final String actionId;
 
   @override
   Pointer<SdlEvent> calloc() {
@@ -23,18 +37,4 @@ class SdlxNotificationEvent extends SdlxEvent {
     }
     return pointer;
   }
-
-  @override
-  void loadFromPointer(Pointer<SdlEvent> pointer) {
-    type = pointer.ref.notification.type;
-    reserved = pointer.ref.notification.reserved;
-    timestamp = pointer.ref.notification.timestamp;
-    which = pointer.ref.notification.which;
-    if (pointer.ref.notification.actionId != nullptr) {
-      actionId = pointer.ref.notification.actionId.toDartString();
-    }
-  }
-
-  static SdlxNotificationEvent fromPointer(Pointer<SdlEvent> pointer) =>
-      SdlxNotificationEvent()..loadFromPointer(pointer);
 }

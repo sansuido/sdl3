@@ -67,22 +67,24 @@ int main() {
       windowSize.h.toDouble() - marge * 2,
     );
     renderer
-      ..setDrawColor(SdlxColor(0, 0, 0))
+      ..setDrawColor(const SdlxColor(0, 0, 0))
       ..clear()
-      ..boxColor(clip, SdlxColor(0, 0, 255, 64));
-    final resultRect = SdlxRect();
-    if (sdlxGetRectEnclosingPoints(
+      ..boxColor(clip, const SdlxColor(0, 0, 255, 64));
+    final resultRect = sdlxGetRectEnclosingPoints(
       clickPoints.toInt(),
-      clip.toInt(),
-      resultRect,
-    )) {
-      renderer.rectangleColor(resultRect.toFloat(), SdlxColor(255, 255, 255));
+      clip: clip.toInt(),
+    );
+    if (resultRect != null) {
+      renderer.rectangleColor(
+        resultRect.toFloat(),
+        const SdlxColor(255, 255, 255),
+      );
     }
     for (var n = 0; n < clickPoints.length; n++) {
       renderer.stringColor(
         clickPoints[n],
         (n + 1).toString(),
-        SdlxColor(0, 255, 0),
+        const SdlxColor(0, 255, 0),
       );
     }
     renderer.present();

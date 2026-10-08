@@ -237,17 +237,11 @@ void drawTriangle(
   SdlxFPoint p2,
   SdlxFPoint p3,
 ) {
-  final color = SdlxFColor(1, 1, 1);
+  const color = SdlxFColor(1, 1, 1);
   final vertices = <SdlxVertex>[
-    SdlxVertex()
-      ..position = p1
-      ..color = color,
-    SdlxVertex()
-      ..position = p2
-      ..color = color,
-    SdlxVertex()
-      ..position = p3
-      ..color = color,
+    SdlxVertex(position: p1, color: color),
+    SdlxVertex(position: p2, color: color),
+    SdlxVertex(position: p3, color: color),
   ];
   sdlxRenderGeometry(renderer, vertices);
 }
@@ -312,11 +306,7 @@ Future<void> main() async {
         final yPos = y * gChipSize;
 
         if (chip == 1 || chip == 6 || chip == 7) {
-          final rect = SdlxFRect()
-            ..x = xPos
-            ..y = yPos
-            ..w = gChipSize
-            ..h = gChipSize;
+          final rect = SdlxFRect(xPos, yPos, gChipSize, gChipSize);
           renderer.fillRect(rect);
         } else if (chip == 2) {
           drawTriangle(
@@ -350,11 +340,12 @@ Future<void> main() async {
       }
     }
     sdlSetRenderDrawColor(renderer, 255, 0, 0, 255);
-    final pRect = SdlxFRect()
-      ..x = (gPlayerX - gCharSize / 2).floorToDouble()
-      ..y = (gPlayerY - gCharSize / 2).floorToDouble()
-      ..w = gCharSize
-      ..h = gCharSize;
+    final pRect = SdlxFRect(
+      gPlayerX - gCharSize / 2,
+      gPlayerY - gCharSize / 2,
+      gCharSize,
+      gCharSize,
+    );
     renderer.fillRect(pRect);
     sdlRenderPresent(renderer);
     await fps.delay();

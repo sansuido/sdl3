@@ -1,9 +1,10 @@
 part of '../sdl_dialog.dart';
 
 class SdlxDialogFileFilter {
-  SdlxDialogFileFilter({this.name = '', this.pattern = ''});
-  String name;
-  String pattern;
+  const SdlxDialogFileFilter({this.name = '', this.pattern = ''});
+
+  final String name;
+  final String pattern;
 
   Pointer<SdlDialogFileFilter> calloc() {
     final pointer = ffi.calloc<SdlDialogFileFilter>();

@@ -32,18 +32,12 @@ part of '../sdl_asyncio.dart';
 /// - [SDL_GetAsyncIOResult - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetAsyncIOResult)
 ///
 /// {@category asyncio}
-bool sdlxGetAsyncIoResult(
-  Pointer<SdlAsyncIoQueue> queue,
-  SdlxAsyncIoOutcome outcome,
-) {
-  final outcomePointer = outcome.calloc();
-  final result = sdlGetAsyncIoResult(queue, outcomePointer);
-  if (result) {
-    outcome.loadFromPointer(outcomePointer);
-  }
-  outcomePointer.callocFree();
-  return result;
-}
+SdlxAsyncIoOutcome? sdlxGetAsyncIoResult(Pointer<SdlAsyncIoQueue> queue) =>
+    ffi.using((arena) {
+      final outcomePointer = arena<SdlAsyncIoOutcome>();
+      final result = sdlGetAsyncIoResult(queue, outcomePointer);
+      return result ? SdlxAsyncIoOutcome.fromPointer(outcomePointer) : null;
+    });
 
 ///
 /// Block until an async I/O task queue has a completed task.
@@ -95,16 +89,11 @@ bool sdlxGetAsyncIoResult(
 /// - [SDL_WaitAsyncIOResult - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_WaitAsyncIOResult)
 ///
 /// {@category asyncio}
-bool sdlxWaitAsyncIoResult(
+SdlxAsyncIoOutcome? sdlxWaitAsyncIoResult(
   Pointer<SdlAsyncIoQueue> queue,
-  SdlxAsyncIoOutcome outcome,
   int timeoutMS,
-) {
-  final outcomePointer = outcome.calloc();
+) => ffi.using((arena) {
+  final outcomePointer = arena<SdlAsyncIoOutcome>();
   final result = sdlWaitAsyncIoResult(queue, outcomePointer, timeoutMS);
-  if (result) {
-    outcome.loadFromPointer(outcomePointer);
-  }
-  outcomePointer.callocFree();
-  return result;
-}
+  return result ? SdlxAsyncIoOutcome.fromPointer(outcomePointer) : null;
+});

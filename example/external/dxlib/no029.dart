@@ -52,7 +52,8 @@ class Player {
     _y = y;
   }
 
-  SdlxFRect getRect() => SdlxFRect.fromCenter(SdlxFPoint(_x, _y), size);
+  SdlxFRect getRect() =>
+      SdlxFRect.fromCenter(center: SdlxFPoint(_x, _y), size: size);
 
   void update(Map map) {
     final wall = <int>[1];
@@ -78,7 +79,7 @@ class Player {
       if (keys[SdlkScancode.down]) {
         if (map.intersection(
               getRect(),
-              move: SdlxFPoint(0, 0.1),
+              move: const SdlxFPoint(0, 0.1),
               mask: floors,
             ) !=
             null) {
@@ -137,7 +138,11 @@ class Player {
         _x = originX;
       }
     }
-    if (map.intersection(getRect(), move: SdlxFPoint(0, 0.1), mask: mask) ==
+    if (map.intersection(
+          getRect(),
+          move: const SdlxFPoint(0, 0.1),
+          mask: mask,
+        ) ==
         null) {
       jumpFlag = true;
     } else {
@@ -197,10 +202,11 @@ class Map {
     SdlxFPoint? move,
     List<int>? mask,
   }) {
-    final move0 = move ?? SdlxFPoint(0, 0);
-    final afterRect = SdlxFRect.fromRect(originRect)
-      ..x += move0.x
-      ..y += move0.y;
+    final move0 = move ?? const SdlxFPoint(0, 0);
+    final afterRect = originRect.copyWith(
+      x: originRect.x + move0.x,
+      y: originRect.y + move0.y,
+    );
     final cellRects = getRectsFromArea(afterRect, mask: mask);
     for (final cellRect in cellRects) {
       final interRect = afterRect.intersection(cellRect);
@@ -273,7 +279,7 @@ void update(Map map, Player player) {
 
 void draw(Pointer<SdlRenderer> renderer, Map map, Player player) {
   renderer
-    ..setDrawColor(SdlxColor(0, 0, 0))
+    ..setDrawColor(const SdlxColor(0, 0, 0))
     ..clear();
   map.debugDraw(renderer);
   player.debugDraw(renderer);
@@ -282,7 +288,7 @@ void draw(Pointer<SdlRenderer> renderer, Map map, Player player) {
 
 void actMain(Pointer<SdlRenderer> renderer) {
   final map = Map(gCellSize)..loadCellData(gMapData);
-  final player = Player(SdlxFPoint(gCellSize - 2, gCellSize - 2))
+  final player = Player(const SdlxFPoint(gCellSize - 2, gCellSize - 2))
     ..setPosition(320, 240);
   var running = true;
   while (running) {

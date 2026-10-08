@@ -15,7 +15,7 @@ int main() {
     return -1;
   }
   var running = true;
-  var oldPoint = SdlxFPoint(0, 0);
+  var oldPoint = const SdlxFPoint(0, 0);
   var oldButton = 0;
   while (running) {
     SdlxEvent? event;

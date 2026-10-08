@@ -1,7 +1,7 @@
 part of '../sdl_events.dart';
 
 class SdlxPenAxisEvent extends SdlxEvent {
-  SdlxPenAxisEvent({
+  const SdlxPenAxisEvent({
     super.type = SDL_EVENT_PEN_AXIS,
     super.reserved = 0,
     super.timestamp = 0,
@@ -12,14 +12,32 @@ class SdlxPenAxisEvent extends SdlxEvent {
     this.y = 0,
     this.axis = 0,
     this.value = 0,
+    this.deviceType = 0,
   });
-  int windowId;
-  int which;
-  int penState;
-  double x;
-  double y;
-  int axis;
-  double value;
+
+  factory SdlxPenAxisEvent.fromPointer(Pointer<SdlEvent> pointer) =>
+      SdlxPenAxisEvent(
+        type: pointer.ref.paxis.type,
+        reserved: pointer.ref.paxis.reserved,
+        timestamp: pointer.ref.paxis.timestamp,
+        windowId: pointer.ref.paxis.windowId,
+        which: pointer.ref.paxis.which,
+        penState: pointer.ref.paxis.penState,
+        x: pointer.ref.paxis.x,
+        y: pointer.ref.paxis.y,
+        axis: pointer.ref.paxis.axis,
+        value: pointer.ref.paxis.value,
+        deviceType: pointer.ref.paxis.deviceType,
+      );
+
+  final int windowId;
+  final int which;
+  final int penState;
+  final double x;
+  final double y;
+  final int axis;
+  final double value;
+  final int deviceType;
 
   @override
   bool isTargetWindow(int targetId, {bool ifNoWindow = true}) =>
@@ -38,23 +56,7 @@ class SdlxPenAxisEvent extends SdlxEvent {
     pointer.ref.paxis.y = y;
     pointer.ref.paxis.axis = axis;
     pointer.ref.paxis.value = value;
+    pointer.ref.paxis.deviceType = deviceType;
     return pointer;
   }
-
-  @override
-  void loadFromPointer(Pointer<SdlEvent> pointer) {
-    type = pointer.ref.paxis.type;
-    reserved = pointer.ref.paxis.reserved;
-    timestamp = pointer.ref.paxis.timestamp;
-    windowId = pointer.ref.paxis.windowId;
-    which = pointer.ref.paxis.which;
-    penState = pointer.ref.paxis.penState;
-    x = pointer.ref.paxis.x;
-    y = pointer.ref.paxis.y;
-    axis = pointer.ref.paxis.axis;
-    value = pointer.ref.paxis.value;
-  }
-
-  static SdlxPenAxisEvent fromPointer(Pointer<SdlEvent> pointer) =>
-      SdlxPenAxisEvent()..loadFromPointer(pointer);
 }

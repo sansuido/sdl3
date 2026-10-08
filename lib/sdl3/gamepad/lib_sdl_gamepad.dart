@@ -242,19 +242,31 @@ String? sdlxGetGamepadMappingForId(int instanceId) {
 /// - [SDL_GetGamepadBindings - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetGamepadBindings)
 ///
 /// {@category gamepad}
-List<SdlxGamepadBinding> sdlxGetGamepadBindings(Pointer<SdlGamepad> gamepad) {
-  final result = <SdlxGamepadBinding>[];
-  final countPointer = ffi.calloc<Int32>();
-  final bindingsPointer = sdlGetGamepadBindings(gamepad, countPointer);
-  if (bindingsPointer != nullptr) {
-    for (var i = 0; i < countPointer.value; i++) {
-      result.add(SdlxGamepadBinding()..loadFromPointer(bindingsPointer[i]));
-    }
-    sdlFree(bindingsPointer.cast<Void>());
-  }
-  countPointer.callocFree();
-  return result;
-}
+List<SdlxGamepadBinding> sdlxGetGamepadBindings(Pointer<SdlGamepad> gamepad) =>
+    ffi.using((arena) {
+      final countPointer = arena<Int32>();
+      final bindingsPointer = sdlGetGamepadBindings(gamepad, countPointer);
+
+      if (bindingsPointer == nullptr) {
+        return const [];
+      }
+
+      try {
+        final count = countPointer.value;
+        final result = <SdlxGamepadBinding>[];
+
+        for (var i = 0; i < count; i++) {
+          final bindingPointer = bindingsPointer[i];
+          if (bindingPointer != nullptr) {
+            result.add(SdlxGamepadBinding.fromPointer(bindingPointer));
+          }
+        }
+
+        return List<SdlxGamepadBinding>.unmodifiable(result);
+      } finally {
+        sdlFree(bindingsPointer.cast<Void>());
+      }
+    });
 
 ///
 /// Get the current state of a finger on a touchpad on a gamepad.

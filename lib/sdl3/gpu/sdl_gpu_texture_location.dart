@@ -8,15 +8,14 @@ class SdlxGpuTextureLocation {
     this.x = 0,
     this.y = 0,
     this.z = 0,
-  }) {
-    this.texture = texture ?? nullptr;
-  }
-  late Pointer<SdlGpuTexture> texture;
-  int mipLevel;
-  int layer;
-  int x;
-  int y;
-  int z;
+  }) : texture = texture ?? nullptr;
+
+  final Pointer<SdlGpuTexture> texture;
+  final int mipLevel;
+  final int layer;
+  final int x;
+  final int y;
+  final int z;
 
   Pointer<SdlGpuTextureLocation> calloc() {
     final pointer = ffi.calloc<SdlGpuTextureLocation>();

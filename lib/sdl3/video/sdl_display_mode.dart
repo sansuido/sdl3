@@ -11,31 +11,30 @@ class SdlxDisplayMode {
     this.refreshRateNumerator = 0,
     this.refreshRateDenominator = 0,
     Pointer<SdlDisplayModeData>? internal,
-  }) {
-    this.internal = internal ?? nullptr;
-  }
+  }) : internal = internal ?? nullptr;
 
-  int displayId;
-  int format;
-  int w;
-  int h;
-  double pixelDensity;
-  double refreshRate;
-  int refreshRateNumerator;
-  int refreshRateDenominator;
-  late Pointer<SdlDisplayModeData> internal;
+  factory SdlxDisplayMode.fromPointer(Pointer<SdlDisplayMode> pointer) =>
+      SdlxDisplayMode(
+        displayId: pointer.ref.displayId,
+        format: pointer.ref.format,
+        w: pointer.ref.w,
+        h: pointer.ref.h,
+        pixelDensity: pointer.ref.pixelDensity,
+        refreshRate: pointer.ref.refreshRate,
+        refreshRateNumerator: pointer.ref.refreshRateNumerator,
+        refreshRateDenominator: pointer.ref.refreshRateDenominator,
+        internal: pointer.ref.internal,
+      );
 
-  void loadFromPointer(Pointer<SdlDisplayMode> pointer) {
-    displayId = pointer.ref.displayId;
-    format = pointer.ref.format;
-    w = pointer.ref.w;
-    h = pointer.ref.h;
-    pixelDensity = pointer.ref.pixelDensity;
-    refreshRate = pointer.ref.refreshRate;
-    refreshRateNumerator = pointer.ref.refreshRateNumerator;
-    refreshRateDenominator = pointer.ref.refreshRateDenominator;
-    internal = pointer.ref.internal;
-  }
+  final int displayId;
+  final int format;
+  final int w;
+  final int h;
+  final double pixelDensity;
+  final double refreshRate;
+  final int refreshRateNumerator;
+  final int refreshRateDenominator;
+  final Pointer<SdlDisplayModeData> internal;
 
   Pointer<SdlDisplayMode> calloc() {
     final pointer = ffi.calloc<SdlDisplayMode>();

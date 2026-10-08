@@ -65,10 +65,10 @@ bool handleEvents() {
 void render() {
   // init
   gRenderer
-    ..setDrawColor(SdlxColor(0xff, 0xff, 0xff))
+    ..setDrawColor(const SdlxColor(0xff, 0xff, 0xff))
     ..clear()
     // map
-    ..setDrawColor(SdlxColor(0xff, 0, 0));
+    ..setDrawColor(const SdlxColor(0xff, 0, 0));
   final rects = <SdlxFRect>[];
   for (var y = 0; y < gMapData.length; y++) {
     for (var x = 0; x < gMapData[y].length; x++) {

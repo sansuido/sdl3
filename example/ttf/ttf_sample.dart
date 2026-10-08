@@ -74,7 +74,7 @@ int main() {
       // Declare rect of square
       // Square dimensions: Half of the min(gScreenWidth, gScreenHeight)
       // Square position: In the middle of the screen
-      final squareRect = SdlxFRect(
+      const squareRect = SdlxFRect(
         gScreenWidth / 2 - gScreenHeight / 2 / 2,
         gScreenHeight / 2 - gScreenHeight / 2 / 2,
         gScreenHeight / 2,
@@ -90,8 +90,8 @@ int main() {
         );
         return 0;
       }
-      final textColor = SdlxColor(0, 0, 0);
-      final backgroundColor = SdlxColor(255, 255, 255);
+      const textColor = SdlxColor(0, 0, 0);
+      const backgroundColor = SdlxColor(255, 255, 255);
       Pointer<SdlTexture> text = nullptr;
       late SdlxFRect textRect;
       final textSurface = font.renderTextShaded(
@@ -141,11 +141,11 @@ int main() {
         }
         // Initialize renderer color white for the background
         renderer
-          ..setDrawColor(SdlxColor(0xff, 0xff, 0xff))
+          ..setDrawColor(const SdlxColor(0xff, 0xff, 0xff))
           // Clear screen
           ..clear()
           // Set renderer color red to draw the square
-          ..setDrawColor(SdlxColor(0xff, 0, 0))
+          ..setDrawColor(const SdlxColor(0xff, 0, 0))
           // Draw filled square
           ..fillRect(squareRect)
           // Draw text

@@ -1,28 +1,41 @@
 part of '../sdl_shadercross.dart';
 
 class SdlxShaderCrossHlslDefine {
-  SdlxShaderCrossHlslDefine({this.name = '', this.value = ''});
-  String name;
-  String value;
+  const SdlxShaderCrossHlslDefine({this.name = '', this.value = ''});
+  final String name;
+  final String value;
 }
 
 class SdlxShaderCrossHlslInfo {
-  SdlxShaderCrossHlslInfo({
+  const SdlxShaderCrossHlslInfo({
     this.source = '',
     this.entrypoint = '',
     this.includeDir = '',
-    List<SdlxShaderCrossHlslDefine>? defines,
+    this.defines = const [],
     this.shaderStage = 0,
     this.props = 0,
-  }) {
-    this.defines = defines ?? [];
-  }
-  String source;
-  String entrypoint;
-  String includeDir;
-  late List<SdlxShaderCrossHlslDefine> defines;
-  int shaderStage;
-  int props;
+  });
+
+  final String source;
+  final String entrypoint;
+  final String includeDir;
+  final List<SdlxShaderCrossHlslDefine> defines;
+  final int shaderStage;
+  final int props;
+
+  SdlxShaderCrossHlslInfo copyWith({
+    String? source,
+    String? entrypoint,
+    String? includeDir,
+    List<SdlxShaderCrossHlslDefine>? defines,
+    int? shaderStage,
+  }) => SdlxShaderCrossHlslInfo(
+    source: source ?? this.source,
+    entrypoint: entrypoint ?? this.entrypoint,
+    includeDir: includeDir ?? this.includeDir,
+    defines: defines ?? this.defines,
+    shaderStage: shaderStage ?? this.shaderStage,
+  );
 
   Pointer<SdlShaderCrossHlslInfo> calloc() {
     final pointer = ffi.calloc<SdlShaderCrossHlslInfo>();

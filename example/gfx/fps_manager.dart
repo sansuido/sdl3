@@ -67,9 +67,13 @@ int main() {
       frameCount++;
     }
     renderer
-      ..setDrawColor(SdlxColor(0, 0, 0))
+      ..setDrawColor(const SdlxColor(0, 0, 0))
       ..clear()
-      ..stringColor(SdlxFPoint(15, 15), 'FPS:$frameRate', SdlxColor(0, 255, 0))
+      ..stringColor(
+        const SdlxFPoint(15, 15),
+        'FPS:$frameRate',
+        const SdlxColor(0, 255, 0),
+      )
       ..present();
   }
   gfx.gfxFree();

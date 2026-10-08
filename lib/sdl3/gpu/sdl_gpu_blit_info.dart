@@ -9,16 +9,15 @@ class SdlxGpuBlitRegion {
     this.y = 0,
     this.w = 0,
     this.h = 0,
-  }) {
-    this.texture = texture ?? nullptr;
-  }
-  late Pointer<SdlGpuTexture> texture;
-  int mipLevel;
-  int layerOrDepthPlane;
-  int x;
-  int y;
-  int w;
-  int h;
+  }) : texture = texture ?? nullptr;
+
+  final Pointer<SdlGpuTexture> texture;
+  final int mipLevel;
+  final int layerOrDepthPlane;
+  final int x;
+  final int y;
+  final int w;
+  final int h;
 }
 
 class SdlxGpuBlitInfo {
@@ -27,19 +26,17 @@ class SdlxGpuBlitInfo {
     this.flipMode = 0,
     this.filter = 0,
     this.cycle = false,
-  }) {
-    source = SdlxGpuBlitRegion();
-    destination = SdlxGpuBlitRegion();
-    clearColor = SdlxFColor(0, 0, 0);
-  }
+  }) : source = SdlxGpuBlitRegion(),
+       destination = SdlxGpuBlitRegion(),
+       clearColor = const SdlxFColor(0, 0, 0);
 
-  late SdlxGpuBlitRegion source;
-  late SdlxGpuBlitRegion destination;
-  int loadOp;
-  late SdlxFColor clearColor;
-  int flipMode;
-  int filter;
-  bool cycle;
+  final SdlxGpuBlitRegion source;
+  final SdlxGpuBlitRegion destination;
+  final int loadOp;
+  final SdlxFColor clearColor;
+  final int flipMode;
+  final int filter;
+  final bool cycle;
 
   Pointer<SdlGpuBlitInfo> calloc() {
     final pointer = ffi.calloc<SdlGpuBlitInfo>();

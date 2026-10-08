@@ -61,15 +61,16 @@ List<int> sdlxGetDisplays() {
 /// - [SDL_GetDisplayBounds - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetDisplayBounds)
 ///
 /// {@category video}
-bool sdlxGetDisplayBounds(int displayId, SdlxRect rect) {
-  final rectPointer = ffi.calloc<SdlRect>();
+SdlxRect? sdlxGetDisplayBounds(int displayId) => ffi.using((arena) {
+  final rectPointer = arena<SdlRect>();
   final result = sdlGetDisplayBounds(displayId, rectPointer);
-  if (result) {
-    rect.loadFromPointer(rectPointer);
+
+  if (!result) {
+    return null;
   }
-  rectPointer.callocFree();
-  return result;
-}
+
+  return SdlxRect.fromPointer(rectPointer);
+});
 
 ///
 /// Get the usable desktop area represented by a display, in screen
@@ -103,33 +104,79 @@ bool sdlxGetDisplayBounds(int displayId, SdlxRect rect) {
 /// - [SDL_GetDisplayUsableBounds - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetDisplayUsableBounds)
 ///
 /// {@category video}
-bool sdlxGetDisplayUsableBounds(int displayId, SdlxRect rect) {
-  final rectPointer = ffi.calloc<SdlRect>();
+SdlxRect? sdlxGetDisplayUsableBounds(int displayId) => ffi.using((arena) {
+  final rectPointer = arena<SdlRect>();
   final result = sdlGetDisplayUsableBounds(displayId, rectPointer);
-  if (result) {
-    rect.loadFromPointer(rectPointer);
-  }
-  rectPointer.callocFree();
-  return result;
-}
 
-List<SdlxDisplayMode>? sdlxGetFullscreenDisplayModes(int displayId) {
-  final countPointer = ffi.calloc<Int32>();
-  final resultPointer = sdlGetFullscreenDisplayModes(displayId, countPointer);
-  if (resultPointer == nullptr) {
-    countPointer.callocFree();
+  if (!result) {
     return null;
   }
-  final count = countPointer.value;
-  final result = <SdlxDisplayMode>[];
-  for (var i = 0; i < count; i++) {
-    final displayMode = SdlxDisplayMode()
-      ..loadFromPointer((resultPointer + i).value);
-    result.add(displayMode);
-  }
-  countPointer.callocFree();
-  return result;
-}
+
+  return SdlxRect.fromPointer(rectPointer);
+});
+
+///
+/// Get a list of fullscreen display modes available on a display.
+///
+/// The display modes are sorted in this priority:
+///
+/// - w -> largest to smallest
+/// - h -> largest to smallest
+/// - bits per pixel -> more colors to fewer colors
+/// - packed pixel layout -> largest to smallest
+/// - refresh rate -> highest to lowest
+/// - pixel density -> lowest to highest
+///
+/// \param displayID the instance ID of the display to query.
+/// \param count a pointer filled in with the number of display modes returned,
+/// may be NULL.
+/// \returns a NULL terminated array of display mode pointers or NULL on
+/// failure; call SDL_GetError() for more information. This is a
+/// single allocation that should be freed with SDL_free() when it is
+/// no longer needed.
+///
+/// \threadsafety This function should only be called on the main thread.
+///
+/// \since This function is available since SDL 3.2.0.
+///
+/// \sa SDL_GetDisplays
+///
+/// ```c
+/// extern SDL_DECLSPEC SDL_DisplayMode ** SDLCALL SDL_GetFullscreenDisplayModes(SDL_DisplayID displayID, int *count)
+/// ```
+///
+/// See also:
+/// - [SDL_GetFullscreenDisplayModes - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetFullscreenDisplayModes)
+///
+/// {@category video}
+List<SdlxDisplayMode>? sdlxGetFullscreenDisplayModes(int displayID) =>
+    ffi.using((arena) {
+      final countPointer = arena<Int32>();
+      final resultPointer = sdlGetFullscreenDisplayModes(
+        displayID,
+        countPointer,
+      );
+
+      if (resultPointer == nullptr) {
+        return null;
+      }
+
+      try {
+        final count = countPointer.value;
+        final result = <SdlxDisplayMode>[];
+
+        for (var i = 0; i < count; i++) {
+          final modePointer = (resultPointer + i).value;
+          if (modePointer != nullptr) {
+            result.add(SdlxDisplayMode.fromPointer(modePointer));
+          }
+        }
+
+        return List<SdlxDisplayMode>.unmodifiable(result);
+      } finally {
+        sdlFree(resultPointer.cast<Void>());
+      }
+    });
 
 ///
 /// Get the closest match to the requested display mode.
@@ -169,28 +216,26 @@ List<SdlxDisplayMode>? sdlxGetFullscreenDisplayModes(int displayId) {
 ///
 /// {@category video}
 SdlxDisplayMode? sdlxGetClosestFullscreenDisplayMode(
-  int displayId,
+  int displayID,
   int w,
   int h,
   double refreshRate,
   bool includeHighDensityModes,
-) {
-  SdlxDisplayMode? result;
-  final closestPointer = ffi.calloc<SdlDisplayMode>();
-  final bl = sdlGetClosestFullscreenDisplayMode(
-    displayId,
+) => ffi.using((arena) {
+  final closestPointer = arena<SdlDisplayMode>();
+  final success = sdlGetClosestFullscreenDisplayMode(
+    displayID,
     w,
     h,
     refreshRate,
     includeHighDensityModes,
     closestPointer,
   );
-  if (bl) {
-    result = SdlxDisplayMode()..loadFromPointer(closestPointer);
-  }
-  closestPointer.callocFree();
-  return result;
-}
+
+  if (!success) return null;
+
+  return SdlxDisplayMode.fromPointer(closestPointer);
+});
 
 ///
 /// Get information about the desktop's display mode.
@@ -219,13 +264,12 @@ SdlxDisplayMode? sdlxGetClosestFullscreenDisplayMode(
 /// - [SDL_GetDesktopDisplayMode - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetDesktopDisplayMode)
 ///
 /// {@category video}
-SdlxDisplayMode? sdlxGetDesktopDisplayMode(int displayId) {
-  final resultPointer = sdlGetDesktopDisplayMode(displayId);
+SdlxDisplayMode? sdlxGetDesktopDisplayMode(int displayID) {
+  final resultPointer = sdlGetDesktopDisplayMode(displayID);
   if (resultPointer == nullptr) {
     return null;
   }
-  final result = SdlxDisplayMode()..loadFromPointer(resultPointer);
-  return result;
+  return SdlxDisplayMode.fromPointer(resultPointer);
 }
 
 ///
@@ -260,8 +304,7 @@ SdlxDisplayMode? sdlxGetCurrentDisplayMode(int displayId) {
   if (resultPointer == nullptr) {
     return null;
   }
-  final result = SdlxDisplayMode()..loadFromPointer(resultPointer);
-  return result;
+  return SdlxDisplayMode.fromPointer(resultPointer);
 }
 
 ///
@@ -409,8 +452,7 @@ SdlxDisplayMode? sdlxGetWindowFullscreenMode(Pointer<SdlWindow> window) {
   if (resultPointer == nullptr) {
     return null;
   }
-  final result = SdlxDisplayMode()..loadFromPointer(resultPointer);
-  return result;
+  return SdlxDisplayMode.fromPointer(resultPointer);
 }
 
 ///
@@ -661,16 +703,17 @@ bool sdlxSetWindowSize(Pointer<SdlWindow> window, SdlxPoint size) =>
 /// - [SDL_GetWindowSafeArea - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetWindowSafeArea)
 ///
 /// {@category video}
-SdlxRect? sdlxGetWindowSafeArea(Pointer<SdlWindow> window) {
-  SdlxRect? rect;
-  final rectPointer = ffi.calloc<SdlRect>();
-  final result = sdlGetWindowSafeArea(window, rectPointer);
-  if (result) {
-    rect = SdlxRect()..loadFromPointer(rectPointer);
-  }
-  rectPointer.callocFree();
-  return rect;
-}
+SdlxRect? sdlxGetWindowSafeArea(Pointer<SdlWindow> window) =>
+    ffi.using((arena) {
+      final rectPointer = arena<SdlRect>();
+      final result = sdlGetWindowSafeArea(window, rectPointer);
+
+      if (!result) {
+        return null;
+      }
+
+      return SdlxRect.fromPointer(rectPointer);
+    });
 
 ///
 /// Get the aspect ratio of a window's client area.
@@ -1134,8 +1177,8 @@ SdlxRect? sdlxGetWindowMouseRect(Pointer<SdlWindow> window) {
   if (resultPointer == nullptr) {
     return null;
   }
-  final result = SdlxRect()..loadFromPointer(resultPointer);
-  return result;
+
+  return SdlxRect.fromPointer(resultPointer);
 }
 
 ///

@@ -1,70 +1,74 @@
 part of '../sdl_rect.dart';
 
 class SdlxFRect {
-  SdlxFRect([this.x = 0, this.y = 0, this.w = 0, this.h = 0]);
-  double x;
-  double y;
-  double w;
-  double h;
+  const SdlxFRect([this.x = 0, this.y = 0, this.w = 0, this.h = 0]);
+
+  factory SdlxFRect.fromPointer(Pointer<SdlFRect> pointer) =>
+      SdlxFRect(pointer.ref.x, pointer.ref.y, pointer.ref.w, pointer.ref.h);
+
+  factory SdlxFRect.fromPosition(SdlxFPoint topLeft, SdlxFPoint size) =>
+      SdlxFRect(topLeft.x, topLeft.y, size.x, size.y);
+
+  factory SdlxFRect.fromPoints(SdlxFPoint p1, SdlxFPoint p2) {
+    final left = math.min(p1.x, p2.x);
+    final width = math.max(p1.x, p2.x) - left;
+    final top = math.min(p1.y, p2.y);
+    final height = math.max(p1.y, p2.y) - top;
+    return SdlxFRect(left, top, width, height);
+  }
+
+  factory SdlxFRect.fromCenter({
+    required SdlxFPoint center,
+    required SdlxFPoint size,
+  }) => SdlxFRect(
+    center.x - size.x * 0.5,
+    center.y - size.y * 0.5,
+    size.x,
+    size.y,
+  );
+
+  final double x;
+  final double y;
+  final double w;
+  final double h;
 
   double get right => x + w;
   double get bottom => y + h;
 
   SdlxFPoint get size => SdlxFPoint(w, h);
-  set size(SdlxFPoint point) {
-    w = point.x;
-    h = point.y;
-  }
-
   SdlxFPoint get topLeft => SdlxFPoint(x, y);
-  set topLeft(SdlxFPoint point) {
-    x = point.x;
-    y = point.y;
-  }
-
   SdlxFPoint get topRight => SdlxFPoint(right, y);
-  set topRight(SdlxFPoint point) {
-    w = point.x - x;
-    y = point.y;
-  }
-
   SdlxFPoint get center => SdlxFPoint(x + w * 0.5, y + h * 0.5);
-  set center(SdlxFPoint point) {
-    x = point.x - w * 0.5;
-    y = point.y - h * 0.5;
-  }
-
   SdlxFPoint get bottomRight => SdlxFPoint(right, bottom);
-  set bottomRight(SdlxFPoint point) {
-    w = point.x - x;
-    h = point.y - y;
-  }
-
   SdlxFPoint get bottomLeft => SdlxFPoint(x, bottom);
-  set bottomLeft(SdlxFPoint point) {
-    x = point.x;
-    h = point.y - y;
-  }
 
-  void moveBy(SdlxFPoint offset) {
-    x += offset.x;
-    y += offset.y;
-  }
+  SdlxFRect copyWith({double? x, double? y, double? w, double? h}) =>
+      SdlxFRect(x ?? this.x, y ?? this.y, w ?? this.w, h ?? this.h);
 
-  void moveTo(SdlxFPoint position) {
-    x = position.x;
-    y = position.y;
-  }
+  SdlxFRect moveBy(SdlxFPoint offset) =>
+      SdlxFRect(x + offset.x, y + offset.y, w, h);
 
-  void sizeBy(SdlxFPoint offset) {
-    w += offset.x;
-    h += offset.y;
-  }
+  SdlxFRect moveTo(SdlxFPoint position) =>
+      SdlxFRect(position.x, position.y, w, h);
 
-  void sizeTo(SdlxFPoint size) {
-    w = size.x;
-    h = size.y;
-  }
+  SdlxFRect sizeBy(SdlxFPoint offset) =>
+      SdlxFRect(x, y, w + offset.x, h + offset.y);
+
+  SdlxFRect sizeTo(SdlxFPoint newSize) => SdlxFRect(x, y, newSize.x, newSize.y);
+
+  SdlxFRect withTopLeft(SdlxFPoint point) => SdlxFRect(point.x, point.y, w, h);
+
+  SdlxFRect withTopRight(SdlxFPoint point) =>
+      SdlxFRect(x, point.y, point.x - x, h);
+
+  SdlxFRect withCenter(SdlxFPoint point) =>
+      SdlxFRect(point.x - w * 0.5, point.y - h * 0.5, w, h);
+
+  SdlxFRect withBottomRight(SdlxFPoint point) =>
+      SdlxFRect(x, y, point.x - x, point.y - y);
+
+  SdlxFRect withBottomLeft(SdlxFPoint point) =>
+      SdlxFRect(point.x, y, w, point.y - y);
 
   SdlxRect toInt() => SdlxRect(x.toInt(), y.toInt(), w.toInt(), h.toInt());
 
@@ -74,59 +78,6 @@ class SdlxFRect {
     double w = 0,
     double h = 0,
   }) => SdlxFRect(x, y, w, h);
-  static SdlxFRect fromPosition(SdlxFPoint topLeft, SdlxFPoint size) =>
-      SdlxFRect()..loadFromPosition(topLeft, size);
-  static SdlxFRect fromPoints(SdlxFPoint p1, SdlxFPoint p2) =>
-      SdlxFRect()..loadFromPoints(p1, p2);
-  static SdlxFRect fromCenter(SdlxFPoint center, SdlxFPoint size) =>
-      SdlxFRect()..loadFromCenter(center, size);
-  static SdlxFRect fromRect(SdlxFRect rect) => SdlxFRect()..loadFromRect(rect);
-  static SdlxFRect fromPointer(Pointer<SdlFRect> pointer) =>
-      SdlxFRect()..loadFromPointer(pointer);
-
-  void loadFrom(double x, double y, double w, double h) {
-    this.x = x;
-    this.y = y;
-    this.w = w;
-    this.h = h;
-  }
-
-  void loadFromPosition(SdlxFPoint topLeft, SdlxFPoint size) {
-    this.topLeft = topLeft;
-    this.size = size;
-  }
-
-  void loadFromPoints(SdlxFPoint p1, SdlxFPoint p2) {
-    final left = math.min(p1.x, p2.x);
-    final width = math.max(p1.x, p2.x) - left;
-    final top = math.min(p1.y, p2.y);
-    final height = math.max(p1.y, p2.y) - top;
-    x = left;
-    y = top;
-    w = width;
-    h = height;
-  }
-
-  void loadFromCenter(SdlxFPoint center, SdlxFPoint size) {
-    loadFromPoints(
-      SdlxFPoint(center.x - size.x / 2, center.y - size.y / 2),
-      SdlxFPoint(center.x + size.x / 2, center.y + size.y / 2),
-    );
-  }
-
-  void loadFromRect(SdlxFRect rect) {
-    x = rect.x;
-    y = rect.y;
-    w = rect.w;
-    h = rect.h;
-  }
-
-  void loadFromPointer(Pointer<SdlFRect> pointer) {
-    x = pointer.ref.x;
-    y = pointer.ref.y;
-    w = pointer.ref.w;
-    h = pointer.ref.h;
-  }
 
   Pointer<SdlFRect> calloc() {
     final pointer = ffi.calloc<SdlFRect>();

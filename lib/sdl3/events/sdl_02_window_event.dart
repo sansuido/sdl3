@@ -1,7 +1,7 @@
 part of '../sdl_events.dart';
 
 class SdlxWindowEvent extends SdlxEvent {
-  SdlxWindowEvent({
+  const SdlxWindowEvent({
     super.type = 0,
     super.reserved = 0,
     super.timestamp = 0,
@@ -10,9 +10,19 @@ class SdlxWindowEvent extends SdlxEvent {
     this.data2 = 0,
   });
 
-  int windowId;
-  int data1;
-  int data2;
+  factory SdlxWindowEvent.fromPointer(Pointer<SdlEvent> pointer) =>
+      SdlxWindowEvent(
+        type: pointer.ref.window.type,
+        reserved: pointer.ref.window.reserved,
+        timestamp: pointer.ref.window.timestamp,
+        windowId: pointer.ref.window.windowId,
+        data1: pointer.ref.window.data1,
+        data2: pointer.ref.window.data2,
+      );
+
+  final int windowId;
+  final int data1;
+  final int data2;
 
   @override
   bool isTargetWindow(int targetId, {bool ifNoWindow = true}) =>
@@ -29,17 +39,4 @@ class SdlxWindowEvent extends SdlxEvent {
     pointer.ref.window.data2 = data2;
     return pointer;
   }
-
-  @override
-  void loadFromPointer(Pointer<SdlEvent> pointer) {
-    type = pointer.ref.window.type;
-    reserved = pointer.ref.window.reserved;
-    timestamp = pointer.ref.window.timestamp;
-    windowId = pointer.ref.window.windowId;
-    data1 = pointer.ref.window.data1;
-    data2 = pointer.ref.window.data2;
-  }
-
-  static SdlxWindowEvent fromPointer(Pointer<SdlEvent> pointer) =>
-      SdlxWindowEvent()..loadFromPointer(pointer);
 }

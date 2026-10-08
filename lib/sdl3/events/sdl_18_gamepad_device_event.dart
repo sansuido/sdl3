@@ -1,12 +1,20 @@
 part of '../sdl_events.dart';
 
 class SdlxGamepadDeviceEvent extends SdlxEvent {
-  SdlxGamepadDeviceEvent({
+  const SdlxGamepadDeviceEvent({
     super.type = 0,
     super.reserved = 0,
     super.timestamp = 0,
     this.which = 0,
   });
+
+  factory SdlxGamepadDeviceEvent.fromPointer(Pointer<SdlEvent> pointer) =>
+      SdlxGamepadDeviceEvent(
+        type: pointer.ref.gdevice.type,
+        reserved: pointer.ref.gdevice.reserved,
+        timestamp: pointer.ref.gdevice.timestamp,
+        which: pointer.ref.gdevice.which,
+      );
 
   factory SdlxGamepadDeviceEvent.added({
     int reserved = 0,
@@ -63,7 +71,7 @@ class SdlxGamepadDeviceEvent extends SdlxEvent {
     which: which,
   );
 
-  int which;
+  final int which;
 
   @override
   Pointer<SdlEvent> calloc() {
@@ -74,15 +82,4 @@ class SdlxGamepadDeviceEvent extends SdlxEvent {
     pointer.ref.gdevice.which = which;
     return pointer;
   }
-
-  @override
-  void loadFromPointer(Pointer<SdlEvent> pointer) {
-    type = pointer.ref.gdevice.type;
-    reserved = pointer.ref.gdevice.reserved;
-    timestamp = pointer.ref.gdevice.timestamp;
-    which = pointer.ref.gdevice.which;
-  }
-
-  static SdlxGamepadDeviceEvent fromPointer(Pointer<SdlEvent> pointer) =>
-      SdlxGamepadDeviceEvent()..loadFromPointer(pointer);
 }

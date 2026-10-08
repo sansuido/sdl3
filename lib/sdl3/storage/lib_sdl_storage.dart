@@ -189,19 +189,17 @@ bool sdlxWriteStorageFile(
 /// - [SDL_GetStoragePathInfo - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetStoragePathInfo)
 ///
 /// {@category storage}
-bool sdlxGetStoragePathInfo(
+SdlxPathInfo? sdlxGetStoragePathInfo(
   Pointer<SdlStorage> storage,
   String path,
-  SdlxPathInfo info,
-) {
-  final infoPointer = info.calloc();
-  final result = sdlGetStoragePathInfo(storage, path, infoPointer);
-  if (result) {
-    info.loadFromPointer(infoPointer);
-  }
-  infoPointer.callocFree();
-  return result;
-}
+) => ffi.using((arena) {
+  final infoPointer = arena<SdlPathInfo>();
+  final success = sdlGetStoragePathInfo(storage, path, infoPointer);
+
+  if (!success) return null;
+
+  return SdlxPathInfo.fromPointer(infoPointer);
+});
 
 ///
 /// Enumerate a directory tree, filtered by pattern, and return a list.

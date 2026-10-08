@@ -1,20 +1,35 @@
 part of '../sdl_events.dart';
 
 class SdlxSensorEvent extends SdlxEvent {
-  SdlxSensorEvent({
+  const SdlxSensorEvent({
     super.type = SDL_EVENT_SENSOR_UPDATE,
     super.reserved = 0,
     super.timestamp = 0,
     this.which = 0,
-    List<double>? data,
+    this.data = const [0.0, 0.0, 0.0, 0.0, 0.0, 0.0],
     this.sensorTimestamp = 0,
-  }) {
-    this.data = data ?? [];
+  });
+
+  factory SdlxSensorEvent.fromPointer(Pointer<SdlEvent> pointer) {
+    final ref = pointer.ref.sensor;
+
+    final sensorData = List<double>.unmodifiable(
+      List<double>.generate(6, (i) => ref.data[i]),
+    );
+
+    return SdlxSensorEvent(
+      type: ref.type,
+      reserved: ref.reserved,
+      timestamp: ref.timestamp,
+      which: ref.which,
+      data: sensorData,
+      sensorTimestamp: ref.sensorTimestamp,
+    );
   }
 
-  int which;
-  late List<double> data;
-  int sensorTimestamp;
+  final int which;
+  final List<double> data;
+  final int sensorTimestamp;
 
   @override
   Pointer<SdlEvent> calloc() {
@@ -44,23 +59,4 @@ class SdlxSensorEvent extends SdlxEvent {
     pointer.ref.sensor.sensorTimestamp = sensorTimestamp;
     return pointer;
   }
-
-  @override
-  void loadFromPointer(Pointer<SdlEvent> pointer) {
-    type = pointer.ref.sensor.type;
-    reserved = pointer.ref.sensor.reserved;
-    timestamp = pointer.ref.sensor.timestamp;
-    which = pointer.ref.sensor.which;
-    data
-      ..add(pointer.ref.sensor.data[0])
-      ..add(pointer.ref.sensor.data[1])
-      ..add(pointer.ref.sensor.data[2])
-      ..add(pointer.ref.sensor.data[3])
-      ..add(pointer.ref.sensor.data[4])
-      ..add(pointer.ref.sensor.data[5]);
-    sensorTimestamp = pointer.ref.sensor.sensorTimestamp;
-  }
-
-  static SdlxSensorEvent fromPointer(Pointer<SdlEvent> pointer) =>
-      SdlxSensorEvent()..loadFromPointer(pointer);
 }

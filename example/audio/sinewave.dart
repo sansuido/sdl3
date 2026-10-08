@@ -6,10 +6,11 @@ import 'dart:typed_data';
 import 'package:sdl3/sdl3.dart';
 
 void sinewave() {
-  final audioSpec = SdlxAudioSpec()
-    ..freq = 44100
-    ..format = SDL_AUDIO_S16LE
-    ..channels = 1;
+  const audioSpec = SdlxAudioSpec(
+    freq: 44100,
+    format: SDL_AUDIO_S16LE,
+    channels: 1,
+  );
   final stream = sdlxOpenAudioDeviceStream(
     SDL_AUDIO_DEVICE_DEFAULT_PLAYBACK,
     audioSpec,

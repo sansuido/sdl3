@@ -152,28 +152,28 @@ bool sdlxSetSurfaceColorMod(Pointer<SdlSurface> surface, SdlxColor color) {
 /// - [SDL_GetSurfaceColorMod - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetSurfaceColorMod)
 ///
 /// {@category surface}
-bool sdlxGetSurfaceColorMod(Pointer<SdlSurface> surface, SdlxColor color) {
-  final rPointer = ffi.calloc<Uint8>();
-  final gPointer = ffi.calloc<Uint8>();
-  final bPointer = ffi.calloc<Uint8>();
-  final aPointer = ffi.calloc<Uint8>();
-  var result = sdlGetSurfaceColorMod(surface, rPointer, gPointer, bPointer);
-  if (result) {
-    color
-      ..r = rPointer.value
-      ..g = gPointer.value
-      ..b = bPointer.value;
-    result = sdlGetSurfaceAlphaMod(surface, aPointer);
-    if (result) {
-      color.a = aPointer.value;
-    }
-  }
-  rPointer.callocFree();
-  gPointer.callocFree();
-  bPointer.callocFree();
-  aPointer.callocFree();
-  return result;
-}
+SdlxColor? sdlxGetSurfaceColorMod(Pointer<SdlSurface> surface) =>
+    ffi.using((arena) {
+      final rPointer = arena<Uint8>();
+      final gPointer = arena<Uint8>();
+      final bPointer = arena<Uint8>();
+      final aPointer = arena<Uint8>();
+
+      if (!sdlGetSurfaceColorMod(surface, rPointer, gPointer, bPointer)) {
+        return null;
+      }
+
+      if (!sdlGetSurfaceAlphaMod(surface, aPointer)) {
+        return null;
+      }
+
+      return SdlxColor(
+        rPointer.value,
+        gPointer.value,
+        bPointer.value,
+        aPointer.value,
+      );
+    });
 
 ///
 /// Get the blend mode used for blit operations.
@@ -278,15 +278,17 @@ bool sdlxSetSurfaceClipRect(Pointer<SdlSurface> surface, SdlxRect? rect) {
 /// - [SDL_GetSurfaceClipRect - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetSurfaceClipRect)
 ///
 /// {@category surface}
-bool sdlxGetSurfaceClipRect(Pointer<SdlSurface> surface, SdlxRect rect) {
-  final rectPointer = rect.calloc();
-  final result = sdlGetSurfaceClipRect(surface, rectPointer);
-  if (result) {
-    rect.loadFromPointer(rectPointer);
-  }
-  rectPointer.callocFree();
-  return result;
-}
+SdlxRect? sdlxGetSurfaceClipRect(Pointer<SdlSurface> surface) =>
+    ffi.using((arena) {
+      final rectPointer = arena<SdlRect>();
+      final result = sdlGetSurfaceClipRect(surface, rectPointer);
+
+      if (!result) {
+        return null;
+      }
+
+      return SdlxRect.fromPointer(rectPointer);
+    });
 
 ///
 /// Clear a surface with a specific color, with floating point precision.
@@ -1071,37 +1073,34 @@ int sdlxMapSurfaceRgba(Pointer<SdlSurface> surface, SdlxColor color) =>
 /// - [SDL_ReadSurfacePixel - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_ReadSurfacePixel)
 ///
 /// {@category surface}
-bool sdlxReadSurfacePixel(
-  Pointer<SdlSurface> surface,
-  SdlxPoint point,
-  SdlxColor color,
-) {
-  final rPointer = ffi.calloc<Uint8>();
-  final gPointer = ffi.calloc<Uint8>();
-  final bPointer = ffi.calloc<Uint8>();
-  final aPointer = ffi.calloc<Uint8>();
-  final result = sdlReadSurfacePixel(
-    surface,
-    point.x,
-    point.y,
-    rPointer,
-    gPointer,
-    bPointer,
-    aPointer,
-  );
-  if (result) {
-    color
-      ..r = rPointer.value
-      ..g = gPointer.value
-      ..b = bPointer.value
-      ..a = aPointer.value;
-  }
-  rPointer.callocFree();
-  gPointer.callocFree();
-  bPointer.callocFree();
-  aPointer.callocFree();
-  return result;
-}
+SdlxColor? sdlxReadSurfacePixel(Pointer<SdlSurface> surface, SdlxPoint point) =>
+    ffi.using((arena) {
+      final rPointer = arena<Uint8>();
+      final gPointer = arena<Uint8>();
+      final bPointer = arena<Uint8>();
+      final aPointer = arena<Uint8>();
+
+      final result = sdlReadSurfacePixel(
+        surface,
+        point.x,
+        point.y,
+        rPointer,
+        gPointer,
+        bPointer,
+        aPointer,
+      );
+
+      if (!result) {
+        return null;
+      }
+
+      return SdlxColor(
+        rPointer.value,
+        gPointer.value,
+        bPointer.value,
+        aPointer.value,
+      );
+    });
 
 ///
 /// Retrieves a single pixel from a surface as RGBA in the sRGB colorspace.
@@ -1136,15 +1135,15 @@ bool sdlxReadSurfacePixel(
 /// - [SDL_ReadSurfacePixelFloat - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_ReadSurfacePixelFloat)
 ///
 /// {@category surface}
-bool sdlxReadSurfacePixelFloat(
+SdlxFColor? sdlxReadSurfacePixelFloat(
   Pointer<SdlSurface> surface,
   SdlxPoint point,
-  SdlxFColor color,
-) {
-  final rPointer = ffi.calloc<Float>();
-  final gPointer = ffi.calloc<Float>();
-  final bPointer = ffi.calloc<Float>();
-  final aPointer = ffi.calloc<Float>();
+) => ffi.using((arena) {
+  final rPointer = arena<Float>();
+  final gPointer = arena<Float>();
+  final bPointer = arena<Float>();
+  final aPointer = arena<Float>();
+
   final result = sdlReadSurfacePixelFloat(
     surface,
     point.x,
@@ -1154,19 +1153,18 @@ bool sdlxReadSurfacePixelFloat(
     bPointer,
     aPointer,
   );
-  if (result) {
-    color
-      ..r = rPointer.value
-      ..g = gPointer.value
-      ..b = bPointer.value
-      ..a = aPointer.value;
+
+  if (!result) {
+    return null;
   }
-  rPointer.callocFree();
-  gPointer.callocFree();
-  bPointer.callocFree();
-  aPointer.callocFree();
-  return result;
-}
+
+  return SdlxFColor(
+    rPointer.value,
+    gPointer.value,
+    bPointer.value,
+    aPointer.value,
+  );
+});
 
 ///
 /// Writes a single pixel to a surface.

@@ -1,12 +1,20 @@
 part of '../sdl_events.dart';
 
 class SdlxCameraDeviceEvent extends SdlxEvent {
-  SdlxCameraDeviceEvent({
+  const SdlxCameraDeviceEvent({
     super.type = 0,
     super.reserved = 0,
     super.timestamp = 0,
     this.which = 0,
   });
+
+  factory SdlxCameraDeviceEvent.fromPointer(Pointer<SdlEvent> pointer) =>
+      SdlxCameraDeviceEvent(
+        type: pointer.ref.cdevice.type,
+        reserved: pointer.ref.cdevice.reserved,
+        timestamp: pointer.ref.cdevice.timestamp,
+        which: pointer.ref.cdevice.which,
+      );
 
   factory SdlxCameraDeviceEvent.added({
     int reserved = 0,
@@ -52,7 +60,7 @@ class SdlxCameraDeviceEvent extends SdlxEvent {
     which: which,
   );
 
-  int which;
+  final int which;
 
   @override
   Pointer<SdlEvent> calloc() {
@@ -63,15 +71,4 @@ class SdlxCameraDeviceEvent extends SdlxEvent {
     pointer.ref.cdevice.which = which;
     return pointer;
   }
-
-  @override
-  void loadFromPointer(Pointer<SdlEvent> pointer) {
-    type = pointer.ref.cdevice.type;
-    reserved = pointer.ref.cdevice.reserved;
-    timestamp = pointer.ref.cdevice.timestamp;
-    which = pointer.ref.cdevice.which;
-  }
-
-  static SdlxCameraDeviceEvent fromPointer(Pointer<SdlEvent> pointer) =>
-      SdlxCameraDeviceEvent()..loadFromPointer(pointer);
 }

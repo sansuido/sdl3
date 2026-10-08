@@ -1,7 +1,7 @@
 part of '../sdl_events.dart';
 
 class SdlxTouchFingerEvent extends SdlxEvent {
-  SdlxTouchFingerEvent({
+  const SdlxTouchFingerEvent({
     super.type = 0,
     super.reserved = 0,
     super.timestamp = 0,
@@ -14,6 +14,21 @@ class SdlxTouchFingerEvent extends SdlxEvent {
     this.pressure = 0,
     this.windowId = 0,
   });
+
+  factory SdlxTouchFingerEvent.fromPointer(Pointer<SdlEvent> pointer) =>
+      SdlxTouchFingerEvent(
+        type: pointer.ref.tfinger.type,
+        reserved: pointer.ref.tfinger.reserved,
+        timestamp: pointer.ref.tfinger.timestamp,
+        touchId: pointer.ref.tfinger.touchId,
+        fingerId: pointer.ref.tfinger.fingerId,
+        x: pointer.ref.tfinger.x,
+        y: pointer.ref.tfinger.y,
+        dx: pointer.ref.tfinger.dx,
+        dy: pointer.ref.tfinger.dy,
+        pressure: pointer.ref.tfinger.pressure,
+        windowId: pointer.ref.tfinger.windowId,
+      );
 
   factory SdlxTouchFingerEvent.down({
     int reserved = 0,
@@ -115,14 +130,14 @@ class SdlxTouchFingerEvent extends SdlxEvent {
     windowId: windowId,
   );
 
-  int touchId;
-  int fingerId;
-  double x;
-  double y;
-  double dx;
-  double dy;
-  double pressure;
-  int windowId;
+  final int touchId;
+  final int fingerId;
+  final double x;
+  final double y;
+  final double dx;
+  final double dy;
+  final double pressure;
+  final int windowId;
 
   @override
   bool isTargetWindow(int targetId, {bool ifNoWindow = true}) =>
@@ -144,22 +159,4 @@ class SdlxTouchFingerEvent extends SdlxEvent {
     pointer.ref.tfinger.windowId = windowId;
     return pointer;
   }
-
-  @override
-  void loadFromPointer(Pointer<SdlEvent> pointer) {
-    type = pointer.ref.tfinger.type;
-    reserved = pointer.ref.tfinger.reserved;
-    timestamp = pointer.ref.tfinger.timestamp;
-    touchId = pointer.ref.tfinger.touchId;
-    fingerId = pointer.ref.tfinger.fingerId;
-    x = pointer.ref.tfinger.x;
-    y = pointer.ref.tfinger.y;
-    dx = pointer.ref.tfinger.dx;
-    dy = pointer.ref.tfinger.dy;
-    pressure = pointer.ref.tfinger.pressure;
-    windowId = pointer.ref.tfinger.windowId;
-  }
-
-  static SdlxTouchFingerEvent fromPointer(Pointer<SdlEvent> pointer) =>
-      SdlxTouchFingerEvent()..loadFromPointer(pointer);
 }

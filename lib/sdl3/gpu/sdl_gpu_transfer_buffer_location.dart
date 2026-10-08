@@ -4,12 +4,10 @@ class SdlxGpuTransferBufferLocation {
   SdlxGpuTransferBufferLocation({
     Pointer<SdlGpuTransferBuffer>? transferBuffer,
     this.offset = 0,
-  }) {
-    this.transferBuffer = transferBuffer ?? nullptr;
-  }
+  }) : transferBuffer = transferBuffer ?? nullptr;
 
-  late Pointer<SdlGpuTransferBuffer> transferBuffer;
-  int offset;
+  final Pointer<SdlGpuTransferBuffer> transferBuffer;
+  final int offset;
 
   Pointer<SdlGpuTransferBufferLocation> calloc() {
     final pointer = ffi.calloc<SdlGpuTransferBufferLocation>();

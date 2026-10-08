@@ -638,7 +638,7 @@ extension SdlSurfacePointerEx on Pointer<SdlSurface> {
   /// - [SDL_GetSurfaceClipRect - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetSurfaceClipRect)
   ///
   /// {@category surface}
-  bool getClipRect(SdlxRect rect) => sdlxGetSurfaceClipRect(this, rect);
+  SdlxRect? getClipRect() => sdlxGetSurfaceClipRect(this);
 
   ///
   /// Creates a new surface identical to the existing surface.

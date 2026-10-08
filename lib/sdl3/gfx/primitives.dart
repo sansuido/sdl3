@@ -3201,32 +3201,30 @@ bool _pieRgba(
   double endAngle;
   double deltaAngle;
   double dr;
-  int numpoints;
-  int i;
 
   /*
-	* Sanity check radii 
-	*/
+  * Sanity check radii 
+  */
   if (rad < 0) {
     return false;
   }
 
   /*
-	* Fixup angles
-	*/
+  * Fixup angles
+  */
   start0 = start0 % 360;
   end0 = end0 % 360;
 
   /*
-	* Special case for rad=0 - draw a point 
-	*/
+  * Special case for rad=0 - draw a point 
+  */
   if (rad == 0) {
     return pixelRgba(renderer, x, y, r, g, b, a, blendMode: blendMode);
   }
 
   /*
-	* Variable setup 
-	*/
+  * Variable setup 
+  */
   dr = rad;
   deltaAngle = 3.0 / dr;
   startAngle = start0 * (2.0 * math.pi / 360.0);
@@ -3235,34 +3233,25 @@ bool _pieRgba(
     endAngle += 2.0 * math.pi;
   }
 
-  /* We will always have at least 2 points */
-  numpoints = 2;
-
-  /* Count points (rather than calculating it) */
-  angle = startAngle;
-  while (angle < endAngle) {
-    angle += deltaAngle;
-    numpoints++;
-  }
-
-  /* Allocate combined vertex array */
-  final points = List<SdlxFPoint>.generate(
-    numpoints,
-    (index) => SdlxFPoint(0, 0),
-  );
-
   /* Update point to start of vy */
-
   /* Center */
-  points[0].x = x;
-  points[1].y = y;
+  final points = <SdlxFPoint>[SdlxFPoint(x, y)];
 
   /* First vertex */
   angle = startAngle;
-  points[1].x = x + dr * math.cos(angle);
-  points[1].y = y + dr * math.sin(angle);
+  points.add(SdlxFPoint(x + dr * math.cos(angle), y + dr * math.sin(angle)));
 
-  if (numpoints < 3) {
+  /* Calculate other vertices */
+  while (angle < endAngle) {
+    angle += deltaAngle;
+    if (angle > endAngle) {
+      angle = endAngle;
+    }
+    points.add(SdlxFPoint(x + dr * math.cos(angle), y + dr * math.sin(angle)));
+  }
+
+  /* We will always have at least 2 points */
+  if (points.length < 3) {
     result = lineRgba(
       renderer,
       points[0].x,
@@ -3276,19 +3265,6 @@ bool _pieRgba(
       blendMode: blendMode,
     );
   } else {
-    /* Calculate other vertices */
-    i = 2;
-    angle = startAngle;
-    while (angle < endAngle) {
-      angle += deltaAngle;
-      if (angle > endAngle) {
-        angle = endAngle;
-      }
-      points[i].x = x + dr * math.cos(angle);
-      points[i].y = y + dr * math.sin(angle);
-      i++;
-    }
-
     /* Draw */
     if (filled != 0) {
       result = filledPolygonRgba(
@@ -3304,7 +3280,6 @@ bool _pieRgba(
       result = polygonRgba(renderer, points, r, g, b, a, blendMode: blendMode);
     }
   }
-
   return result;
 }
 
@@ -3497,14 +3472,12 @@ bool trigonColor(
   SdlxColor color, {
   int blendMode = SDL_BLENDMODE_BLEND,
 }) {
-  final points = List<SdlxFPoint>.generate(3, (index) => SdlxFPoint(0, 0));
+  final points = <SdlxFPoint>[
+    SdlxFPoint(x1, y1),
+    SdlxFPoint(x2, y2),
+    SdlxFPoint(x3, y3),
+  ];
 
-  points[0].x = x1;
-  points[1].x = x2;
-  points[2].x = x3;
-  points[0].y = y1;
-  points[1].y = y2;
-  points[2].y = y3;
   final result = polygonColor(renderer, points, color, blendMode: blendMode);
   return result;
 }
@@ -3540,14 +3513,11 @@ bool trigonRgba(
   int a, {
   int blendMode = SDL_BLENDMODE_BLEND,
 }) {
-  final points = List<SdlxFPoint>.generate(3, (index) => SdlxFPoint(0, 0));
-
-  points[0].x = x1;
-  points[1].x = x2;
-  points[2].x = x3;
-  points[0].y = y1;
-  points[1].y = y2;
-  points[2].y = y3;
+  final points = <SdlxFPoint>[
+    SdlxFPoint(x1, y1),
+    SdlxFPoint(x2, y2),
+    SdlxFPoint(x3, y3),
+  ];
 
   final result = polygonRgba(
     renderer,
@@ -3590,14 +3560,11 @@ bool aatrigonColor(
   SdlxColor color, {
   int blendMode = SDL_BLENDMODE_BLEND,
 }) {
-  final points = List<SdlxFPoint>.generate(3, (index) => SdlxFPoint(0, 0));
-
-  points[0].x = x1;
-  points[1].x = x2;
-  points[2].x = x3;
-  points[0].y = y1;
-  points[1].y = y2;
-  points[2].y = y3;
+  final points = <SdlxFPoint>[
+    SdlxFPoint(x1, y1),
+    SdlxFPoint(x2, y2),
+    SdlxFPoint(x3, y3),
+  ];
 
   final result = aapolygonColor(renderer, points, color, blendMode: blendMode);
   return result;
@@ -3634,14 +3601,11 @@ bool aatrigonRgba(
   int a, {
   int blendMode = SDL_BLENDMODE_BLEND,
 }) {
-  final points = List<SdlxFPoint>.generate(3, (index) => SdlxFPoint(0, 0));
-
-  points[0].x = x1;
-  points[1].x = x2;
-  points[2].x = x3;
-  points[0].y = y1;
-  points[1].y = y2;
-  points[2].y = y3;
+  final points = <SdlxFPoint>[
+    SdlxFPoint(x1, y1),
+    SdlxFPoint(x2, y2),
+    SdlxFPoint(x3, y3),
+  ];
 
   final result = aapolygonRgba(
     renderer,
@@ -3684,14 +3648,11 @@ bool filledTrigonColor(
   SdlxColor color, {
   int blendMode = SDL_BLENDMODE_BLEND,
 }) {
-  final points = List<SdlxFPoint>.generate(3, (index) => SdlxFPoint(0, 0));
-
-  points[0].x = x1;
-  points[1].x = x2;
-  points[2].x = x3;
-  points[0].y = y1;
-  points[1].y = y2;
-  points[2].y = y3;
+  final points = <SdlxFPoint>[
+    SdlxFPoint(x1, y1),
+    SdlxFPoint(x2, y2),
+    SdlxFPoint(x3, y3),
+  ];
 
   final result = filledPolygonColor(
     renderer,
@@ -3735,14 +3696,11 @@ bool filledTrigonRgba(
   int a, {
   int blendMode = SDL_BLENDMODE_BLEND,
 }) {
-  final points = List<SdlxFPoint>.generate(3, (index) => SdlxFPoint(0, 0));
-
-  points[0].x = x1;
-  points[1].x = x2;
-  points[2].x = x3;
-  points[0].y = y1;
-  points[1].y = y2;
-  points[2].y = y3;
+  final points = <SdlxFPoint>[
+    SdlxFPoint(x1, y1),
+    SdlxFPoint(x2, y2),
+    SdlxFPoint(x3, y3),
+  ];
 
   final result = filledPolygonRgba(
     renderer,
@@ -5049,7 +5007,6 @@ bool thickLineRgba(
   double ny;
   double ang;
   double adj;
-  final points = List<SdlxFPoint>.generate(4, (index) => SdlxFPoint(0, 0));
 
   if (renderer == nullptr) {
     return false;
@@ -5083,9 +5040,9 @@ bool thickLineRgba(
   /* Calculate offsets for sides */
   dx = x2 - x1;
   dy = y2 - y1;
-  l = sdlSqrt(dx * dx + dy * dy);
-  ang = sdlAtan2(dx, dy);
-  adj = 0.1 + 0.9 * sdlFabs(sdlCos(2.0 * ang));
+  l = math.sqrt(dx * dx + dy * dy);
+  ang = math.atan2(dx, dy);
+  adj = 0.1 + 0.9 * math.cos(2.0 * ang).abs();
   wl2 = (width - adj) / (2.0 * l);
   nx = dx * wl2;
   ny = dy * wl2;
@@ -5095,14 +5052,13 @@ bool thickLineRgba(
   dy1 = y1;
   dx2 = x2;
   dy2 = y2;
-  points[0].x = dx1 + ny;
-  points[1].x = dx1 - ny;
-  points[2].x = dx2 - ny;
-  points[3].x = dx2 + ny;
-  points[0].y = dy1 - nx;
-  points[1].y = dy1 + nx;
-  points[2].y = dy2 + nx;
-  points[3].y = dy2 - nx;
+
+  final points = <SdlxFPoint>[
+    SdlxFPoint(dx1 + ny, dy1 - nx),
+    SdlxFPoint(dx1 - ny, dy1 + nx),
+    SdlxFPoint(dx2 - ny, dy2 + nx),
+    SdlxFPoint(dx2 + ny, dy2 - nx),
+  ];
 
   /* Draw polygon */
   final result = filledPolygonRgba(
@@ -5119,8 +5075,9 @@ bool thickLineRgba(
 
 void gfxFree() {
   for (var i = 0; i < 256; i++) {
-    if (gfxPrimitivesFont[i] != nullptr) {
-      sdlDestroyTexture(gfxPrimitivesFont[i]);
+    final texture = gfxPrimitivesFont[i];
+    if (texture != nullptr) {
+      sdlDestroyTexture(texture);
       gfxPrimitivesFont[i] = nullptr;
     }
   }

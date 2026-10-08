@@ -26,12 +26,13 @@ part of '../sdl_pixels.dart';
 /// - [SDL_GetMasksForPixelFormat - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetMasksForPixelFormat)
 ///
 /// {@category pixels}
-bool sdlxGetMasksForPixelFormat(int format, SdlxMasks masks) {
-  final bppPointer = ffi.calloc<Int32>();
-  final rmaskPointer = ffi.calloc<Uint32>();
-  final gmaskPointer = ffi.calloc<Uint32>();
-  final bmaskPointer = ffi.calloc<Uint32>();
-  final amaskPointer = ffi.calloc<Uint32>();
+SdlxMasks? sdlxGetMasksForPixelFormat(int format) => ffi.using((arena) {
+  final bppPointer = arena<Int32>();
+  final rmaskPointer = arena<Uint32>();
+  final gmaskPointer = arena<Uint32>();
+  final bmaskPointer = arena<Uint32>();
+  final amaskPointer = arena<Uint32>();
+
   final result = sdlGetMasksForPixelFormat(
     format,
     bppPointer,
@@ -40,21 +41,19 @@ bool sdlxGetMasksForPixelFormat(int format, SdlxMasks masks) {
     bmaskPointer,
     amaskPointer,
   );
-  if (result) {
-    masks
-      ..bpp = bppPointer.value
-      ..rmask = rmaskPointer.value
-      ..gmask = gmaskPointer.value
-      ..bmask = bmaskPointer.value
-      ..amask = amaskPointer.value;
+
+  if (!result) {
+    return null;
   }
-  bppPointer.callocFree();
-  rmaskPointer.callocFree();
-  gmaskPointer.callocFree();
-  bmaskPointer.callocFree();
-  amaskPointer.callocFree();
-  return result;
-}
+
+  return SdlxMasks(
+    bpp: bppPointer.value,
+    rmask: rmaskPointer.value,
+    gmask: gmaskPointer.value,
+    bmask: bmaskPointer.value,
+    amask: amaskPointer.value,
+  );
+});
 
 ///
 /// Convert a bpp value and RGBA masks to an enumerated pixel format.
@@ -171,24 +170,19 @@ bool sdlxSetPaletteColors(
 /// - [SDL_GetRGB - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetRGB)
 ///
 /// {@category pixels}
-void sdlxGetRgb(
+SdlxColor? sdlxGetRgb(
   int pixelvalue,
   Pointer<SdlPixelFormatDetails> format,
   Pointer<SdlPalette> palette,
-  SdlxColor color,
-) {
-  final rPointer = ffi.calloc<Uint8>();
-  final gPointer = ffi.calloc<Uint8>();
-  final bPointer = ffi.calloc<Uint8>();
+) => ffi.using((arena) {
+  final rPointer = arena<Uint8>();
+  final gPointer = arena<Uint8>();
+  final bPointer = arena<Uint8>();
+
   sdlGetRgb(pixelvalue, format, palette, rPointer, gPointer, bPointer);
-  color
-    ..r = rPointer.value
-    ..g = gPointer.value
-    ..b = bPointer.value;
-  rPointer.callocFree();
-  gPointer.callocFree();
-  bPointer.callocFree();
-}
+
+  return SdlxColor(rPointer.value, gPointer.value, bPointer.value);
+});
 
 ///
 /// Get RGBA values from a pixel in the specified format.
@@ -228,16 +222,16 @@ void sdlxGetRgb(
 /// - [SDL_GetRGBA - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetRGBA)
 ///
 /// {@category pixels}
-void sdlxGetRgba(
+SdlxColor sdlxGetRgba(
   int pixelvalue,
   Pointer<SdlPixelFormatDetails> format,
   Pointer<SdlPalette> palette,
-  SdlxColor color,
-) {
-  final rPointer = ffi.calloc<Uint8>();
-  final gPointer = ffi.calloc<Uint8>();
-  final bPointer = ffi.calloc<Uint8>();
-  final aPointer = ffi.calloc<Uint8>();
+) => ffi.using((arena) {
+  final rPointer = arena<Uint8>();
+  final gPointer = arena<Uint8>();
+  final bPointer = arena<Uint8>();
+  final aPointer = arena<Uint8>();
+
   sdlGetRgba(
     pixelvalue,
     format,
@@ -247,13 +241,11 @@ void sdlxGetRgba(
     bPointer,
     aPointer,
   );
-  color
-    ..r = rPointer.value
-    ..g = gPointer.value
-    ..b = bPointer.value
-    ..a = aPointer.value;
-  rPointer.callocFree();
-  gPointer.callocFree();
-  bPointer.callocFree();
-  aPointer.callocFree();
-}
+
+  return SdlxColor(
+    rPointer.value,
+    gPointer.value,
+    bPointer.value,
+    aPointer.value,
+  );
+});

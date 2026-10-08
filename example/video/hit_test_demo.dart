@@ -79,11 +79,7 @@ Future<void> main() async {
       sdlSetRenderDrawColor(renderer, 30, 30, 30, 255);
       sdlRenderClear(renderer);
       sdlSetRenderDrawColor(renderer, 60, 60, 65, 255);
-      final titleRect = SdlxFRect()
-        ..x = 0
-        ..y = 0
-        ..w = windowSize.w.toDouble()
-        ..h = 50;
+      final titleRect = SdlxFRect(0, 0, windowSize.w.toDouble(), 50);
       renderer.fillRect(titleRect);
       sdlSetRenderDrawColor(renderer, 100, 100, 100, 255);
       sdlRenderLine(renderer, 0, 49, windowSize.w.toDouble(), 49);

@@ -7,7 +7,7 @@ void onTrayCallback(Pointer<Void> userdata, Pointer<SdlTrayEntry> entry) {
   final label = sdlGetTrayEntryLabel(entry);
   if (label != null && label.contains('Quit')) {
     print('Bye!');
-    sdlxPushEvent(SdlxQuitEvent());
+    sdlxPushEvent(const SdlxQuitEvent());
   } else {
     print('Hello!');
   }

@@ -1,9 +1,9 @@
 part of '../sdl_notification.dart';
 
 class SdlxNotificationAction {
-  SdlxNotificationAction({this.type = 0});
+  const SdlxNotificationAction({this.type = 0});
 
-  int type;
+  final int type;
 
   void toPointer(Pointer<SdlNotificationAction> pointer) {
     pointer.ref.type = type;

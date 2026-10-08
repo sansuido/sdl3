@@ -1,7 +1,7 @@
 part of '../sdl_events.dart';
 
 class SdlxKeyboardEvent extends SdlxEvent {
-  SdlxKeyboardEvent({
+  const SdlxKeyboardEvent({
     super.type = 0,
     super.reserved = 0,
     super.timestamp = 0,
@@ -14,6 +14,21 @@ class SdlxKeyboardEvent extends SdlxEvent {
     this.down = false,
     this.repeat = false,
   });
+
+  factory SdlxKeyboardEvent.fromPointer(Pointer<SdlEvent> pointer) =>
+      SdlxKeyboardEvent(
+        type: pointer.ref.key.type,
+        reserved: pointer.ref.key.reserved,
+        timestamp: pointer.ref.key.timestamp,
+        windowId: pointer.ref.key.windowId,
+        which: pointer.ref.key.which,
+        scancode: pointer.ref.key.scancode,
+        key: pointer.ref.key.key,
+        mod: pointer.ref.key.mod,
+        raw: pointer.ref.key.raw,
+        down: pointer.ref.key.down,
+        repeat: pointer.ref.key.repeat,
+      );
 
   factory SdlxKeyboardEvent.down({
     int reserved = 0,
@@ -65,14 +80,14 @@ class SdlxKeyboardEvent extends SdlxEvent {
     repeat: repeat,
   );
 
-  int windowId;
-  int which;
-  int scancode;
-  int key;
-  int mod;
-  int raw;
-  bool down;
-  bool repeat;
+  final int windowId;
+  final int which;
+  final int scancode;
+  final int key;
+  final int mod;
+  final int raw;
+  final bool down;
+  final bool repeat;
 
   @override
   bool isTargetWindow(int targetId, {bool ifNoWindow = true}) =>
@@ -94,22 +109,4 @@ class SdlxKeyboardEvent extends SdlxEvent {
     pointer.ref.key.repeat = repeat;
     return pointer;
   }
-
-  @override
-  void loadFromPointer(Pointer<SdlEvent> pointer) {
-    type = pointer.ref.key.type;
-    reserved = pointer.ref.key.reserved;
-    timestamp = pointer.ref.key.timestamp;
-    windowId = pointer.ref.key.windowId;
-    which = pointer.ref.key.which;
-    scancode = pointer.ref.key.scancode;
-    key = pointer.ref.key.key;
-    mod = pointer.ref.key.mod;
-    raw = pointer.ref.key.raw;
-    down = pointer.ref.key.down;
-    repeat = pointer.ref.key.repeat;
-  }
-
-  static SdlxKeyboardEvent fromPointer(Pointer<SdlEvent> pointer) =>
-      SdlxKeyboardEvent()..loadFromPointer(pointer);
 }

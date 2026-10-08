@@ -1,17 +1,18 @@
 part of '../sdl_mouse.dart';
 
 class SdlxCursorFrameInfo {
-  SdlxCursorFrameInfo({Pointer<SdlSurface>? surface, this.duration = 0}) {
-    this.surface = surface ?? nullptr;
-  }
+  SdlxCursorFrameInfo({Pointer<SdlSurface>? surface, this.duration = 0})
+    : surface = surface ?? nullptr;
 
-  late Pointer<SdlSurface> surface;
-  int duration;
+  factory SdlxCursorFrameInfo.fromPointer(
+    Pointer<SdlCursorFrameInfo> pointer,
+  ) => SdlxCursorFrameInfo(
+    surface: pointer.ref.surface,
+    duration: pointer.ref.duration,
+  );
 
-  void loadFromPointer(Pointer<SdlCursorFrameInfo> pointer) {
-    surface = pointer.ref.surface;
-    duration = pointer.ref.duration;
-  }
+  final Pointer<SdlSurface> surface;
+  final int duration;
 
   Pointer<SdlCursorFrameInfo> calloc() {
     final pointer = ffi.calloc<SdlCursorFrameInfo>();

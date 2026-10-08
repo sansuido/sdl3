@@ -1,11 +1,10 @@
 part of '../sdl_gpu.dart';
 
 class SdlxGpuBufferBinding {
-  SdlxGpuBufferBinding({Pointer<SdlGpuBuffer>? buffer, this.offset = 0}) {
-    this.buffer = buffer ?? nullptr;
-  }
-  late Pointer<SdlGpuBuffer> buffer;
-  int offset;
+  SdlxGpuBufferBinding({Pointer<SdlGpuBuffer>? buffer, this.offset = 0})
+    : buffer = buffer ?? nullptr;
+  final Pointer<SdlGpuBuffer> buffer;
+  final int offset;
 
   Pointer<SdlGpuBufferBinding> calloc() {
     final pointer = ffi.calloc<SdlGpuBufferBinding>();

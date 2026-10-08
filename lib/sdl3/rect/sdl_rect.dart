@@ -1,21 +1,18 @@
 part of '../sdl_rect.dart';
 
 class SdlxRect {
-  SdlxRect([this.x = 0, this.y = 0, this.w = 0, this.h = 0]);
-  int x;
-  int y;
-  int w;
-  int h;
+  const SdlxRect([this.x = 0, this.y = 0, this.w = 0, this.h = 0]);
+
+  factory SdlxRect.fromPointer(Pointer<SdlRect> pointer) =>
+      SdlxRect(pointer.ref.x, pointer.ref.y, pointer.ref.w, pointer.ref.h);
+
+  final int x;
+  final int y;
+  final int w;
+  final int h;
 
   SdlxFRect toFloat() =>
       SdlxFRect(x.toDouble(), y.toDouble(), w.toDouble(), h.toDouble());
-
-  void loadFromPointer(Pointer<SdlRect> pointer) {
-    x = pointer.ref.x;
-    y = pointer.ref.y;
-    w = pointer.ref.w;
-    h = pointer.ref.h;
-  }
 
   Pointer<SdlRect> calloc() {
     final pointer = ffi.calloc<SdlRect>();

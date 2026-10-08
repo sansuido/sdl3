@@ -1,7 +1,7 @@
 part of '../sdl_events.dart';
 
 class SdlxJoyAxisEvent extends SdlxEvent {
-  SdlxJoyAxisEvent({
+  const SdlxJoyAxisEvent({
     super.type = SDL_EVENT_JOYSTICK_AXIS_MOTION,
     super.reserved = 0,
     super.timestamp = 0,
@@ -10,9 +10,19 @@ class SdlxJoyAxisEvent extends SdlxEvent {
     this.value = 0,
   });
 
-  int which;
-  int axis;
-  int value;
+  factory SdlxJoyAxisEvent.fromPointer(Pointer<SdlEvent> pointer) =>
+      SdlxJoyAxisEvent(
+        type: pointer.ref.jaxis.type,
+        reserved: pointer.ref.jaxis.reserved,
+        timestamp: pointer.ref.jaxis.timestamp,
+        which: pointer.ref.jaxis.which,
+        axis: pointer.ref.jaxis.axis,
+        value: pointer.ref.jaxis.value,
+      );
+
+  final int which;
+  final int axis;
+  final int value;
 
   @override
   Pointer<SdlEvent> calloc() {
@@ -25,17 +35,4 @@ class SdlxJoyAxisEvent extends SdlxEvent {
     pointer.ref.jaxis.value = value;
     return pointer;
   }
-
-  @override
-  void loadFromPointer(Pointer<SdlEvent> pointer) {
-    type = pointer.ref.jaxis.type;
-    reserved = pointer.ref.jaxis.reserved;
-    timestamp = pointer.ref.jaxis.timestamp;
-    which = pointer.ref.jaxis.which;
-    axis = pointer.ref.jaxis.axis;
-    value = pointer.ref.jaxis.value;
-  }
-
-  static SdlxJoyAxisEvent fromPointer(Pointer<SdlEvent> pointer) =>
-      SdlxJoyAxisEvent()..loadFromPointer(pointer);
 }

@@ -11,18 +11,17 @@ class SdlxGpuShaderCreateInfo {
     this.numStorageBuffers = 0,
     this.numUniformBuffers = 0,
     this.props = 0,
-  }) {
-    this.code = code ?? Uint8List(0);
-  }
-  late Uint8List code;
-  String entrypoint;
-  int format;
-  int stage;
-  int numSamplers;
-  int numStorageTextures;
-  int numStorageBuffers;
-  int numUniformBuffers;
-  int props;
+  }) : code = code ?? Uint8List(0);
+
+  final Uint8List code;
+  final String entrypoint;
+  final int format;
+  final int stage;
+  final int numSamplers;
+  final int numStorageTextures;
+  final int numStorageBuffers;
+  final int numUniformBuffers;
+  final int props;
 
   Pointer<SdlGpuShaderCreateInfo> calloc() {
     final pointer = ffi.calloc<SdlGpuShaderCreateInfo>();

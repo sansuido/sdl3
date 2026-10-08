@@ -22,14 +22,14 @@ int main() {
     return -1;
   }
   final positions = <SdlxFPoint>[
-    SdlxFPoint(400, 150),
-    SdlxFPoint(200, 450),
-    SdlxFPoint(600, 450),
+    const SdlxFPoint(400, 150),
+    const SdlxFPoint(200, 450),
+    const SdlxFPoint(600, 450),
   ];
   final colors = <SdlxFColor>[
-    SdlxFColor(1, 0, 0),
-    SdlxFColor(0, 0, 1),
-    SdlxFColor(0, 1, 0),
+    const SdlxFColor(1, 0, 0),
+    const SdlxFColor(0, 0, 1),
+    const SdlxFColor(0, 1, 0),
   ];
   var running = true;
   while (running) {
@@ -45,7 +45,7 @@ int main() {
       }
     }
     renderer
-      ..setDrawColor(SdlxColor(0, 0, 0))
+      ..setDrawColor(const SdlxColor(0, 0, 0))
       ..clear()
       ..geometryRaw(positions, colors: colors)
       ..present();

@@ -1,54 +1,91 @@
 part of '../sdl_gamepad.dart';
 
 class SdlxGamepadBindingAxis {
-  SdlxGamepadBindingAxis({this.axis = 0, this.axisMin = 0, this.axisMax = 0});
-  int axis;
-  int axisMin;
-  int axisMax;
+  const SdlxGamepadBindingAxis({
+    this.axis = 0,
+    this.axisMin = 0,
+    this.axisMax = 0,
+  });
+
+  final int axis;
+  final int axisMin;
+  final int axisMax;
 }
 
 class SdlxGamepadBindingHat {
-  SdlxGamepadBindingHat({this.hat = 0, this.hatMask = 0});
+  const SdlxGamepadBindingHat({this.hat = 0, this.hatMask = 0});
 
-  int hat;
-  int hatMask;
+  final int hat;
+  final int hatMask;
 }
 
 class SdlxGamepadBinding {
-  SdlxGamepadBinding({this.inputType = 0, this.outputType = 0});
+  const SdlxGamepadBinding({
+    required this.inputType,
+    required this.outputType,
+    this.inputButton,
+    this.inputAxis,
+    this.inputHat,
+    this.outputButton,
+    this.outputAxis,
+  });
 
-  int inputType;
-  int? inputButton;
-  SdlxGamepadBindingAxis? inputAxis;
-  SdlxGamepadBindingHat? inputHat;
-  int outputType;
-  int? outputButton;
-  SdlxGamepadBindingAxis? outputAxis;
+  factory SdlxGamepadBinding.fromPointer(Pointer<SdlGamepadBinding> pointer) {
+    final ref = pointer.ref;
+    final inputType = ref.inputType;
 
-  void loadFromPointer(Pointer<SdlGamepadBinding> pointer) {
-    inputType = pointer.ref.inputType;
+    int? inputButton;
+    SdlxGamepadBindingAxis? inputAxis;
+    SdlxGamepadBindingHat? inputHat;
+
     switch (inputType) {
       case SdlkGamepadBindtype.button:
-        inputButton = pointer.ref.input.button;
+        inputButton = ref.input.button;
       case SdlkGamepadBindtype.axis:
-        inputAxis = SdlxGamepadBindingAxis()
-          ..axis = pointer.ref.input.axis.axis
-          ..axisMin = pointer.ref.input.axis.axisMin
-          ..axisMin = pointer.ref.input.axis.axisMax;
+        inputAxis = SdlxGamepadBindingAxis(
+          axis: ref.input.axis.axis,
+          axisMin: ref.input.axis.axisMin,
+          axisMax: ref.input.axis.axisMax,
+        );
       case SdlkGamepadBindtype.hat:
-        inputHat = SdlxGamepadBindingHat()
-          ..hat = pointer.ref.input.hat.hat
-          ..hatMask = pointer.ref.input.hat.hatMask;
+        inputHat = SdlxGamepadBindingHat(
+          hat: ref.input.hat.hat,
+          hatMask: ref.input.hat.hatMask,
+        );
     }
-    outputType = pointer.ref.outputType;
+
+    final outputType = ref.outputType;
+    int? outputButton;
+    SdlxGamepadBindingAxis? outputAxis;
+
     switch (outputType) {
       case SdlkGamepadBindtype.button:
-        outputButton = pointer.ref.output.button;
+        outputButton = ref.output.button;
       case SdlkGamepadBindtype.axis:
-        outputAxis = SdlxGamepadBindingAxis()
-          ..axis = pointer.ref.output.axis.axis
-          ..axisMin = pointer.ref.output.axis.axisMin
-          ..axisMin = pointer.ref.output.axis.axisMax;
+        outputAxis = SdlxGamepadBindingAxis(
+          axis: ref.output.axis.axis,
+          axisMin: ref.output.axis.axisMin,
+          axisMax: ref.output.axis.axisMax,
+        );
     }
+
+    return SdlxGamepadBinding(
+      inputType: inputType,
+      outputType: outputType,
+      inputButton: inputButton,
+      inputAxis: inputAxis,
+      inputHat: inputHat,
+      outputButton: outputButton,
+      outputAxis: outputAxis,
+    );
   }
+
+  final int inputType;
+  final int? inputButton;
+  final SdlxGamepadBindingAxis? inputAxis;
+  final SdlxGamepadBindingHat? inputHat;
+
+  final int outputType;
+  final int? outputButton;
+  final SdlxGamepadBindingAxis? outputAxis;
 }

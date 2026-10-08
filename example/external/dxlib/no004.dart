@@ -142,10 +142,10 @@ void render() {
   final mapDrawPointY = gPlayerY - drawMapChipNumY ~/ 2;
   // init
   gRenderer
-    ..setDrawColor(SdlxColor(0, 0, 0))
+    ..setDrawColor(const SdlxColor(0, 0, 0))
     ..clear()
     // map
-    ..setDrawColor(SdlxColor(0xff, 0, 0));
+    ..setDrawColor(const SdlxColor(0xff, 0, 0));
   for (var y = 0; y < gMapData.length; y++) {
     final drawY = y + mapDrawPointY;
     if (drawY < 0 || drawY >= gMapData.length) {
@@ -170,7 +170,7 @@ void render() {
   }
   // player
   gRenderer
-    ..setDrawColor(SdlxColor(0xff, 0xff, 0xff))
+    ..setDrawColor(const SdlxColor(0xff, 0xff, 0xff))
     ..fillRect(
       SdlxFRect(
         (gPlayerX - mapDrawPointX) * gMapSize.toDouble(),

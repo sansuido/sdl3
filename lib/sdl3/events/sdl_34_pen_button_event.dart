@@ -1,7 +1,7 @@
 part of '../sdl_events.dart';
 
 class SdlxPenButtonEvent extends SdlxEvent {
-  SdlxPenButtonEvent({
+  const SdlxPenButtonEvent({
     super.type = 0,
     super.reserved = 0,
     super.timestamp = 0,
@@ -12,7 +12,23 @@ class SdlxPenButtonEvent extends SdlxEvent {
     this.y = 0,
     this.button = 0,
     this.down = false,
+    this.devideType = 0,
   });
+
+  factory SdlxPenButtonEvent.fromPointer(Pointer<SdlEvent> pointer) =>
+      SdlxPenButtonEvent(
+        type: pointer.ref.pbutton.type,
+        reserved: pointer.ref.pbutton.reserved,
+        timestamp: pointer.ref.pbutton.timestamp,
+        windowId: pointer.ref.pbutton.windowId,
+        which: pointer.ref.pbutton.which,
+        penState: pointer.ref.pbutton.penState,
+        x: pointer.ref.pbutton.x,
+        y: pointer.ref.pbutton.y,
+        button: pointer.ref.pbutton.button,
+        down: pointer.ref.pbutton.down,
+        devideType: pointer.ref.pbutton.deviceType,
+      );
 
   factory SdlxPenButtonEvent.down({
     int reserved = 0,
@@ -24,6 +40,7 @@ class SdlxPenButtonEvent extends SdlxEvent {
     double y = 0,
     int button = 0,
     bool down = false,
+    int devideType = 0,
   }) => SdlxPenButtonEvent(
     type: SDL_EVENT_PEN_BUTTON_DOWN,
     reserved: reserved,
@@ -35,6 +52,7 @@ class SdlxPenButtonEvent extends SdlxEvent {
     y: y,
     button: button,
     down: down,
+    devideType: devideType,
   );
 
   factory SdlxPenButtonEvent.up({
@@ -47,6 +65,7 @@ class SdlxPenButtonEvent extends SdlxEvent {
     double y = 0,
     int button = 0,
     bool down = false,
+    int devideType = 0,
   }) => SdlxPenButtonEvent(
     type: SDL_EVENT_PEN_BUTTON_UP,
     reserved: reserved,
@@ -58,15 +77,17 @@ class SdlxPenButtonEvent extends SdlxEvent {
     y: y,
     button: button,
     down: down,
+    devideType: devideType,
   );
 
-  int windowId;
-  int which;
-  int penState;
-  double x;
-  double y;
-  int button;
-  bool down;
+  final int windowId;
+  final int which;
+  final int penState;
+  final double x;
+  final double y;
+  final int button;
+  final bool down;
+  final int devideType;
 
   @override
   bool isTargetWindow(int targetId, {bool ifNoWindow = true}) =>
@@ -85,23 +106,7 @@ class SdlxPenButtonEvent extends SdlxEvent {
     pointer.ref.pbutton.y = y;
     pointer.ref.pbutton.button = button;
     pointer.ref.pbutton.down = down;
+    pointer.ref.pbutton.deviceType = devideType;
     return pointer;
   }
-
-  @override
-  void loadFromPointer(Pointer<SdlEvent> pointer) {
-    type = pointer.ref.pbutton.type;
-    reserved = pointer.ref.pbutton.reserved;
-    timestamp = pointer.ref.pbutton.timestamp;
-    windowId = pointer.ref.pbutton.windowId;
-    which = pointer.ref.pbutton.which;
-    penState = pointer.ref.pbutton.penState;
-    x = pointer.ref.pbutton.x;
-    y = pointer.ref.pbutton.y;
-    button = pointer.ref.pbutton.button;
-    down = pointer.ref.pbutton.down;
-  }
-
-  static SdlxPenButtonEvent fromPointer(Pointer<SdlEvent> pointer) =>
-      SdlxPenButtonEvent()..loadFromPointer(pointer);
 }

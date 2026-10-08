@@ -97,13 +97,13 @@ bool handleEvents() {
 void renderer() {
   // init
   gRenderer
-    ..setDrawColor(SdlxColor(0, 0, 0))
+    ..setDrawColor(const SdlxColor(0, 0, 0))
     ..clear()
     // draw player
-    ..setDrawColor(SdlxColor(0xff, 0, 0))
+    ..setDrawColor(const SdlxColor(0xff, 0, 0))
     ..fillRect(SdlxFRect(gPlayer.x - 24, gPlayer.y - 24, 48, 48))
     // shot
-    ..setDrawColor(SdlxColor(0xff, 0xff, 0xff));
+    ..setDrawColor(const SdlxColor(0xff, 0xff, 0xff));
   for (final shot in gShotList) {
     gRenderer.fillRect(SdlxFRect(shot.x - 8, shot.y - 8, 16, 16));
   }

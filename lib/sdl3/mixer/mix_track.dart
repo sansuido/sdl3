@@ -1192,8 +1192,7 @@ extension MixTrackPointerEx on Pointer<MixTrack> {
   /// - [MIX_GetTrack3DPosition - SDL3 Wiki](https://wiki.libsdl.org/SDL3/MIX_GetTrack3DPosition)
   ///
   /// {@category mixer}
-  bool get3DPosition(MixxPoint3D position) =>
-      mixxGetTrack3DPosition(this, position);
+  MixxPoint3D? get3DPosition() => mixxGetTrack3DPosition(this);
 
   ///
   /// Assign a track to a mixing group.

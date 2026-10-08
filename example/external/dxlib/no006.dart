@@ -67,7 +67,7 @@ class Game {
     for (var n = 0; n < gString.length; n++) {
       final chara = gString[n];
       if (!charaTextures.containsKey(chara)) {
-        final textColor = SdlxColor(0, 0, 0);
+        const textColor = SdlxColor(0, 0, 0);
         final surface = font.renderTextBlended(chara, textColor);
         if (surface != nullptr) {
           final texture = renderer.createTextureFromSurface(surface);
@@ -85,8 +85,8 @@ class Game {
     if (font == nullptr) {
       return false;
     }
-    final textColor = SdlxColor(0, 0, 0);
-    final alertColor = SdlxColor(255, 0, 0);
+    const textColor = SdlxColor(0, 0, 0);
+    const alertColor = SdlxColor(255, 0, 0);
 
     final surface = font.renderTextShaded(
       '[PRESS ANY KEY]',
@@ -148,7 +148,7 @@ class Game {
 
   void render() {
     renderer
-      ..setDrawColor(SdlxColor(0xff, 0xff, 0xff))
+      ..setDrawColor(const SdlxColor(0xff, 0xff, 0xff))
       ..clear();
     var drawX = 0;
     var drawY = 0;

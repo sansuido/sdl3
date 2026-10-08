@@ -46,8 +46,9 @@ Future<int> main() async {
   var completedRequests = 0;
   var running = true;
   while (running) {
-    final outcome = SdlxAsyncIoOutcome();
-    if (queue.getResult(outcome)) {
+    final outcome = queue.getResult();
+
+    if (outcome != null) {
       if (outcome.result == SdlkAsyncio.complete) {
         completedRequests++;
         print(

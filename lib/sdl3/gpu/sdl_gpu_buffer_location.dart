@@ -1,12 +1,11 @@
 part of '../sdl_gpu.dart';
 
 class SdlxGpuBufferLocation {
-  SdlxGpuBufferLocation({Pointer<SdlGpuBuffer>? buffer, this.offset = 0}) {
-    this.buffer = buffer ?? nullptr;
-  }
+  SdlxGpuBufferLocation({Pointer<SdlGpuBuffer>? buffer, this.offset = 0})
+    : buffer = buffer ?? nullptr;
 
-  late Pointer<SdlGpuBuffer> buffer;
-  int offset;
+  final Pointer<SdlGpuBuffer> buffer;
+  final int offset;
 
   Pointer<SdlGpuBufferLocation> calloc() {
     final pointer = ffi.calloc<SdlGpuBufferLocation>();

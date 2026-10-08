@@ -1,7 +1,7 @@
 part of '../sdl_gpu.dart';
 
 class SdlxGpuViewport {
-  SdlxGpuViewport({
+  const SdlxGpuViewport({
     this.x = 0,
     this.y = 0,
     this.w = 0,
@@ -9,12 +9,13 @@ class SdlxGpuViewport {
     this.minDepth = 0,
     this.maxDepth = 0,
   });
-  double x;
-  double y;
-  double w;
-  double h;
-  double minDepth;
-  double maxDepth;
+
+  final double x;
+  final double y;
+  final double w;
+  final double h;
+  final double minDepth;
+  final double maxDepth;
 
   Pointer<SdlGpuViewport> calloc() {
     final pointer = ffi.calloc<SdlGpuViewport>();

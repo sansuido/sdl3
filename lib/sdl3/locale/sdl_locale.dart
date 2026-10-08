@@ -1,17 +1,18 @@
 part of '../sdl_locale.dart';
 
 class SdlxLocale {
-  SdlxLocale({this.language = '', this.country = ''});
+  const SdlxLocale({this.language = '', this.country = ''});
 
-  String language;
-  String country;
+  factory SdlxLocale.fromPointer(Pointer<SdlLocale> pointer) {
+    final ref = pointer.ref;
 
-  void loadFromPointer(Pointer<SdlLocale> pointer) {
-    if (pointer.ref.language != nullptr) {
-      language = pointer.ref.language.toDartString();
-    }
-    if (pointer.ref.country != nullptr) {
-      country = pointer.ref.country.toDartString();
-    }
+    final language = ref.language != nullptr ? ref.language.toDartString() : '';
+
+    final country = ref.country != nullptr ? ref.country.toDartString() : '';
+
+    return SdlxLocale(language: language, country: country);
   }
+
+  final String language;
+  final String country;
 }

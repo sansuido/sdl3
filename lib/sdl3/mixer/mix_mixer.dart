@@ -194,7 +194,7 @@ extension MixMixerPointerEx on Pointer<MixMixer> {
   /// - [MIX_GetMixerFormat - SDL3 Wiki](https://wiki.libsdl.org/SDL3/MIX_GetMixerFormat)
   ///
   /// {@category mixer}
-  bool getFormat(SdlxAudioSpec spec) => mixxGetMixerFormat(this, spec);
+  SdlxAudioSpec? getFormat() => mixxGetMixerFormat(this);
 
   ///
   /// Load audio for playback from an SDL_IOStream.

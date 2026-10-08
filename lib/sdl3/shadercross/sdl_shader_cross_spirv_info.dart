@@ -6,13 +6,12 @@ class SdlxShaderCrossSpirvInfo {
     this.entrypoint = '',
     this.shaderStage = 0,
     this.props = 0,
-  }) {
-    this.bytecode = bytecode ?? Uint8List(0);
-  }
-  late Uint8List bytecode;
-  String entrypoint;
-  int shaderStage;
-  int props;
+  }) : bytecode = bytecode ?? Uint8List(0);
+
+  final Uint8List bytecode;
+  final String entrypoint;
+  final int shaderStage;
+  final int props;
 
   Pointer<SdlShaderCrossSpirvInfo> calloc() {
     final pointer = ffi.calloc<SdlShaderCrossSpirvInfo>();

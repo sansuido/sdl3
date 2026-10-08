@@ -1,16 +1,15 @@
 part of '../sdl_rect.dart';
 
 class SdlxPoint {
-  SdlxPoint(this.x, this.y);
-  int x;
-  int y;
+  const SdlxPoint(this.x, this.y);
+
+  factory SdlxPoint.fromPointer(Pointer<SdlPoint> pointer) =>
+      SdlxPoint(pointer.ref.x, pointer.ref.y);
+
+  final int x;
+  final int y;
 
   SdlxFPoint toFloat() => SdlxFPoint(x.toDouble(), y.toDouble());
-
-  void loadFromPointer(Pointer<SdlPoint> pointer) {
-    x = pointer.ref.x;
-    y = pointer.ref.y;
-  }
 
   Pointer<SdlPoint> calloc() {
     final pointer = ffi.calloc<SdlPoint>();

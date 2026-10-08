@@ -82,19 +82,32 @@ List<int> sdlxGetCameras() {
 /// - [SDL_GetCameraSupportedFormats - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetCameraSupportedFormats)
 ///
 /// {@category camera}
-List<SdlxCameraSpec> sdlxGetCameraSupportedFormats(int instanceId) {
-  final result = <SdlxCameraSpec>[];
-  final countPointer = ffi.calloc<Int32>();
-  final specsPointer = sdlGetCameraSupportedFormats(instanceId, countPointer);
-  if (specsPointer != nullptr) {
-    for (var i = 0; i < countPointer.value; i++) {
-      result.add(SdlxCameraSpec()..loadFromPointer(specsPointer[i]));
+List<SdlxCameraSpec> sdlxGetCameraSupportedFormats(int instanceId) => ffi.using(
+  (arena) {
+    final countPointer = arena<Int32>();
+    final specsPointer = sdlGetCameraSupportedFormats(instanceId, countPointer);
+
+    if (specsPointer == nullptr) {
+      return const [];
     }
-    sdlFree(specsPointer.cast<Void>());
-  }
-  countPointer.callocFree();
-  return result;
-}
+
+    try {
+      final count = countPointer.value;
+      final result = <SdlxCameraSpec>[];
+
+      for (var i = 0; i < count; i++) {
+        final specPointer = specsPointer[i];
+        if (specPointer != nullptr) {
+          result.add(SdlxCameraSpec.fromPointer(specPointer));
+        }
+      }
+
+      return List<SdlxCameraSpec>.unmodifiable(result);
+    } finally {
+      sdlFree(specsPointer.cast<Void>());
+    }
+  },
+);
 
 ///
 /// Open a video recording device (a "camera").
@@ -190,15 +203,15 @@ Pointer<SdlCamera> sdlxOpenCamera(int instanceId, [SdlxCameraSpec? spec]) {
 /// - [SDL_GetCameraFormat - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetCameraFormat)
 ///
 /// {@category camera}
-bool sdlxGetCameraFormat(Pointer<SdlCamera> camera, SdlxCameraSpec spec) {
-  final specPointer = spec.calloc();
-  final result = sdlGetCameraFormat(camera, specPointer);
-  if (result) {
-    spec.loadFromPointer(specPointer);
-  }
-  specPointer.callocFree();
-  return result;
-}
+SdlxCameraSpec? sdlxGetCameraFormat(Pointer<SdlCamera> camera) =>
+    ffi.using((arena) {
+      final specPointer = arena<SdlCameraSpec>();
+      final success = sdlGetCameraFormat(camera, specPointer);
+
+      if (!success) return null;
+
+      return SdlxCameraSpec.fromPointer(specPointer);
+    });
 
 ///
 /// Acquire a frame.

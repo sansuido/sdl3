@@ -1,30 +1,31 @@
 part of '../sdl_net.dart';
 
 class NetxDatagram {
-  NetxDatagram({Pointer<NetAddress>? addr, this.port = 0, this.buf}) {
-    this.addr = addr ?? nullptr;
-  }
-  late Pointer<NetAddress> addr;
-  int port;
-  Uint8List? buf;
-  var hasRefed = false;
+  const NetxDatagram({
+    required this.addr,
+    required this.port,
+    required this.buf,
+  });
 
-  void loadFromPointer(Pointer<NetDatagram> pointer, {bool refAddress = true}) {
-    addr = pointer.ref.addr;
-    port = pointer.ref.port;
-    buf = Uint8List.fromList(
-      pointer.ref.buf.cast<Uint8>().asTypedList(pointer.ref.buflen),
-    );
-    if (refAddress) {
-      hasRefed = refAddress;
-      netRefAddress(addr);
+  factory NetxDatagram.fromPointer(
+    Pointer<NetDatagram> pointer, {
+    bool refAddress = true,
+  }) {
+    final ref = pointer.ref;
+    final addrPtr = ref.addr;
+
+    if (refAddress && addrPtr != nullptr) {
+      netRefAddress(addrPtr);
     }
+
+    final bufData = addrPtr != nullptr && ref.buf != nullptr && ref.buflen > 0
+        ? Uint8List.fromList(ref.buf.cast<Uint8>().asTypedList(ref.buflen))
+        : Uint8List(0);
+
+    return NetxDatagram(addr: addrPtr, port: ref.port, buf: bufData);
   }
 
-  void destroy() {
-    if (hasRefed && addr != nullptr) {
-      netUnrefAddress(addr);
-      addr = nullptr;
-    }
-  }
+  final Pointer<NetAddress> addr;
+  final int port;
+  final Uint8List buf;
 }

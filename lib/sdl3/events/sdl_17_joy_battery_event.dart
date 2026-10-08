@@ -1,7 +1,7 @@
 part of '../sdl_events.dart';
 
 class SdlxJoyBatteryEvent extends SdlxEvent {
-  SdlxJoyBatteryEvent({
+  const SdlxJoyBatteryEvent({
     super.type = SDL_EVENT_JOYSTICK_BATTERY_UPDATED,
     super.reserved = 0,
     super.timestamp = 0,
@@ -10,9 +10,19 @@ class SdlxJoyBatteryEvent extends SdlxEvent {
     this.percent = 0,
   });
 
-  int which;
-  int state;
-  int percent;
+  factory SdlxJoyBatteryEvent.fromPointer(Pointer<SdlEvent> pointer) =>
+      SdlxJoyBatteryEvent(
+        type: pointer.ref.jbattery.type,
+        reserved: pointer.ref.jbattery.reserved,
+        timestamp: pointer.ref.jbattery.timestamp,
+        which: pointer.ref.jbattery.which,
+        state: pointer.ref.jbattery.state,
+        percent: pointer.ref.jbattery.percent,
+      );
+
+  final int which;
+  final int state;
+  final int percent;
 
   @override
   Pointer<SdlEvent> calloc() {
@@ -25,17 +35,4 @@ class SdlxJoyBatteryEvent extends SdlxEvent {
     pointer.ref.jbattery.percent = percent;
     return pointer;
   }
-
-  @override
-  void loadFromPointer(Pointer<SdlEvent> pointer) {
-    type = pointer.ref.jbattery.type;
-    reserved = pointer.ref.jbattery.reserved;
-    timestamp = pointer.ref.jbattery.timestamp;
-    which = pointer.ref.jbattery.which;
-    state = pointer.ref.jbattery.state;
-    percent = pointer.ref.jbattery.percent;
-  }
-
-  static SdlxJoyBatteryEvent fromPointer(Pointer<SdlEvent> pointer) =>
-      SdlxJoyBatteryEvent()..loadFromPointer(pointer);
 }

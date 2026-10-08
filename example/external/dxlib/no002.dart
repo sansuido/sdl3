@@ -93,10 +93,10 @@ bool handleEvents() {
 void render() {
   // init
   gRenderer
-    ..setDrawColor(SdlxColor(0, 0, 0))
+    ..setDrawColor(const SdlxColor(0, 0, 0))
     ..clear()
     // player
-    ..setDrawColor(SdlxColor(0, 255, 0))
+    ..setDrawColor(const SdlxColor(0, 255, 0))
     ..fillRect(
       SdlxFRect(
         gPlayerX,

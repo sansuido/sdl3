@@ -1,12 +1,20 @@
 part of '../sdl_events.dart';
 
 class SdlxRenderEvent extends SdlxEvent {
-  SdlxRenderEvent({
+  const SdlxRenderEvent({
     super.type = 0,
     super.reserved = 0,
     super.timestamp = 0,
     this.windowId = 0,
   });
+
+  factory SdlxRenderEvent.fromPointer(Pointer<SdlEvent> pointer) =>
+      SdlxRenderEvent(
+        type: pointer.ref.render.type,
+        reserved: pointer.ref.render.reserved,
+        timestamp: pointer.ref.render.timestamp,
+        windowId: pointer.ref.render.windowId,
+      );
 
   factory SdlxRenderEvent.targetsReset({
     int reserved = 0,
@@ -41,7 +49,7 @@ class SdlxRenderEvent extends SdlxEvent {
     windowId: windowId,
   );
 
-  int windowId;
+  final int windowId;
 
   @override
   bool isTargetWindow(int targetId, {bool ifNoWindow = true}) =>
@@ -56,15 +64,4 @@ class SdlxRenderEvent extends SdlxEvent {
     pointer.ref.render.windowId = windowId;
     return pointer;
   }
-
-  @override
-  void loadFromPointer(Pointer<SdlEvent> pointer) {
-    type = pointer.ref.render.type;
-    reserved = pointer.ref.render.reserved;
-    timestamp = pointer.ref.render.timestamp;
-    windowId = pointer.ref.render.windowId;
-  }
-
-  static SdlxRenderEvent fromPointer(Pointer<SdlEvent> pointer) =>
-      SdlxRenderEvent()..loadFromPointer(pointer);
 }

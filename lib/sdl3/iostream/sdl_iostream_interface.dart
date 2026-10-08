@@ -9,23 +9,33 @@ class SdlxIoStreamInterface {
     Pointer<NativeFunction<SdlIoStreamInterfaceWrite>>? write,
     Pointer<NativeFunction<SdlIoStreamInterfaceFlush>>? flush,
     Pointer<NativeFunction<SdlIoStreamInterfaceClose>>? close,
-  }) {
-    this.version = version ?? sizeOf<SdlIoStreamInterface>();
-    this.size = size ?? nullptr;
-    this.seek = seek ?? nullptr;
-    this.read = read ?? nullptr;
-    this.write = write ?? nullptr;
-    this.flush = flush ?? nullptr;
-    this.close = close ?? nullptr;
-  }
+  }) : version = version ?? sizeOf<SdlIoStreamInterface>(),
+       size = size ?? nullptr,
+       seek = seek ?? nullptr,
+       read = read ?? nullptr,
+       write = write ?? nullptr,
+       flush = flush ?? nullptr,
+       close = close ?? nullptr;
 
-  late int version;
-  late Pointer<NativeFunction<SdlIoStreamInterfaceSize>> size;
-  late Pointer<NativeFunction<SdlIoStreamInterfaceSeek>> seek;
-  late Pointer<NativeFunction<SdlIoStreamInterfaceRead>> read;
-  late Pointer<NativeFunction<SdlIoStreamInterfaceWrite>> write;
-  late Pointer<NativeFunction<SdlIoStreamInterfaceFlush>> flush;
-  late Pointer<NativeFunction<SdlIoStreamInterfaceClose>> close;
+  factory SdlxIoStreamInterface.fromPointer(
+    Pointer<SdlIoStreamInterface> pointer,
+  ) => SdlxIoStreamInterface(
+    version: pointer.ref.version,
+    size: pointer.ref.size,
+    seek: pointer.ref.seek,
+    read: pointer.ref.read,
+    write: pointer.ref.write,
+    flush: pointer.ref.flush,
+    close: pointer.ref.close,
+  );
+
+  final int version;
+  final Pointer<NativeFunction<SdlIoStreamInterfaceSize>> size;
+  final Pointer<NativeFunction<SdlIoStreamInterfaceSeek>> seek;
+  final Pointer<NativeFunction<SdlIoStreamInterfaceRead>> read;
+  final Pointer<NativeFunction<SdlIoStreamInterfaceWrite>> write;
+  final Pointer<NativeFunction<SdlIoStreamInterfaceFlush>> flush;
+  final Pointer<NativeFunction<SdlIoStreamInterfaceClose>> close;
 
   Pointer<SdlIoStreamInterface> calloc() {
     final pointer = ffi.calloc<SdlIoStreamInterface>();
@@ -37,15 +47,5 @@ class SdlxIoStreamInterface {
     pointer.ref.flush = flush;
     pointer.ref.close = close;
     return pointer;
-  }
-
-  void loadFromPointer(Pointer<SdlIoStreamInterface> pointer) {
-    version = pointer.ref.version;
-    size = pointer.ref.size;
-    seek = pointer.ref.seek;
-    read = pointer.ref.read;
-    write = pointer.ref.write;
-    flush = pointer.ref.flush;
-    close = pointer.ref.close;
   }
 }

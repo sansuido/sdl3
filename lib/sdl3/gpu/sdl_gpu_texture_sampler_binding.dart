@@ -4,12 +4,11 @@ class SdlxGpuTextureSamplerBinding {
   SdlxGpuTextureSamplerBinding({
     Pointer<SdlGpuTexture>? texture,
     Pointer<SdlGpuSampler>? sampler,
-  }) {
-    this.texture = texture ?? nullptr;
-    this.sampler = sampler ?? nullptr;
-  }
-  late Pointer<SdlGpuTexture> texture;
-  late Pointer<SdlGpuSampler> sampler;
+  }) : texture = texture ?? nullptr,
+       sampler = sampler ?? nullptr;
+
+  final Pointer<SdlGpuTexture> texture;
+  final Pointer<SdlGpuSampler> sampler;
 
   Pointer<SdlGpuTextureSamplerBinding> calloc() {
     final pointer = ffi.calloc<SdlGpuTextureSamplerBinding>();

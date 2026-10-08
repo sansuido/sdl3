@@ -39,30 +39,31 @@ part of '../sdl_image.dart';
 /// - [IMG_LoadGPUTexture - SDL3 Wiki](https://wiki.libsdl.org/SDL3/IMG_LoadGPUTexture)
 ///
 /// {@category image}
-Pointer<SdlGpuTexture> imgxLoadGpuTexture(
+({Pointer<SdlGpuTexture> texture, SdlxPoint size})? imgxLoadGpuTexture(
   Pointer<SdlGpuDevice> device,
   Pointer<SdlGpuCopyPass> copyPass,
-  String file, {
-  SdlxPoint? size,
-}) {
-  final widthPointer = ffi.calloc<Int32>();
-  final heightPointer = ffi.calloc<Int32>();
-  final result = imgLoadGpuTexture(
+  String file,
+) => ffi.using((arena) {
+  final widthPointer = arena<Int32>();
+  final heightPointer = arena<Int32>();
+
+  final texture = imgLoadGpuTexture(
     device,
     copyPass,
     file,
     widthPointer,
     heightPointer,
   );
-  if (result != nullptr && size != null) {
-    size
-      ..x = widthPointer.value
-      ..y = heightPointer.value;
+
+  if (texture == nullptr) {
+    return null;
   }
-  widthPointer.callocFree();
-  heightPointer.callocFree();
-  return result;
-}
+
+  return (
+    texture: texture,
+    size: SdlxPoint(widthPointer.value, heightPointer.value),
+  );
+});
 
 ///
 /// Load an image from an SDL data source into a GPU texture.
@@ -114,16 +115,16 @@ Pointer<SdlGpuTexture> imgxLoadGpuTexture(
 /// - [IMG_LoadGPUTexture_IO - SDL3 Wiki](https://wiki.libsdl.org/SDL3/IMG_LoadGPUTexture_IO)
 ///
 /// {@category image}
-Pointer<SdlGpuTexture> imgxLoadGpuTextureIo(
+({Pointer<SdlGpuTexture> texture, SdlxPoint size})? imgxLoadGpuTextureIo(
   Pointer<SdlGpuDevice> device,
   Pointer<SdlGpuCopyPass> copyPass,
   Pointer<SdlIoStream> src, {
   bool closeio = false,
-  SdlxPoint? size,
-}) {
-  final widthPointer = ffi.calloc<Int32>();
-  final heightPointer = ffi.calloc<Int32>();
-  final result = imgLoadGpuTextureIo(
+}) => ffi.using((arena) {
+  final widthPointer = arena<Int32>();
+  final heightPointer = arena<Int32>();
+
+  final texture = imgLoadGpuTextureIo(
     device,
     copyPass,
     src,
@@ -131,15 +132,16 @@ Pointer<SdlGpuTexture> imgxLoadGpuTextureIo(
     widthPointer,
     heightPointer,
   );
-  if (result != nullptr && size != null) {
-    size
-      ..x = widthPointer.value
-      ..y = heightPointer.value;
+
+  if (texture == nullptr) {
+    return null;
   }
-  widthPointer.callocFree();
-  heightPointer.callocFree();
-  return result;
-}
+
+  return (
+    texture: texture,
+    size: SdlxPoint(widthPointer.value, heightPointer.value),
+  );
+});
 
 ///
 /// Load an image from an SDL data source into a GPU texture.
@@ -199,17 +201,17 @@ Pointer<SdlGpuTexture> imgxLoadGpuTextureIo(
 /// - [IMG_LoadGPUTextureTyped_IO - SDL3 Wiki](https://wiki.libsdl.org/SDL3/IMG_LoadGPUTextureTyped_IO)
 ///
 /// {@category image}
-Pointer<SdlGpuTexture> imgxLoadGpuTextureTypedIo(
+({Pointer<SdlGpuTexture> texture, SdlxPoint size})? imgxLoadGpuTextureTypedIo(
   Pointer<SdlGpuDevice> device,
   Pointer<SdlGpuCopyPass> copyPass,
   Pointer<SdlIoStream> src,
   String type, {
   bool closeio = false,
-  SdlxPoint? size,
-}) {
-  final widthPointer = ffi.calloc<Int32>();
-  final heightPointer = ffi.calloc<Int32>();
-  final result = imgLoadGpuTextureTypedIo(
+}) => ffi.using((arena) {
+  final widthPointer = arena<Int32>();
+  final heightPointer = arena<Int32>();
+
+  final texture = imgLoadGpuTextureTypedIo(
     device,
     copyPass,
     src,
@@ -218,15 +220,16 @@ Pointer<SdlGpuTexture> imgxLoadGpuTextureTypedIo(
     widthPointer,
     heightPointer,
   );
-  if (result != nullptr && size != null) {
-    size
-      ..x = widthPointer.value
-      ..y = heightPointer.value;
+
+  if (texture == nullptr) {
+    return null;
   }
-  widthPointer.callocFree();
-  heightPointer.callocFree();
-  return result;
-}
+
+  return (
+    texture: texture,
+    size: SdlxPoint(widthPointer.value, heightPointer.value),
+  );
+});
 
 ///
 /// Get the next frame in an animation decoder.

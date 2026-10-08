@@ -15,22 +15,21 @@ class SdlxGpuComputePipelineCreateInfo {
     this.threadcountY = 0,
     this.threadcountZ = 0,
     this.props = 0,
-  }) {
-    this.code = code ?? Uint8List(0);
-  }
-  late Uint8List code;
-  String entrypoint;
-  int format;
-  int numSamplers;
-  int numReadonlyStorageTextures;
-  int numReadonlyStorageBuffers;
-  int numReadwriteStorageTextures;
-  int numReadwriteStorageBuffers;
-  int numUniformBuffers;
-  int threadcountX;
-  int threadcountY;
-  int threadcountZ;
-  int props;
+  }) : code = code ?? Uint8List(0);
+
+  final Uint8List code;
+  final String entrypoint;
+  final int format;
+  final int numSamplers;
+  final int numReadonlyStorageTextures;
+  final int numReadonlyStorageBuffers;
+  final int numReadwriteStorageTextures;
+  final int numReadwriteStorageBuffers;
+  final int numUniformBuffers;
+  final int threadcountX;
+  final int threadcountY;
+  final int threadcountZ;
+  final int props;
 
   Pointer<SdlGpuComputePipelineCreateInfo> calloc() {
     final pointer = ffi.calloc<SdlGpuComputePipelineCreateInfo>();

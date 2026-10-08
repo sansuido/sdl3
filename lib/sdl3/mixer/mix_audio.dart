@@ -123,7 +123,7 @@ extension MixAudioPointerEx on Pointer<MixAudio> {
   /// - [MIX_GetAudioFormat - SDL3 Wiki](https://wiki.libsdl.org/SDL3/MIX_GetAudioFormat)
   ///
   /// {@category mixer}
-  bool getFormat(SdlxAudioSpec spec) => mixxGetAudioFormat(this, spec);
+  SdlxAudioSpec? getFormat() => mixxGetAudioFormat(this);
 
   ///
   /// Destroy the specified audio.

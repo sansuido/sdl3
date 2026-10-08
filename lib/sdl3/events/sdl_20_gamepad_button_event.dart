@@ -1,7 +1,7 @@
 part of '../sdl_events.dart';
 
 class SdlxGamepadButtonEvent extends SdlxEvent {
-  SdlxGamepadButtonEvent({
+  const SdlxGamepadButtonEvent({
     super.type = 0,
     super.reserved = 0,
     super.timestamp = 0,
@@ -9,6 +9,16 @@ class SdlxGamepadButtonEvent extends SdlxEvent {
     this.button = 0,
     this.down = false,
   });
+
+  factory SdlxGamepadButtonEvent.fromPointer(Pointer<SdlEvent> pointer) =>
+      SdlxGamepadButtonEvent(
+        type: pointer.ref.gbutton.type,
+        reserved: pointer.ref.gbutton.reserved,
+        timestamp: pointer.ref.gbutton.timestamp,
+        which: pointer.ref.gbutton.which,
+        button: pointer.ref.gbutton.button,
+        down: pointer.ref.gbutton.down,
+      );
 
   factory SdlxGamepadButtonEvent.down({
     int reserved = 0,
@@ -40,9 +50,9 @@ class SdlxGamepadButtonEvent extends SdlxEvent {
     down: down,
   );
 
-  int which;
-  int button;
-  bool down;
+  final int which;
+  final int button;
+  final bool down;
 
   @override
   Pointer<SdlEvent> calloc() {
@@ -55,17 +65,4 @@ class SdlxGamepadButtonEvent extends SdlxEvent {
     pointer.ref.gbutton.down = down;
     return pointer;
   }
-
-  @override
-  void loadFromPointer(Pointer<SdlEvent> pointer) {
-    type = pointer.ref.gbutton.type;
-    reserved = pointer.ref.gbutton.reserved;
-    timestamp = pointer.ref.gbutton.timestamp;
-    which = pointer.ref.gbutton.which;
-    button = pointer.ref.gbutton.button;
-    down = pointer.ref.gbutton.down;
-  }
-
-  static SdlxGamepadButtonEvent fromPointer(Pointer<SdlEvent> pointer) =>
-      SdlxGamepadButtonEvent()..loadFromPointer(pointer);
 }

@@ -1,12 +1,12 @@
 part of '../sdl_pixels.dart';
 
 class SdlxColor {
-  SdlxColor(this.r, this.g, this.b, [this.a = 255]);
+  const SdlxColor(this.r, this.g, this.b, [this.a = 255]);
 
-  int r;
-  int g;
-  int b;
-  int a;
+  final int r;
+  final int g;
+  final int b;
+  final int a;
 
   Pointer<SdlColor> calloc() {
     final pointer = ffi.calloc<SdlColor>();

@@ -355,7 +355,7 @@ Uint8List? netxReadFromStreamSocket(Pointer<NetStreamSocket> sock, int buflen) {
 /// "connection" to fail at this level, but may report failure for
 /// unrecoverable system-level conditions; once a datagram socket fails, you
 /// should assume it is no longer usable and should destroy it with
-/// SDL_DestroyDatagramSocket().
+/// NET_DestroyDatagramSocket().
 ///
 /// Sending to a NULL address is treated as a request to broadcast a packet.
 /// Note that this will report failure immediately if the socket was not
@@ -462,7 +462,7 @@ bool netxSendDatagram(
 /// "connection" to fail at this level, but may report failure for
 /// unrecoverable system-level conditions; once a datagram socket fails, you
 /// should assume it is no longer usable and should destroy it with
-/// SDL_DestroyDatagramSocket().
+/// NET_DestroyDatagramSocket().
 ///
 /// \param sock the datagram socket to send data through.
 /// \param dgram a pointer to the datagram packet pointer.
@@ -490,18 +490,21 @@ bool netxSendDatagram(
 NetxDatagram? netxReceiveDatagram(
   Pointer<NetDatagramSocket> sock, {
   bool refAddress = true,
-}) {
-  NetxDatagram? result;
-  final dgramPointer = ffi.calloc<Pointer<NetDatagram>>();
-  final bl = netReceiveDatagram(sock, dgramPointer);
-  if (bl) {
-    result = NetxDatagram()
-      ..loadFromPointer(dgramPointer.value, refAddress: refAddress);
-    netDestroyDatagram(dgramPointer.value);
+}) => ffi.using((arena) {
+  final dgramPointer = arena<Pointer<NetDatagram>>();
+  final success = netReceiveDatagram(sock, dgramPointer);
+
+  if (!success || dgramPointer.value == nullptr) {
+    return null;
   }
-  dgramPointer.callocFree();
-  return result;
-}
+
+  final nativeDgram = dgramPointer.value;
+  try {
+    return NetxDatagram.fromPointer(nativeDgram, refAddress: refAddress);
+  } finally {
+    netDestroyDatagram(nativeDgram);
+  }
+});
 
 ///
 /// Block on multiple sockets until at least one has data available.

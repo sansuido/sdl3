@@ -1,7 +1,7 @@
 part of '../sdl_events.dart';
 
 class SdlxJoyHatEvent extends SdlxEvent {
-  SdlxJoyHatEvent({
+  const SdlxJoyHatEvent({
     super.type = SDL_EVENT_JOYSTICK_HAT_MOTION,
     super.reserved = 0,
     super.timestamp = 0,
@@ -10,9 +10,19 @@ class SdlxJoyHatEvent extends SdlxEvent {
     this.value = 0,
   });
 
-  int which;
-  int hat;
-  int value;
+  factory SdlxJoyHatEvent.fromPointer(Pointer<SdlEvent> pointer) =>
+      SdlxJoyHatEvent(
+        type: pointer.ref.jhat.type,
+        reserved: pointer.ref.jhat.reserved,
+        timestamp: pointer.ref.jhat.timestamp,
+        which: pointer.ref.jhat.which,
+        hat: pointer.ref.jhat.hat,
+        value: pointer.ref.jhat.value,
+      );
+
+  final int which;
+  final int hat;
+  final int value;
 
   @override
   Pointer<SdlEvent> calloc() {
@@ -25,17 +35,4 @@ class SdlxJoyHatEvent extends SdlxEvent {
     pointer.ref.jhat.value = value;
     return pointer;
   }
-
-  @override
-  void loadFromPointer(Pointer<SdlEvent> pointer) {
-    type = pointer.ref.jhat.type;
-    reserved = pointer.ref.jhat.reserved;
-    timestamp = pointer.ref.jhat.timestamp;
-    which = pointer.ref.jhat.which;
-    hat = pointer.ref.jhat.hat;
-    value = pointer.ref.jhat.value;
-  }
-
-  static SdlxJoyHatEvent fromPointer(Pointer<SdlEvent> pointer) =>
-      SdlxJoyHatEvent()..loadFromPointer(pointer);
 }

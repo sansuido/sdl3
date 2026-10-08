@@ -1,32 +1,52 @@
 part of '../sdl_shadercross.dart';
 
 class SdlxShaderCrossGraphicsShaderResourceInfo {
-  SdlxShaderCrossGraphicsShaderResourceInfo({
+  const SdlxShaderCrossGraphicsShaderResourceInfo({
     this.numSamplers = 0,
     this.numStorageTextures = 0,
     this.numStorageBuffers = 0,
     this.numUniformBuffers = 0,
   });
-  int numSamplers;
-  int numStorageTextures;
-  int numStorageBuffers;
-  int numUniformBuffers;
 
-  Pointer<SdlShaderCrossGraphicsShaderResourceInfo> calloc() {
-    final pointer = ffi.calloc<SdlShaderCrossGraphicsShaderResourceInfo>();
-    pointer.ref.numSamplers = numSamplers;
-    pointer.ref.numStorageTextures = numStorageTextures;
-    pointer.ref.numStorageBuffers = numStorageBuffers;
-    pointer.ref.numUniformBuffers = numUniformBuffers;
-    return pointer;
-  }
-
-  void loadFromPointer(
+  factory SdlxShaderCrossGraphicsShaderResourceInfo.fromPointer(
     Pointer<SdlShaderCrossGraphicsShaderResourceInfo> pointer,
   ) {
-    numSamplers = pointer.ref.numSamplers;
-    numStorageTextures = pointer.ref.numStorageTextures;
-    numStorageBuffers = pointer.ref.numStorageBuffers;
-    numUniformBuffers = pointer.ref.numUniformBuffers;
+    final ref = pointer.ref;
+    return SdlxShaderCrossGraphicsShaderResourceInfo(
+      numSamplers: ref.numSamplers,
+      numStorageTextures: ref.numStorageTextures,
+      numStorageBuffers: ref.numStorageBuffers,
+      numUniformBuffers: ref.numUniformBuffers,
+    );
+  }
+
+  factory SdlxShaderCrossGraphicsShaderResourceInfo.fromRef(
+    SdlShaderCrossGraphicsShaderResourceInfo ref,
+  ) => SdlxShaderCrossGraphicsShaderResourceInfo(
+    numSamplers: ref.numSamplers,
+    numStorageTextures: ref.numStorageTextures,
+    numStorageBuffers: ref.numStorageBuffers,
+    numUniformBuffers: ref.numUniformBuffers,
+  );
+
+  final int numSamplers;
+  final int numStorageTextures;
+  final int numStorageBuffers;
+  final int numUniformBuffers;
+
+  void copyTo(SdlShaderCrossGraphicsShaderResourceInfo ref) {
+    ref
+      ..numSamplers = numSamplers
+      ..numStorageTextures = numStorageTextures
+      ..numStorageBuffers = numStorageBuffers
+      ..numUniformBuffers = numUniformBuffers;
+  }
+
+  Pointer<SdlShaderCrossGraphicsShaderResourceInfo> calloc([
+    Allocator allocator = ffi.calloc,
+  ]) {
+    final pointer = allocator<SdlShaderCrossGraphicsShaderResourceInfo>();
+    copyTo(pointer.ref);
+    return pointer;
   }
 }

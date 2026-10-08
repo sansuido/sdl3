@@ -43,7 +43,7 @@ int main() {
   var t = 0.0;
   var fun = 5;
   for (var i = 0; i < gMaxN; i++) {
-    points.add(SdlxFPoint(0, 0));
+    points.add(const SdlxFPoint(0, 0));
   }
   var running = true;
   while (running) {
@@ -87,23 +87,23 @@ int main() {
       tot--;
     }
     renderer
-      ..setDrawColor(SdlxColor(0, 0, 0))
+      ..setDrawColor(const SdlxColor(0, 0, 0))
       ..clear()
-      ..hlineColor(0, gWidth - 1, baseY, SdlxColor(0xff, 0xff, 0xff))
-      ..vlineColor(baseX, 0, gHeight - 1, SdlxColor(0xff, 0xff, 0xff));
+      ..hlineColor(0, gWidth - 1, baseY, const SdlxColor(0xff, 0xff, 0xff))
+      ..vlineColor(baseX, 0, gHeight - 1, const SdlxColor(0xff, 0xff, 0xff));
     for (var i = 0; (i + fun) < tot; i++) {
       renderer.thickLineColor(
         points[i],
         points[i + fun],
         1,
-        SdlxColor(0, 255, 0),
+        const SdlxColor(0, 255, 0),
       );
     }
     renderer
       ..stringColor(
-        SdlxFPoint(10, 10),
+        const SdlxFPoint(10, 10),
         'coY:$coY zY:$zY fun:$fun',
-        SdlxColor(0, 255, 0),
+        const SdlxColor(0, 255, 0),
       )
       ..present();
   }

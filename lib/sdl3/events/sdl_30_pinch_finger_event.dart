@@ -1,7 +1,7 @@
 part of '../sdl_events.dart';
 
 class SdlxPinchFingerEvent extends SdlxEvent {
-  SdlxPinchFingerEvent({
+  const SdlxPinchFingerEvent({
     super.type = 0,
     super.reserved = 0,
     super.timestamp = 0,
@@ -12,6 +12,15 @@ class SdlxPinchFingerEvent extends SdlxEvent {
     this.focusX = 0,
     this.focusY = 0,
   });
+
+  factory SdlxPinchFingerEvent.fromPointer(Pointer<SdlEvent> pointer) =>
+      SdlxPinchFingerEvent(
+        type: pointer.ref.pinch.type,
+        reserved: pointer.ref.pinch.reserved,
+        timestamp: pointer.ref.pinch.timestamp,
+        scale: pointer.ref.pinch.scale,
+        windowId: pointer.ref.pinch.windowId,
+      );
 
   factory SdlxPinchFingerEvent.begin({
     int reserved = 0,
@@ -76,12 +85,12 @@ class SdlxPinchFingerEvent extends SdlxEvent {
     focusY: focusY,
   );
 
-  double scale;
-  int windowId;
-  double spanX;
-  double spanY;
-  double focusX;
-  double focusY;
+  final double scale;
+  final int windowId;
+  final double spanX;
+  final double spanY;
+  final double focusX;
+  final double focusY;
 
   @override
   bool isTargetWindow(int targetId, {bool ifNoWindow = true}) =>
@@ -97,16 +106,4 @@ class SdlxPinchFingerEvent extends SdlxEvent {
     pointer.ref.pinch.windowId = windowId;
     return pointer;
   }
-
-  @override
-  void loadFromPointer(Pointer<SdlEvent> pointer) {
-    type = pointer.ref.pinch.type;
-    reserved = pointer.ref.pinch.reserved;
-    timestamp = pointer.ref.pinch.timestamp;
-    scale = pointer.ref.pinch.scale;
-    windowId = pointer.ref.pinch.windowId;
-  }
-
-  static SdlxPinchFingerEvent fromPointer(Pointer<SdlEvent> pointer) =>
-      SdlxPinchFingerEvent()..loadFromPointer(pointer);
 }

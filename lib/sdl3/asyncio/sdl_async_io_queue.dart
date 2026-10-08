@@ -100,8 +100,7 @@ extension SdlAsyncIoQueuePointerEx on Pointer<SdlAsyncIoQueue> {
   /// - [SDL_GetAsyncIOResult - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetAsyncIOResult)
   ///
   /// {@category asyncio}
-  bool getResult(SdlxAsyncIoOutcome outcome) =>
-      sdlxGetAsyncIoResult(this, outcome);
+  SdlxAsyncIoOutcome? getResult() => sdlxGetAsyncIoResult(this);
 
   ///
   /// Block until an async I/O task queue has a completed task.

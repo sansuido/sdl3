@@ -251,7 +251,7 @@ void drawTriangle(
 ) {
   final xPos = x + dx;
   final yPos = y + dy;
-  final color = SdlxFColor(1, 1, 1);
+  const color = SdlxFColor(1, 1, 1);
   List<SdlxFPoint> points;
 
   switch (type) {
@@ -284,11 +284,7 @@ void drawTriangle(
   }
 
   final vertices = points
-      .map(
-        (p) => SdlxVertex()
-          ..position = p
-          ..color = color,
-      )
+      .map((p) => SdlxVertex(position: p, color: color))
       .toList();
   sdlxRenderGeometry(renderer, vertices);
 }
@@ -369,11 +365,12 @@ Future<void> main() async {
         final yPos = y * gChipSize;
 
         if ([1, 6, 7].contains(chip)) {
-          final rect = SdlxFRect()
-            ..x = (xPos + drawOffX)
-            ..y = (yPos + drawOffY)
-            ..w = gChipSize
-            ..h = gChipSize;
+          final rect = SdlxFRect(
+            xPos + drawOffX,
+            yPos + drawOffY,
+            gChipSize,
+            gChipSize,
+          );
           renderer.fillRect(rect);
         } else if (chip >= 2 && chip <= 5) {
           drawTriangle(renderer, xPos, yPos, chip, drawOffX, drawOffY);
@@ -382,11 +379,7 @@ Future<void> main() async {
     }
 
     sdlSetRenderDrawColor(renderer, 255, 0, 0, 255);
-    final pRect = SdlxFRect()
-      ..x = playerDrawX.floorToDouble()
-      ..y = playerDrawY.floorToDouble()
-      ..w = gCharSize
-      ..h = gCharSize;
+    final pRect = SdlxFRect(playerDrawX, playerDrawY, gCharSize, gCharSize);
     renderer.fillRect(pRect);
 
     sdlRenderPresent(renderer);

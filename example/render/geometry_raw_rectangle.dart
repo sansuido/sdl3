@@ -28,24 +28,24 @@ int main() {
   final texture = renderer.loadTexture('assets/jap/gate.png');
 
   final positions = <SdlxFPoint>[
-    SdlxFPoint(200, 150),
-    SdlxFPoint(600, 150),
-    SdlxFPoint(600, 450),
-    SdlxFPoint(200, 450),
+    const SdlxFPoint(200, 150),
+    const SdlxFPoint(600, 150),
+    const SdlxFPoint(600, 450),
+    const SdlxFPoint(200, 450),
   ];
 
   final colors = <SdlxFColor>[
-    SdlxFColor(1, 0, 0),
-    SdlxFColor(0, 1, 0),
-    SdlxFColor(0, 0, 1),
-    SdlxFColor(1, 1, 0),
+    const SdlxFColor(1, 0, 0),
+    const SdlxFColor(0, 1, 0),
+    const SdlxFColor(0, 0, 1),
+    const SdlxFColor(1, 1, 0),
   ];
 
   final texCoords = <SdlxFPoint>[
-    SdlxFPoint(0, 0),
-    SdlxFPoint(1, 0),
-    SdlxFPoint(1, 1),
-    SdlxFPoint(0, 1),
+    const SdlxFPoint(0, 0),
+    const SdlxFPoint(1, 0),
+    const SdlxFPoint(1, 1),
+    const SdlxFPoint(0, 1),
   ];
 
   final indices = <int>[0, 1, 2, 0, 2, 3];
@@ -74,7 +74,7 @@ int main() {
     }
 
     renderer
-      ..setDrawColor(SdlxColor(0, 0, 0))
+      ..setDrawColor(const SdlxColor(0, 0, 0))
       ..clear();
     if (textureOn) {
       renderer.geometryRaw(

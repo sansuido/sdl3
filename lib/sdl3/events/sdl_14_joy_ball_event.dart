@@ -1,7 +1,7 @@
 part of '../sdl_events.dart';
 
 class SdlxJoyBallEvent extends SdlxEvent {
-  SdlxJoyBallEvent({
+  const SdlxJoyBallEvent({
     super.type = SDL_EVENT_JOYSTICK_BALL_MOTION,
     super.reserved = 0,
     super.timestamp = 0,
@@ -11,10 +11,21 @@ class SdlxJoyBallEvent extends SdlxEvent {
     this.yrel = 0,
   });
 
-  int which;
-  int ball;
-  int xrel;
-  int yrel;
+  factory SdlxJoyBallEvent.fromPointer(Pointer<SdlEvent> pointer) =>
+      SdlxJoyBallEvent(
+        type: pointer.ref.jball.type,
+        reserved: pointer.ref.jball.reserved,
+        timestamp: pointer.ref.jball.timestamp,
+        which: pointer.ref.jball.which,
+        ball: pointer.ref.jball.ball,
+        xrel: pointer.ref.jball.xrel,
+        yrel: pointer.ref.jball.yrel,
+      );
+
+  final int which;
+  final int ball;
+  final int xrel;
+  final int yrel;
 
   @override
   Pointer<SdlEvent> calloc() {
@@ -28,18 +39,4 @@ class SdlxJoyBallEvent extends SdlxEvent {
     pointer.ref.jball.yrel = yrel;
     return pointer;
   }
-
-  @override
-  void loadFromPointer(Pointer<SdlEvent> pointer) {
-    type = pointer.ref.jball.type;
-    reserved = pointer.ref.jball.reserved;
-    timestamp = pointer.ref.jball.timestamp;
-    which = pointer.ref.jball.which;
-    ball = pointer.ref.jball.ball;
-    xrel = pointer.ref.jball.xrel;
-    yrel = pointer.ref.jball.yrel;
-  }
-
-  static SdlxJoyBallEvent fromPointer(Pointer<SdlEvent> pointer) =>
-      SdlxJoyBallEvent()..loadFromPointer(pointer);
 }

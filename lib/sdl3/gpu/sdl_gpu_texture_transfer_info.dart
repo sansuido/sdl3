@@ -6,13 +6,12 @@ class SdlxGpuTextureTransferInfo {
     this.offset = 0,
     this.pixelsPerRow = 0,
     this.rowsPerLayer = 0,
-  }) {
-    this.transferBuffer = transferBuffer ?? nullptr;
-  }
-  late Pointer<SdlGpuTransferBuffer> transferBuffer;
-  int offset;
-  int pixelsPerRow;
-  int rowsPerLayer;
+  }) : transferBuffer = transferBuffer ?? nullptr;
+
+  final Pointer<SdlGpuTransferBuffer> transferBuffer;
+  final int offset;
+  final int pixelsPerRow;
+  final int rowsPerLayer;
 
   Pointer<SdlGpuTextureTransferInfo> calloc() {
     final pointer = ffi.calloc<SdlGpuTextureTransferInfo>();

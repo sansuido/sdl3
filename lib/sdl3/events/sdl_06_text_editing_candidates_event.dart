@@ -1,21 +1,45 @@
 part of '../sdl_events.dart';
 
 class SdlxTextEditingCandidatesEvent extends SdlxEvent {
-  SdlxTextEditingCandidatesEvent({
+  const SdlxTextEditingCandidatesEvent({
     super.type = SDL_EVENT_TEXT_EDITING_CANDIDATES,
     super.reserved = 0,
     super.timestamp = 0,
     this.windowId = 0,
-    List<String>? candidates,
+    this.candidates = const [],
     this.selectedCandidate = 0,
     this.horizontal = false,
-  }) {
-    this.candidates = candidates ?? [];
+  });
+
+  factory SdlxTextEditingCandidatesEvent.fromPointer(
+    Pointer<SdlEvent> pointer,
+  ) {
+    final ref = pointer.ref.editCandidates;
+    final candidateList = <String>[];
+    if (ref.candidates != nullptr && ref.numCandidates > 0) {
+      for (var i = 0; i < ref.numCandidates; i++) {
+        final ptr = ref.candidates[i];
+        if (ptr != nullptr) {
+          candidateList.add(ptr.cast<ffi.Utf8>().toDartString());
+        }
+      }
+    }
+
+    return SdlxTextEditingCandidatesEvent(
+      type: ref.type,
+      reserved: ref.reserved,
+      timestamp: ref.timestamp,
+      windowId: ref.windowId,
+      candidates: List.unmodifiable(candidateList),
+      selectedCandidate: ref.selectedCandidate,
+      horizontal: ref.horizontal,
+    );
   }
-  int windowId;
-  late List<String> candidates;
-  int selectedCandidate;
-  bool horizontal;
+
+  final int windowId;
+  final List<String> candidates;
+  final int selectedCandidate;
+  final bool horizontal;
 
   @override
   bool isTargetWindow(int targetId, {bool ifNoWindow = true}) =>
@@ -40,27 +64,4 @@ class SdlxTextEditingCandidatesEvent extends SdlxEvent {
     pointer.ref.editCandidates.horizontal = horizontal;
     return pointer;
   }
-
-  @override
-  void loadFromPointer(Pointer<SdlEvent> pointer) {
-    type = pointer.ref.editCandidates.type;
-    reserved = pointer.ref.editCandidates.reserved;
-    timestamp = pointer.ref.editCandidates.timestamp;
-    for (var i = 0; i < pointer.ref.editCandidates.numCandidates; i++) {
-      if (pointer.ref.editCandidates.candidates[i] != nullptr) {
-        candidates.add(
-          pointer.ref.editCandidates.candidates[i]
-              .cast<ffi.Utf8>()
-              .toDartString(),
-        );
-      }
-    }
-    windowId = pointer.ref.editCandidates.windowId;
-    selectedCandidate = pointer.ref.editCandidates.selectedCandidate;
-    horizontal = pointer.ref.editCandidates.horizontal;
-  }
-
-  static SdlxTextEditingCandidatesEvent fromPointer(
-    Pointer<SdlEvent> pointer,
-  ) => SdlxTextEditingCandidatesEvent()..loadFromPointer(pointer);
 }

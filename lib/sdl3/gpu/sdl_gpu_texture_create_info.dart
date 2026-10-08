@@ -1,7 +1,7 @@
 part of '../sdl_gpu.dart';
 
 class SdlxGpuTextureCreateInfo {
-  SdlxGpuTextureCreateInfo({
+  const SdlxGpuTextureCreateInfo({
     this.type = 0,
     this.format = 0,
     this.usage = 0,
@@ -12,15 +12,16 @@ class SdlxGpuTextureCreateInfo {
     this.sampleCount = 0,
     this.props = 0,
   });
-  int type;
-  int format;
-  int usage;
-  int width;
-  int height;
-  int layerCountOrDepth;
-  int numLevels;
-  int sampleCount;
-  int props;
+
+  final int type;
+  final int format;
+  final int usage;
+  final int width;
+  final int height;
+  final int layerCountOrDepth;
+  final int numLevels;
+  final int sampleCount;
+  final int props;
 
   Pointer<SdlGpuTextureCreateInfo> calloc() {
     final pointer = ffi.calloc<SdlGpuTextureCreateInfo>();

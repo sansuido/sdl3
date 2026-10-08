@@ -1483,16 +1483,17 @@ SdlxPoint? ttfxGetTextSize(Pointer<TtfText> text) {
 /// - [TTF_GetTextSubString - SDL3 Wiki](https://wiki.libsdl.org/SDL3/TTF_GetTextSubString)
 ///
 /// {@category ttf}
-TtfxSubString? ttfxGetTextSubString(Pointer<TtfText> text, int offset) {
-  TtfxSubString? result;
-  final subStringPointer = ffi.calloc<TtfSubString>();
-  final bl = ttfGetTextSubString(text, offset, subStringPointer);
-  if (bl) {
-    result = TtfxSubString()..loadFromPointer(subStringPointer);
-  }
-  subStringPointer.callocFree();
-  return result;
-}
+TtfxSubString? ttfxGetTextSubString(Pointer<TtfText> text, int offset) =>
+    ffi.using((arena) {
+      final subStringPointer = arena<TtfSubString>();
+      final result = ttfGetTextSubString(text, offset, subStringPointer);
+
+      if (!result) {
+        return null;
+      }
+
+      return TtfxSubString.fromPointer(subStringPointer);
+    });
 
 ///
 /// Get the substring of a text object that contains the given line.
@@ -1523,16 +1524,17 @@ TtfxSubString? ttfxGetTextSubString(Pointer<TtfText> text, int offset) {
 /// - [TTF_GetTextSubStringForLine - SDL3 Wiki](https://wiki.libsdl.org/SDL3/TTF_GetTextSubStringForLine)
 ///
 /// {@category ttf}
-TtfxSubString? ttfxGetTextSubStringForLine(Pointer<TtfText> text, int line) {
-  TtfxSubString? result;
-  final subStringPointer = ffi.calloc<TtfSubString>();
-  final bl = ttfGetTextSubStringForLine(text, line, subStringPointer);
-  if (bl) {
-    result = TtfxSubString()..loadFromPointer(subStringPointer);
-  }
-  subStringPointer.callocFree();
-  return result;
-}
+TtfxSubString? ttfxGetTextSubStringForLine(Pointer<TtfText> text, int line) =>
+    ffi.using((arena) {
+      final subStringPointer = arena<TtfSubString>();
+      final result = ttfGetTextSubStringForLine(text, line, subStringPointer);
+
+      if (!result) {
+        return null;
+      }
+
+      return TtfxSubString.fromPointer(subStringPointer);
+    });
 
 ///
 /// Get the substrings of a text object that contain a range of text.
@@ -1576,7 +1578,7 @@ List<TtfxSubString> ttfxGetTextSubStringsForRange(
   );
   if (subStringsPointer != nullptr) {
     for (var i = 0; i < countPointer.value; i++) {
-      result.add(TtfxSubString()..loadFromPointer(subStringsPointer[i]));
+      result.add(TtfxSubString.fromPointer(subStringsPointer[i]));
     }
     sdlFree(subStringsPointer.cast<Void>());
   }
@@ -1621,7 +1623,7 @@ TtfxSubString? ttfxGetTextSubStringForPoint(
   final subStringPointer = ffi.calloc<TtfSubString>();
   final bl = ttfGetTextSubStringForPoint(text, x, y, subStringPointer);
   if (bl) {
-    result = TtfxSubString()..loadFromPointer(subStringPointer);
+    result = TtfxSubString.fromPointer(subStringPointer);
   }
   subStringPointer.callocFree();
   return result;
@@ -1662,7 +1664,7 @@ TtfxSubString? ttfxGetPreviousTextSubString(
   final resultPointer = ffi.calloc<TtfSubString>();
   final bl = ttfGetPreviousTextSubString(text, subStringPointer, resultPointer);
   if (bl) {
-    result = TtfxSubString()..loadFromPointer(resultPointer);
+    result = TtfxSubString.fromPointer(resultPointer);
   }
   subStringPointer.callocFree();
   resultPointer.callocFree();
@@ -1703,7 +1705,7 @@ TtfxSubString? ttfxGetNextTextSubString(
   final resultPointer = ffi.calloc<TtfSubString>();
   final bl = ttfGetNextTextSubString(text, subStringPointer, resultPointer);
   if (bl) {
-    result = TtfxSubString()..loadFromPointer(resultPointer);
+    result = TtfxSubString.fromPointer(resultPointer);
   }
   subStringPointer.callocFree();
   resultPointer.callocFree();

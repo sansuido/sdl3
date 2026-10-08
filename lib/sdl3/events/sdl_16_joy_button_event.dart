@@ -1,7 +1,7 @@
 part of '../sdl_events.dart';
 
 class SdlxJoyButtonEvent extends SdlxEvent {
-  SdlxJoyButtonEvent({
+  const SdlxJoyButtonEvent({
     super.type = 0,
     super.reserved = 0,
     super.timestamp = 0,
@@ -9,6 +9,16 @@ class SdlxJoyButtonEvent extends SdlxEvent {
     this.button = 0,
     this.down = false,
   });
+
+  factory SdlxJoyButtonEvent.fromPointer(Pointer<SdlEvent> pointer) =>
+      SdlxJoyButtonEvent(
+        type: pointer.ref.jbutton.type,
+        reserved: pointer.ref.jbutton.reserved,
+        timestamp: pointer.ref.jbutton.timestamp,
+        which: pointer.ref.jbutton.which,
+        button: pointer.ref.jbutton.button,
+        down: pointer.ref.jbutton.down,
+      );
 
   factory SdlxJoyButtonEvent.down({
     int reserved = 0,
@@ -40,9 +50,9 @@ class SdlxJoyButtonEvent extends SdlxEvent {
     down: down,
   );
 
-  int which;
-  int button;
-  bool down;
+  final int which;
+  final int button;
+  final bool down;
 
   @override
   Pointer<SdlEvent> calloc() {
@@ -55,17 +65,4 @@ class SdlxJoyButtonEvent extends SdlxEvent {
     pointer.ref.jbutton.down = down;
     return pointer;
   }
-
-  @override
-  void loadFromPointer(Pointer<SdlEvent> pointer) {
-    type = pointer.ref.jbutton.type;
-    reserved = pointer.ref.jbutton.reserved;
-    timestamp = pointer.ref.jbutton.timestamp;
-    which = pointer.ref.jbutton.which;
-    button = pointer.ref.jbutton.button;
-    down = pointer.ref.jbutton.down;
-  }
-
-  static SdlxJoyButtonEvent fromPointer(Pointer<SdlEvent> pointer) =>
-      SdlxJoyButtonEvent()..loadFromPointer(pointer);
 }

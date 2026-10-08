@@ -57,19 +57,29 @@ bool sdlxHasRectIntersection(SdlxRect a, SdlxRect b) {
 /// - [SDL_GetRectIntersection - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetRectIntersection)
 ///
 /// {@category rect}
-bool sdlxGetRectIntersection(SdlxRect a, SdlxRect b, SdlxRect result) {
-  final aPointer = a.calloc();
-  final bPointer = b.calloc();
-  final resultPointer = ffi.calloc<SdlRect>();
-  final bl = sdlGetRectIntersection(aPointer, bPointer, resultPointer);
-  if (bl) {
-    result.loadFromPointer(resultPointer);
+SdlxRect? sdlxGetRectIntersection(SdlxRect a, SdlxRect b) => ffi.using((arena) {
+  final aPointer = arena<SdlRect>()
+    ..ref.x = a.x
+    ..ref.y = a.y
+    ..ref.w = a.w
+    ..ref.h = a.h;
+
+  final bPointer = arena<SdlRect>()
+    ..ref.x = b.x
+    ..ref.y = b.y
+    ..ref.w = b.w
+    ..ref.h = b.h;
+
+  final resultPointer = arena<SdlRect>();
+
+  final intersects = sdlGetRectIntersection(aPointer, bPointer, resultPointer);
+
+  if (!intersects) {
+    return null;
   }
-  aPointer.callocFree();
-  bPointer.callocFree();
-  resultPointer.callocFree();
-  return bl;
-}
+
+  return SdlxRect.fromPointer(resultPointer);
+});
 
 ///
 /// Calculate the union of two rectangles.
@@ -93,19 +103,29 @@ bool sdlxGetRectIntersection(SdlxRect a, SdlxRect b, SdlxRect result) {
 /// - [SDL_GetRectUnion - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetRectUnion)
 ///
 /// {@category rect}
-bool sdlxGetRectUnion(SdlxRect a, SdlxRect b, SdlxRect result) {
-  final aPointer = a.calloc();
-  final bPointer = b.calloc();
-  final resultPointer = ffi.calloc<SdlRect>();
-  final bl = sdlGetRectUnion(aPointer, bPointer, resultPointer);
-  if (bl) {
-    result.loadFromPointer(resultPointer);
+SdlxRect? sdlxGetRectUnion(SdlxRect a, SdlxRect b) => ffi.using((arena) {
+  final aPointer = arena<SdlRect>()
+    ..ref.x = a.x
+    ..ref.y = a.y
+    ..ref.w = a.w
+    ..ref.h = a.h;
+
+  final bPointer = arena<SdlRect>()
+    ..ref.x = b.x
+    ..ref.y = b.y
+    ..ref.w = b.w
+    ..ref.h = b.h;
+
+  final resultPointer = arena<SdlRect>();
+
+  final result = sdlGetRectUnion(aPointer, bPointer, resultPointer);
+
+  if (!result) {
+    return null;
   }
-  aPointer.callocFree();
-  bPointer.callocFree();
-  resultPointer.callocFree();
-  return bl;
-}
+
+  return SdlxRect.fromPointer(resultPointer);
+});
 
 ///
 /// Calculate a minimal rectangle enclosing a set of points.
@@ -134,33 +154,41 @@ bool sdlxGetRectUnion(SdlxRect a, SdlxRect b, SdlxRect result) {
 /// - [SDL_GetRectEnclosingPoints - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetRectEnclosingPoints)
 ///
 /// {@category rect}
-bool sdlxGetRectEnclosingPoints(
-  List<SdlxPoint> points,
+SdlxRect? sdlxGetRectEnclosingPoints(
+  List<SdlxPoint> points, {
   SdlxRect? clip,
-  SdlxRect result,
-) {
-  final pointsPointer = points.calloc();
-  final resultPointer = ffi.calloc<SdlRect>();
+}) => ffi.using((arena) {
+  final pointsPointer = arena<SdlPoint>(points.length);
+  for (var i = 0; i < points.length; i++) {
+    final point = pointsPointer + i;
+    point.ref.x = points[i].x;
+    point.ref.y = points[i].y;
+  }
+
   Pointer<SdlRect> clipPointer = nullptr;
   if (clip != null) {
-    clipPointer = clip.calloc();
+    clipPointer = arena<SdlRect>()
+      ..ref.x = clip.x
+      ..ref.y = clip.y
+      ..ref.w = clip.w
+      ..ref.h = clip.h;
   }
-  final bl = sdlGetRectEnclosingPoints(
+
+  final resultPointer = arena<SdlRect>();
+
+  final result = sdlGetRectEnclosingPoints(
     pointsPointer,
     points.length,
     clipPointer,
     resultPointer,
   );
-  if (bl) {
-    result.loadFromPointer(resultPointer);
+
+  if (!result) {
+    return null;
   }
-  pointsPointer.callocFree();
-  resultPointer.callocFree();
-  if (clipPointer != nullptr) {
-    clipPointer.callocFree();
-  }
-  return bl;
-}
+
+  return SdlxRect.fromPointer(resultPointer);
+});
 
 ///
 /// Calculate the intersection of a rectangle and line segment.
@@ -190,38 +218,37 @@ bool sdlxGetRectEnclosingPoints(
 /// - [SDL_GetRectAndLineIntersection - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetRectAndLineIntersection)
 ///
 /// {@category rect}
-bool sdlxGetRectAndLineIntersection(SdlxRect rect, SdlxPoint p1, SdlxPoint p2) {
-  final rectPointer = rect.calloc();
-  final x1Pointer = ffi.calloc<Int32>();
-  final y1Pointer = ffi.calloc<Int32>();
-  final x2Pointer = ffi.calloc<Int32>();
-  final y2Pointer = ffi.calloc<Int32>();
-  x1Pointer.value = p1.x;
-  y1Pointer.value = p1.y;
-  x2Pointer.value = p2.x;
-  y2Pointer.value = p2.y;
-  final bl = sdlGetRectAndLineIntersection(
+({SdlxPoint p1, SdlxPoint p2})? sdlxGetRectAndLineIntersection(
+  SdlxRect rect,
+  SdlxPoint p1,
+  SdlxPoint p2,
+) => ffi.using((arena) {
+  final rectPointer = arena<SdlRect>()
+    ..ref.x = rect.x
+    ..ref.y = rect.y
+    ..ref.w = rect.w
+    ..ref.h = rect.h;
+
+  final x1Pointer = arena<Int32>()..value = p1.x;
+  final y1Pointer = arena<Int32>()..value = p1.y;
+  final x2Pointer = arena<Int32>()..value = p2.x;
+  final y2Pointer = arena<Int32>()..value = p2.y;
+
+  final intersects = sdlGetRectAndLineIntersection(
     rectPointer,
     x1Pointer,
     y1Pointer,
     x2Pointer,
     y2Pointer,
   );
-  if (bl) {
-    p1
-      ..x = x1Pointer.value
-      ..y = y1Pointer.value;
-    p2
-      ..x = x2Pointer.value
-      ..y = y2Pointer.value;
+  if (!intersects) {
+    return null;
   }
-  rectPointer.callocFree();
-  x1Pointer.callocFree();
-  y1Pointer.callocFree();
-  x2Pointer.callocFree();
-  y2Pointer.callocFree();
-  return bl;
-}
+  return (
+    p1: SdlxPoint(x1Pointer.value, y1Pointer.value),
+    p2: SdlxPoint(x2Pointer.value, y2Pointer.value),
+  );
+});
 
 ///
 /// Determine whether two rectangles intersect with float precision.
@@ -280,19 +307,34 @@ bool sdlxHasRectIntersectionFloat(SdlxFRect a, SdlxFRect b) {
 /// - [SDL_GetRectIntersectionFloat - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetRectIntersectionFloat)
 ///
 /// {@category rect}
-bool sdlxGetRectIntersectionFloat(SdlxFRect a, SdlxFRect b, SdlxFRect result) {
-  final aPointer = a.calloc();
-  final bPointer = b.calloc();
-  final resultPointer = ffi.calloc<SdlFRect>();
-  final bl = sdlGetRectIntersectionFloat(aPointer, bPointer, resultPointer);
-  if (bl) {
-    result.loadFromPointer(resultPointer);
-  }
-  aPointer.callocFree();
-  bPointer.callocFree();
-  resultPointer.callocFree();
-  return bl;
-}
+SdlxFRect? sdlxGetRectIntersectionFloat(SdlxFRect a, SdlxFRect b) =>
+    ffi.using((arena) {
+      final aPointer = arena<SdlFRect>()
+        ..ref.x = a.x
+        ..ref.y = a.y
+        ..ref.w = a.w
+        ..ref.h = a.h;
+
+      final bPointer = arena<SdlFRect>()
+        ..ref.x = b.x
+        ..ref.y = b.y
+        ..ref.w = b.w
+        ..ref.h = b.h;
+
+      final resultPointer = arena<SdlFRect>();
+
+      final intersects = sdlGetRectIntersectionFloat(
+        aPointer,
+        bPointer,
+        resultPointer,
+      );
+
+      if (!intersects) {
+        return null;
+      }
+
+      return SdlxFRect.fromPointer(resultPointer);
+    });
 
 ///
 /// Calculate the union of two rectangles with float precision.
@@ -316,19 +358,30 @@ bool sdlxGetRectIntersectionFloat(SdlxFRect a, SdlxFRect b, SdlxFRect result) {
 /// - [SDL_GetRectUnionFloat - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetRectUnionFloat)
 ///
 /// {@category rect}
-bool sdlxGetRectUnionFloat(SdlxFRect a, SdlxFRect b, SdlxFRect result) {
-  final aPointer = a.calloc();
-  final bPointer = b.calloc();
-  final resultPointer = ffi.calloc<SdlFRect>();
-  final bl = sdlGetRectUnionFloat(aPointer, bPointer, resultPointer);
-  if (bl) {
-    result.loadFromPointer(resultPointer);
-  }
-  aPointer.callocFree();
-  bPointer.callocFree();
-  resultPointer.callocFree();
-  return bl;
-}
+SdlxFRect? sdlxGetRectUnionFloat(SdlxFRect a, SdlxFRect b) =>
+    ffi.using((arena) {
+      final aPointer = arena<SdlFRect>()
+        ..ref.x = a.x
+        ..ref.y = a.y
+        ..ref.w = a.w
+        ..ref.h = a.h;
+
+      final bPointer = arena<SdlFRect>()
+        ..ref.x = b.x
+        ..ref.y = b.y
+        ..ref.w = b.w
+        ..ref.h = b.h;
+
+      final resultPointer = arena<SdlFRect>();
+
+      final result = sdlGetRectUnionFloat(aPointer, bPointer, resultPointer);
+
+      if (!result) {
+        return null;
+      }
+
+      return SdlxFRect.fromPointer(resultPointer);
+    });
 
 ///
 /// Calculate a minimal rectangle enclosing a set of points with float
@@ -358,33 +411,40 @@ bool sdlxGetRectUnionFloat(SdlxFRect a, SdlxFRect b, SdlxFRect result) {
 /// - [SDL_GetRectEnclosingPointsFloat - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetRectEnclosingPointsFloat)
 ///
 /// {@category rect}
-bool sdlxGetRectEnclosingPointsFloat(
-  List<SdlxFPoint> points,
+SdlxFRect? sdlxGetRectEnclosingPointsFloat(
+  List<SdlxFPoint> points, {
   SdlxFRect? clip,
-  SdlxFRect result,
-) {
-  final pointsPointer = points.calloc();
-  final resultPointer = ffi.calloc<SdlFRect>();
+}) => ffi.using((arena) {
+  final pointsPointer = arena<SdlFPoint>(points.length);
+  for (var i = 0; i < points.length; i++) {
+    final point = pointsPointer + i;
+    point.ref.x = points[i].x;
+    point.ref.y = points[i].y;
+  }
   Pointer<SdlFRect> clipPointer = nullptr;
   if (clip != null) {
-    clipPointer = clip.calloc();
+    clipPointer = arena<SdlFRect>()
+      ..ref.x = clip.x
+      ..ref.y = clip.y
+      ..ref.w = clip.w
+      ..ref.h = clip.h;
   }
-  final bl = sdlGetRectEnclosingPointsFloat(
+
+  final resultPointer = arena<SdlFRect>();
+
+  final result = sdlGetRectEnclosingPointsFloat(
     pointsPointer,
     points.length,
     clipPointer,
     resultPointer,
   );
-  if (bl) {
-    result.loadFromPointer(resultPointer);
+
+  if (!result) {
+    return null;
   }
-  pointsPointer.callocFree();
-  resultPointer.callocFree();
-  if (clipPointer != nullptr) {
-    clipPointer.callocFree();
-  }
-  return bl;
-}
+
+  return SdlxFRect.fromPointer(resultPointer);
+});
 
 ///
 /// Calculate the intersection of a rectangle and line segment with float
@@ -415,39 +475,39 @@ bool sdlxGetRectEnclosingPointsFloat(
 /// - [SDL_GetRectAndLineIntersectionFloat - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetRectAndLineIntersectionFloat)
 ///
 /// {@category rect}
-bool sdlxGetRectAndLineIntersectionFloat(
+({SdlxFPoint p1, SdlxFPoint p2})? sdlxGetRectAndLineIntersectionFloat(
   SdlxFRect rect,
   SdlxFPoint p1,
   SdlxFPoint p2,
-) {
-  final rectPointer = rect.calloc();
-  final x1Pointer = ffi.calloc<Float>();
-  final y1Pointer = ffi.calloc<Float>();
-  final x2Pointer = ffi.calloc<Float>();
-  final y2Pointer = ffi.calloc<Float>();
-  x1Pointer.value = p1.x;
-  y1Pointer.value = p1.y;
-  x2Pointer.value = p2.x;
-  y2Pointer.value = p2.y;
-  final bl = sdlGetRectAndLineIntersectionFloat(
+) => ffi.using((arena) {
+  // SdlFRect æ§é ä½ãã¤ã³ã¿ã®ç¢ºä¿ã¨å¤ã®ã»ãã
+  final rectPointer = arena<SdlFRect>()
+    ..ref.x = rect.x
+    ..ref.y = rect.y
+    ..ref.w = rect.w
+    ..ref.h = rect.h;
+
+  // Out ãã©ã¡ã¼ã¿å¼ Initial Value ãã¤ã³ã¿ã®ç¢ºä¿
+  final x1Pointer = arena<Float>()..value = p1.x;
+  final y1Pointer = arena<Float>()..value = p1.y;
+  final x2Pointer = arena<Float>()..value = p2.x;
+  final y2Pointer = arena<Float>()..value = p2.y;
+
+  final intersects = sdlGetRectAndLineIntersectionFloat(
     rectPointer,
     x1Pointer,
     y1Pointer,
     x2Pointer,
     y2Pointer,
   );
-  if (bl) {
-    p1
-      ..x = x1Pointer.value
-      ..y = y1Pointer.value;
-    p2
-      ..x = x2Pointer.value
-      ..y = y2Pointer.value;
+
+  if (!intersects) {
+    return null;
   }
-  rectPointer.callocFree();
-  x1Pointer.callocFree();
-  y1Pointer.callocFree();
-  x2Pointer.callocFree();
-  y2Pointer.callocFree();
-  return bl;
-}
+
+  // ã¯ãªããï¼åæ­ï¼ãããæ°ããäº¤ç¹2ã¤ã Record ã§è¿å´
+  return (
+    p1: SdlxFPoint(x1Pointer.value, y1Pointer.value),
+    p2: SdlxFPoint(x2Pointer.value, y2Pointer.value),
+  );
+});

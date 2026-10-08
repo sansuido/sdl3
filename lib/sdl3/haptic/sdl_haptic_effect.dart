@@ -1,56 +1,62 @@
 part of '../sdl_haptic.dart';
 
-class SdlxHapticEffect {
-  SdlxHapticEffect({this.type = 0});
+final class SdlxHapticDirection {
+  const SdlxHapticDirection({this.type = 0, this.dir = const [0, 0, 0]});
 
-  int type;
-
-  Pointer<SdlHapticEffect> calloc() {
-    final pointer = ffi.calloc<SdlHapticEffect>();
-    pointer.ref.type = type;
-    return pointer;
+  factory SdlxHapticDirection.fromRef(SdlHapticDirection ref) {
+    final dirList = List<int>.generate(3, (i) => ref.dir[i]);
+    return SdlxHapticDirection(type: ref.type, dir: List.unmodifiable(dirList));
   }
 
-  void loadFromPointer(Pointer<SdlHapticEffect> pointer) {}
+  final int type;
+  final List<int> dir;
 
-  static SdlxHapticEffect fromPointer(Pointer<SdlHapticEffect> pointer) {
+  void copyTo(SdlHapticDirection ref) {
+    ref.type = type;
+    for (var i = 0; i < 3 && i < dir.length; i++) {
+      ref.dir[i] = dir[i];
+    }
+  }
+}
+
+abstract class SdlxHapticEffect {
+  const SdlxHapticEffect({this.type = 0});
+
+  factory SdlxHapticEffect.fromPointer(Pointer<SdlHapticEffect> pointer) {
     switch (pointer.ref.type) {
       case SDL_HAPTIC_CONSTANT:
-        return SdlxHapticConstant()..loadFromPointer(pointer);
+        return SdlxHapticConstant.fromPointer(pointer);
       case SDL_HAPTIC_SINE:
       case SDL_HAPTIC_SQUARE:
       case SDL_HAPTIC_TRIANGLE:
       case SDL_HAPTIC_SAWTOOTHUP:
       case SDL_HAPTIC_SAWTOOTHDOWN:
-        return SdlxHapticPeriodic()..loadFromPointer(pointer);
+        return SdlxHapticPeriodic.fromPointer(pointer);
       case SDL_HAPTIC_SPRING:
       case SDL_HAPTIC_DAMPER:
       case SDL_HAPTIC_INERTIA:
       case SDL_HAPTIC_FRICTION:
-        return SdlxHapticCondition()..loadFromPointer(pointer);
+        return SdlxHapticCondition.fromPointer(pointer);
       case SDL_HAPTIC_RAMP:
-        return SdlxHapticRamp()..loadFromPointer(pointer);
+        return SdlxHapticRamp.fromPointer(pointer);
       case SDL_HAPTIC_LEFTRIGHT:
-        return SdlxHapticLeftRight()..loadFromPointer(pointer);
+        return SdlxHapticLeftRight.fromPointer(pointer);
       default:
-        return SdlxHapticCustom()..loadFromPointer(pointer);
+        return SdlxHapticCustom.fromPointer(pointer);
     }
   }
-}
 
-final class SdlxHapticDirection {
-  SdlxHapticDirection({this.type = 0, List<int>? dir}) {
-    this.dir = dir ?? List<int>.generate(3, (index) => 0);
-  }
+  final int type;
 
-  int type;
-  late List<int> dir;
+  Pointer<SdlHapticEffect> toNative([Allocator allocator = ffi.calloc]);
+
+  Pointer<SdlHapticEffect> calloc() => toNative();
 }
 
 class SdlxHapticConstant extends SdlxHapticEffect {
-  SdlxHapticConstant({
-    super.type = 0,
-    SdlxHapticDirection? direction,
+  const SdlxHapticConstant({
+    super.type = SDL_HAPTIC_CONSTANT,
+    this.direction = const SdlxHapticDirection(),
     this.length = 0,
     this.delay = 0,
     this.button = 0,
@@ -60,65 +66,59 @@ class SdlxHapticConstant extends SdlxHapticEffect {
     this.attackLevel = 0,
     this.fadeLength = 0,
     this.fadeLevel = 0,
-  }) {
-    this.direction = direction ?? SdlxHapticDirection();
+  });
+
+  factory SdlxHapticConstant.fromPointer(Pointer<SdlHapticEffect> pointer) {
+    final ref = pointer.ref.ant;
+    return SdlxHapticConstant(
+      type: ref.type,
+      direction: SdlxHapticDirection.fromRef(ref.direction),
+      length: ref.length,
+      delay: ref.delay,
+      button: ref.button,
+      interval: ref.interval,
+      level: ref.level,
+      attackLength: ref.attackLength,
+      attackLevel: ref.attackLevel,
+      fadeLength: ref.fadeLength,
+      fadeLevel: ref.fadeLevel,
+    );
   }
 
-  late SdlxHapticDirection direction;
-  int length;
-  int delay;
-  int button;
-  int interval;
-  int level;
-  int attackLength;
-  int attackLevel;
-  int fadeLength;
-  int fadeLevel;
+  final SdlxHapticDirection direction;
+  final int length;
+  final int delay;
+  final int button;
+  final int interval;
+  final int level;
+  final int attackLength;
+  final int attackLevel;
+  final int fadeLength;
+  final int fadeLevel;
 
   @override
-  Pointer<SdlHapticEffect> calloc() {
-    final pointer = ffi.calloc<SdlHapticEffect>();
-    pointer.ref.ant.type = type;
-    pointer.ref.ant.direction.type = direction.type;
-    for (var i = 0; i < direction.dir.length; i++) {
-      pointer.ref.ant.direction.dir[i] = direction.dir[i];
-    }
-    pointer.ref.ant.length = length;
-    pointer.ref.ant.delay = delay;
-    pointer.ref.ant.button = button;
-    pointer.ref.ant.interval = interval;
-    pointer.ref.ant.level = level;
-    pointer.ref.ant.attackLength = attackLength;
-    pointer.ref.ant.attackLevel = attackLevel;
-    pointer.ref.ant.fadeLength = fadeLength;
-    pointer.ref.ant.fadeLevel = fadeLevel;
+  Pointer<SdlHapticEffect> toNative([Allocator allocator = ffi.calloc]) {
+    final pointer = allocator<SdlHapticEffect>();
+    final ref = pointer.ref.ant..type = type;
+    direction.copyTo(ref.direction);
+    ref
+      ..length = length
+      ..delay = delay
+      ..button = button
+      ..interval = interval
+      ..level = level
+      ..attackLength = attackLength
+      ..attackLevel = attackLevel
+      ..fadeLength = fadeLength
+      ..fadeLevel = fadeLevel;
     return pointer;
-  }
-
-  @override
-  void loadFromPointer(Pointer<SdlHapticEffect> pointer) {
-    type = pointer.ref.ant.type;
-    direction.type = pointer.ref.ant.direction.type;
-    direction.dir.clear();
-    for (var i = 0; i < 3; i++) {
-      direction.dir.add(pointer.ref.ant.direction.dir[i]);
-    }
-    length = pointer.ref.ant.length;
-    delay = pointer.ref.ant.delay;
-    button = pointer.ref.ant.button;
-    interval = pointer.ref.ant.interval;
-    level = pointer.ref.ant.level;
-    attackLength = pointer.ref.ant.attackLength;
-    attackLevel = pointer.ref.ant.attackLevel;
-    fadeLength = pointer.ref.ant.fadeLength;
-    fadeLevel = pointer.ref.ant.fadeLevel;
   }
 }
 
 class SdlxHapticPeriodic extends SdlxHapticEffect {
-  SdlxHapticPeriodic({
+  const SdlxHapticPeriodic({
     super.type = 0,
-    SdlxHapticDirection? direction,
+    this.direction = const SdlxHapticDirection(),
     this.length = 0,
     this.delay = 0,
     this.button = 0,
@@ -131,182 +131,154 @@ class SdlxHapticPeriodic extends SdlxHapticEffect {
     this.attackLevel = 0,
     this.fadeLength = 0,
     this.fadeLevel = 0,
-  }) {
-    this.direction = direction ?? SdlxHapticDirection();
+  });
+
+  factory SdlxHapticPeriodic.fromPointer(Pointer<SdlHapticEffect> pointer) {
+    final ref = pointer.ref.periodic;
+    return SdlxHapticPeriodic(
+      type: ref.type,
+      direction: SdlxHapticDirection.fromRef(ref.direction),
+      length: ref.length,
+      delay: ref.delay,
+      button: ref.button,
+      interval: ref.interval,
+      period: ref.period,
+      magnitude: ref.magnitude,
+      offset: ref.offset,
+      phase: ref.phase,
+      attackLength: ref.attackLength,
+      attackLevel: ref.attackLevel,
+      fadeLength: ref.fadeLength,
+      fadeLevel: ref.fadeLevel,
+    );
   }
 
-  late SdlxHapticDirection direction;
-  int length;
-  int delay;
-  int button;
-  int interval;
-  int period;
-  int magnitude;
-  int offset;
-  int phase;
-  int attackLength;
-  int attackLevel;
-  int fadeLength;
-  int fadeLevel;
+  final SdlxHapticDirection direction;
+  final int length;
+  final int delay;
+  final int button;
+  final int interval;
+  final int period;
+  final int magnitude;
+  final int offset;
+  final int phase;
+  final int attackLength;
+  final int attackLevel;
+  final int fadeLength;
+  final int fadeLevel;
 
   @override
-  Pointer<SdlHapticEffect> calloc() {
-    final pointer = ffi.calloc<SdlHapticEffect>();
-    pointer.ref.periodic.type = type;
-    pointer.ref.periodic.direction.type = direction.type;
-    for (var i = 0; i < direction.dir.length; i++) {
-      pointer.ref.periodic.direction.dir[i] = direction.dir[i];
-    }
-    pointer.ref.periodic.length = length;
-    pointer.ref.periodic.delay = delay;
-    pointer.ref.periodic.button = button;
-    pointer.ref.periodic.interval = interval;
-    pointer.ref.periodic.period = period;
-    pointer.ref.periodic.magnitude = magnitude;
-    pointer.ref.periodic.offset = offset;
-    pointer.ref.periodic.phase = phase;
-    pointer.ref.periodic.attackLength = attackLength;
-    pointer.ref.periodic.attackLevel = attackLevel;
-    pointer.ref.periodic.fadeLength = fadeLength;
-    pointer.ref.periodic.fadeLevel = fadeLevel;
+  Pointer<SdlHapticEffect> toNative([Allocator allocator = ffi.calloc]) {
+    final pointer = allocator<SdlHapticEffect>();
+    final ref = pointer.ref.periodic..type = type;
+    direction.copyTo(ref.direction);
+    ref
+      ..length = length
+      ..delay = delay
+      ..button = button
+      ..interval = interval
+      ..period = period
+      ..magnitude = magnitude
+      ..offset = offset
+      ..phase = phase
+      ..attackLength = attackLength
+      ..attackLevel = attackLevel
+      ..fadeLength = fadeLength
+      ..fadeLevel = fadeLevel;
     return pointer;
-  }
-
-  @override
-  void loadFromPointer(Pointer<SdlHapticEffect> pointer) {
-    type = pointer.ref.periodic.type;
-    direction.type = pointer.ref.periodic.direction.type;
-    direction.dir.clear();
-    for (var i = 0; i < 3; i++) {
-      direction.dir.add(pointer.ref.periodic.direction.dir[i]);
-    }
-    length = pointer.ref.periodic.length;
-    delay = pointer.ref.periodic.delay;
-    button = pointer.ref.periodic.button;
-    interval = pointer.ref.periodic.interval;
-    period = pointer.ref.periodic.period;
-    magnitude = pointer.ref.periodic.magnitude;
-    offset = pointer.ref.periodic.offset;
-    phase = pointer.ref.periodic.phase;
-    attackLength = pointer.ref.periodic.attackLength;
-    attackLevel = pointer.ref.periodic.attackLevel;
-    fadeLength = pointer.ref.periodic.fadeLength;
-    fadeLevel = pointer.ref.periodic.fadeLevel;
   }
 }
 
 class SdlxHapticCondition extends SdlxHapticEffect {
-  SdlxHapticCondition({
+  const SdlxHapticCondition({
     super.type = 0,
-    SdlxHapticDirection? direction,
+    this.direction = const SdlxHapticDirection(),
     this.length = 0,
     this.delay = 0,
     this.button = 0,
     this.interval = 0,
-    List<int>? rightSat,
-    List<int>? leftSat,
-    List<int>? rightCoeff,
-    List<int>? leftCoeff,
-    List<int>? deadband,
-    List<int>? center,
-  }) {
-    this.direction = direction ?? SdlxHapticDirection();
-    this.rightSat = rightSat ?? List<int>.generate(3, (index) => 0);
-    this.leftSat = leftSat ?? List<int>.generate(3, (index) => 0);
-    this.rightCoeff = rightCoeff ?? List<int>.generate(3, (index) => 0);
-    this.leftCoeff = leftCoeff ?? List<int>.generate(3, (index) => 0);
-    this.deadband = deadband ?? List<int>.generate(3, (index) => 0);
-    this.center = center ?? List<int>.generate(3, (index) => 0);
+    this.rightSat = const [0, 0, 0],
+    this.leftSat = const [0, 0, 0],
+    this.rightCoeff = const [0, 0, 0],
+    this.leftCoeff = const [0, 0, 0],
+    this.deadband = const [0, 0, 0],
+    this.center = const [0, 0, 0],
+  });
+
+  factory SdlxHapticCondition.fromPointer(Pointer<SdlHapticEffect> pointer) {
+    final ref = pointer.ref.condition;
+    return SdlxHapticCondition(
+      type: ref.type,
+      direction: SdlxHapticDirection.fromRef(ref.direction),
+      length: ref.length,
+      delay: ref.delay,
+      button: ref.button,
+      interval: ref.interval,
+      rightSat: List.unmodifiable(
+        List<int>.generate(3, (i) => ref.rightSat[i]),
+      ),
+      leftSat: List.unmodifiable(List<int>.generate(3, (i) => ref.leftSat[i])),
+      rightCoeff: List.unmodifiable(
+        List<int>.generate(3, (i) => ref.rightCoeff[i]),
+      ),
+      leftCoeff: List.unmodifiable(
+        List<int>.generate(3, (i) => ref.leftCoeff[i]),
+      ),
+      deadband: List.unmodifiable(
+        List<int>.generate(3, (i) => ref.deadband[i]),
+      ),
+      center: List.unmodifiable(List<int>.generate(3, (i) => ref.center[i])),
+    );
   }
 
-  late SdlxHapticDirection direction;
-  int length;
-  int delay;
-  int button;
-  int interval;
-  late List<int> rightSat;
-  late List<int> leftSat;
-  late List<int> rightCoeff;
-  late List<int> leftCoeff;
-  late List<int> deadband;
-  late List<int> center;
+  final SdlxHapticDirection direction;
+  final int length;
+  final int delay;
+  final int button;
+  final int interval;
+  final List<int> rightSat;
+  final List<int> leftSat;
+  final List<int> rightCoeff;
+  final List<int> leftCoeff;
+  final List<int> deadband;
+  final List<int> center;
 
   @override
-  Pointer<SdlHapticEffect> calloc() {
-    final pointer = ffi.calloc<SdlHapticEffect>();
-    pointer.ref.condition.type = type;
-    pointer.ref.condition.direction.type = direction.type;
-    for (var i = 0; i < direction.dir.length; i++) {
-      pointer.ref.condition.direction.dir[i] = direction.dir[i];
+  Pointer<SdlHapticEffect> toNative([Allocator allocator = ffi.calloc]) {
+    final pointer = allocator<SdlHapticEffect>();
+    final ref = pointer.ref.condition..type = type;
+    direction.copyTo(ref.direction);
+    ref
+      ..length = length
+      ..delay = delay
+      ..button = button
+      ..interval = interval;
+    for (var i = 0; i < 3 && i < rightSat.length; i++) {
+      ref.rightSat[i] = rightSat[i];
     }
-    pointer.ref.condition.length = length;
-    pointer.ref.condition.delay = delay;
-    pointer.ref.condition.button = button;
-    pointer.ref.condition.interval = interval;
-    for (var i = 0; i < rightSat.length; i++) {
-      pointer.ref.condition.rightSat[i] = rightSat[i];
+    for (var i = 0; i < 3 && i < leftSat.length; i++) {
+      ref.leftSat[i] = leftSat[i];
     }
-    for (var i = 0; i < leftSat.length; i++) {
-      pointer.ref.condition.leftSat[i] = leftSat[i];
+    for (var i = 0; i < 3 && i < rightCoeff.length; i++) {
+      ref.rightCoeff[i] = rightCoeff[i];
     }
-    for (var i = 0; i < rightCoeff.length; i++) {
-      pointer.ref.condition.rightCoeff[i] = rightCoeff[i];
+    for (var i = 0; i < 3 && i < leftCoeff.length; i++) {
+      ref.leftCoeff[i] = leftCoeff[i];
     }
-    for (var i = 0; i < leftCoeff.length; i++) {
-      pointer.ref.condition.leftCoeff[i] = leftCoeff[i];
+    for (var i = 0; i < 3 && i < deadband.length; i++) {
+      ref.deadband[i] = deadband[i];
     }
-    for (var i = 0; i < deadband.length; i++) {
-      pointer.ref.condition.deadband[i] = deadband[i];
-    }
-    for (var i = 0; i < center.length; i++) {
-      pointer.ref.condition.center[i] = center[i];
+    for (var i = 0; i < 3 && i < center.length; i++) {
+      ref.center[i] = center[i];
     }
     return pointer;
-  }
-
-  @override
-  void loadFromPointer(Pointer<SdlHapticEffect> pointer) {
-    type = pointer.ref.condition.type;
-    direction.type = pointer.ref.condition.direction.type;
-    direction.dir.clear();
-    for (var i = 0; i < 3; i++) {
-      direction.dir.add(pointer.ref.condition.direction.dir[i]);
-    }
-    length = pointer.ref.condition.length;
-    delay = pointer.ref.condition.delay;
-    button = pointer.ref.condition.button;
-    interval = pointer.ref.condition.interval;
-    rightSat.clear();
-    for (var i = 0; i < 3; i++) {
-      rightSat[i] = pointer.ref.condition.rightSat[i];
-    }
-    leftSat.clear();
-    for (var i = 0; i < 3; i++) {
-      leftSat[i] = pointer.ref.condition.leftSat[i];
-    }
-    rightCoeff.clear();
-    for (var i = 0; i < 3; i++) {
-      rightCoeff[i] = pointer.ref.condition.rightCoeff[i];
-    }
-    leftCoeff.clear();
-    for (var i = 0; i < 3; i++) {
-      leftCoeff[i] = pointer.ref.condition.leftCoeff[i];
-    }
-    deadband.clear();
-    for (var i = 0; i < 3; i++) {
-      deadband[i] = pointer.ref.condition.deadband[i];
-    }
-    center.clear();
-    for (var i = 0; i < 3; i++) {
-      center[i] = pointer.ref.condition.center[i];
-    }
   }
 }
 
 class SdlxHapticRamp extends SdlxHapticEffect {
-  SdlxHapticRamp({
-    super.type = 0,
-    SdlxHapticDirection? direction,
+  const SdlxHapticRamp({
+    super.type = SDL_HAPTIC_RAMP,
+    this.direction = const SdlxHapticDirection(),
     this.length = 0,
     this.delay = 0,
     this.button = 0,
@@ -317,99 +289,96 @@ class SdlxHapticRamp extends SdlxHapticEffect {
     this.attackLevel = 0,
     this.fadeLength = 0,
     this.fadeLevel = 0,
-  }) {
-    this.direction = direction ?? SdlxHapticDirection();
+  });
+
+  factory SdlxHapticRamp.fromPointer(Pointer<SdlHapticEffect> pointer) {
+    final ref = pointer.ref.ramp;
+    return SdlxHapticRamp(
+      type: ref.type,
+      direction: SdlxHapticDirection.fromRef(ref.direction),
+      length: ref.length,
+      delay: ref.delay,
+      button: ref.button,
+      interval: ref.interval,
+      start: ref.start,
+      end: ref.end,
+      attackLength: ref.attackLength,
+      attackLevel: ref.attackLevel,
+      fadeLength: ref.fadeLength,
+      fadeLevel: ref.fadeLevel,
+    );
   }
 
-  late SdlxHapticDirection direction;
-  int length;
-  int delay;
-  int button;
-  int interval;
-  int start;
-  int end;
-  int attackLength;
-  int attackLevel;
-  int fadeLength;
-  int fadeLevel;
+  final SdlxHapticDirection direction;
+  final int length;
+  final int delay;
+  final int button;
+  final int interval;
+  final int start;
+  final int end;
+  final int attackLength;
+  final int attackLevel;
+  final int fadeLength;
+  final int fadeLevel;
 
   @override
-  Pointer<SdlHapticEffect> calloc() {
-    final pointer = ffi.calloc<SdlHapticEffect>();
-    pointer.ref.ramp.type = type;
-    pointer.ref.ramp.direction.type = direction.type;
-    for (var i = 0; i < direction.dir.length; i++) {
-      pointer.ref.ramp.direction.dir[i] = direction.dir[i];
-    }
-    pointer.ref.ramp.length = length;
-    pointer.ref.ramp.delay = delay;
-    pointer.ref.ramp.button = button;
-    pointer.ref.ramp.interval = interval;
-    pointer.ref.ramp.start = start;
-    pointer.ref.ramp.end = end;
-    pointer.ref.ramp.attackLength = attackLength;
-    pointer.ref.ramp.attackLevel = attackLevel;
-    pointer.ref.ramp.fadeLength = fadeLength;
-    pointer.ref.ramp.fadeLevel = fadeLevel;
+  Pointer<SdlHapticEffect> toNative([Allocator allocator = ffi.calloc]) {
+    final pointer = allocator<SdlHapticEffect>();
+    final ref = pointer.ref.ramp..type = type;
+    direction.copyTo(ref.direction);
+    ref
+      ..length = length
+      ..delay = delay
+      ..button = button
+      ..interval = interval
+      ..start = start
+      ..end = end
+      ..attackLength = attackLength
+      ..attackLevel = attackLevel
+      ..fadeLength = fadeLength
+      ..fadeLevel = fadeLevel;
     return pointer;
-  }
-
-  @override
-  void loadFromPointer(Pointer<SdlHapticEffect> pointer) {
-    type = pointer.ref.ramp.type;
-    direction.type = pointer.ref.ramp.direction.type;
-    direction.dir.clear();
-    for (var i = 0; i < 3; i++) {
-      direction.dir.add(pointer.ref.ramp.direction.dir[i]);
-    }
-    length = pointer.ref.ramp.length;
-    delay = pointer.ref.ramp.delay;
-    button = pointer.ref.ramp.button;
-    interval = pointer.ref.ramp.interval;
-    start = pointer.ref.ramp.start;
-    end = pointer.ref.ramp.end;
-    attackLength = pointer.ref.ramp.attackLength;
-    attackLevel = pointer.ref.ramp.attackLevel;
-    fadeLength = pointer.ref.ramp.fadeLength;
-    fadeLevel = pointer.ref.ramp.fadeLevel;
   }
 }
 
 class SdlxHapticLeftRight extends SdlxHapticEffect {
-  SdlxHapticLeftRight({
-    super.type = 0,
+  const SdlxHapticLeftRight({
+    super.type = SDL_HAPTIC_LEFTRIGHT,
     this.length = 0,
     this.largeMagnitude = 0,
     this.smallMagnitude = 0,
   });
 
-  int length;
-  int largeMagnitude;
-  int smallMagnitude;
-
-  @override
-  Pointer<SdlHapticEffect> calloc() {
-    final pointer = ffi.calloc<SdlHapticEffect>();
-    pointer.ref.leftright.type = type;
-    pointer.ref.leftright.length = length;
-    pointer.ref.leftright.largeMagnitude = largeMagnitude;
-    pointer.ref.leftright.smallMagnitude = smallMagnitude;
-    return pointer;
+  factory SdlxHapticLeftRight.fromPointer(Pointer<SdlHapticEffect> pointer) {
+    final ref = pointer.ref.leftright;
+    return SdlxHapticLeftRight(
+      type: ref.type,
+      length: ref.length,
+      largeMagnitude: ref.largeMagnitude,
+      smallMagnitude: ref.smallMagnitude,
+    );
   }
 
+  final int length;
+  final int largeMagnitude;
+  final int smallMagnitude;
+
   @override
-  void loadFromPointer(Pointer<SdlHapticEffect> pointer) {
-    type = pointer.ref.leftright.type;
-    length = pointer.ref.leftright.length;
-    largeMagnitude = pointer.ref.leftright.largeMagnitude;
-    smallMagnitude = pointer.ref.leftright.smallMagnitude;
+  Pointer<SdlHapticEffect> toNative([Allocator allocator = ffi.calloc]) {
+    final pointer = allocator<SdlHapticEffect>();
+    pointer.ref.leftright
+      ..type = type
+      ..length = length
+      ..largeMagnitude = largeMagnitude
+      ..smallMagnitude = smallMagnitude;
+    return pointer;
   }
 }
 
 class SdlxHapticCustom extends SdlxHapticEffect {
-  SdlxHapticCustom({
+  const SdlxHapticCustom({
     super.type = 0,
-    SdlxHapticDirection? direction,
+    this.direction = const SdlxHapticDirection(),
     this.length = 0,
     this.delay = 0,
     this.button = 0,
@@ -422,86 +391,73 @@ class SdlxHapticCustom extends SdlxHapticEffect {
     this.attackLevel = 0,
     this.fadeLength = 0,
     this.fadeLevel = 0,
-  }) {
-    this.direction = direction ?? SdlxHapticDirection();
-  }
+  });
 
-  late SdlxHapticDirection direction;
-  int length;
-  int delay;
-  int button;
-  int interval;
-  int channels;
-  int period;
-  int samples;
-  Uint16List? data;
-  int attackLength;
-  int attackLevel;
-  int fadeLength;
-  int fadeLevel;
-
-  @override
-  Pointer<SdlHapticEffect> calloc() {
-    final pointer = ffi.calloc<SdlHapticEffect>();
-    pointer.ref.custom.type = type;
-    pointer.ref.custom.direction.type = direction.type;
-    for (var i = 0; i < direction.dir.length; i++) {
-      pointer.ref.custom.direction.dir[i] = direction.dir[i];
-    }
-    pointer.ref.custom.length = length;
-    pointer.ref.custom.delay = delay;
-    pointer.ref.custom.button = button;
-    pointer.ref.custom.interval = interval;
-    pointer.ref.custom.channels = channels;
-    pointer.ref.custom.period = period;
-    pointer.ref.custom.samples = samples;
-    if (data != null) {
-      final dataPointer = ffi.calloc<Uint16>(data!.length);
-      dataPointer.asTypedList(data!.length).setAll(0, data!);
-      pointer.ref.custom.data = dataPointer;
-    }
-    pointer.ref.custom.attackLength = attackLength;
-    pointer.ref.custom.attackLevel = attackLevel;
-    pointer.ref.custom.fadeLength = fadeLength;
-    pointer.ref.custom.fadeLevel = fadeLevel;
-    return pointer;
-  }
-
-  @override
-  void loadFromPointer(Pointer<SdlHapticEffect> pointer) {
-    type = pointer.ref.custom.type;
-    direction.type = pointer.ref.custom.direction.type;
-    direction.dir.clear();
-    for (var i = 0; i < 3; i++) {
-      direction.dir.add(pointer.ref.custom.direction.dir[i]);
-    }
-    length = pointer.ref.custom.length;
-    delay = pointer.ref.custom.delay;
-    button = pointer.ref.custom.button;
-    interval = pointer.ref.custom.interval;
-    channels = pointer.ref.custom.channels;
-    period = pointer.ref.custom.period;
-    samples = pointer.ref.custom.samples;
-    if (pointer.ref.custom.data != nullptr) {
-      data = Uint16List.fromList(
-        pointer.ref.custom.data.asTypedList(channels * samples),
+  factory SdlxHapticCustom.fromPointer(Pointer<SdlHapticEffect> pointer) {
+    final ref = pointer.ref.custom;
+    Uint16List? dataList;
+    if (ref.data != nullptr && ref.channels > 0 && ref.samples > 0) {
+      dataList = Uint16List.fromList(
+        ref.data.asTypedList(ref.channels * ref.samples),
       );
     }
-    attackLength = pointer.ref.custom.attackLength;
-    attackLevel = pointer.ref.custom.attackLevel;
-    fadeLength = pointer.ref.custom.fadeLength;
-    fadeLevel = pointer.ref.custom.fadeLevel;
+    return SdlxHapticCustom(
+      type: ref.type,
+      direction: SdlxHapticDirection.fromRef(ref.direction),
+      length: ref.length,
+      delay: ref.delay,
+      button: ref.button,
+      interval: ref.interval,
+      channels: ref.channels,
+      period: ref.period,
+      samples: ref.samples,
+      data: dataList,
+      attackLength: ref.attackLength,
+      attackLevel: ref.attackLevel,
+      fadeLength: ref.fadeLength,
+      fadeLevel: ref.fadeLevel,
+    );
   }
-}
 
-extension SdlHapticEffectPointerEx on Pointer<SdlHapticEffect> {
-  void callocAllFree() {
-    if (this == nullptr) return;
-    if (ref.type == SDL_HAPTIC_CUSTOM) {
-      if (ref.custom.data != nullptr) {
-        ffi.calloc.free(ref.custom.data);
-      }
+  final SdlxHapticDirection direction;
+  final int length;
+  final int delay;
+  final int button;
+  final int interval;
+  final int channels;
+  final int period;
+  final int samples;
+  final Uint16List? data;
+  final int attackLength;
+  final int attackLevel;
+  final int fadeLength;
+  final int fadeLevel;
+
+  @override
+  Pointer<SdlHapticEffect> toNative([Allocator allocator = ffi.calloc]) {
+    final pointer = allocator<SdlHapticEffect>();
+    final ref = pointer.ref.custom..type = type;
+    direction.copyTo(ref.direction);
+    ref
+      ..length = length
+      ..delay = delay
+      ..button = button
+      ..interval = interval
+      ..channels = channels
+      ..period = period
+      ..samples = samples;
+    if (data != null && data!.isNotEmpty) {
+      final dataPointer = allocator<Uint16>(data!.length);
+      dataPointer.asTypedList(data!.length).setAll(0, data!);
+      ref.data = dataPointer;
+    } else {
+      ref.data = nullptr;
     }
-    callocFree();
+    ref
+      ..attackLength = attackLength
+      ..attackLevel = attackLevel
+      ..fadeLength = fadeLength
+      ..fadeLevel = fadeLevel;
+    return pointer;
   }
 }

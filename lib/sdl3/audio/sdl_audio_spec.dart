@@ -1,24 +1,18 @@
 part of '../sdl_audio.dart';
 
 class SdlxAudioSpec {
-  SdlxAudioSpec({
-    this.format = 0,
-    this.channels = 0,
-    this.freq = 0,
-    this.sampleFrames = 0,
-  });
+  const SdlxAudioSpec({this.format = 0, this.channels = 0, this.freq = 0});
 
-  int format;
-  int channels;
-  int freq;
-  // for sdlGetAudioDeviceFormat
-  int sampleFrames;
+  factory SdlxAudioSpec.fromPointer(Pointer<SdlAudioSpec> pointer) =>
+      SdlxAudioSpec(
+        format: pointer.ref.format,
+        channels: pointer.ref.channels,
+        freq: pointer.ref.freq,
+      );
 
-  void loadFromPointer(Pointer<SdlAudioSpec> pointer) {
-    format = pointer.ref.format;
-    channels = pointer.ref.channels;
-    freq = pointer.ref.freq;
-  }
+  final int format;
+  final int channels;
+  final int freq;
 
   Pointer<SdlAudioSpec> calloc() {
     final pointer = ffi.calloc<SdlAudioSpec>();

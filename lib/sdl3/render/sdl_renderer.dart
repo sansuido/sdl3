@@ -1216,7 +1216,7 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// - [SDL_GetRenderDrawColor - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetRenderDrawColor)
   ///
   /// {@category render}
-  bool getDrawColor(SdlxColor color) => sdlxGetRenderDrawColor(this, color);
+  SdlxColor? getDrawColor(SdlxColor color) => sdlxGetRenderDrawColor(this);
 
   ///
   /// Get the color used for drawing operations (Rect, Line and Clear).
@@ -1248,8 +1248,7 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// - [SDL_GetRenderDrawColorFloat - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetRenderDrawColorFloat)
   ///
   /// {@category render}
-  bool getDrawColorFloat(SdlxFColor color) =>
-      sdlxGetRenderDrawColorFloat(this, color);
+  SdlxFColor? getDrawColorFloat() => sdlxGetRenderDrawColorFloat(this);
 
   ///
   /// Set the color scale used for render operations.

@@ -1,7 +1,7 @@
 part of '../sdl_time.dart';
 
 class SdlxDateTime {
-  SdlxDateTime({
+  const SdlxDateTime({
     this.year = 0,
     this.month = 0,
     this.day = 0,
@@ -13,15 +13,28 @@ class SdlxDateTime {
     this.utcOffset = 0,
   });
 
-  int year;
-  int month;
-  int day;
-  int hour;
-  int minute;
-  int second;
-  int nanosecond;
-  int dayOfWeek;
-  int utcOffset;
+  factory SdlxDateTime.fromPointer(Pointer<SdlDateTime> pointer) =>
+      SdlxDateTime(
+        year: pointer.ref.year,
+        month: pointer.ref.month,
+        day: pointer.ref.day,
+        hour: pointer.ref.hour,
+        minute: pointer.ref.minute,
+        second: pointer.ref.second,
+        nanosecond: pointer.ref.nanosecond,
+        dayOfWeek: pointer.ref.dayOfWeek,
+        utcOffset: pointer.ref.utcOffset,
+      );
+
+  final int year;
+  final int month;
+  final int day;
+  final int hour;
+  final int minute;
+  final int second;
+  final int nanosecond;
+  final int dayOfWeek;
+  final int utcOffset;
 
   Pointer<SdlDateTime> calloc() {
     final pointer = ffi.calloc<SdlDateTime>();
@@ -36,19 +49,4 @@ class SdlxDateTime {
     pointer.ref.utcOffset = utcOffset;
     return pointer;
   }
-
-  void loadFromPointer(Pointer<SdlDateTime> pointer) {
-    year = pointer.ref.year;
-    month = pointer.ref.month;
-    day = pointer.ref.day;
-    hour = pointer.ref.hour;
-    minute = pointer.ref.minute;
-    second = pointer.ref.second;
-    nanosecond = pointer.ref.nanosecond;
-    dayOfWeek = pointer.ref.dayOfWeek;
-    utcOffset = pointer.ref.utcOffset;
-  }
-
-  static SdlxDateTime fromPointer(Pointer<SdlDateTime> pointer) =>
-      SdlxDateTime()..loadFromPointer(pointer);
 }

@@ -59,16 +59,16 @@ int main() {
       }
     }
     renderer
-      ..setDrawColor(SdlxColor(0, 0, 0))
+      ..setDrawColor(const SdlxColor(0, 0, 0))
       ..clear()
-      ..filledPolygonColor(clickPoints, SdlxColor(255, 255, 255, 64))
-      ..polygonColor(clickPoints, SdlxColor(255, 255, 255))
-      ..bezierColor(clickPoints, 10, SdlxColor(255, 0, 0));
+      ..filledPolygonColor(clickPoints, const SdlxColor(255, 255, 255, 64))
+      ..polygonColor(clickPoints, const SdlxColor(255, 255, 255))
+      ..bezierColor(clickPoints, 10, const SdlxColor(255, 0, 0));
     for (var n = 0; n < clickPoints.length; n++) {
       renderer.stringColor(
         clickPoints[n],
         (n + 1).toString(),
-        SdlxColor(0, 255, 0),
+        const SdlxColor(0, 255, 0),
       );
     }
     renderer.present();

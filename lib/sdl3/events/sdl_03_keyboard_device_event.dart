@@ -1,12 +1,20 @@
 part of '../sdl_events.dart';
 
 class SdlxKeyboardDeviceEvent extends SdlxEvent {
-  SdlxKeyboardDeviceEvent({
+  const SdlxKeyboardDeviceEvent({
     super.type = 0,
     super.reserved = 0,
     super.timestamp = 0,
     this.which = 0,
   });
+
+  factory SdlxKeyboardDeviceEvent.fromPointer(Pointer<SdlEvent> pointer) =>
+      SdlxKeyboardDeviceEvent(
+        type: pointer.ref.kdevice.type,
+        reserved: pointer.ref.kdevice.reserved,
+        timestamp: pointer.ref.kdevice.timestamp,
+        which: pointer.ref.kdevice.which,
+      );
 
   factory SdlxKeyboardDeviceEvent.added({
     int reserved = 0,
@@ -18,6 +26,7 @@ class SdlxKeyboardDeviceEvent extends SdlxEvent {
     timestamp: timestamp,
     which: which,
   );
+
   factory SdlxKeyboardDeviceEvent.removed({
     int reserved = 0,
     int timestamp = 0,
@@ -29,7 +38,7 @@ class SdlxKeyboardDeviceEvent extends SdlxEvent {
     which: which,
   );
 
-  int which;
+  final int which;
 
   @override
   Pointer<SdlEvent> calloc() {
@@ -40,15 +49,4 @@ class SdlxKeyboardDeviceEvent extends SdlxEvent {
     pointer.ref.kdevice.which = which;
     return pointer;
   }
-
-  @override
-  void loadFromPointer(Pointer<SdlEvent> pointer) {
-    type = pointer.ref.kdevice.type;
-    reserved = pointer.ref.kdevice.reserved;
-    timestamp = pointer.ref.kdevice.timestamp;
-    which = pointer.ref.kdevice.which;
-  }
-
-  static SdlxKeyboardDeviceEvent fromPointer(Pointer<SdlEvent> pointer) =>
-      SdlxKeyboardDeviceEvent()..loadFromPointer(pointer);
 }

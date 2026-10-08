@@ -1,7 +1,7 @@
 part of '../sdl_gpu.dart';
 
 class SdlxGpuSamplerCreateInfo {
-  SdlxGpuSamplerCreateInfo({
+  const SdlxGpuSamplerCreateInfo({
     this.minFilter = 0,
     this.magFilter = 0,
     this.mipmapMode = 0,
@@ -19,22 +19,23 @@ class SdlxGpuSamplerCreateInfo {
     this.padding2 = 0,
     this.props = 0,
   });
-  int minFilter;
-  int magFilter;
-  int mipmapMode;
-  int addressModeU;
-  int addressModeV;
-  int addressModeW;
-  double mipLodBias;
-  double maxAnisotropy;
-  int compareOp;
-  double minLod;
-  double maxLod;
-  bool enableAnisotropy;
-  bool enableCompare;
-  int padding1;
-  int padding2;
-  int props;
+
+  final int minFilter;
+  final int magFilter;
+  final int mipmapMode;
+  final int addressModeU;
+  final int addressModeV;
+  final int addressModeW;
+  final double mipLodBias;
+  final double maxAnisotropy;
+  final int compareOp;
+  final double minLod;
+  final double maxLod;
+  final bool enableAnisotropy;
+  final bool enableCompare;
+  final int padding1;
+  final int padding2;
+  final int props;
 
   Pointer<SdlGpuSamplerCreateInfo> calloc() {
     final pointer = ffi.calloc<SdlGpuSamplerCreateInfo>();

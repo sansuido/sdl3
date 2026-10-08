@@ -192,19 +192,19 @@ bool appInit() {
   gPolygons = [];
   gPolygons
     ..add(
-      Polygon.fromLTWH(SdlxFPoint(0, 0), SdlxFPoint(32, 64))
-        ..shift(SdlxFPoint(320 - 64, 240 - 64)),
+      Polygon.fromLTWH(const SdlxFPoint(0, 0), const SdlxFPoint(32, 64))
+        ..shift(const SdlxFPoint(320 - 64, 240 - 64)),
     )
     ..add(
       Polygon([
-        SdlxFPoint(64 + 18, 0 + 18),
-        SdlxFPoint(64 + 18, 64 + 18),
-        SdlxFPoint(0 + 18, 64 + 18),
-      ])..shift(SdlxFPoint(320 - 64, 240 - 64)),
+        const SdlxFPoint(64 + 18, 0 + 18),
+        const SdlxFPoint(64 + 18, 64 + 18),
+        const SdlxFPoint(0 + 18, 64 + 18),
+      ])..shift(const SdlxFPoint(320 - 64, 240 - 64)),
     )
     ..add(
-      Polygon.fromLTWH(SdlxFPoint(0, 0), SdlxFPoint(64, 64))
-        ..shift(SdlxFPoint(320 + 16, 240 + 16)),
+      Polygon.fromLTWH(const SdlxFPoint(0, 0), const SdlxFPoint(64, 64))
+        ..shift(const SdlxFPoint(320 + 16, 240 + 16)),
     );
   return true;
 }
@@ -233,7 +233,7 @@ bool appEvent() {
           case SdlkEvent.mouseButtonDown:
             final mouse = Polygon.fromCenter(
               SdlxFPoint(event.x, event.y),
-              SdlxFPoint(1, 1),
+              const SdlxFPoint(1, 1),
             );
             for (var i = gPolygons.length - 1; i >= 0; i--) {
               final polygon = gPolygons[i];
@@ -265,10 +265,10 @@ bool appIterate() {
       }
     }
   }
-  final i1 = SdlxFPoint(0, 480 / 4);
-  final i2 = SdlxFPoint(640, 480 / 4 * 3);
+  const i1 = SdlxFPoint(0, 480 / 4);
+  const i2 = SdlxFPoint(640, 480 / 4 * 3);
   gRenderer
-    ..setDrawColor(SdlxColor(0, 0, 0))
+    ..setDrawColor(const SdlxColor(0, 0, 0))
     ..clear();
   for (final polygon in gPolygons) {
     if (polygon == gHoldPolygon) {

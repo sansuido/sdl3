@@ -1,7 +1,7 @@
 part of '../sdl_filesystem.dart';
 
 class SdlxPathInfo {
-  SdlxPathInfo({
+  const SdlxPathInfo({
     this.type = 0,
     this.size = 0,
     this.createTime = 0,
@@ -9,11 +9,20 @@ class SdlxPathInfo {
     this.accessTime = 0,
   });
 
-  int type;
-  int size;
-  int createTime;
-  int modifyTime;
-  int accessTime;
+  factory SdlxPathInfo.fromPointer(Pointer<SdlPathInfo> pointer) =>
+      SdlxPathInfo(
+        type: pointer.ref.type,
+        size: pointer.ref.size,
+        createTime: pointer.ref.createTime,
+        modifyTime: pointer.ref.modifyTime,
+        accessTime: pointer.ref.accessTime,
+      );
+
+  final int type;
+  final int size;
+  final int createTime;
+  final int modifyTime;
+  final int accessTime;
 
   Pointer<SdlPathInfo> calloc() {
     final pointer = ffi.calloc<SdlPathInfo>();
@@ -23,13 +32,5 @@ class SdlxPathInfo {
     pointer.ref.modifyTime = modifyTime;
     pointer.ref.accessTime = accessTime;
     return pointer;
-  }
-
-  void loadFromPointer(Pointer<SdlPathInfo> pointer) {
-    type = pointer.ref.type;
-    size = pointer.ref.size;
-    createTime = pointer.ref.createTime;
-    modifyTime = pointer.ref.modifyTime;
-    accessTime = pointer.ref.accessTime;
   }
 }

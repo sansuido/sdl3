@@ -1,5 +1,6 @@
 // https://github.com/libsdl-org/SDL_mixer/blob/main/test/testspatialization.c
 import 'dart:ffi';
+import 'dart:math' as math;
 
 import 'package:sdl3/sdl3.dart';
 
@@ -140,40 +141,38 @@ bool appIterate() {
   final angle =
       moment *
       2.0 *
-      SDL_PI_F; // angle on the circle for this moment, in radians.
-  final center = SdlxFPoint(0, 0)
-    ..x = 640.0 / 2.0
-    ..y = 480.0 / 2.0;
+      math.pi; // angle on the circle for this moment, in radians.
+  const center = SdlxFPoint(640.0 / 2.0, 480.0 / 2.0);
   const radius = 200.0; // size of half the circle (radius, not diameter).
   const boxsize = 30.0;
-  final sourcept = SdlxFPoint(0, 0);
-  final position = MixxPoint3D()..y = 0; // always horizontal.
+  const scale = 3.0;
+
+  final MixxPoint3D position;
+  final SdlxFPoint sourcept;
+
   // run in a horizontal circle around the listener (circling on X and Z coordinates).
   if (gAutopilot) {
-    position
-      ..x = sdlCosf(angle)
-      ..z = sdlSinf(angle);
-    sourcept
-      ..x = center.x + (position.x * radius)
-      ..y = center.y + (position.z * radius);
+    final posX = math.cos(angle);
+    final posZ = math.sin(angle);
+    position = MixxPoint3D(
+      x: posX * scale, // make distance attenuation noticeble.
+      z: posZ * scale,
+    );
+    sourcept = SdlxFPoint(
+      center.x + (posX * radius),
+      center.y + (posZ * radius),
+    );
   } else {
-    position
-      ..x =
-          ((gMouseX / 640.0) * 2.0) -
-          1.0 // scale to -1.0f to 1.0f
-      ..z = ((gMouseY / 480.0) * 2.0) - 1.0;
-    sourcept
-      ..x = gMouseX
-      ..y = gMouseY;
+    final posX = ((gMouseX / 640.0) * 2.0) - 1.0; // scale to -1.0f to 1.0f
+    final posZ = ((gMouseY / 480.0) * 2.0) - 1.0;
+    position = MixxPoint3D(x: posX * scale, z: posZ * scale);
+    sourcept = SdlxFPoint(gMouseX, gMouseY);
   }
-  const scale = 3.0;
-  position
-    ..x *=
-        scale // make distance attenuation noticable.
-    ..z *= scale;
+
   mixxSetTrack3DPosition(gTrack, position);
   sdlSetRenderDrawColor(gRenderer, 0, 0, 0, 255);
   sdlRenderClear(gRenderer);
+
   if (gTrack.playing() && gPcms.isNotEmpty) {
     sdlSetRenderDrawColor(gRenderer, 255, 255, 255, 255);
     double px = 0;
@@ -189,12 +188,14 @@ bool appIterate() {
     sdlSetRenderDrawColor(gRenderer, 255, 255, 255, 255);
     sdlRenderLine(gRenderer, 0, 240, 640, 240);
   }
+
   {
-    final sourceRect = SdlxFRect()
-      ..x = sourcept.x - boxsize / 2
-      ..y = sourcept.y - boxsize / 2
-      ..w = boxsize
-      ..h = boxsize;
+    final sourceRect = SdlxFRect(
+      sourcept.x - boxsize / 2,
+      sourcept.y - boxsize / 2,
+      boxsize,
+      boxsize,
+    );
     sdlSetRenderDrawColor(gRenderer, 0, 0, 255, 255);
     sdlxRenderFillRect(gRenderer, sourceRect);
     sdlSetRenderDrawColor(gRenderer, 255, 255, 255, 255);
@@ -205,12 +206,14 @@ bool appIterate() {
       'SOURCE',
     );
   }
+
   {
-    final listenerRect = SdlxFRect()
-      ..x = center.x - boxsize / 2
-      ..y = center.y - boxsize / 2
-      ..w = boxsize
-      ..h = boxsize;
+    final listenerRect = SdlxFRect(
+      center.x - boxsize / 2,
+      center.y - boxsize / 2,
+      boxsize,
+      boxsize,
+    );
     sdlSetRenderDrawColor(gRenderer, 0, 255, 0, 255);
     sdlxRenderFillRect(gRenderer, listenerRect);
     sdlSetRenderDrawColor(gRenderer, 255, 255, 255, 255);
@@ -221,6 +224,7 @@ bool appIterate() {
       'LISTENER',
     );
   }
+
   sdlRenderPresent(gRenderer);
   return true;
 }

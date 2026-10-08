@@ -250,22 +250,26 @@ Pointer<SdlGpuComputePipeline> sdlxShaderCrossCompileComputePipelineFromSpirv(
 SdlxShaderCrossGraphicsShaderMetadata? sdlxShaderCrossReflectGraphicsSpirv(
   Uint8List bytecode, {
   int props = 0,
-}) {
-  SdlxShaderCrossGraphicsShaderMetadata? metadata;
-  final bytecodePointer = ffi.calloc<Uint8>(bytecode.length)
-    ..asTypedList(bytecode.length).setAll(0, bytecode);
+}) => ffi.using((arena) {
+  final bytecodePointer = arena<Uint8>(bytecode.length);
+  bytecodePointer.asTypedList(bytecode.length).setAll(0, bytecode);
+
   final result = sdlShaderCrossReflectGraphicsSpirv(
     bytecodePointer,
     bytecode.length,
     props,
   );
-  if (result != nullptr) {
-    metadata = SdlxShaderCrossGraphicsShaderMetadata()..loadFromPointer(result);
+
+  if (result == nullptr) {
+    return null;
+  }
+
+  try {
+    return SdlxShaderCrossGraphicsShaderMetadata.fromPointer(result);
+  } finally {
     sdlFree(result.cast<Void>());
   }
-  bytecodePointer.callocFree();
-  return metadata;
-}
+});
 
 ///
 /// Reflect compute pipeline info from SPIRV code. If your shader source is HLSL, you should obtain SPIR-V bytecode from SDL_ShaderCross_CompileSPIRVFromHLSL(). This must be freed with SDL_free() when you are done with the metadata.
@@ -288,23 +292,26 @@ SdlxShaderCrossGraphicsShaderMetadata? sdlxShaderCrossReflectGraphicsSpirv(
 SdlxShaderCrossComputePipelineMetadata? sdlxShaderCrossReflectComputeSpirv(
   Uint8List bytecode, {
   int props = 0,
-}) {
-  SdlxShaderCrossComputePipelineMetadata? metadata;
-  final bytecodePointer = ffi.calloc<Uint8>(bytecode.length)
-    ..asTypedList(bytecode.length).setAll(0, bytecode);
+}) => ffi.using((arena) {
+  final bytecodePointer = arena<Uint8>(bytecode.length);
+  bytecodePointer.asTypedList(bytecode.length).setAll(0, bytecode);
+
   final result = sdlShaderCrossReflectComputeSpirv(
     bytecodePointer,
     bytecode.length,
     props,
   );
-  if (result != nullptr) {
-    metadata = SdlxShaderCrossComputePipelineMetadata()
-      ..loadFromPointer(result);
+
+  if (result == nullptr) {
+    return null;
+  }
+
+  try {
+    return SdlxShaderCrossComputePipelineMetadata.fromPointer(result);
+  } finally {
     sdlFree(result.cast<Void>());
   }
-  bytecodePointer.callocFree();
-  return metadata;
-}
+});
 
 ///
 /// Compile to DXBC bytecode from HLSL code via a SPIRV-Cross round trip.
@@ -461,10 +468,11 @@ Uint8List? _compileCodeFromHlsl({
       return sdlxShaderCrossCompileDxilFromHlsl(info);
     case SdlkGpuShaderformat.msl:
       final mslString = sdlxShaderCrossTranspileMslFromSpirv(
-        SdlxShaderCrossSpirvInfo()
-          ..bytecode = spirv
-          ..shaderStage = info.shaderStage
-          ..entrypoint = info.entrypoint,
+        SdlxShaderCrossSpirvInfo(
+          bytecode: spirv,
+          shaderStage: info.shaderStage,
+          entrypoint: info.entrypoint,
+        ),
       );
       return mslString != null
           ? Uint8List.fromList(utf8.encode(mslString))
@@ -499,16 +507,17 @@ sdlxShaderCrossGraphicsShaderFromHlsl(
   }
   final shader = sdlxCreateGpuShader(
     device,
-    SdlxGpuShaderCreateInfo()
-      ..code = code
-      ..entrypoint = info.entrypoint
-      ..format = format
-      ..stage = info.shaderStage
-      ..numSamplers = metadata.resourceInfo.numSamplers
-      ..numStorageTextures = metadata.resourceInfo.numStorageTextures
-      ..numStorageBuffers = metadata.resourceInfo.numStorageBuffers
-      ..numUniformBuffers = metadata.resourceInfo.numUniformBuffers
-      ..props = props,
+    SdlxGpuShaderCreateInfo(
+      code: code,
+      entrypoint: info.entrypoint,
+      format: format,
+      stage: info.shaderStage,
+      numSamplers: metadata.resourceInfo.numSamplers,
+      numStorageTextures: metadata.resourceInfo.numStorageTextures,
+      numStorageBuffers: metadata.resourceInfo.numStorageBuffers,
+      numUniformBuffers: metadata.resourceInfo.numUniformBuffers,
+      props: props,
+    ),
   );
   if (shader == nullptr) {
     return null;
@@ -526,12 +535,18 @@ sdlxShaderCrossComputePipelineFromHlsl(
   SdlxShaderCrossHlslInfo info, {
   int props = 0,
 }) {
-  info.shaderStage = SdlkShadercrossShaderstage.compute;
-  final spirv = sdlxShaderCrossCompileSpirvFromHlsl(info);
+  final computeInfo = info.copyWith(
+    shaderStage: SdlkShadercrossShaderstage.compute,
+  );
+  final spirv = sdlxShaderCrossCompileSpirvFromHlsl(computeInfo);
   if (spirv == null) {
     return null;
   }
-  final code = _compileCodeFromHlsl(format: format, info: info, spirv: spirv);
+  final code = _compileCodeFromHlsl(
+    format: format,
+    info: computeInfo,
+    spirv: spirv,
+  );
   if (code == null) {
     return null;
   }
@@ -541,20 +556,21 @@ sdlxShaderCrossComputePipelineFromHlsl(
   }
   final pipeline = sdlxCreateGpuComputePipeline(
     device,
-    SdlxGpuComputePipelineCreateInfo()
-      ..code = code
-      ..entrypoint = info.entrypoint
-      ..format = format
-      ..numSamplers = metadata.numSamplers
-      ..numReadonlyStorageTextures = metadata.numReadonlyStorageTextures
-      ..numReadonlyStorageBuffers = metadata.numReadonlyStorageBuffers
-      ..numReadwriteStorageTextures = metadata.numReadwriteStorageTextures
-      ..numReadwriteStorageBuffers = metadata.numReadwriteStorageBuffers
-      ..numUniformBuffers = metadata.numUniformBuffers
-      ..threadcountX = metadata.threadcountX
-      ..threadcountY = metadata.threadcountY
-      ..threadcountZ = metadata.threadcountZ
-      ..props = props,
+    SdlxGpuComputePipelineCreateInfo(
+      code: code,
+      entrypoint: computeInfo.entrypoint,
+      format: format,
+      numSamplers: metadata.numSamplers,
+      numReadonlyStorageTextures: metadata.numReadonlyStorageTextures,
+      numReadonlyStorageBuffers: metadata.numReadonlyStorageBuffers,
+      numReadwriteStorageTextures: metadata.numReadwriteStorageTextures,
+      numReadwriteStorageBuffers: metadata.numReadwriteStorageBuffers,
+      numUniformBuffers: metadata.numUniformBuffers,
+      threadcountX: metadata.threadcountX,
+      threadcountY: metadata.threadcountY,
+      threadcountZ: metadata.threadcountZ,
+      props: props,
+    ),
   );
   if (pipeline == nullptr) {
     return null;

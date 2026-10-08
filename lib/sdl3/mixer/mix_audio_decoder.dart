@@ -179,7 +179,7 @@ extension MixAudioDecoderPointerEx on Pointer<MixAudioDecoder> {
   /// - [MIX_GetAudioDecoderFormat - SDL3 Wiki](https://wiki.libsdl.org/SDL3/MIX_GetAudioDecoderFormat)
   ///
   /// {@category mixer}
-  bool getFormat(SdlxAudioSpec spec) => mixxGetAudioDecoderFormat(this, spec);
+  SdlxAudioSpec? getFormat() => mixxGetAudioDecoderFormat(this);
 
   ///
   /// Decode more audio from a MIX_AudioDecoder.

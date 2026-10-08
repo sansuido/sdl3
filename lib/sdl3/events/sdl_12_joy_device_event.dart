@@ -1,12 +1,20 @@
 part of '../sdl_events.dart';
 
 class SdlxJoyDeviceEvent extends SdlxEvent {
-  SdlxJoyDeviceEvent({
+  const SdlxJoyDeviceEvent({
     super.type = 0,
     super.reserved = 0,
     super.timestamp = 0,
     this.which = 0,
   });
+
+  factory SdlxJoyDeviceEvent.fromPointer(Pointer<SdlEvent> pointer) =>
+      SdlxJoyDeviceEvent(
+        type: pointer.ref.jdevice.type,
+        reserved: pointer.ref.jdevice.reserved,
+        timestamp: pointer.ref.jdevice.timestamp,
+        which: pointer.ref.jdevice.which,
+      );
 
   factory SdlxJoyDeviceEvent.added({
     int reserved = 0,
@@ -41,7 +49,7 @@ class SdlxJoyDeviceEvent extends SdlxEvent {
     which: which,
   );
 
-  int which;
+  final int which;
 
   @override
   Pointer<SdlEvent> calloc() {
@@ -52,15 +60,4 @@ class SdlxJoyDeviceEvent extends SdlxEvent {
     pointer.ref.jdevice.which = which;
     return pointer;
   }
-
-  @override
-  void loadFromPointer(Pointer<SdlEvent> pointer) {
-    type = pointer.ref.jdevice.type;
-    reserved = pointer.ref.jdevice.reserved;
-    timestamp = pointer.ref.jdevice.timestamp;
-    which = pointer.ref.jdevice.which;
-  }
-
-  static SdlxJoyDeviceEvent fromPointer(Pointer<SdlEvent> pointer) =>
-      SdlxJoyDeviceEvent()..loadFromPointer(pointer);
 }

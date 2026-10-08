@@ -1,20 +1,37 @@
 part of '../sdl_events.dart';
 
 class SdlxGamepadSensorEvent extends SdlxEvent {
-  SdlxGamepadSensorEvent({
+  const SdlxGamepadSensorEvent({
     super.type = SDL_EVENT_GAMEPAD_SENSOR_UPDATE,
     super.reserved = 0,
     super.timestamp = 0,
     this.which = 0,
-    List<double>? data,
+    this.data = const [0.0, 0.0, 0.0],
     this.sensor = 0,
-  }) {
-    this.data = data ?? [];
+  });
+
+  factory SdlxGamepadSensorEvent.fromPointer(Pointer<SdlEvent> pointer) {
+    final ref = pointer.ref.gsensor;
+
+    final sensorData = List<double>.unmodifiable([
+      ref.data[0],
+      ref.data[1],
+      ref.data[2],
+    ]);
+
+    return SdlxGamepadSensorEvent(
+      type: ref.type,
+      reserved: ref.reserved,
+      timestamp: ref.timestamp,
+      which: ref.which,
+      data: sensorData,
+      sensor: ref.sensor,
+    );
   }
 
-  int which;
-  late List<double> data;
-  int sensor;
+  final int which;
+  final List<double> data;
+  final int sensor;
 
   @override
   Pointer<SdlEvent> calloc() {
@@ -35,20 +52,4 @@ class SdlxGamepadSensorEvent extends SdlxEvent {
     pointer.ref.gsensor.sensor = sensor;
     return pointer;
   }
-
-  @override
-  void loadFromPointer(Pointer<SdlEvent> pointer) {
-    type = pointer.ref.gsensor.type;
-    reserved = pointer.ref.gsensor.reserved;
-    timestamp = pointer.ref.gsensor.timestamp;
-    which = pointer.ref.gsensor.which;
-    data
-      ..add(pointer.ref.gsensor.data[0])
-      ..add(pointer.ref.gsensor.data[1])
-      ..add(pointer.ref.gsensor.data[2]);
-    sensor = pointer.ref.gsensor.sensor;
-  }
-
-  static SdlxGamepadSensorEvent fromPointer(Pointer<SdlEvent> pointer) =>
-      SdlxGamepadSensorEvent()..loadFromPointer(pointer);
 }
