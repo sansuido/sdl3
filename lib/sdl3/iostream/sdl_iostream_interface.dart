@@ -37,8 +37,8 @@ class SdlxIoStreamInterface {
   final Pointer<NativeFunction<SdlIoStreamInterfaceFlush>> flush;
   final Pointer<NativeFunction<SdlIoStreamInterfaceClose>> close;
 
-  Pointer<SdlIoStreamInterface> calloc() {
-    final pointer = ffi.calloc<SdlIoStreamInterface>();
+  Pointer<SdlIoStreamInterface> toNative([Allocator allocator = ffi.calloc]) {
+    final pointer = allocator<SdlIoStreamInterface>();
     pointer.ref.version = version;
     pointer.ref.size = size;
     pointer.ref.seek = seek;

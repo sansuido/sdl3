@@ -14,8 +14,8 @@ class SdlxCursorFrameInfo {
   final Pointer<SdlSurface> surface;
   final int duration;
 
-  Pointer<SdlCursorFrameInfo> calloc() {
-    final pointer = ffi.calloc<SdlCursorFrameInfo>();
+  Pointer<SdlCursorFrameInfo> toNative([Allocator allocator = ffi.calloc]) {
+    final pointer = allocator<SdlCursorFrameInfo>();
     pointer.ref
       ..surface = surface
       ..duration = duration;
@@ -24,8 +24,8 @@ class SdlxCursorFrameInfo {
 }
 
 extension SdlxCursorFrameInfoListExtension on List<SdlxCursorFrameInfo> {
-  Pointer<SdlCursorFrameInfo> calloc() {
-    final buffersPointer = ffi.calloc<SdlCursorFrameInfo>(length);
+  Pointer<SdlCursorFrameInfo> toNative([Allocator allocator = ffi.calloc]) {
+    final buffersPointer = allocator<SdlCursorFrameInfo>(length);
     for (var n = 0; n < length; n++) {
       final bufferPointer = buffersPointer + n;
       bufferPointer.ref.surface = this[n].surface;

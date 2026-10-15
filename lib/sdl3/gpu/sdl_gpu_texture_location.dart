@@ -17,8 +17,8 @@ class SdlxGpuTextureLocation {
   final int y;
   final int z;
 
-  Pointer<SdlGpuTextureLocation> calloc() {
-    final pointer = ffi.calloc<SdlGpuTextureLocation>();
+  Pointer<SdlGpuTextureLocation> toNative([Allocator allocator = ffi.calloc]) {
+    final pointer = allocator<SdlGpuTextureLocation>();
     pointer.ref.texture = texture;
     pointer.ref.mipLevel = mipLevel;
     pointer.ref.layer = layer;

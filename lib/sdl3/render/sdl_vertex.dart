@@ -11,8 +11,8 @@ class SdlxVertex {
   final SdlxFColor color;
   final SdlxFPoint texCoord;
 
-  Pointer<SdlVertex> calloc() {
-    final pointer = ffi.calloc<SdlVertex>();
+  Pointer<SdlVertex> toNative([Allocator allocator = ffi.calloc]) {
+    final pointer = allocator<SdlVertex>();
     pointer.ref.position.x = position.x;
     pointer.ref.position.y = position.y;
     pointer.ref.color.r = color.r;
@@ -26,8 +26,8 @@ class SdlxVertex {
 }
 
 extension SdlxVertexListExtension on List<SdlxVertex> {
-  Pointer<SdlVertex> calloc() {
-    final buffersPointer = ffi.calloc<SdlVertex>(length);
+  Pointer<SdlVertex> toNative([Allocator allocator = ffi.calloc]) {
+    final buffersPointer = allocator<SdlVertex>(length);
     for (var n = 0; n < length; n++) {
       final bufferPointer = buffersPointer + n;
       bufferPointer.ref.position.x = this[n].position.x;

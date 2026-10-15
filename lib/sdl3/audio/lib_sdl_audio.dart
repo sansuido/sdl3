@@ -35,19 +35,21 @@ part of '../sdl_audio.dart';
 /// - [SDL_GetAudioPlaybackDevices - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetAudioPlaybackDevices)
 ///
 /// {@category audio}
-List<int> sdlxGetAudioPlaybackDevices() {
-  final result = <int>[];
-  final countPointer = ffi.calloc<Int32>();
+List<int> sdlxGetAudioPlaybackDevices() => ffi.using((arena) {
+  final countPointer = arena<Int32>();
   final devicesPointer = sdlGetAudioPlaybackDevices(countPointer);
-  if (devicesPointer != nullptr) {
-    for (var i = 0; i < countPointer.value; i++) {
-      result.add(devicesPointer[i]);
-    }
-    sdlFree(devicesPointer.cast<Void>());
+
+  if (devicesPointer == nullptr) {
+    return [];
   }
-  countPointer.callocFree();
+
+  final result = [
+    for (var i = 0; i < countPointer.value; i++) devicesPointer[i],
+  ];
+
+  sdlFree(devicesPointer.cast<Void>());
   return result;
-}
+});
 
 ///
 /// Get a list of currently-connected audio recording devices.
@@ -84,19 +86,21 @@ List<int> sdlxGetAudioPlaybackDevices() {
 /// - [SDL_GetAudioRecordingDevices - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetAudioRecordingDevices)
 ///
 /// {@category audio}
-List<int> sdlxGetAudioRecordingDevices() {
-  final result = <int>[];
-  final countPointer = ffi.calloc<Int32>();
+List<int> sdlxGetAudioRecordingDevices() => ffi.using((arena) {
+  final countPointer = arena<Int32>();
   final devicesPointer = sdlGetAudioRecordingDevices(countPointer);
-  if (devicesPointer != nullptr) {
-    for (var i = 0; i < countPointer.value; i++) {
-      result.add(devicesPointer[i]);
-    }
-    sdlFree(devicesPointer.cast<Void>());
+
+  if (devicesPointer == nullptr) {
+    return [];
   }
-  countPointer.callocFree();
+
+  final result = [
+    for (var i = 0; i < countPointer.value; i++) devicesPointer[i],
+  ];
+
+  sdlFree(devicesPointer.cast<Void>());
   return result;
-}
+});
 
 ///
 /// Get the current audio format of a specific audio device.
@@ -187,19 +191,21 @@ List<int> sdlxGetAudioRecordingDevices() {
 /// - [SDL_GetAudioDeviceChannelMap - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetAudioDeviceChannelMap)
 ///
 /// {@category audio}
-List<int> sdlxGetAudioDeviceChannelMap(int devid) {
-  final result = <int>[];
-  final countPointer = ffi.calloc<Int32>();
+List<int> sdlxGetAudioDeviceChannelMap(int devid) => ffi.using((arena) {
+  final countPointer = arena<Int32>();
   final channelMapsPointer = sdlGetAudioDeviceChannelMap(devid, countPointer);
-  if (channelMapsPointer != nullptr) {
-    for (var i = 0; i < countPointer.value; i++) {
-      result.add(channelMapsPointer[i]);
-    }
-    sdlFree(channelMapsPointer.cast<Void>());
+
+  if (channelMapsPointer == nullptr) {
+    return [];
   }
-  countPointer.callocFree();
+
+  final result = [
+    for (var i = 0; i < countPointer.value; i++) channelMapsPointer[i],
+  ];
+
+  sdlFree(channelMapsPointer.cast<Void>());
   return result;
-}
+});
 
 ///
 /// Open a specific audio device.
@@ -283,17 +289,10 @@ List<int> sdlxGetAudioDeviceChannelMap(int devid) {
 /// - [SDL_OpenAudioDevice - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_OpenAudioDevice)
 ///
 /// {@category audio}
-int sdlxOpenAudioDevice(int devid, SdlxAudioSpec? spec) {
-  Pointer<SdlAudioSpec> specPointer = nullptr;
-  if (spec != null) {
-    specPointer = spec.calloc();
-  }
-  final result = sdlOpenAudioDevice(devid, specPointer);
-  if (specPointer != nullptr) {
-    specPointer.callocFree();
-  }
-  return result;
-}
+int sdlxOpenAudioDevice(int devid, SdlxAudioSpec? spec) => ffi.using(
+  (arena) =>
+      sdlOpenAudioDevice(devid, spec != null ? spec.toNative(arena) : nullptr),
+);
 
 ///
 /// Bind a list of audio streams to an audio device.
@@ -341,15 +340,15 @@ int sdlxOpenAudioDevice(int devid, SdlxAudioSpec? spec) {
 /// - [SDL_BindAudioStreams - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_BindAudioStreams)
 ///
 /// {@category audio}
-bool sdlxBindAudioStreams(int devid, List<Pointer<SdlAudioStream>> streams) {
-  final streamsPointer = ffi.calloc<Pointer<SdlAudioStream>>(streams.length);
-  for (var i = 0; i < streams.length; i++) {
-    streamsPointer[i] = streams[i];
-  }
-  final result = sdlBindAudioStreams(devid, streamsPointer, streams.length);
-  streamsPointer.callocFree();
-  return result;
-}
+bool sdlxBindAudioStreams(int devid, List<Pointer<SdlAudioStream>> streams) =>
+    ffi.using((arena) {
+      final streamsPointer = arena<Pointer<SdlAudioStream>>(streams.length);
+      for (var i = 0; i < streams.length; i++) {
+        streamsPointer[i] = streams[i];
+      }
+
+      return sdlBindAudioStreams(devid, streamsPointer, streams.length);
+    });
 
 ///
 /// Unbind a list of audio streams from their audio devices.
@@ -378,14 +377,15 @@ bool sdlxBindAudioStreams(int devid, List<Pointer<SdlAudioStream>> streams) {
 /// - [SDL_UnbindAudioStreams - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_UnbindAudioStreams)
 ///
 /// {@category audio}
-void sdlxUnbindAudioStreams(List<Pointer<SdlAudioStream>> streams) {
-  final streamsPointer = ffi.calloc<Pointer<SdlAudioStream>>(streams.length);
-  for (var i = 0; i < streams.length; i++) {
-    streamsPointer[i] = streams[i];
-  }
-  sdlUnbindAudioStreams(streamsPointer, streams.length);
-  streamsPointer.callocFree();
-}
+void sdlxUnbindAudioStreams(List<Pointer<SdlAudioStream>> streams) =>
+    ffi.using((arena) {
+      final streamsPointer = arena<Pointer<SdlAudioStream>>(streams.length);
+      for (var i = 0; i < streams.length; i++) {
+        streamsPointer[i] = streams[i];
+      }
+
+      sdlUnbindAudioStreams(streamsPointer, streams.length);
+    });
 
 ///
 /// Create a new audio stream.
@@ -425,19 +425,12 @@ void sdlxUnbindAudioStreams(List<Pointer<SdlAudioStream>> streams) {
 Pointer<SdlAudioStream> sdlxCreateAudioStream(
   SdlxAudioSpec srcSpec,
   SdlxAudioSpec? dstSpec,
-) {
-  final srcSpecPointer = srcSpec.calloc();
-  Pointer<SdlAudioSpec> dstSpecPointer = nullptr;
-  if (dstSpec != null) {
-    dstSpecPointer = dstSpec.calloc();
-  }
-  final result = sdlCreateAudioStream(srcSpecPointer, dstSpecPointer);
-  srcSpecPointer.callocFree();
-  if (dstSpecPointer != nullptr) {
-    dstSpecPointer.callocFree();
-  }
-  return result;
-}
+) => ffi.using(
+  (arena) => sdlCreateAudioStream(
+    srcSpec.toNative(arena),
+    dstSpec != null ? dstSpec.toNative(arena) : nullptr,
+  ),
+);
 
 ///
 /// Query the current format of an audio stream.
@@ -533,28 +526,13 @@ bool sdlxSetAudioStreamFormat(
   Pointer<SdlAudioStream> stream,
   SdlxAudioSpec? srcSpec,
   SdlxAudioSpec? dstSpec,
-) {
-  Pointer<SdlAudioSpec> srcSpecPointer = nullptr;
-  Pointer<SdlAudioSpec> dstSpecPointer = nullptr;
-  if (srcSpec != null) {
-    srcSpecPointer = srcSpec.calloc();
-  }
-  if (dstSpec != null) {
-    dstSpecPointer = dstSpec.calloc();
-  }
-  final result = sdlSetAudioStreamFormat(
+) => ffi.using(
+  (arena) => sdlSetAudioStreamFormat(
     stream,
-    srcSpecPointer,
-    dstSpecPointer,
-  );
-  if (srcSpecPointer != nullptr) {
-    srcSpecPointer.callocFree();
-  }
-  if (dstSpecPointer != nullptr) {
-    dstSpecPointer.callocFree();
-  }
-  return result;
-}
+    srcSpec != null ? srcSpec.toNative(arena) : nullptr,
+    dstSpec != null ? dstSpec.toNative(arena) : nullptr,
+  ),
+);
 
 ///
 /// Get the current input channel map of an audio stream.
@@ -586,22 +564,25 @@ bool sdlxSetAudioStreamFormat(
 /// - [SDL_GetAudioStreamInputChannelMap - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetAudioStreamInputChannelMap)
 ///
 /// {@category audio}
-List<int> sdlxGetAudioStreamInputChannelMap(Pointer<SdlAudioStream> stream) {
-  final result = <int>[];
-  final countPointer = ffi.calloc<Int32>();
-  final inputChannelMapsPointer = sdlGetAudioStreamInputChannelMap(
-    stream,
-    countPointer,
-  );
-  if (inputChannelMapsPointer != nullptr) {
-    for (var i = 0; i < countPointer.value; i++) {
-      result.add(inputChannelMapsPointer[i]);
-    }
-    sdlFree(inputChannelMapsPointer.cast<Void>());
-  }
-  countPointer.callocFree();
-  return result;
-}
+List<int> sdlxGetAudioStreamInputChannelMap(Pointer<SdlAudioStream> stream) =>
+    ffi.using((arena) {
+      final countPointer = arena<Int32>();
+      final inputChannelMapsPointer = sdlGetAudioStreamInputChannelMap(
+        stream,
+        countPointer,
+      );
+
+      if (inputChannelMapsPointer == nullptr) {
+        return [];
+      }
+
+      final result = [
+        for (var i = 0; i < countPointer.value; i++) inputChannelMapsPointer[i],
+      ];
+
+      sdlFree(inputChannelMapsPointer.cast<Void>());
+      return result;
+    });
 
 ///
 /// Get the current output channel map of an audio stream.
@@ -633,22 +614,26 @@ List<int> sdlxGetAudioStreamInputChannelMap(Pointer<SdlAudioStream> stream) {
 /// - [SDL_GetAudioStreamOutputChannelMap - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetAudioStreamOutputChannelMap)
 ///
 /// {@category audio}
-List<int> sdlxGetAudioStreamOutputChannelMap(Pointer<SdlAudioStream> stream) {
-  final result = <int>[];
-  final countPointer = ffi.calloc<Int32>();
-  final inputChannelMapsPointer = sdlGetAudioStreamOutputChannelMap(
-    stream,
-    countPointer,
-  );
-  if (inputChannelMapsPointer != nullptr) {
-    for (var i = 0; i < countPointer.value; i++) {
-      result.add(inputChannelMapsPointer[i]);
-    }
-    sdlFree(inputChannelMapsPointer.cast<Void>());
-  }
-  countPointer.callocFree();
-  return result;
-}
+List<int> sdlxGetAudioStreamOutputChannelMap(Pointer<SdlAudioStream> stream) =>
+    ffi.using((arena) {
+      final countPointer = arena<Int32>();
+      final outputChannelMapsPointer = sdlGetAudioStreamOutputChannelMap(
+        stream,
+        countPointer,
+      );
+
+      if (outputChannelMapsPointer == nullptr) {
+        return [];
+      }
+
+      final result = [
+        for (var i = 0; i < countPointer.value; i++)
+          outputChannelMapsPointer[i],
+      ];
+
+      sdlFree(outputChannelMapsPointer.cast<Void>());
+      return result;
+    });
 
 ///
 /// Set the current input channel map of an audio stream.
@@ -719,19 +704,14 @@ List<int> sdlxGetAudioStreamOutputChannelMap(Pointer<SdlAudioStream> stream) {
 bool sdlxSetAudioStreamInputChannelMap(
   Pointer<SdlAudioStream> stream,
   List<int> chmaps,
-) {
-  final chmapsPointer = ffi.calloc<Int32>(chmaps.length);
+) => ffi.using((arena) {
+  final chmapsPointer = arena<Int32>(chmaps.length);
   for (var i = 0; i < chmaps.length; i++) {
     chmapsPointer[i] = chmaps[i];
   }
-  final result = sdlSetAudioStreamInputChannelMap(
-    stream,
-    chmapsPointer,
-    chmaps.length,
-  );
-  chmapsPointer.callocFree();
-  return result;
-}
+
+  return sdlSetAudioStreamInputChannelMap(stream, chmapsPointer, chmaps.length);
+});
 
 ///
 /// Set the current output channel map of an audio stream.
@@ -800,19 +780,18 @@ bool sdlxSetAudioStreamInputChannelMap(
 bool sdlxSetAudioStreamOutputChannelMap(
   Pointer<SdlAudioStream> stream,
   List<int> chmaps,
-) {
-  final chmapsPointer = ffi.calloc<Int32>(chmaps.length);
+) => ffi.using((arena) {
+  final chmapsPointer = arena<Int32>(chmaps.length);
   for (var i = 0; i < chmaps.length; i++) {
     chmapsPointer[i] = chmaps[i];
   }
-  final result = sdlSetAudioStreamOutputChannelMap(
+
+  return sdlSetAudioStreamOutputChannelMap(
     stream,
     chmapsPointer,
     chmaps.length,
   );
-  chmapsPointer.callocFree();
-  return result;
-}
+});
 
 ///
 /// Add data to the stream.
@@ -1100,22 +1079,14 @@ Pointer<SdlAudioStream> sdlxOpenAudioDeviceStream(
   SdlxAudioSpec? spec,
   Pointer<NativeFunction<SdlAudioStreamCallback>> callback,
   Pointer<Void> userdata,
-) {
-  Pointer<SdlAudioSpec> specPointer = nullptr;
-  if (spec != null) {
-    specPointer = spec.calloc();
-  }
-  final result = sdlOpenAudioDeviceStream(
+) => ffi.using(
+  (arena) => sdlOpenAudioDeviceStream(
     devid,
-    specPointer,
+    spec != null ? spec.toNative(arena) : nullptr,
     callback,
     userdata,
-  );
-  if (specPointer != nullptr) {
-    specPointer.callocFree();
-  }
-  return result;
-}
+  ),
+);
 
 ///
 /// Load the audio data of a WAVE file into memory.

@@ -43,8 +43,8 @@ class SdlxFPoint {
   SdlxFPoint operator /(SdlxFPoint other) =>
       SdlxFPoint(x / other.x, y / other.y);
 
-  Pointer<SdlFPoint> calloc() {
-    final pointer = ffi.calloc<SdlFPoint>();
+  Pointer<SdlFPoint> toNative([Allocator allocator = ffi.calloc]) {
+    final pointer = allocator<SdlFPoint>();
     pointer.ref.x = x;
     pointer.ref.y = y;
     return pointer;
@@ -60,8 +60,8 @@ extension SdlxFPointListExtension on List<SdlxFPoint> {
     return points;
   }
 
-  Pointer<SdlFPoint> calloc() {
-    final buffersPointer = ffi.calloc<SdlFPoint>(length);
+  Pointer<SdlFPoint> toNative([Allocator allocator = ffi.calloc]) {
+    final buffersPointer = allocator<SdlFPoint>(length);
     for (var i = 0; i < length; i++) {
       final bufferPointer = buffersPointer + i;
       bufferPointer.ref.x = this[i].x;
@@ -70,8 +70,8 @@ extension SdlxFPointListExtension on List<SdlxFPoint> {
     return buffersPointer;
   }
 
-  Pointer<Float> callocXy() {
-    final buffersPointer = ffi.calloc<Float>(length * 2);
+  Pointer<Float> toNativeXy([Allocator allocator = ffi.calloc]) {
+    final buffersPointer = allocator<Float>(length * 2);
     for (var i = 0; i < length; i++) {
       (buffersPointer + i * 2).value = this[i].x;
       (buffersPointer + i * 2 + 1).value = this[i].y;

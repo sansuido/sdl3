@@ -37,8 +37,10 @@ class SdlxGpuSamplerCreateInfo {
   final int padding2;
   final int props;
 
-  Pointer<SdlGpuSamplerCreateInfo> calloc() {
-    final pointer = ffi.calloc<SdlGpuSamplerCreateInfo>();
+  Pointer<SdlGpuSamplerCreateInfo> toNative([
+    Allocator allocator = ffi.calloc,
+  ]) {
+    final pointer = allocator<SdlGpuSamplerCreateInfo>();
     pointer.ref.minFilter = minFilter;
     pointer.ref.magFilter = magFilter;
     pointer.ref.mipmapMode = mipmapMode;

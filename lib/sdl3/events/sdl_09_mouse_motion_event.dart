@@ -41,8 +41,8 @@ class SdlxMouseMotionEvent extends SdlxEvent {
       windowId == targetId;
 
   @override
-  Pointer<SdlEvent> calloc() {
-    final pointer = ffi.calloc<SdlEvent>();
+  Pointer<SdlEvent> toNative([Allocator allocator = ffi.calloc]) {
+    final pointer = allocator<SdlEvent>();
     pointer.ref.motion.type = type;
     pointer.ref.motion.reserved = reserved;
     pointer.ref.motion.timestamp = timestamp;

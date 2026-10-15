@@ -28,12 +28,10 @@ Pointer<SdlHidDevice> sdlxHidOpen(
   int vendorId,
   int productId,
   String serialNumber,
-) {
-  final serialNumberPointer = serialNumber.toNativeWChar();
-  final result = sdlHidOpen(vendorId, productId, serialNumberPointer);
-  serialNumberPointer.callocFree();
-  return result;
-}
+) => ffi.using((arena) {
+  final serialNumberPointer = serialNumber.toNativeWChar(arena);
+  return sdlHidOpen(vendorId, productId, serialNumberPointer);
+});
 
 ///
 /// Write an Output report to a HID device.
@@ -72,14 +70,15 @@ int sdlxHidWrite(
   Pointer<SdlHidDevice> dev,
   Uint8List data, {
   int reportId = 0x00,
-}) {
-  final dataPointer = ffi.calloc<Uint8>(data.length + 1);
+}) => ffi.using((arena) {
+  final totalLength = data.length + 1;
+  final dataPointer = arena<Uint8>(totalLength);
+
   dataPointer[0] = reportId;
-  dataPointer.asTypedList(data.length + 1).setAll(1, data);
-  final result = sdlHidWrite(dev, dataPointer, data.length + 1);
-  dataPointer.callocFree();
-  return result;
-}
+  dataPointer.asTypedList(totalLength).setAll(1, data);
+
+  return sdlHidWrite(dev, dataPointer, totalLength);
+});
 
 ///
 /// Read an Input report from a HID device with timeout.
@@ -112,26 +111,23 @@ int sdlxHidWrite(
   Pointer<SdlHidDevice> dev,
   int length,
   int milliseconds,
-) {
-  var bytes = 0;
-  var reportId = 0;
-  late Uint8List data;
+) => ffi.using((arena) {
   final totalLength = length + 1;
-  final dataPointer = ffi.calloc<Uint8>(totalLength);
-  bytes = sdlHidReadTimeout(dev, dataPointer, totalLength, milliseconds);
-  if (bytes > 0) {
-    reportId = dataPointer[0];
-    if (bytes > 1) {
-      data = Uint8List.fromList(dataPointer.asTypedList(bytes).sublist(1));
-    } else {
-      data = Uint8List(0);
-    }
-  } else {
-    data = Uint8List(0);
+  final dataPointer = arena<Uint8>(totalLength);
+
+  final bytes = sdlHidReadTimeout(dev, dataPointer, totalLength, milliseconds);
+
+  if (bytes <= 0) {
+    return (bytes: bytes, data: Uint8List(0), reportId: 0);
   }
-  dataPointer.callocFree();
+
+  final reportId = dataPointer[0];
+  final data = bytes > 1
+      ? Uint8List.fromList(dataPointer.asTypedList(bytes).sublist(1))
+      : Uint8List(0);
+
   return (bytes: bytes, data: data, reportId: reportId);
-}
+});
 
 ///
 /// Read an Input report from a HID device.
@@ -163,26 +159,23 @@ int sdlxHidWrite(
 ({int bytes, Uint8List data, int reportId}) sdlxHidRead(
   Pointer<SdlHidDevice> dev,
   int length,
-) {
-  var bytes = 0;
-  var reportId = 0;
-  late Uint8List data;
+) => ffi.using((arena) {
   final totalLength = length + 1;
-  final dataPointer = ffi.calloc<Uint8>(totalLength);
-  bytes = sdlHidRead(dev, dataPointer, totalLength);
-  if (bytes > 0) {
-    reportId = dataPointer[0];
-    if (bytes > 1) {
-      data = Uint8List.fromList(dataPointer.asTypedList(bytes).sublist(1));
-    } else {
-      data = Uint8List(0);
-    }
-  } else {
-    data = Uint8List(0);
+  final dataPointer = arena<Uint8>(totalLength);
+
+  final bytes = sdlHidRead(dev, dataPointer, totalLength);
+
+  if (bytes <= 0) {
+    return (bytes: bytes, data: Uint8List(0), reportId: 0);
   }
-  dataPointer.callocFree();
+
+  final reportId = dataPointer[0];
+  final data = bytes > 1
+      ? Uint8List.fromList(dataPointer.asTypedList(bytes).sublist(1))
+      : Uint8List(0);
+
   return (bytes: bytes, data: data, reportId: reportId);
-}
+});
 
 ///
 /// Send a Feature report to the device.
@@ -219,14 +212,15 @@ int sdlxHidSendFeatureReport(
   Pointer<SdlHidDevice> dev,
   Uint8List data, {
   int reportId = 0x00,
-}) {
-  final dataPointer = ffi.calloc<Uint8>(data.length + 1);
+}) => ffi.using((arena) {
+  final totalLength = data.length + 1;
+  final dataPointer = arena<Uint8>(totalLength);
+
   dataPointer[0] = reportId;
-  dataPointer.asTypedList(data.length + 1).setAll(1, data);
-  final result = sdlHidSendFeatureReport(dev, dataPointer, data.length + 1);
-  dataPointer.callocFree();
-  return result;
-}
+  dataPointer.asTypedList(totalLength).setAll(1, data);
+
+  return sdlHidSendFeatureReport(dev, dataPointer, totalLength);
+});
 
 ///
 /// Get a feature report from a HID device.
@@ -260,26 +254,23 @@ int sdlxHidSendFeatureReport(
 ({int bytes, Uint8List data, int reportId}) sdlxHidGetFeatureReport(
   Pointer<SdlHidDevice> dev,
   int length,
-) {
-  var bytes = 0;
-  var reportId = 0;
-  late Uint8List data;
+) => ffi.using((arena) {
   final totalLength = length + 1;
-  final dataPointer = ffi.calloc<Uint8>(totalLength);
-  bytes = sdlHidGetFeatureReport(dev, dataPointer, totalLength);
-  if (bytes > 0) {
-    reportId = dataPointer[0];
-    if (bytes > 1) {
-      data = Uint8List.fromList(dataPointer.asTypedList(bytes).sublist(1));
-    } else {
-      data = Uint8List(0);
-    }
-  } else {
-    data = Uint8List(0);
+  final dataPointer = arena<Uint8>(totalLength);
+
+  final bytes = sdlHidGetFeatureReport(dev, dataPointer, totalLength);
+
+  if (bytes <= 0) {
+    return (bytes: bytes, data: Uint8List(0), reportId: 0);
   }
-  dataPointer.callocFree();
+
+  final reportId = dataPointer[0];
+  final data = bytes > 1
+      ? Uint8List.fromList(dataPointer.asTypedList(bytes).sublist(1))
+      : Uint8List(0);
+
   return (bytes: bytes, data: data, reportId: reportId);
-}
+});
 
 ///
 /// Get an input report from a HID device.
@@ -313,26 +304,23 @@ int sdlxHidSendFeatureReport(
 ({int bytes, Uint8List data, int reportId}) sdlxHidGetInputReport(
   Pointer<SdlHidDevice> dev,
   int length,
-) {
-  var bytes = 0;
-  var reportId = 0;
-  late Uint8List data;
+) => ffi.using((arena) {
   final totalLength = length + 1;
-  final dataPointer = ffi.calloc<Uint8>(totalLength);
-  bytes = sdlHidGetInputReport(dev, dataPointer, totalLength);
-  if (bytes > 0) {
-    reportId = dataPointer[0];
-    if (bytes > 1) {
-      data = Uint8List.fromList(dataPointer.asTypedList(bytes).sublist(1));
-    } else {
-      data = Uint8List(0);
-    }
-  } else {
-    data = Uint8List(0);
+  final dataPointer = arena<Uint8>(totalLength);
+
+  final bytes = sdlHidGetInputReport(dev, dataPointer, totalLength);
+
+  if (bytes <= 0) {
+    return (bytes: bytes, data: Uint8List(0), reportId: 0);
   }
-  dataPointer.callocFree();
+
+  final reportId = dataPointer[0];
+  final data = bytes > 1
+      ? Uint8List.fromList(dataPointer.asTypedList(bytes).sublist(1))
+      : Uint8List(0);
+
   return (bytes: bytes, data: data, reportId: reportId);
-}
+});
 
 ///
 /// Get The Manufacturer String from a HID device.
@@ -356,21 +344,17 @@ int sdlxHidSendFeatureReport(
 String? sdlxHidGetManufacturerString(
   Pointer<SdlHidDevice> dev, {
   int maxlen = 256,
-}) {
-  String? result;
-  final stringPointer = ffi.calloc<WChar>(maxlen);
+}) => ffi.using((arena) {
+  final stringPointer = arena<WChar>(maxlen);
   final errorcode = sdlHidGetManufacturerString(dev, stringPointer, maxlen);
-  if (errorcode == 0) {
-    result = stringPointer.toDartString();
-    if (result.isEmpty) {
-      result = null;
-    }
-  } else {
-    result = null;
+
+  if (errorcode != 0) {
+    return null;
   }
-  stringPointer.callocFree();
-  return result;
-}
+
+  final result = stringPointer.toDartString();
+  return result.isEmpty ? null : result;
+});
 
 ///
 /// Get The Product String from a HID device.
@@ -391,21 +375,20 @@ String? sdlxHidGetManufacturerString(
 /// - [SDL_hid_get_product_string - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_hid_get_product_string)
 ///
 /// {@category hidapi}
-String? sdlxHidGetProductString(Pointer<SdlHidDevice> dev, {int maxlen = 256}) {
-  String? result;
-  final stringPointer = ffi.calloc<WChar>(maxlen);
+String? sdlxHidGetProductString(
+  Pointer<SdlHidDevice> dev, {
+  int maxlen = 256,
+}) => ffi.using((arena) {
+  final stringPointer = arena<WChar>(maxlen);
   final errorcode = sdlHidGetProductString(dev, stringPointer, maxlen);
-  if (errorcode == 0) {
-    result = stringPointer.toDartString();
-    if (result.isEmpty) {
-      result = null;
-    }
-  } else {
-    result = null;
+
+  if (errorcode != 0) {
+    return null;
   }
-  stringPointer.callocFree();
-  return result;
-}
+
+  final result = stringPointer.toDartString();
+  return result.isEmpty ? null : result;
+});
 
 ///
 /// Get The Serial Number String from a HID device.
@@ -429,21 +412,17 @@ String? sdlxHidGetProductString(Pointer<SdlHidDevice> dev, {int maxlen = 256}) {
 String? sdlxHidGetSerialNumberString(
   Pointer<SdlHidDevice> dev, {
   int maxlen = 256,
-}) {
-  String? result;
-  final stringPointer = ffi.calloc<WChar>(maxlen);
+}) => ffi.using((arena) {
+  final stringPointer = arena<WChar>(maxlen);
   final errorcode = sdlHidGetSerialNumberString(dev, stringPointer, maxlen);
-  if (errorcode == 0) {
-    result = stringPointer.toDartString();
-    if (result.isEmpty) {
-      result = null;
-    }
-  } else {
-    result = null;
+
+  if (errorcode != 0) {
+    return null;
   }
-  stringPointer.callocFree();
-  return result;
-}
+
+  final result = stringPointer.toDartString();
+  return result.isEmpty ? null : result;
+});
 
 ///
 /// Get a string from a HID device, based on its string index.
@@ -469,26 +448,22 @@ String? sdlxHidGetIndexedString(
   Pointer<SdlHidDevice> dev,
   int stringIndex, {
   int maxlen = 256,
-}) {
-  String? result;
-  final stringPointer = ffi.calloc<WChar>(maxlen);
+}) => ffi.using((arena) {
+  final stringPointer = arena<WChar>(maxlen);
   final errorcode = sdlHidGetIndexedString(
     dev,
     stringIndex,
     stringPointer,
     maxlen,
   );
-  if (errorcode == 0) {
-    result = stringPointer.toDartString();
-    if (result.isEmpty) {
-      result = null;
-    }
-  } else {
-    result = null;
+
+  if (errorcode != 0) {
+    return null;
   }
-  stringPointer.callocFree();
-  return result;
-}
+
+  final result = stringPointer.toDartString();
+  return result.isEmpty ? null : result;
+});
 
 ///
 /// Get a report descriptor from a HID device.
@@ -515,16 +490,13 @@ String? sdlxHidGetIndexedString(
 Uint8List sdlxHidGetReportDescriptor(
   Pointer<SdlHidDevice> dev, {
   int bufSize = 4096,
-}) {
-  var bytes = 0;
-  late Uint8List data;
-  final dataPointer = ffi.calloc<Uint8>(bufSize);
-  bytes = sdlHidGetReportDescriptor(dev, dataPointer, bufSize);
-  if (bytes > 0) {
-    data = Uint8List.fromList(dataPointer.asTypedList(bytes).sublist(0));
-  } else {
-    data = Uint8List(0);
+}) => ffi.using((arena) {
+  final dataPointer = arena<Uint8>(bufSize);
+  final bytes = sdlHidGetReportDescriptor(dev, dataPointer, bufSize);
+
+  if (bytes <= 0) {
+    return Uint8List(0);
   }
-  dataPointer.callocFree();
-  return data;
-}
+
+  return Uint8List.fromList(dataPointer.asTypedList(bytes));
+});

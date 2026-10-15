@@ -41,8 +41,8 @@ class SdlxKeyboardDeviceEvent extends SdlxEvent {
   final int which;
 
   @override
-  Pointer<SdlEvent> calloc() {
-    final pointer = ffi.calloc<SdlEvent>();
+  Pointer<SdlEvent> toNative([Allocator allocator = ffi.calloc]) {
+    final pointer = allocator<SdlEvent>();
     pointer.ref.kdevice.type = type;
     pointer.ref.kdevice.reserved = reserved;
     pointer.ref.kdevice.timestamp = timestamp;

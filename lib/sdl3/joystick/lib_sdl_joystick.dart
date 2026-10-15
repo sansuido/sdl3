@@ -24,19 +24,20 @@ part of '../sdl_joystick.dart';
 /// - [SDL_GetJoysticks - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetJoysticks)
 ///
 /// {@category joystick}
-List<int> sdlxGetJoysticks() {
-  final result = <int>[];
-  final countPointer = ffi.calloc<Int32>();
+List<int> sdlxGetJoysticks() => ffi.using((arena) {
+  final countPointer = arena<Int32>();
   final joysticksPointer = sdlGetJoysticks(countPointer);
-  if (joysticksPointer != nullptr) {
-    for (var i = 0; i < countPointer.value; i++) {
-      result.add(joysticksPointer[i]);
-    }
+
+  if (joysticksPointer == nullptr) {
+    return [];
+  }
+
+  try {
+    return [for (var i = 0; i < countPointer.value; i++) joysticksPointer[i]];
+  } finally {
     sdlFree(joysticksPointer.cast<Void>());
   }
-  countPointer.callocFree();
-  return result;
-}
+});
 
 ///
 /// Attach a new virtual joystick.
@@ -77,12 +78,8 @@ List<int> sdlxGetJoysticks() {
 /// - [SDL_AttachVirtualJoystick - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_AttachVirtualJoystick)
 ///
 /// {@category joystick}
-int sdlxAttachVirtualJoystick(SdlxVirtualJoystickDesc desc) {
-  final descPointer = desc.calloc();
-  final result = sdlAttachVirtualJoystick(descPointer);
-  descPointer.callocAllFree();
-  return result;
-}
+int sdlxAttachVirtualJoystick(SdlxVirtualJoystickDesc desc) =>
+    ffi.using((arena) => sdlAttachVirtualJoystick(desc.toNative(arena)));
 
 ///
 /// Send a sensor update for an opened virtual joystick.
@@ -125,21 +122,19 @@ bool sdlxSendJoystickVirtualSensorData(
   int type,
   int sensorTimestamp,
   List<double> data,
-) {
-  final dataPointer = ffi.calloc<Float>(data.length);
-  for (var i = 0; i < data.length; i++) {
-    dataPointer[i] = data[i];
-  }
-  final result = sdlSendJoystickVirtualSensorData(
+) => ffi.using((arena) {
+  final count = data.length;
+  final dataPointer = arena<Float>(count);
+  dataPointer.asTypedList(count).setAll(0, data);
+
+  return sdlSendJoystickVirtualSensorData(
     joystick,
     type,
     sensorTimestamp,
     dataPointer,
-    data.length,
+    count,
   );
-  dataPointer.callocFree();
-  return result;
-}
+});
 
 ///
 /// Get the device information encoded in a SDL_GUID structure.
@@ -170,15 +165,12 @@ bool sdlxSendJoystickVirtualSensorData(
 /// {@category joystick}
 ({int crc16, int product, int vendor, int version}) sdlxGetJoystickGuidInfo(
   SdlGuid guid,
-) {
-  late int vendor;
-  late int product;
-  late int version;
-  late int crc16;
-  final vendorPointer = ffi.calloc<Uint16>();
-  final productPointer = ffi.calloc<Uint16>();
-  final versionPointer = ffi.calloc<Uint16>();
-  final crc16Pointer = ffi.calloc<Uint16>();
+) => ffi.using((arena) {
+  final vendorPointer = arena<Uint16>();
+  final productPointer = arena<Uint16>();
+  final versionPointer = arena<Uint16>();
+  final crc16Pointer = arena<Uint16>();
+
   sdlGetJoystickGuidInfo(
     guid,
     vendorPointer,
@@ -186,16 +178,14 @@ bool sdlxSendJoystickVirtualSensorData(
     versionPointer,
     crc16Pointer,
   );
-  vendor = vendorPointer.value;
-  product = productPointer.value;
-  version = versionPointer.value;
-  crc16 = crc16Pointer.value;
-  vendorPointer.callocFree();
-  productPointer.callocFree();
-  versionPointer.callocFree();
-  crc16Pointer.callocFree();
-  return (vendor: vendor, product: product, version: version, crc16: crc16);
-}
+
+  return (
+    vendor: vendorPointer.value,
+    product: productPointer.value,
+    version: versionPointer.value,
+    crc16: crc16Pointer.value,
+  );
+});
 
 ///
 /// Get the initial state of an axis control on a joystick.
@@ -221,16 +211,16 @@ bool sdlxSendJoystickVirtualSensorData(
 /// - [SDL_GetJoystickAxisInitialState - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetJoystickAxisInitialState)
 ///
 /// {@category joystick}
-int? sdlxGetJoystickAxisInitialState(Pointer<SdlJoystick> joystick, int axis) {
-  int? result;
-  final statePointer = ffi.calloc<Int16>();
-  final bl = sdlGetJoystickAxisInitialState(joystick, axis, statePointer);
-  if (bl) {
-    result = statePointer.value;
-  }
-  statePointer.callocFree();
-  return result;
-}
+int? sdlxGetJoystickAxisInitialState(Pointer<SdlJoystick> joystick, int axis) =>
+    ffi.using((arena) {
+      final statePointer = arena<Int16>();
+
+      if (!sdlGetJoystickAxisInitialState(joystick, axis, statePointer)) {
+        return null;
+      }
+
+      return statePointer.value;
+    });
 
 ///
 /// Get the ball axis change since the last poll.
@@ -264,23 +254,16 @@ int? sdlxGetJoystickAxisInitialState(Pointer<SdlJoystick> joystick, int axis) {
 ({int dx, int dy})? sdlxGetJoystickBall(
   Pointer<SdlJoystick> joystick,
   int ball,
-) {
-  var dx = 0;
-  var dy = 0;
-  final dxPointer = ffi.calloc<Int32>();
-  final dyPointer = ffi.calloc<Int32>();
-  final bl = sdlGetJoystickBall(joystick, ball, dxPointer, dyPointer);
-  if (bl) {
-    dx = dxPointer.value;
-    dy = dyPointer.value;
-  }
-  dxPointer.callocFree();
-  dyPointer.callocFree();
-  if (!bl) {
+) => ffi.using((arena) {
+  final dxPointer = arena<Int32>();
+  final dyPointer = arena<Int32>();
+
+  if (!sdlGetJoystickBall(joystick, ball, dxPointer, dyPointer)) {
     return null;
   }
-  return (dx: dx, dy: dy);
-}
+
+  return (dx: dxPointer.value, dy: dyPointer.value);
+});
 
 ///
 /// Get the current state of a joystick sensor.
@@ -311,18 +294,15 @@ List<double> sdlxGetJoystickSensorData(
   Pointer<SdlJoystick> joystick,
   int type,
   int numValues,
-) {
-  final data = <double>[];
-  final dataPointer = ffi.calloc<Float>(numValues);
-  final bl = sdlGetJoystickSensorData(joystick, type, dataPointer, numValues);
-  if (bl) {
-    for (var i = 0; i < numValues; i++) {
-      data.add(dataPointer[i]);
-    }
+) => ffi.using((arena) {
+  final dataPointer = arena<Float>(numValues);
+
+  if (!sdlGetJoystickSensorData(joystick, type, dataPointer, numValues)) {
+    return [];
   }
-  dataPointer.callocFree();
-  return data;
-}
+
+  return [for (var i = 0; i < numValues; i++) dataPointer[i]];
+});
 
 ///
 /// Get the battery state of a joystick.
@@ -355,11 +335,9 @@ List<double> sdlxGetJoystickSensorData(
 /// {@category joystick}
 ({int percent, int state}) sdlxGetJoystickPowerInfo(
   Pointer<SdlJoystick> joystick,
-) {
-  var percent = 0;
-  final percentPointer = ffi.calloc<Int32>();
+) => ffi.using((arena) {
+  final percentPointer = arena<Int32>();
   final state = sdlGetJoystickPowerInfo(joystick, percentPointer);
-  percent = percentPointer.value;
-  percentPointer.callocFree();
-  return (percent: percent, state: state);
-}
+
+  return (percent: percentPointer.value, state: state);
+});

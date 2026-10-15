@@ -11,8 +11,8 @@ class SdlxPoint {
 
   SdlxFPoint toFloat() => SdlxFPoint(x.toDouble(), y.toDouble());
 
-  Pointer<SdlPoint> calloc() {
-    final pointer = ffi.calloc<SdlPoint>();
+  Pointer<SdlPoint> toNative([Allocator allocator = ffi.calloc]) {
+    final pointer = allocator<SdlPoint>();
     pointer.ref.x = x;
     pointer.ref.y = y;
     return pointer;
@@ -20,8 +20,8 @@ class SdlxPoint {
 }
 
 extension SdlxPointListExtension on List<SdlxPoint> {
-  Pointer<SdlPoint> calloc() {
-    final buffersPointer = ffi.calloc<SdlPoint>(length);
+  Pointer<SdlPoint> toNative([Allocator allocator = ffi.calloc]) {
+    final buffersPointer = allocator<SdlPoint>(length);
     for (var n = 0; n < length; n++) {
       final bufferPointer = buffersPointer + n;
       bufferPointer.ref.x = this[n].x;

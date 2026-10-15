@@ -274,24 +274,19 @@ part of '../sdl_image.dart';
 /// {@category image}
 ({Pointer<SdlSurface> frame, int duration})? imgxGetAnimationDecoderFrame(
   Pointer<ImgAnimationDecoder> decoder,
-) {
-  late Pointer<SdlSurface> frame;
-  late int duration;
-  final framePointer = ffi.calloc<Pointer<SdlSurface>>();
-  final durationPointer = ffi.calloc<Uint64>();
-  final result = imgGetAnimationDecoderFrame(
+) => ffi.using((arena) {
+  final framePointer = arena<Pointer<SdlSurface>>();
+  final durationPointer = arena<Uint64>();
+
+  final success = imgGetAnimationDecoderFrame(
     decoder,
     framePointer,
     durationPointer,
   );
-  if (result) {
-    frame = framePointer.value;
-    duration = durationPointer.value;
-  }
-  framePointer.callocFree();
-  durationPointer.callocFree();
-  if (!result) {
+
+  if (!success) {
     return null;
   }
-  return (frame: frame, duration: duration);
-}
+
+  return (frame: framePointer.value, duration: durationPointer.value);
+});

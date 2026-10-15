@@ -69,8 +69,8 @@ class SdlxFColor {
     );
   }
 
-  Pointer<SdlFColor> calloc() {
-    final pointer = ffi.calloc<SdlFColor>();
+  Pointer<SdlFColor> toNative([Allocator allocator = ffi.calloc]) {
+    final pointer = allocator<SdlFColor>();
     pointer.ref.r = r;
     pointer.ref.g = g;
     pointer.ref.b = b;
@@ -80,8 +80,8 @@ class SdlxFColor {
 }
 
 extension SdlxFColorListExtension on List<SdlxFColor> {
-  Pointer<SdlFColor> calloc() {
-    final buffersPointer = ffi.calloc<SdlFColor>(length);
+  Pointer<SdlFColor> toNative([Allocator allocator = ffi.calloc]) {
+    final buffersPointer = allocator<SdlFColor>(length);
     for (var i = 0; i < length; i++) {
       final bufferPointer = buffersPointer + i;
       bufferPointer.ref.r = this[i].r;

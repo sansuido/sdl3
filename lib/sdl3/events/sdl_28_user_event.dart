@@ -32,8 +32,8 @@ class SdlxUserEvent extends SdlxEvent {
       windowId == targetId;
 
   @override
-  Pointer<SdlEvent> calloc() {
-    final pointer = ffi.calloc<SdlEvent>();
+  Pointer<SdlEvent> toNative([Allocator allocator = ffi.calloc]) {
+    final pointer = allocator<SdlEvent>();
     pointer.ref.user.type = type;
     pointer.ref.user.reserved = reserved;
     pointer.ref.user.timestamp = timestamp;

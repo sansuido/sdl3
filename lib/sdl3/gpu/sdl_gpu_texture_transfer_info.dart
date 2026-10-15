@@ -13,8 +13,10 @@ class SdlxGpuTextureTransferInfo {
   final int pixelsPerRow;
   final int rowsPerLayer;
 
-  Pointer<SdlGpuTextureTransferInfo> calloc() {
-    final pointer = ffi.calloc<SdlGpuTextureTransferInfo>();
+  Pointer<SdlGpuTextureTransferInfo> toNative([
+    Allocator allocator = ffi.calloc,
+  ]) {
+    final pointer = allocator<SdlGpuTextureTransferInfo>();
     pointer.ref.transferBuffer = transferBuffer;
     pointer.ref.offset = offset;
     pointer.ref.pixelsPerRow = pixelsPerRow;

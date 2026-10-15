@@ -27,8 +27,8 @@ class SdlxCameraSpec {
   final int framerateNumerator;
   final int framerateDenominator;
 
-  Pointer<SdlCameraSpec> calloc() {
-    final pointer = ffi.calloc<SdlCameraSpec>();
+  Pointer<SdlCameraSpec> toNative([Allocator allocator = ffi.calloc]) {
+    final pointer = allocator<SdlCameraSpec>();
     pointer.ref.format = format;
     pointer.ref.colorspace = colorspace;
     pointer.ref.width = width;

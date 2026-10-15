@@ -1,7 +1,7 @@
 part of '../sdl_dart.dart';
 
 extension StringToWCharEx on String {
-  Pointer<WChar> toNativeWChar({Allocator allocator = ffi.malloc}) {
+  Pointer<WChar> toNativeWChar([Allocator allocator = ffi.calloc]) {
     if (sizeOf<WChar>() == 2) {
       return toNativeUtf16(allocator: allocator).cast<WChar>();
     } else {

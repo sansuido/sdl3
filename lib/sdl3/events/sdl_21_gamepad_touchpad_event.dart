@@ -97,8 +97,8 @@ class SdlxGamepadTouchpadEvent extends SdlxEvent {
   final double pressure;
 
   @override
-  Pointer<SdlEvent> calloc() {
-    final pointer = ffi.calloc<SdlEvent>();
+  Pointer<SdlEvent> toNative([Allocator allocator = ffi.calloc]) {
+    final pointer = allocator<SdlEvent>();
     pointer.ref.gtouchpad.type = type;
     pointer.ref.gtouchpad.reserved = reserved;
     pointer.ref.gtouchpad.timestamp = timestamp;

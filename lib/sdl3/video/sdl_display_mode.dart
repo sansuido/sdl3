@@ -36,8 +36,8 @@ class SdlxDisplayMode {
   final int refreshRateDenominator;
   final Pointer<SdlDisplayModeData> internal;
 
-  Pointer<SdlDisplayMode> calloc() {
-    final pointer = ffi.calloc<SdlDisplayMode>();
+  Pointer<SdlDisplayMode> toNative([Allocator allocator = ffi.calloc]) {
+    final pointer = allocator<SdlDisplayMode>();
     pointer.ref
       ..displayId = displayId
       ..format = format

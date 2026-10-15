@@ -97,17 +97,18 @@ String? sdlxGetPrimarySelectionText() {
 /// - [SDL_GetClipboardData - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetClipboardData)
 ///
 /// {@category clipboard}
-String? sdlxGetClipboardData(String mimeType) {
-  String? result;
-  final sizePointer = ffi.calloc<Size>();
+String? sdlxGetClipboardData(String mimeType) => ffi.using((arena) {
+  final sizePointer = arena<Size>();
   final data = sdlGetClipboardData(mimeType, sizePointer).cast<ffi.Utf8>();
-  if (data != nullptr) {
-    result = data.toDartString(length: sizePointer.value);
-    sdlFree(data.cast<Void>());
+
+  if (data == nullptr) {
+    return null;
   }
-  sizePointer.callocFree();
+
+  final result = data.toDartString(length: sizePointer.value);
+  sdlFree(data.cast<Void>());
   return result;
-}
+});
 
 ///
 /// Retrieve the list of mime types available in the clipboard.
@@ -132,19 +133,20 @@ String? sdlxGetClipboardData(String mimeType) {
 /// - [SDL_GetClipboardMimeTypes - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetClipboardMimeTypes)
 ///
 /// {@category clipboard}
-List<String> sdlxGetClipboardMimeTypes() {
-  final result = <String>[];
-  final numMimeTypesPointer = ffi.calloc<Size>();
+List<String> sdlxGetClipboardMimeTypes() => ffi.using((arena) {
+  final numMimeTypesPointer = arena<Size>();
   final mimeTypesPointer = sdlGetClipboardMimeTypes(numMimeTypesPointer);
-  if (mimeTypesPointer != nullptr) {
-    for (var i = 0; i < numMimeTypesPointer.value; i++) {
-      final mimeTypePointer = mimeTypesPointer[i];
-      if (mimeTypePointer != nullptr) {
-        result.add(mimeTypePointer.cast<ffi.Utf8>().toDartString());
-      }
-    }
-    sdlFree(mimeTypesPointer.cast<Void>());
+
+  if (mimeTypesPointer == nullptr) {
+    return [];
   }
-  numMimeTypesPointer.callocFree();
+
+  final result = [
+    for (var i = 0; i < numMimeTypesPointer.value; i++)
+      if (mimeTypesPointer[i] != nullptr)
+        mimeTypesPointer[i].cast<ffi.Utf8>().toDartString(),
+  ];
+
+  sdlFree(mimeTypesPointer.cast<Void>());
   return result;
-}
+});

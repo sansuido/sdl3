@@ -10,21 +10,21 @@ class SdlxNotificationAction {
   }
 }
 
-extension SdlNotificationActionPointerCallocAllFreeExtension
-    on Pointer<SdlNotificationAction> {
-  void callocAllFree(int numActions) {
-    for (var i = 0; i < numActions; i++) {
-      final actionPointer = this + i;
-      switch (actionPointer.ref.type) {
-        case SDL_NOTIFICATION_ACTION_TYPE_BUTTON:
-          if (actionPointer.ref.button.actionId != nullptr) {
-            actionPointer.ref.button.actionId.callocFree();
-          }
-          if (actionPointer.ref.button.actionLabel != nullptr) {
-            actionPointer.ref.button.actionLabel.callocFree();
-          }
-      }
-    }
-    callocFree();
-  }
-}
+//extension SdlNotificationActionPointerCallocAllFreeExtension
+//    on Pointer<SdlNotificationAction> {
+//  void callocAllFree(int numActions) {
+//    for (var i = 0; i < numActions; i++) {
+//      final actionPointer = this + i;
+//      switch (actionPointer.ref.type) {
+//        case SDL_NOTIFICATION_ACTION_TYPE_BUTTON:
+//          if (actionPointer.ref.button.actionId != nullptr) {
+//            actionPointer.ref.button.actionId.callocFree();
+//          }
+//          if (actionPointer.ref.button.actionLabel != nullptr) {
+//            actionPointer.ref.button.actionLabel.callocFree();
+//          }
+//      }
+//    }
+//    callocFree();
+//  }
+//}

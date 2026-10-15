@@ -110,10 +110,10 @@ Future<int> main() async {
       } else if (event is SdlxMouseButtonEvent) {
         if (event.type == SdlkEvent.mouseButtonDown) {
           for (final subStringRange in subStringRanges) {
-            if (isPointInRect(
-              SdlxFPoint(event.x, event.y),
-              subStringRange.rect.toFloat()..moveBy(renderOffset),
-            )) {
+            final movedRect = subStringRange.rect.toFloat().moveBy(
+              renderOffset,
+            );
+            if (isPointInRect(SdlxFPoint(event.x, event.y), movedRect)) {
               holdStartPosition = SdlxFPoint(event.x, event.y);
             }
           }
@@ -125,23 +125,20 @@ Future<int> main() async {
     renderer
       ..setDrawColor(const SdlxColor(20, 30, 50))
       ..clear();
+
     for (final subString in subStrings) {
-      renderer.boxColor(
-        subString.rect.toFloat()..moveBy(renderOffset),
-        const SdlxColor(0, 0, 0),
-      );
+      // 修正: 戻り値を受け取るように変更
+      final movedRect = subString.rect.toFloat().moveBy(renderOffset);
+      renderer.boxColor(movedRect, const SdlxColor(0, 0, 0));
     }
     if (hoverSubString != null) {
-      renderer.boxColor(
-        hoverSubString.rect.toFloat()..moveBy(renderOffset),
-        const SdlxColor(64, 64, 64),
-      );
+      // 修正: 戻り値を受け取るように変更
+      final movedRect = hoverSubString.rect.toFloat().moveBy(renderOffset);
+      renderer.boxColor(movedRect, const SdlxColor(64, 64, 64));
     }
     for (final subStringRange in subStringRanges) {
-      renderer.rectangleColor(
-        subStringRange.rect.toFloat()..moveBy(renderOffset),
-        const SdlxColor(255, 0, 0),
-      );
+      final movedRect = subStringRange.rect.toFloat().moveBy(renderOffset);
+      renderer.rectangleColor(movedRect, const SdlxColor(255, 0, 0));
     }
     text.drawRenderer(renderOffset.x, renderOffset.y);
     renderer.present();

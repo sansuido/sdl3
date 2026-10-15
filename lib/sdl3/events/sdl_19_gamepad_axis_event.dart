@@ -25,8 +25,8 @@ class SdlxGamepadAxisEvent extends SdlxEvent {
   final int value;
 
   @override
-  Pointer<SdlEvent> calloc() {
-    final pointer = ffi.calloc<SdlEvent>();
+  Pointer<SdlEvent> toNative([Allocator allocator = ffi.calloc]) {
+    final pointer = allocator<SdlEvent>();
     pointer.ref.gaxis.type = type;
     pointer.ref.gaxis.reserved = reserved;
     pointer.ref.gaxis.timestamp = timestamp;

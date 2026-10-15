@@ -27,26 +27,23 @@ part of '../sdl_time.dart';
 /// - [SDL_GetDateTimeLocalePreferences - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetDateTimeLocalePreferences)
 ///
 /// {@category time}
-({int dateFromat, int timeFormat})? sdlxGetDateTimeLocalePreferences() {
-  int? dateFormat;
-  int? timeFormat;
-  final dateFormatPointer = ffi.calloc<Int32>();
-  final timeFormatPointer = ffi.calloc<Int32>();
-  final bl = sdlGetDateTimeLocalePreferences(
-    dateFormatPointer,
-    timeFormatPointer,
-  );
-  if (bl) {
-    dateFormat = dateFormatPointer.value;
-    timeFormat = timeFormatPointer.value;
-  }
-  dateFormatPointer.callocFree();
-  timeFormatPointer.callocFree();
-  if (!bl) {
-    return null;
-  }
-  return (dateFromat: dateFormat!, timeFormat: timeFormat!);
-}
+({int dateFromat, int timeFormat})? sdlxGetDateTimeLocalePreferences() =>
+    ffi.using((arena) {
+      final dateFormatPointer = arena<Int32>();
+      final timeFormatPointer = arena<Int32>();
+
+      if (!sdlGetDateTimeLocalePreferences(
+        dateFormatPointer,
+        timeFormatPointer,
+      )) {
+        return null;
+      }
+
+      return (
+        dateFromat: dateFormatPointer.value,
+        timeFormat: timeFormatPointer.value,
+      );
+    });
 
 ///
 /// Gets the current value of the system realtime clock in nanoseconds since
@@ -68,16 +65,13 @@ part of '../sdl_time.dart';
 /// - [SDL_GetCurrentTime - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetCurrentTime)
 ///
 /// {@category time}
-int? sdlxGetCurrentTime() {
-  int? result;
-  final ticksPointer = ffi.calloc<Int64>();
-  final bl = sdlGetCurrentTime(ticksPointer);
-  if (bl) {
-    result = ticksPointer.value;
+int? sdlxGetCurrentTime() => ffi.using((arena) {
+  final ticksPointer = arena<Int64>();
+  if (!sdlGetCurrentTime(ticksPointer)) {
+    return null;
   }
-  ticksPointer.callocFree();
-  return result;
-}
+  return ticksPointer.value;
+});
 
 ///
 /// Converts an SDL_Time in nanoseconds since the epoch to a calendar time in
@@ -136,18 +130,15 @@ SdlxDateTime? sdlxTimeToDateTime(int ticks, {bool localTime = false}) =>
 /// - [SDL_DateTimeToTime - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_DateTimeToTime)
 ///
 /// {@category time}
-int? sdlxDateTimeToTime(SdlxDateTime dateTime) {
-  int? result;
-  final dateTimePointer = dateTime.calloc();
-  final ticksPointer = ffi.calloc<Int64>();
-  final bl = sdlDateTimeToTime(dateTimePointer, ticksPointer);
-  if (bl) {
-    result = ticksPointer.value;
+int? sdlxDateTimeToTime(SdlxDateTime dateTime) => ffi.using((arena) {
+  final dateTimePointer = dateTime.toNative(arena);
+  final ticksPointer = arena<Int64>();
+
+  if (sdlDateTimeToTime(dateTimePointer, ticksPointer)) {
+    return ticksPointer.value;
   }
-  dateTimePointer.callocFree();
-  ticksPointer.callocFree();
-  return result;
-}
+  return null;
+});
 
 ///
 /// Converts an SDL time into a Windows FILETIME (100-nanosecond intervals
@@ -173,15 +164,15 @@ int? sdlxDateTimeToTime(SdlxDateTime dateTime) {
 /// - [SDL_TimeToWindows - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_TimeToWindows)
 ///
 /// {@category time}
-({int dwLowDateTime, int dwHighDateTime}) sdlxTimeToWindows(int ticks) {
-  late int dwLowDateTime;
-  late int dwHighDateTime;
-  final dwLowDateTimePointer = ffi.calloc<Uint32>();
-  final dwHighDateTimePointer = ffi.calloc<Uint32>();
-  sdlTimeToWindows(ticks, dwLowDateTimePointer, dwHighDateTimePointer);
-  dwLowDateTime = dwLowDateTimePointer.value;
-  dwHighDateTime = dwHighDateTimePointer.value;
-  dwLowDateTimePointer.callocFree();
-  dwHighDateTimePointer.callocFree();
-  return (dwLowDateTime: dwLowDateTime, dwHighDateTime: dwHighDateTime);
-}
+({int dwLowDateTime, int dwHighDateTime}) sdlxTimeToWindows(int ticks) =>
+    ffi.using((arena) {
+      final dwLowDateTimePointer = arena<Uint32>();
+      final dwHighDateTimePointer = arena<Uint32>();
+
+      sdlTimeToWindows(ticks, dwLowDateTimePointer, dwHighDateTimePointer);
+
+      return (
+        dwLowDateTime: dwLowDateTimePointer.value,
+        dwHighDateTime: dwHighDateTimePointer.value,
+      );
+    });

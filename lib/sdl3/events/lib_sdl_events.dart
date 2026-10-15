@@ -55,19 +55,16 @@ List<SdlxEvent> sdlxPeepEvents(
   int action,
   int minType,
   int maxType,
-) {
-  final results = <SdlxEvent>[];
-  final pointers = ffi.calloc<SdlEvent>(numevents);
+) => ffi.using((arena) {
+  final pointers = arena<SdlEvent>(numevents);
   final length = sdlPeepEvents(pointers, numevents, action, minType, maxType);
-  if (length > 0) {
-    for (var i = 0; i < length; i++) {
-      final pointer = pointers + i;
-      results.add(SdlxEvent.fromPointer(pointer));
-    }
+
+  if (length <= 0) {
+    return [];
   }
-  ffi.calloc.free(pointers);
-  return results;
-}
+
+  return [for (var i = 0; i < length; i++) SdlxEvent.fromPointer(pointers + i)];
+});
 
 ///
 /// Poll for currently pending events.
@@ -126,16 +123,16 @@ List<SdlxEvent> sdlxPeepEvents(
 /// - [SDL_PollEvent - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_PollEvent)
 ///
 /// {@category events}
-SdlxEvent? sdlxPollEvent() {
-  SdlxEvent? result;
-  final pointer = ffi.calloc<SdlEvent>();
-  final bl = sdlPollEvent(pointer);
-  if (bl) {
-    result = SdlxEvent.fromPointer(pointer);
+SdlxEvent? sdlxPollEvent() => ffi.using((arena) {
+  final pointer = arena<SdlEvent>();
+  final hasEvent = sdlPollEvent(pointer);
+
+  if (!hasEvent) {
+    return null;
   }
-  ffi.calloc.free(pointer);
-  return result;
-}
+
+  return SdlxEvent.fromPointer(pointer);
+});
 
 ///
 /// Wait indefinitely for the next available event.
@@ -167,16 +164,16 @@ SdlxEvent? sdlxPollEvent() {
 /// - [SDL_WaitEvent - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_WaitEvent)
 ///
 /// {@category events}
-SdlxEvent? sdlxWaitEvent() {
-  SdlxEvent? result;
-  final pointer = ffi.calloc<SdlEvent>();
-  final bl = sdlWaitEvent(pointer);
-  if (bl) {
-    result = SdlxEvent.fromPointer(pointer);
+SdlxEvent? sdlxWaitEvent() => ffi.using((arena) {
+  final pointer = arena<SdlEvent>();
+  final hasEvent = sdlWaitEvent(pointer);
+
+  if (!hasEvent) {
+    return null;
   }
-  ffi.calloc.free(pointer);
-  return result;
-}
+
+  return SdlxEvent.fromPointer(pointer);
+});
 
 ///
 /// Wait until the specified timeout (in milliseconds) for the next available
@@ -214,16 +211,16 @@ SdlxEvent? sdlxWaitEvent() {
 /// - [SDL_WaitEventTimeout - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_WaitEventTimeout)
 ///
 /// {@category events}
-SdlxEvent? sdlxWaitEventTimeout(int timeout) {
-  SdlxEvent? result;
-  final pointer = ffi.calloc<SdlEvent>();
-  final bl = sdlWaitEventTimeout(pointer, timeout);
-  if (bl) {
-    result = SdlxEvent.fromPointer(pointer);
+SdlxEvent? sdlxWaitEventTimeout(int timeout) => ffi.using((arena) {
+  final pointer = arena<SdlEvent>();
+  final hasEvent = sdlWaitEventTimeout(pointer, timeout);
+
+  if (!hasEvent) {
+    return null;
   }
-  ffi.calloc.free(pointer);
-  return result;
-}
+
+  return SdlxEvent.fromPointer(pointer);
+});
 
 ///
 /// Add an event to the event queue.
@@ -265,9 +262,5 @@ SdlxEvent? sdlxWaitEventTimeout(int timeout) {
 /// - [SDL_PushEvent - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_PushEvent)
 ///
 /// {@category events}
-bool sdlxPushEvent(SdlxEvent event) {
-  final eventPointer = event.calloc();
-  final result = sdlPushEvent(eventPointer);
-  eventPointer.callocAllFree();
-  return result;
-}
+bool sdlxPushEvent(SdlxEvent event) =>
+    ffi.using((arena) => sdlPushEvent(event.toNative(arena)));

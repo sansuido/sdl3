@@ -8,8 +8,8 @@ class MixxStereoGains {
   final double left;
   final double right;
 
-  Pointer<MixStereoGains> calloc() {
-    final pointer = ffi.calloc<MixStereoGains>();
+  Pointer<MixStereoGains> toNative([Allocator allocator = ffi.calloc]) {
+    final pointer = allocator<MixStereoGains>();
     pointer.ref.left = left;
     pointer.ref.right = right;
     return pointer;

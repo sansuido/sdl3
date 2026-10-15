@@ -49,8 +49,6 @@ abstract class SdlxHapticEffect {
   final int type;
 
   Pointer<SdlHapticEffect> toNative([Allocator allocator = ffi.calloc]);
-
-  Pointer<SdlHapticEffect> calloc() => toNative();
 }
 
 class SdlxHapticConstant extends SdlxHapticEffect {

@@ -5,7 +5,6 @@ import 'package:ffi/ffi.dart' as ffi;
 import 'dylib.dart' as dylib;
 
 import 'sdl.dart';
-import 'sdl_dart.dart';
 
 part 'dialog/lib_sdl_dialog.dart';
 part 'dialog/sdl_dialog_file_filter.dart';

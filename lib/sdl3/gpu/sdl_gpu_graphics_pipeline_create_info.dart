@@ -177,8 +177,10 @@ class SdlxGpuGraphicsPipelineCreateInfo {
   final SdlxGpuGraphicsPipelineTargetInfo targetInfo;
   final int props;
 
-  Pointer<SdlGpuGraphicsPipelineCreateInfo> calloc() {
-    final pointer = ffi.calloc<SdlGpuGraphicsPipelineCreateInfo>();
+  Pointer<SdlGpuGraphicsPipelineCreateInfo> toNative([
+    Allocator allocator = ffi.calloc,
+  ]) {
+    final pointer = allocator<SdlGpuGraphicsPipelineCreateInfo>();
     pointer.ref.vertexShader = vertexShader;
     pointer.ref.fragmentShader = fragmentShader;
     pointer.ref.primitiveType = primitiveType;
@@ -186,8 +188,8 @@ class SdlxGpuGraphicsPipelineCreateInfo {
     // vertexInputState
     {
       if (vertexInputState.vertexBufferDescriptions.isNotEmpty) {
-        final vertexBufferDescriptions = ffi
-            .calloc<SdlGpuVertexBufferDescription>(
+        final vertexBufferDescriptions =
+            allocator<SdlGpuVertexBufferDescription>(
               vertexInputState.vertexBufferDescriptions.length,
             );
         for (
@@ -210,7 +212,7 @@ class SdlxGpuGraphicsPipelineCreateInfo {
             vertexBufferDescriptions;
       }
       if (vertexInputState.vertexAttributes.isNotEmpty) {
-        final vertexAttributes = ffi.calloc<SdlGpuVertexAttribute>(
+        final vertexAttributes = allocator<SdlGpuVertexAttribute>(
           vertexInputState.vertexAttributes.length,
         );
         for (var i = 0; i < vertexInputState.vertexAttributes.length; i++) {
@@ -286,10 +288,9 @@ class SdlxGpuGraphicsPipelineCreateInfo {
     {
       // colorTargetDescriptions
       if (targetInfo.colorTargetDescriptions.isNotEmpty) {
-        final colorTargetDescriptions = ffi
-            .calloc<SdlGpuColorTargetDescription>(
-              targetInfo.colorTargetDescriptions.length,
-            );
+        final colorTargetDescriptions = allocator<SdlGpuColorTargetDescription>(
+          targetInfo.colorTargetDescriptions.length,
+        );
         for (var i = 0; i < targetInfo.colorTargetDescriptions.length; i++) {
           final colorTargetDescription = colorTargetDescriptions + i;
           colorTargetDescriptions[i].format =
@@ -337,21 +338,21 @@ class SdlxGpuGraphicsPipelineCreateInfo {
   }
 }
 
-extension SdlGpuGraphicsPipelineCreateInfoCallocAllFreeExtension
-    on Pointer<SdlGpuGraphicsPipelineCreateInfo> {
-  void callocAllFree() {
-    if (ref.vertexInputState.numVertexBuffers > 0) {
-      ref.vertexInputState.vertexBufferDescriptions.callocFree();
-      ref.vertexInputState.vertexBufferDescriptions = nullptr;
-    }
-    if (ref.vertexInputState.numVertexAttributes > 0) {
-      ref.vertexInputState.vertexAttributes.callocFree();
-      ref.vertexInputState.vertexAttributes = nullptr;
-    }
-    if (ref.targetInfo.numColorTargets > 0) {
-      ref.targetInfo.colorTargetDescriptions.callocFree();
-      ref.targetInfo.colorTargetDescriptions = nullptr;
-    }
-    callocFree();
-  }
-}
+//extension SdlGpuGraphicsPipelineCreateInfoCallocAllFreeExtension
+//    on Pointer<SdlGpuGraphicsPipelineCreateInfo> {
+//  void callocAllFree() {
+//    if (ref.vertexInputState.numVertexBuffers > 0) {
+//      ref.vertexInputState.vertexBufferDescriptions.callocFree();
+//      ref.vertexInputState.vertexBufferDescriptions = nullptr;
+//    }
+//    if (ref.vertexInputState.numVertexAttributes > 0) {
+//      ref.vertexInputState.vertexAttributes.callocFree();
+//      ref.vertexInputState.vertexAttributes = nullptr;
+//    }
+//    if (ref.targetInfo.numColorTargets > 0) {
+//      ref.targetInfo.colorTargetDescriptions.callocFree();
+//      ref.targetInfo.colorTargetDescriptions = nullptr;
+//    }
+//    callocFree();
+//  }
+//}

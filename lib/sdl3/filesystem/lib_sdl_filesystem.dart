@@ -118,16 +118,25 @@ String? sdlxGetPrefPath(String? org, String? app) {
 /// - [SDL_GlobDirectory - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GlobDirectory)
 ///
 /// {@category filesystem}
-List<String> sdlxGlobDirectory(String path, {String? pattern, int flags = 0}) {
-  final result = <String>[];
-  final countPointer = ffi.calloc<Int32>();
-  final stringsPointer = sdlGlobDirectory(path, pattern, flags, countPointer);
-  if (stringsPointer != nullptr) {
-    for (var i = 0; i < countPointer.value; i++) {
-      result.add(stringsPointer[i].cast<ffi.Utf8>().toDartString());
-    }
-    sdlFree(stringsPointer.cast<Void>());
-  }
-  countPointer.callocFree();
-  return result;
-}
+List<String> sdlxGlobDirectory(String path, {String? pattern, int flags = 0}) =>
+    ffi.using((arena) {
+      final countPointer = arena<Int32>();
+      final stringsPointer = sdlGlobDirectory(
+        path,
+        pattern,
+        flags,
+        countPointer,
+      );
+
+      if (stringsPointer == nullptr) {
+        return [];
+      }
+
+      final result = [
+        for (var i = 0; i < countPointer.value; i++)
+          stringsPointer[i].cast<ffi.Utf8>().toDartString(),
+      ];
+
+      sdlFree(stringsPointer.cast<Void>());
+      return result;
+    });

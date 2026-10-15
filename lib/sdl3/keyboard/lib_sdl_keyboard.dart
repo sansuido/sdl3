@@ -29,19 +29,20 @@ part of '../sdl_keyboard.dart';
 /// - [SDL_GetKeyboards - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetKeyboards)
 ///
 /// {@category keyboard}
-List<int> sdlxGetKeyboards() {
-  final result = <int>[];
-  final countPointer = ffi.calloc<Int32>();
+List<int> sdlxGetKeyboards() => ffi.using((arena) {
+  final countPointer = arena<Int32>();
   final resultPointer = sdlGetKeyboards(countPointer);
-  if (resultPointer != nullptr) {
-    for (var i = 0; i < countPointer.value; i++) {
-      result.add(resultPointer[i]);
-    }
+
+  if (resultPointer == nullptr) {
+    return [];
+  }
+
+  try {
+    return [for (var i = 0; i < countPointer.value; i++) resultPointer[i]];
+  } finally {
     sdlFree(resultPointer.cast<Void>());
   }
-  countPointer.callocFree();
-  return result;
-}
+});
 
 ///
 /// Get a snapshot of the current state of the keyboard.
@@ -82,18 +83,21 @@ List<int> sdlxGetKeyboards() {
 /// - [SDL_GetKeyboardState - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetKeyboardState)
 ///
 /// {@category keyboard}
-List<bool> sdlxGetKeyboardState() {
-  final result = <bool>[];
-  final numkeysPointer = ffi.calloc<Int32>();
+List<bool> sdlxGetKeyboardState() => ffi.using((arena) {
+  final numkeysPointer = arena<Int32>();
   final resultPointer = sdlGetKeyboardState(numkeysPointer);
-  if (resultPointer != nullptr) {
-    for (var i = 0; i < numkeysPointer.value; i++) {
-      result.add(resultPointer[i]);
-    }
+
+  if (resultPointer == nullptr) {
+    return [];
   }
-  numkeysPointer.callocFree();
+
+  final result = <bool>[];
+  final count = numkeysPointer.value;
+  for (var i = 0; i < count; i++) {
+    result.add(resultPointer[i]);
+  }
   return result;
-}
+});
 
 ///
 /// Set the area used to type Unicode text input.
@@ -128,12 +132,9 @@ bool sdlxSetTextInputArea(
   Pointer<SdlWindow> window,
   SdlxRect rect,
   int cursor,
-) {
-  final rectPointer = rect.calloc();
-  final result = sdlSetTextInputArea(window, rectPointer, cursor);
-  rectPointer.callocFree();
-  return result;
-}
+) => ffi.using(
+  (arena) => sdlSetTextInputArea(window, rect.toNative(arena), cursor),
+);
 
 ///
 /// Get the area used to type Unicode text input.

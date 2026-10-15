@@ -10,8 +10,8 @@ class MixxPoint3D {
   final double y;
   final double z;
 
-  Pointer<MixPoint3D> calloc() {
-    final pointer = ffi.calloc<MixPoint3D>();
+  Pointer<MixPoint3D> toNative([Allocator allocator = ffi.calloc]) {
+    final pointer = allocator<MixPoint3D>();
     pointer.ref.x = x;
     pointer.ref.y = y;
     pointer.ref.z = z;

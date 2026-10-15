@@ -389,12 +389,10 @@ bool rectangleRgba(
   var y10 = y1;
   var x20 = x2;
   var y20 = y2;
-  var result = true;
-  double tmp;
 
   /*
-	* Test for special cases of straight lines or single point 
-	*/
+   * Test for special cases of straight lines or single point 
+   */
   if (x10 == x20) {
     if (y10 == y20) {
       return pixelRgba(renderer, x10, y10, r, g, b, a, blendMode: blendMode);
@@ -411,63 +409,42 @@ bool rectangleRgba(
         blendMode: blendMode,
       );
     }
-  } else {
-    if (y10 == y20) {
-      return hlineRgba(
-        renderer,
-        x10,
-        x20,
-        y10,
-        r,
-        g,
-        b,
-        a,
-        blendMode: blendMode,
-      );
-    }
+  } else if (y10 == y20) {
+    return hlineRgba(renderer, x10, x20, y10, r, g, b, a, blendMode: blendMode);
   }
 
   /*
-	* Swap x10, x20 if required 
-	*/
+   * Swap x10, x20 if required 
+   */
   if (x10 > x20) {
-    tmp = x10;
+    final tmp = x10;
     x10 = x20;
     x20 = tmp;
   }
 
   /*
-	* Swap y10, y20 if required 
-	*/
+   * Swap y10, y20 if required 
+   */
   if (y10 > y20) {
-    tmp = y10;
+    final tmp = y10;
     y10 = y20;
     y20 = tmp;
   }
 
-  /* 
-	* Create destination rect
-	*/
-  final rect = ffi.calloc<SdlFRect>();
-  rect.ref.x = x10;
-  rect.ref.y = y10;
-  rect.ref.w = x20 - x10;
-  rect.ref.h = y20 - y10;
-
   /*
-	* Draw
-	*/
-  result = true;
-  if (result) {
-    result = sdlSetRenderDrawBlendMode(renderer, blendMode);
-  }
+   * Draw
+   */
+  var result = sdlSetRenderDrawBlendMode(renderer, blendMode);
   if (result) {
     result = sdlSetRenderDrawColor(renderer, r, g, b, a);
   }
   if (result) {
-    result = sdlRenderRect(renderer, rect);
+    result = sdlxRenderRect(
+      renderer,
+      SdlxFRect(x10, y10, x20 - x10, y20 - y10),
+    );
   }
-  ffi.calloc.free(rect);
+
   return result;
 }
 
@@ -1147,12 +1124,10 @@ bool boxRgba(
   var x20 = x2;
   var y10 = y1;
   var y20 = y2;
-  var result = true;
-  double tmp;
 
   /*
-	* Test for special cases of straight lines or single point 
-	*/
+   * Test for special cases of straight lines or single point 
+   */
   if (x10 == x20) {
     if (y10 == y20) {
       return pixelRgba(renderer, x10, y10, r, g, b, a, blendMode: blendMode);
@@ -1169,63 +1144,42 @@ bool boxRgba(
         blendMode: blendMode,
       );
     }
-  } else {
-    if (y10 == y20) {
-      return hlineRgba(
-        renderer,
-        x10,
-        x20,
-        y10,
-        r,
-        g,
-        b,
-        a,
-        blendMode: blendMode,
-      );
-    }
+  } else if (y10 == y20) {
+    return hlineRgba(renderer, x10, x20, y10, r, g, b, a, blendMode: blendMode);
   }
 
   /*
-	* Swap x1, x2 if required 
-	*/
+   * Swap x1, x2 if required 
+   */
   if (x10 > x20) {
-    tmp = x10;
+    final tmp = x10;
     x10 = x20;
     x20 = tmp;
   }
 
   /*
-	* Swap y1, y2 if required 
-	*/
+   * Swap y1, y2 if required 
+   */
   if (y10 > y20) {
-    tmp = y10;
+    final tmp = y10;
     y10 = y20;
     y20 = tmp;
   }
 
-  /* 
-	* Create destination rect
-	*/
-  final rect = ffi.calloc<SdlFRect>();
-  rect.ref.x = x10;
-  rect.ref.y = y10;
-  rect.ref.w = x20 - x10 + 1;
-  rect.ref.h = y20 - y10 + 1;
-
   /*
-	* Draw
-	*/
-  result = true;
-  if (result) {
-    result = sdlSetRenderDrawBlendMode(renderer, blendMode);
-  }
+   * Draw
+   */
+  var result = sdlSetRenderDrawBlendMode(renderer, blendMode);
   if (result) {
     result = sdlSetRenderDrawColor(renderer, r, g, b, a);
   }
   if (result) {
-    result = sdlRenderFillRect(renderer, rect);
+    result = sdlxRenderFillRect(
+      renderer,
+      SdlxFRect(x10, y10, x20 - x10 + 1, y20 - y10 + 1),
+    );
   }
-  ffi.calloc.free(rect);
+
   return result;
 }
 
@@ -4142,92 +4096,76 @@ bool _hLineTextured(
 ) {
   var x10 = x1;
   var x20 = x2;
-  double w;
-  double xtmp;
-  var result = true;
-  double textureXWalker;
-  double textureYStart;
-  double pixelsWritten;
-  double writeWidth;
 
   /*
-	* Swap x1, x2 if required to ensure x1<=x2
-	*/
+   * Swap x1, x2 if required to ensure x1<=x2
+   */
   if (x10 > x20) {
-    xtmp = x10;
+    final xtmp = x10;
     x10 = x20;
     x20 = xtmp;
   }
 
   /*
-	* Calculate width to draw
-	*/
-  w = x20 - SDL_PIXELFORMAT_XRGB2101010 + 1;
+   * Calculate width to draw
+   */
+  final w = x20 - SDL_PIXELFORMAT_XRGB2101010 + 1;
 
   /*
-	* Determine where in the texture we start drawing
-	*/
-  textureXWalker = (x10 - textureDx) % textureW;
+   * Determine where in the texture we start drawing
+   */
+  var textureXWalker = (x10 - textureDx) % textureW;
   if (textureXWalker < 0) {
     textureXWalker = textureW + textureXWalker;
   }
 
-  textureYStart = (y + textureDy) % textureH;
+  var textureYStart = (y + textureDy) % textureH;
   if (textureYStart < 0) {
     textureYStart = textureH + textureYStart;
   }
 
-  /* setup the source rectangle; we are only drawing one horizontal line */
-  final sourceRect = ffi.calloc<SdlFRect>();
-  sourceRect.ref.y = textureYStart;
-  sourceRect.ref.x = textureXWalker;
-  sourceRect.ref.h = 1;
-
-  /* we will draw to the current y */
-  final dstRect = ffi.calloc<SdlFRect>();
-  dstRect.ref.y = y;
-  dstRect.ref.h = 1;
+  var result = true;
 
   /* if there are enough pixels left in the current row of the texture */
   /* draw it all at once */
   if (w <= textureW - textureXWalker) {
-    sourceRect.ref.w = w;
-    sourceRect.ref.x = textureXWalker;
-    dstRect.ref.x = x10;
-    dstRect.ref.w = sourceRect.ref.w;
-    result = sdlRenderTexture(renderer, texture, sourceRect, dstRect);
+    result = sdlxRenderTexture(
+      renderer,
+      texture,
+      srcrect: SdlxFRect(textureXWalker, textureYStart, w, 1),
+      dstrect: SdlxFRect(x10, y, w, 1),
+    );
   } else {
     /* we need to draw multiple times */
     /* draw the first segment */
-    pixelsWritten = textureW - textureXWalker;
-    sourceRect.ref.w = pixelsWritten;
-    sourceRect.ref.x = textureXWalker;
-    dstRect.ref.x = x10;
-    dstRect.ref.w = sourceRect.ref.w;
+    var pixelsWritten = textureW - textureXWalker;
     if (result) {
-      result = sdlRenderTexture(renderer, texture, sourceRect, dstRect);
+      result = sdlxRenderTexture(
+        renderer,
+        texture,
+        srcrect: SdlxFRect(textureXWalker, textureYStart, pixelsWritten, 1),
+        dstrect: SdlxFRect(x10, y, pixelsWritten, 1),
+      );
     }
-    writeWidth = textureW.toDouble();
+    var writeWidth = textureW.toDouble();
 
     /* now draw the rest */
-    /* set the source x to 0 */
-    sourceRect.ref.x = 0;
     while (pixelsWritten < w) {
       if (writeWidth >= w - pixelsWritten) {
         writeWidth = w - pixelsWritten;
       }
-      sourceRect.ref.w = writeWidth;
-      dstRect.ref.x = x10 + pixelsWritten;
-      dstRect.ref.w = sourceRect.ref.w;
       if (result) {
-        result = sdlRenderTexture(renderer, texture, sourceRect, dstRect);
+        result = sdlxRenderTexture(
+          renderer,
+          texture,
+          srcrect: SdlxFRect(0, textureYStart, writeWidth, 1),
+          dstrect: SdlxFRect(x10 + pixelsWritten, y, writeWidth, 1),
+        );
       }
       pixelsWritten += writeWidth;
     }
   }
-  ffi.calloc
-    ..free(sourceRect)
-    ..free(dstRect);
+
   return result;
 }
 
@@ -4543,28 +4481,18 @@ bool characterRgba(
   int b,
   int a,
 ) {
-  final srect = ffi.calloc<SdlFRect>();
-  final drect = ffi.calloc<SdlFRect>();
-  var result = true;
-  int ix;
-  int iy;
-  int patt;
-  Pointer<Uint32> pixels;
-  int linepos;
-  Pointer<SdlSurface> character;
-  Pointer<SdlSurface> rotatedCharacter;
-  int ci;
   /* Character index in cache */
-  ci = c;
+  final ci = c;
+
   /*
-	* Create new charWidth x charHeight bitmap surface if not already present.
-	* Might get rotated later.
-	*/
+   * Create new charWidth x charHeight bitmap surface if not already present.
+   * Might get rotated later.
+   */
   if (gfxPrimitivesFont[ci] == nullptr) {
     /*
-		* Redraw character into surface
-		*/
-    character = sdlCreateSurface(
+     * Redraw character into surface
+     */
+    var character = sdlCreateSurface(
       charWidth,
       charHeight,
       SDL_PIXELFORMAT_RGBA8888,
@@ -4572,18 +4500,19 @@ bool characterRgba(
     if (character == nullptr) {
       return false;
     }
+
     final charpos = ci * charSize;
-    pixels = character.ref.pixels.cast<Uint32>();
+    final pixels = character.ref.pixels.cast<Uint32>();
+
     /*
-		* Drawing loop 
-		*/
-    patt = 0;
-    linepos = 0;
-    for (iy = 0; iy < charHeight; iy++) {
-      patt = currentFontdata[charpos + iy];
-      for (ix = 0; ix < charWidth; ix++) {
+     * Drawing loop 
+     */
+    var linepos = 0;
+    for (var iy = 0; iy < charHeight; iy++) {
+      var patt = currentFontdata[charpos + iy];
+      for (var ix = 0; ix < charWidth; ix++) {
         final pixel = pixels + linepos;
-        if (patt & 0x80 != 0) {
+        if ((patt & 0x80) != 0) {
           pixel.value = 0xffffffff;
         } else {
           pixel.value = 0;
@@ -4592,55 +4521,56 @@ bool characterRgba(
         patt = patt << 1;
       }
     }
+
     /* Maybe rotate and replace cached image */
     if (charRotation > 0) {
-      rotatedCharacter = rotateSurface90Degrees(character, charRotation);
+      final rotatedCharacter = rotateSurface90Degrees(character, charRotation);
       sdlDestroySurface(character);
       character = rotatedCharacter;
     }
+
     /* Convert temp surface into texture */
     gfxPrimitivesFont[ci] = sdlCreateTextureFromSurface(renderer, character);
     sdlDestroySurface(character);
+
     /*
-		* Check pointer 
-		*/
+     * Check pointer 
+     */
     if (gfxPrimitivesFont[ci] == nullptr) {
       return false;
     }
   }
+
   /*
-	* Set color 
-	*/
-  result = true;
-  if (result) {
-    result = sdlSetTextureColorMod(gfxPrimitivesFont[ci], r, g, b);
-  }
+   * Set color 
+   */
+  var result = sdlSetTextureColorMod(gfxPrimitivesFont[ci], r, g, b);
   if (result) {
     result = sdlSetTextureAlphaMod(gfxPrimitivesFont[ci], a);
   }
+
   /*
-	* Setup source rectangle
-	*/
-  srect.ref.x = 0;
-  srect.ref.y = 0;
-  srect.ref.w = charWidthLocal.toDouble();
-  srect.ref.h = charHeightLocal.toDouble();
-  /*
-	* Setup destination rectangle
-	*/
-  drect.ref.x = x;
-  drect.ref.y = y;
-  drect.ref.w = charWidthLocal.toDouble();
-  drect.ref.h = charHeightLocal.toDouble();
-  /*
-	* Draw texture onto destination 
-	*/
+   * Draw texture onto destination 
+   */
   if (result) {
-    result = sdlRenderTexture(renderer, gfxPrimitivesFont[ci], srect, drect);
+    result = sdlxRenderTexture(
+      renderer,
+      gfxPrimitivesFont[ci],
+      srcrect: SdlxFRect(
+        0,
+        0,
+        charWidthLocal.toDouble(),
+        charHeightLocal.toDouble(),
+      ),
+      dstrect: SdlxFRect(
+        x,
+        y,
+        charWidthLocal.toDouble(),
+        charHeightLocal.toDouble(),
+      ),
+    );
   }
-  ffi.calloc
-    ..free(srect)
-    ..free(drect);
+
   return result;
 }
 

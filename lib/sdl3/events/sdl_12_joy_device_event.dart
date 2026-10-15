@@ -52,8 +52,8 @@ class SdlxJoyDeviceEvent extends SdlxEvent {
   final int which;
 
   @override
-  Pointer<SdlEvent> calloc() {
-    final pointer = ffi.calloc<SdlEvent>();
+  Pointer<SdlEvent> toNative([Allocator allocator = ffi.calloc]) {
+    final pointer = allocator<SdlEvent>();
     pointer.ref.jdevice.type = type;
     pointer.ref.jdevice.reserved = reserved;
     pointer.ref.jdevice.timestamp = timestamp;

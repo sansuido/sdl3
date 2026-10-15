@@ -35,14 +35,14 @@ class SdlxClipboardEvent extends SdlxEvent {
   final List<String> mimeTypes;
 
   @override
-  Pointer<SdlEvent> calloc() {
-    final pointer = ffi.calloc<SdlEvent>();
+  Pointer<SdlEvent> toNative([Allocator allocator = ffi.calloc]) {
+    final pointer = allocator<SdlEvent>();
     pointer.ref.clipboard.type = type;
     pointer.ref.clipboard.reserved = reserved;
     pointer.ref.clipboard.timestamp = timestamp;
     pointer.ref.clipboard.owner = owner;
     if (mimeTypes.isNotEmpty) {
-      final mimeTypesPointer = ffi.calloc<Pointer<Int8>>(mimeTypes.length);
+      final mimeTypesPointer = allocator<Pointer<Int8>>(mimeTypes.length);
       for (var i = 0; i < mimeTypes.length; i++) {
         mimeTypesPointer[i] = mimeTypes[i].toNativeUtf8().cast<Int8>();
       }

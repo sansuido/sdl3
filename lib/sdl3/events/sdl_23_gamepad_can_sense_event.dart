@@ -55,8 +55,8 @@ class SdlxGamepadCapSenseEvent extends SdlxEvent {
   final bool down;
 
   @override
-  Pointer<SdlEvent> calloc() {
-    final pointer = ffi.calloc<SdlEvent>();
+  Pointer<SdlEvent> toNative([Allocator allocator = ffi.calloc]) {
+    final pointer = allocator<SdlEvent>();
     pointer.ref.gcapsense.type = type;
     pointer.ref.gcapsense.reserved = reserved;
     pointer.ref.gcapsense.timestamp = timestamp;

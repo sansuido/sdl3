@@ -29,19 +29,20 @@ part of '../sdl_mouse.dart';
 /// - [SDL_GetMice - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetMice)
 ///
 /// {@category mouse}
-List<int> sdlxGetMice() {
-  final result = <int>[];
-  final countPointer = ffi.calloc<Int32>();
+List<int> sdlxGetMice() => ffi.using((arena) {
+  final countPointer = arena<Int32>();
   final micePointer = sdlGetMice(countPointer);
-  if (micePointer != nullptr) {
-    for (var i = 0; i < countPointer.value; i++) {
-      result.add(micePointer[i]);
-    }
+
+  if (micePointer == nullptr) {
+    return [];
+  }
+
+  try {
+    return [for (var i = 0; i < countPointer.value; i++) micePointer[i]];
+  } finally {
     sdlFree(micePointer.cast<Void>());
   }
-  countPointer.callocFree();
-  return result;
-}
+});
 
 ///
 /// Query SDL's cache for the synchronous mouse button state and the
@@ -82,18 +83,14 @@ List<int> sdlxGetMice() {
 /// - [SDL_GetMouseState - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetMouseState)
 ///
 /// {@category mouse}
-({int button, double x, double y}) sdlxGetMouseState() {
-  var x = 0.0;
-  var y = 0.0;
-  final xPointer = ffi.calloc<Float>();
-  final yPointer = ffi.calloc<Float>();
+({int button, double x, double y}) sdlxGetMouseState() => ffi.using((arena) {
+  final xPointer = arena<Float>();
+  final yPointer = arena<Float>();
+
   final button = sdlGetMouseState(xPointer, yPointer);
-  x = xPointer.value;
-  y = yPointer.value;
-  xPointer.callocFree();
-  yPointer.callocFree();
-  return (button: button, x: x, y: y);
-}
+
+  return (button: button, x: xPointer.value, y: yPointer.value);
+});
 
 ///
 /// Query the platform for the asynchronous mouse button state and the
@@ -138,18 +135,15 @@ List<int> sdlxGetMice() {
 /// - [SDL_GetGlobalMouseState - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetGlobalMouseState)
 ///
 /// {@category mouse}
-({int button, double x, double y}) sdlxGetGlobalMouseState() {
-  var x = 0.0;
-  var y = 0.0;
-  final xPointer = ffi.calloc<Float>();
-  final yPointer = ffi.calloc<Float>();
-  final button = sdlGetGlobalMouseState(xPointer, yPointer);
-  x = xPointer.value;
-  y = yPointer.value;
-  xPointer.callocFree();
-  yPointer.callocFree();
-  return (button: button, x: x, y: y);
-}
+({int button, double x, double y}) sdlxGetGlobalMouseState() =>
+    ffi.using((arena) {
+      final xPointer = arena<Float>();
+      final yPointer = arena<Float>();
+
+      final button = sdlGetGlobalMouseState(xPointer, yPointer);
+
+      return (button: button, x: xPointer.value, y: yPointer.value);
+    });
 
 ///
 /// Query SDL's cache for the synchronous mouse button state and accumulated
@@ -192,18 +186,15 @@ List<int> sdlxGetMice() {
 /// - [SDL_GetRelativeMouseState - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetRelativeMouseState)
 ///
 /// {@category mouse}
-({int button, double x, double y}) sdlxGetRelativeMouseState() {
-  var x = 0.0;
-  var y = 0.0;
-  final xPointer = ffi.calloc<Float>();
-  final yPointer = ffi.calloc<Float>();
-  final button = sdlGetRelativeMouseState(xPointer, yPointer);
-  x = xPointer.value;
-  y = yPointer.value;
-  xPointer.callocFree();
-  yPointer.callocFree();
-  return (button: button, x: x, y: y);
-}
+({int button, double x, double y}) sdlxGetRelativeMouseState() =>
+    ffi.using((arena) {
+      final xPointer = arena<Float>();
+      final yPointer = arena<Float>();
+
+      final button = sdlGetRelativeMouseState(xPointer, yPointer);
+
+      return (button: button, x: xPointer.value, y: yPointer.value);
+    });
 
 ///
 /// Move the mouse cursor to the given position within the window.
@@ -372,14 +363,11 @@ Pointer<SdlCursor> sdlxCreateColorCursor(
 Pointer<SdlCursor> sdlxCreateAnimatedCursor(
   List<SdlxCursorFrameInfo> frames,
   SdlxPoint hot,
-) {
-  final framesPointer = frames.calloc();
-  final result = sdlCreateAnimatedCursor(
-    framesPointer,
+) => ffi.using(
+  (arena) => sdlCreateAnimatedCursor(
+    frames.toNative(arena),
     frames.length,
     hot.x,
     hot.y,
-  );
-  framesPointer.callocFree();
-  return result;
-}
+  ),
+);

@@ -4,7 +4,6 @@ import 'package:ffi/ffi.dart' as ffi;
 
 import 'dylib.dart' as dylib;
 import 'sdl.dart';
-import 'sdl_dart.dart';
 
 part 'notification/lib_sdl_notification.dart';
 part 'notification/sdl_notification_action.dart';

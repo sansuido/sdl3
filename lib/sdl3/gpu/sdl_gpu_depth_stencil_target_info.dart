@@ -25,8 +25,10 @@ class SdlxGpuDepthStencilTargetInfo {
   final int mipLevel;
   final int layer;
 
-  Pointer<SdlGpuDepthStencilTargetInfo> calloc() {
-    final pointer = ffi.calloc<SdlGpuDepthStencilTargetInfo>();
+  Pointer<SdlGpuDepthStencilTargetInfo> toNative([
+    Allocator allocator = ffi.calloc,
+  ]) {
+    final pointer = allocator<SdlGpuDepthStencilTargetInfo>();
     pointer.ref.texture = texture;
     pointer.ref.clearDepth = clearDepth;
     pointer.ref.loadOp = loadOp;

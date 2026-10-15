@@ -34,8 +34,8 @@ class SdlxGamepadSensorEvent extends SdlxEvent {
   final int sensor;
 
   @override
-  Pointer<SdlEvent> calloc() {
-    final pointer = ffi.calloc<SdlEvent>();
+  Pointer<SdlEvent> toNative([Allocator allocator = ffi.calloc]) {
+    final pointer = allocator<SdlEvent>();
     pointer.ref.gsensor.type = type;
     pointer.ref.gsensor.reserved = reserved;
     pointer.ref.gsensor.timestamp = timestamp;

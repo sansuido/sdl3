@@ -38,12 +38,7 @@ part of '../sdl_storage.dart';
 Pointer<SdlStorage> sdlxOpenStorage(
   SdlxStorageInterface iface,
   Pointer<Void> userdata,
-) {
-  final ifacePointer = iface.calloc();
-  final result = sdlOpenStorage(ifacePointer, userdata);
-  ifacePointer.callocFree();
-  return result;
-}
+) => ffi.using((arena) => sdlOpenStorage(iface.toNative(arena), userdata));
 
 ///
 /// Query the size of a file within a storage container.
@@ -67,16 +62,14 @@ Pointer<SdlStorage> sdlxOpenStorage(
 /// - [SDL_GetStorageFileSize - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetStorageFileSize)
 ///
 /// {@category storage}
-int? sdlxGetStorageFileSize(Pointer<SdlStorage> storage, String path) {
-  int? result;
-  final lengthPointer = ffi.calloc<Uint64>();
-  final bl = sdlGetStorageFileSize(storage, path, lengthPointer);
-  if (bl) {
-    result = lengthPointer.value;
-  }
-  lengthPointer.callocFree();
-  return result;
-}
+int? sdlxGetStorageFileSize(Pointer<SdlStorage> storage, String path) =>
+    ffi.using((arena) {
+      final lengthPointer = arena<Uint64>();
+      if (!sdlGetStorageFileSize(storage, path, lengthPointer)) {
+        return null;
+      }
+      return lengthPointer.value;
+    });
 
 ///
 /// Synchronously read a file from a storage container into a client-provided
@@ -108,22 +101,24 @@ int? sdlxGetStorageFileSize(Pointer<SdlStorage> storage, String path) {
 ///
 /// {@category storage}
 Uint8List? sdlxReadStorageFile(Pointer<SdlStorage> storage, String path) {
-  Uint8List? result;
   final length = sdlxGetStorageFileSize(storage, path);
-  if (length != null) {
-    final destinationPointer = ffi.calloc<Uint8>(length);
-    final bl = sdlReadStorageFile(
+  if (length == null) {
+    return null;
+  }
+
+  return ffi.using((arena) {
+    final destinationPointer = arena<Uint8>(length);
+    if (!sdlReadStorageFile(
       storage,
       path,
       destinationPointer.cast<Void>(),
       length,
-    );
-    if (bl) {
-      result = Uint8List.fromList(destinationPointer.asTypedList(length));
+    )) {
+      return null;
     }
-    destinationPointer.callocFree();
-  }
-  return result;
+
+    return Uint8List.fromList(destinationPointer.asTypedList(length));
+  });
 }
 
 ///
@@ -154,18 +149,17 @@ bool sdlxWriteStorageFile(
   Pointer<SdlStorage> storage,
   String path,
   Uint8List source,
-) {
-  final sourcePointer = ffi.calloc<Uint8>(source.length);
+) => ffi.using((arena) {
+  final sourcePointer = arena<Uint8>(source.length);
   sourcePointer.asTypedList(source.length).setRange(0, source.length, source);
-  final bl = sdlWriteStorageFile(
+
+  return sdlWriteStorageFile(
     storage,
     path,
     sourcePointer.cast<Void>(),
     source.length,
   );
-  sourcePointer.callocFree();
-  return bl;
-}
+});
 
 ///
 /// Get information about a filesystem path in a storage container.
@@ -252,9 +246,8 @@ List<String> sdlxGlobStorageDirectory(
   String path, {
   String? pattern,
   int flags = 0,
-}) {
-  final result = <String>[];
-  final countPointer = ffi.calloc<Int32>();
+}) => ffi.using((arena) {
+  final countPointer = arena<Int32>();
   final stringsPointer = sdlGlobStorageDirectory(
     storage,
     path,
@@ -262,12 +255,17 @@ List<String> sdlxGlobStorageDirectory(
     flags,
     countPointer,
   );
-  if (stringsPointer != nullptr) {
-    for (var i = 0; i < countPointer.value; i++) {
-      result.add(stringsPointer[i].cast<ffi.Utf8>().toDartString());
-    }
+
+  if (stringsPointer == nullptr) {
+    return [];
+  }
+
+  try {
+    return [
+      for (var i = 0; i < countPointer.value; i++)
+        stringsPointer[i].cast<ffi.Utf8>().toDartString(),
+    ];
+  } finally {
     sdlFree(stringsPointer.cast<Void>());
   }
-  countPointer.callocFree();
-  return result;
-}
+});

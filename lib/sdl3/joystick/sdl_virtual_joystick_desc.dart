@@ -77,8 +77,8 @@ class SdlxVirtualJoystickDesc {
   setSensorsEnabled;
   final Pointer<NativeFunction<SdlVirtualJoystickDescCleanup>> cleanup;
 
-  Pointer<SdlVirtualJoystickDesc> calloc() {
-    final pointer = ffi.calloc<SdlVirtualJoystickDesc>();
+  Pointer<SdlVirtualJoystickDesc> toNative([Allocator allocator = ffi.calloc]) {
+    final pointer = allocator<SdlVirtualJoystickDesc>();
     pointer.ref.version = version;
     pointer.ref.type = type;
     pointer.ref.vendorId = vendorId;
@@ -93,14 +93,14 @@ class SdlxVirtualJoystickDesc {
       pointer.ref.name = name.toNativeUtf8();
     }
     if (touchpads.isNotEmpty) {
-      pointer.ref.touchpads = ffi.calloc<SdlVirtualJoystickTouchpadDesc>();
+      pointer.ref.touchpads = allocator<SdlVirtualJoystickTouchpadDesc>();
       for (var i = 0; i < touchpads.length; i++) {
         pointer.ref.touchpads[i].nfingers = touchpads[i].nfingers;
       }
       pointer.ref.ntouchpads = touchpads.length;
     }
     if (sensors.isNotEmpty) {
-      pointer.ref.sensors = ffi.calloc<SdlVirtualJoystickSensorDesc>();
+      pointer.ref.sensors = allocator<SdlVirtualJoystickSensorDesc>();
       for (var i = 0; i < sensors.length; i++) {
         pointer.ref.sensors[i].type = sensors[i].type;
         pointer.ref.sensors[i].rate = sensors[i].rate;
@@ -120,18 +120,18 @@ class SdlxVirtualJoystickDesc {
   }
 }
 
-extension SdlVirtualJoystickDescCallocAllFreeExtension
-    on Pointer<SdlVirtualJoystickDesc> {
-  void callocAllFree() {
-    if (ref.name != nullptr) {
-      ref.name.callocFree();
-    }
-    if (ref.touchpads != nullptr) {
-      ref.touchpads.callocFree();
-    }
-    if (ref.sensors != nullptr) {
-      ref.sensors.callocFree();
-    }
-    callocFree();
-  }
-}
+//extension SdlVirtualJoystickDescCallocAllFreeExtension
+//    on Pointer<SdlVirtualJoystickDesc> {
+//  void callocAllFree() {
+//    if (ref.name != nullptr) {
+//      ref.name.callocFree();
+//    }
+//    if (ref.touchpads != nullptr) {
+//      ref.touchpads.callocFree();
+//    }
+//    if (ref.sensors != nullptr) {
+//      ref.sensors.callocFree();
+//    }
+//    callocFree();
+//  }
+//}

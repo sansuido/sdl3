@@ -41,8 +41,8 @@ class SdlxMouseDeviceEvent extends SdlxEvent {
   final int which;
 
   @override
-  Pointer<SdlEvent> calloc() {
-    final pointer = ffi.calloc<SdlEvent>();
+  Pointer<SdlEvent> toNative([Allocator allocator = ffi.calloc]) {
+    final pointer = allocator<SdlEvent>();
     pointer.ref.mdevice.type = type;
     pointer.ref.mdevice.reserved = reserved;
     pointer.ref.mdevice.timestamp = timestamp;

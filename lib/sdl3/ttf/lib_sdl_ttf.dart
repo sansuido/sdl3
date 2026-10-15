@@ -23,19 +23,20 @@ part of '../sdl_ttf.dart';
 /// - [TTF_GetFreeTypeVersion - SDL3 Wiki](https://wiki.libsdl.org/SDL3/TTF_GetFreeTypeVersion)
 ///
 /// {@category ttf}
-({int major, int minor, int patch}) ttfxGetFreeTypeVersion() {
-  final majorPointer = ffi.calloc<Int32>();
-  final minorPointer = ffi.calloc<Int32>();
-  final patchPointer = ffi.calloc<Int32>();
-  ttfGetFreeTypeVersion(majorPointer, minorPointer, patchPointer);
-  final major = majorPointer.value;
-  final minor = minorPointer.value;
-  final patch = patchPointer.value;
-  majorPointer.callocFree();
-  minorPointer.callocFree();
-  patchPointer.callocFree();
-  return (major: major, minor: minor, patch: patch);
-}
+({int major, int minor, int patch}) ttfxGetFreeTypeVersion() =>
+    ffi.using((arena) {
+      final majorPointer = arena<Int32>();
+      final minorPointer = arena<Int32>();
+      final patchPointer = arena<Int32>();
+
+      ttfGetFreeTypeVersion(majorPointer, minorPointer, patchPointer);
+
+      return (
+        major: majorPointer.value,
+        minor: minorPointer.value,
+        patch: patchPointer.value,
+      );
+    });
 
 ///
 /// Query the version of the HarfBuzz library in use.
@@ -58,19 +59,20 @@ part of '../sdl_ttf.dart';
 /// - [TTF_GetHarfBuzzVersion - SDL3 Wiki](https://wiki.libsdl.org/SDL3/TTF_GetHarfBuzzVersion)
 ///
 /// {@category ttf}
-({int major, int minor, int patch}) ttfxGetHarfBuzzVersion() {
-  final majorPointer = ffi.calloc<Int32>();
-  final minorPointer = ffi.calloc<Int32>();
-  final patchPointer = ffi.calloc<Int32>();
-  ttfGetHarfBuzzVersion(majorPointer, minorPointer, patchPointer);
-  final major = majorPointer.value;
-  final minor = minorPointer.value;
-  final patch = patchPointer.value;
-  majorPointer.callocFree();
-  minorPointer.callocFree();
-  patchPointer.callocFree();
-  return (major: major, minor: minor, patch: patch);
-}
+({int major, int minor, int patch}) ttfxGetHarfBuzzVersion() =>
+    ffi.using((arena) {
+      final majorPointer = arena<Int32>();
+      final minorPointer = arena<Int32>();
+      final patchPointer = arena<Int32>();
+
+      ttfGetHarfBuzzVersion(majorPointer, minorPointer, patchPointer);
+
+      return (
+        major: majorPointer.value,
+        minor: minorPointer.value,
+        patch: patchPointer.value,
+      );
+    });
 
 ///
 /// Get font target resolutions, in dots per inch.
@@ -96,23 +98,18 @@ part of '../sdl_ttf.dart';
 /// - [TTF_GetFontDPI - SDL3 Wiki](https://wiki.libsdl.org/SDL3/TTF_GetFontDPI)
 ///
 /// {@category ttf}
-({int hdpi, int vdpi})? ttfxGetFontDpi(Pointer<TtfFont> font) {
-  late int hdpi;
-  late int vdpi;
-  final hdpiPointer = ffi.calloc<Int32>();
-  final vdpiPointer = ffi.calloc<Int32>();
-  final result = ttfGetFontDpi(font, hdpiPointer, vdpiPointer);
-  if (result) {
-    hdpi = hdpiPointer.value;
-    vdpi = vdpiPointer.value;
-  }
-  hdpiPointer.callocFree();
-  vdpiPointer.callocFree();
-  if (!result) {
-    return null;
-  }
-  return (hdpi: hdpi, vdpi: vdpi);
-}
+({int hdpi, int vdpi})? ttfxGetFontDpi(Pointer<TtfFont> font) =>
+    ffi.using((arena) {
+      final hdpiPointer = arena<Int32>();
+      final vdpiPointer = arena<Int32>();
+
+      final result = ttfGetFontDpi(font, hdpiPointer, vdpiPointer);
+      if (!result) {
+        return null;
+      }
+
+      return (hdpi: hdpiPointer.value, vdpi: vdpiPointer.value);
+    });
 
 ///
 /// Get the pixel image for a UNICODE codepoint.
@@ -140,19 +137,16 @@ part of '../sdl_ttf.dart';
 ({int imageType, Pointer<SdlSurface> surface})? ttfxGetGlyphImage(
   Pointer<TtfFont> font,
   int ch,
-) {
-  late int imageType;
-  final imageTypePointer = ffi.calloc<Int32>();
+) => ffi.using((arena) {
+  final imageTypePointer = arena<Int32>();
   final surface = ttfGetGlyphImage(font, ch, imageTypePointer);
-  if (surface != nullptr) {
-    imageType = imageTypePointer.value;
-  }
-  imageTypePointer.callocFree();
+
   if (surface == nullptr) {
     return null;
   }
-  return (surface: surface, imageType: imageType);
-}
+
+  return (surface: surface, imageType: imageTypePointer.value);
+});
 
 ///
 /// Get the pixel image for a character index.
@@ -183,19 +177,16 @@ part of '../sdl_ttf.dart';
 ({int imageType, Pointer<SdlSurface> surface})? ttfxGetGlyphImageForIndex(
   Pointer<TtfFont> font,
   int glyphIndex,
-) {
-  late int imageType;
-  final imageTypePointer = ffi.calloc<Int32>();
+) => ffi.using((arena) {
+  final imageTypePointer = arena<Int32>();
   final surface = ttfGetGlyphImageForIndex(font, glyphIndex, imageTypePointer);
-  if (surface != nullptr) {
-    imageType = imageTypePointer.value;
-  }
-  imageTypePointer.callocFree();
+
   if (surface == nullptr) {
     return null;
   }
-  return (surface: surface, imageType: imageType);
-}
+
+  return (surface: surface, imageType: imageTypePointer.value);
+});
 
 ///
 /// Query the metrics (dimensions) of a font's glyph for a UNICODE codepoint.
@@ -237,17 +228,13 @@ part of '../sdl_ttf.dart';
 ({int advance, int maxx, int maxy, int minx, int miny})? ttfxGetGlyphMetrics(
   Pointer<TtfFont> font,
   int ch,
-) {
-  late int minx;
-  late int maxx;
-  late int miny;
-  late int maxy;
-  late int advance;
-  final minxPointer = ffi.calloc<Int32>();
-  final maxxPointer = ffi.calloc<Int32>();
-  final minyPointer = ffi.calloc<Int32>();
-  final maxyPointer = ffi.calloc<Int32>();
-  final advancePointer = ffi.calloc<Int32>();
+) => ffi.using((arena) {
+  final minxPointer = arena<Int32>();
+  final maxxPointer = arena<Int32>();
+  final minyPointer = arena<Int32>();
+  final maxyPointer = arena<Int32>();
+  final advancePointer = arena<Int32>();
+
   final result = ttfGetGlyphMetrics(
     font,
     ch,
@@ -257,23 +244,19 @@ part of '../sdl_ttf.dart';
     maxyPointer,
     advancePointer,
   );
-  if (result) {
-    minx = minxPointer.value;
-    maxx = maxxPointer.value;
-    miny = minyPointer.value;
-    maxy = maxyPointer.value;
-    advance = advancePointer.value;
-  }
-  minxPointer.callocFree();
-  maxxPointer.callocFree();
-  minyPointer.callocFree();
-  maxyPointer.callocFree();
-  advancePointer.callocFree();
+
   if (!result) {
     return null;
   }
-  return (minx: minx, maxx: maxx, miny: miny, maxy: maxy, advance: advance);
-}
+
+  return (
+    minx: minxPointer.value,
+    maxx: maxxPointer.value,
+    miny: minyPointer.value,
+    maxy: maxyPointer.value,
+    advance: advancePointer.value,
+  );
+});
 
 ///
 /// Query the kerning size between the glyphs of two UNICODE codepoints.
@@ -299,16 +282,17 @@ part of '../sdl_ttf.dart';
 /// - [TTF_GetGlyphKerning - SDL3 Wiki](https://wiki.libsdl.org/SDL3/TTF_GetGlyphKerning)
 ///
 /// {@category ttf}
-int? ttfxGetGlyphKerning(Pointer<TtfFont> font, int previousCh, int ch) {
-  int? kerning;
-  final kerningPointer = ffi.calloc<Int32>();
-  final bl = ttfGetGlyphKerning(font, previousCh, ch, kerningPointer);
-  if (bl) {
-    kerning = kerningPointer.value;
-  }
-  kerningPointer.callocFree();
-  return kerning;
-}
+int? ttfxGetGlyphKerning(Pointer<TtfFont> font, int previousCh, int ch) =>
+    ffi.using((arena) {
+      final kerningPointer = arena<Int32>();
+      final bl = ttfGetGlyphKerning(font, previousCh, ch, kerningPointer);
+
+      if (!bl) {
+        return null;
+      }
+
+      return kerningPointer.value;
+    });
 
 ///
 /// Calculate the dimensions of a rendered string of UTF-8 text.
@@ -338,23 +322,19 @@ int? ttfxGetGlyphKerning(Pointer<TtfFont> font, int previousCh, int ch) {
 /// - [TTF_GetStringSize - SDL3 Wiki](https://wiki.libsdl.org/SDL3/TTF_GetStringSize)
 ///
 /// {@category ttf}
-({int w, int h})? ttfxGetStringSize(Pointer<TtfFont> font, String text) {
-  late int w;
-  late int h;
-  final wPointer = ffi.calloc<Int32>();
-  final hPointer = ffi.calloc<Int32>();
-  final bl = ttfGetStringSize(font, text, wPointer, hPointer);
-  if (bl) {
-    w = wPointer.value;
-    h = hPointer.value;
-  }
-  wPointer.callocFree();
-  hPointer.callocFree();
-  if (!bl) {
-    return null;
-  }
-  return (w: w, h: h);
-}
+({int h, int w})? ttfxGetStringSize(Pointer<TtfFont> font, String text) =>
+    ffi.using((arena) {
+      final wPointer = arena<Int32>();
+      final hPointer = arena<Int32>();
+
+      final bl = ttfGetStringSize(font, text, wPointer, hPointer);
+
+      if (!bl) {
+        return null;
+      }
+
+      return (w: wPointer.value, h: hPointer.value);
+    });
 
 ///
 /// Calculate the dimensions of a rendered string of UTF-8 text.
@@ -390,27 +370,22 @@ int? ttfxGetGlyphKerning(Pointer<TtfFont> font, int previousCh, int ch) {
 /// - [TTF_GetStringSizeWrapped - SDL3 Wiki](https://wiki.libsdl.org/SDL3/TTF_GetStringSizeWrapped)
 ///
 /// {@category ttf}
-({int w, int h})? ttfxGetStringSizeWrapped(
+({int h, int w})? ttfxGetStringSizeWrapped(
   Pointer<TtfFont> font,
   String text,
   int wrapWidth,
-) {
-  late int w;
-  late int h;
-  final wPointer = ffi.calloc<Int32>();
-  final hPointer = ffi.calloc<Int32>();
+) => ffi.using((arena) {
+  final wPointer = arena<Int32>();
+  final hPointer = arena<Int32>();
+
   final bl = ttfGetStringSizeWrapped(font, text, wrapWidth, wPointer, hPointer);
-  if (bl) {
-    w = wPointer.value;
-    h = hPointer.value;
-  }
-  wPointer.callocFree();
-  hPointer.callocFree();
+
   if (!bl) {
     return null;
   }
-  return (w: w, h: h);
-}
+
+  return (w: wPointer.value, h: hPointer.value);
+});
 
 ///
 /// Calculate how much of a UTF-8 string will fit in a given width.
@@ -446,33 +421,31 @@ int? ttfxGetGlyphKerning(Pointer<TtfFont> font, int previousCh, int ch) {
 /// - [TTF_MeasureString - SDL3 Wiki](https://wiki.libsdl.org/SDL3/TTF_MeasureString)
 ///
 /// {@category ttf}
-({int measuredWidth, int measuredLength})? ttfxMeasureString(
+({int measuredLength, int measuredWidth})? ttfxMeasureString(
   Pointer<TtfFont> font,
   String text,
   int maxWidth,
-) {
-  late int measuredWidth;
-  late int measuredLength;
-  final measuredWidthPointer = ffi.calloc<Int32>();
-  final measuredLengthPointer = ffi.calloc<Size>();
-  final bl = ttfMeasureString(
+) => ffi.using((arena) {
+  final measuredWidthPointer = arena<Int32>();
+  final measuredLengthPointer = arena<Size>();
+
+  final success = ttfMeasureString(
     font,
     text,
     maxWidth,
     measuredWidthPointer,
     measuredLengthPointer,
   );
-  if (bl) {
-    measuredWidth = measuredWidthPointer.value;
-    measuredLength = measuredLengthPointer.value;
-  }
-  measuredWidthPointer.callocFree();
-  measuredLengthPointer.callocFree();
-  if (!bl) {
+
+  if (!success) {
     return null;
   }
-  return (measuredWidth: measuredWidth, measuredLength: measuredLength);
-}
+
+  return (
+    measuredWidth: measuredWidthPointer.value,
+    measuredLength: measuredLengthPointer.value,
+  );
+});
 
 ///
 /// Render UTF-8 text at fast quality to a new 8-bit surface.
@@ -521,12 +494,9 @@ Pointer<SdlSurface> ttfxRenderTextSolid(
   Pointer<TtfFont> font,
   String? text,
   SdlxColor fg,
-) {
-  final fgPointer = fg.calloc();
-  final surface = ttfRenderTextSolid(font, text, fgPointer.ref);
-  ffi.calloc.free(fgPointer);
-  return surface;
-}
+) => ffi.using(
+  (arena) => ttfRenderTextSolid(font, text, fg.toNative(arena).ref),
+);
 
 ///
 /// Render word-wrapped UTF-8 text at fast quality to a new 8-bit surface.
@@ -575,17 +545,10 @@ Pointer<SdlSurface> ttfxRenderTextSolidWrapped(
   String? text,
   SdlxColor fg,
   int wrapLength,
-) {
-  final fgPointer = fg.calloc();
-  final surface = ttfRenderTextSolidWrapped(
-    font,
-    text,
-    fgPointer.ref,
-    wrapLength,
-  );
-  ffi.calloc.free(fgPointer);
-  return surface;
-}
+) => ffi.using(
+  (arena) =>
+      ttfRenderTextSolidWrapped(font, text, fg.toNative(arena).ref, wrapLength),
+);
 
 ///
 /// Render a single 32-bit glyph at fast quality to a new 8-bit surface.
@@ -626,12 +589,8 @@ Pointer<SdlSurface> ttfxRenderGlyphSolid(
   Pointer<TtfFont> font,
   int ch,
   SdlxColor fg,
-) {
-  final fgPointer = fg.calloc();
-  final surface = ttfRenderGlyphSolid(font, ch, fgPointer.ref);
-  ffi.calloc.free(fgPointer);
-  return surface;
-}
+) =>
+    ffi.using((arena) => ttfRenderGlyphSolid(font, ch, fg.toNative(arena).ref));
 
 ///
 /// Render UTF-8 text at high quality to a new 8-bit surface.
@@ -682,14 +641,14 @@ Pointer<SdlSurface> ttfxRenderTextShaded(
   String? text,
   SdlxColor fg,
   SdlxColor bg,
-) {
-  final fgPointer = fg.calloc();
-  final bgPointer = bg.calloc();
-  final surface = ttfRenderTextShaded(font, text, fgPointer.ref, bgPointer.ref);
-  ffi.calloc.free(fgPointer);
-  ffi.calloc.free(bgPointer);
-  return surface;
-}
+) => ffi.using(
+  (arena) => ttfRenderTextShaded(
+    font,
+    text,
+    fg.toNative(arena).ref,
+    bg.toNative(arena).ref,
+  ),
+);
 
 ///
 /// Render word-wrapped UTF-8 text at high quality to a new 8-bit surface.
@@ -741,20 +700,15 @@ Pointer<SdlSurface> ttfxRenderTextShadedWrapped(
   SdlxColor fg,
   SdlxColor bg,
   int wrapWidth,
-) {
-  final fgPointer = fg.calloc();
-  final bgPointer = bg.calloc();
-  final surface = ttfRenderTextShadedWrapped(
+) => ffi.using(
+  (arena) => ttfRenderTextShadedWrapped(
     font,
     text,
-    fgPointer.ref,
-    bgPointer.ref,
+    fg.toNative(arena).ref,
+    bg.toNative(arena).ref,
     wrapWidth,
-  );
-  ffi.calloc.free(fgPointer);
-  ffi.calloc.free(bgPointer);
-  return surface;
-}
+  ),
+);
 
 ///
 /// Render a single UNICODE codepoint at high quality to a new 8-bit surface.
@@ -798,14 +752,14 @@ Pointer<SdlSurface> ttfxRenderGlyphShaded(
   int ch,
   SdlxColor fg,
   SdlxColor bg,
-) {
-  final fgPointer = fg.calloc();
-  final bgPointer = bg.calloc();
-  final surface = ttfRenderGlyphShaded(font, ch, fgPointer.ref, bgPointer.ref);
-  ffi.calloc.free(fgPointer);
-  ffi.calloc.free(bgPointer);
-  return surface;
-}
+) => ffi.using(
+  (arena) => ttfRenderGlyphShaded(
+    font,
+    ch,
+    fg.toNative(arena).ref,
+    bg.toNative(arena).ref,
+  ),
+);
 
 ///
 /// Render UTF-8 text at high quality to a new ARGB surface.
@@ -853,12 +807,9 @@ Pointer<SdlSurface> ttfxRenderTextBlended(
   Pointer<TtfFont> font,
   String? text,
   SdlxColor fg,
-) {
-  final fgPointer = fg.calloc();
-  final surface = ttfRenderTextBlended(font, text, fgPointer.ref);
-  ffi.calloc.free(fgPointer);
-  return surface;
-}
+) => ffi.using(
+  (arena) => ttfRenderTextBlended(font, text, fg.toNative(arena).ref),
+);
 
 ///
 /// Render word-wrapped UTF-8 text at high quality to a new ARGB surface.
@@ -907,17 +858,14 @@ Pointer<SdlSurface> ttfxRenderTextBlendedWrapped(
   String? text,
   SdlxColor fg,
   int wrapWidth,
-) {
-  final fgPointer = fg.calloc();
-  final surface = ttfRenderTextBlendedWrapped(
+) => ffi.using(
+  (arena) => ttfRenderTextBlendedWrapped(
     font,
     text,
-    fgPointer.ref,
+    fg.toNative(arena).ref,
     wrapWidth,
-  );
-  ffi.calloc.free(fgPointer);
-  return surface;
-}
+  ),
+);
 
 ///
 /// Render a single UNICODE codepoint at high quality to a new ARGB surface.
@@ -958,12 +906,9 @@ Pointer<SdlSurface> ttfxRenderGlyphBlended(
   Pointer<TtfFont> font,
   int ch,
   SdlxColor fg,
-) {
-  final fgPointer = fg.calloc();
-  final surface = ttfRenderGlyphBlended(font, ch, fgPointer.ref);
-  ffi.calloc.free(fgPointer);
-  return surface;
-}
+) => ffi.using(
+  (arena) => ttfRenderGlyphBlended(font, ch, fg.toNative(arena).ref),
+);
 
 ///
 /// Render UTF-8 text at LCD subpixel quality to a new ARGB surface.
@@ -1013,14 +958,14 @@ Pointer<SdlSurface> ttfxRenderTextLcd(
   String? text,
   SdlxColor fg,
   SdlxColor bg,
-) {
-  final fgPointer = fg.calloc();
-  final bgPointer = bg.calloc();
-  final surface = ttfRenderTextLcd(font, text, fgPointer.ref, bgPointer.ref);
-  ffi.calloc.free(fgPointer);
-  ffi.calloc.free(bgPointer);
-  return surface;
-}
+) => ffi.using(
+  (arena) => ttfRenderTextLcd(
+    font,
+    text,
+    fg.toNative(arena).ref,
+    bg.toNative(arena).ref,
+  ),
+);
 
 ///
 /// Render word-wrapped UTF-8 text at LCD subpixel quality to a new ARGB
@@ -1072,20 +1017,15 @@ Pointer<SdlSurface> ttfxRenderTextLcdWrapped(
   SdlxColor fg,
   SdlxColor bg,
   int wrapWidth,
-) {
-  final fgPointer = fg.calloc();
-  final bgPointer = bg.calloc();
-  final surface = ttfRenderTextLcdWrapped(
+) => ffi.using(
+  (arena) => ttfRenderTextLcdWrapped(
     font,
     text,
-    fgPointer.ref,
-    bgPointer.ref,
+    fg.toNative(arena).ref,
+    bg.toNative(arena).ref,
     wrapWidth,
-  );
-  ffi.calloc.free(fgPointer);
-  ffi.calloc.free(bgPointer);
-  return surface;
-}
+  ),
+);
 
 ///
 /// Render a single UNICODE codepoint at LCD subpixel quality to a new ARGB
@@ -1129,14 +1069,14 @@ Pointer<SdlSurface> ttfxRenderGlyphLcd(
   int ch,
   SdlxColor fg,
   SdlxColor bg,
-) {
-  final fgPointer = fg.calloc();
-  final bgPointer = bg.calloc();
-  final surface = ttfRenderGlyphLcd(font, ch, fgPointer.ref, bgPointer.ref);
-  ffi.calloc.free(fgPointer);
-  ffi.calloc.free(bgPointer);
-  return surface;
-}
+) => ffi.using(
+  (arena) => ttfRenderGlyphLcd(
+    font,
+    ch,
+    fg.toNative(arena).ref,
+    bg.toNative(arena).ref,
+  ),
+);
 
 ///
 /// Set the color of a text object.
@@ -1233,27 +1173,25 @@ bool ttfxSetTextColorFloat(Pointer<TtfText> text, SdlxFColor color) =>
 /// - [TTF_GetTextColor - SDL3 Wiki](https://wiki.libsdl.org/SDL3/TTF_GetTextColor)
 ///
 /// {@category ttf}
-SdlxColor? ttfxGetTextColor(Pointer<TtfText> text) {
-  SdlxColor? result;
-  final rPointer = ffi.calloc<Uint8>();
-  final gPointer = ffi.calloc<Uint8>();
-  final bPointer = ffi.calloc<Uint8>();
-  final aPointer = ffi.calloc<Uint8>();
-  final bl = ttfGetTextColor(text, rPointer, gPointer, bPointer, aPointer);
-  if (bl) {
-    result = SdlxColor(
-      rPointer.value,
-      gPointer.value,
-      bPointer.value,
-      aPointer.value,
-    );
+SdlxColor? ttfxGetTextColor(Pointer<TtfText> text) => ffi.using((arena) {
+  final rPointer = arena<Uint8>();
+  final gPointer = arena<Uint8>();
+  final bPointer = arena<Uint8>();
+  final aPointer = arena<Uint8>();
+
+  final success = ttfGetTextColor(text, rPointer, gPointer, bPointer, aPointer);
+
+  if (!success) {
+    return null;
   }
-  rPointer.callocFree();
-  gPointer.callocFree();
-  bPointer.callocFree();
-  aPointer.callocFree();
-  return result;
-}
+
+  return SdlxColor(
+    rPointer.value,
+    gPointer.value,
+    bPointer.value,
+    aPointer.value,
+  );
+});
 
 ///
 /// Get the color of a text object.
@@ -1286,27 +1224,31 @@ SdlxColor? ttfxGetTextColor(Pointer<TtfText> text) {
 /// - [TTF_GetTextColorFloat - SDL3 Wiki](https://wiki.libsdl.org/SDL3/TTF_GetTextColorFloat)
 ///
 /// {@category ttf}
-SdlxFColor? ttfxGetTextColorFloat(Pointer<TtfText> text) {
-  SdlxFColor? result;
-  final rPointer = ffi.calloc<Float>();
-  final gPointer = ffi.calloc<Float>();
-  final bPointer = ffi.calloc<Float>();
-  final aPointer = ffi.calloc<Float>();
-  final bl = ttfGetTextColorFloat(text, rPointer, gPointer, bPointer, aPointer);
-  if (bl) {
-    result = SdlxFColor(
-      rPointer.value,
-      gPointer.value,
-      bPointer.value,
-      aPointer.value,
-    );
+SdlxFColor? ttfxGetTextColorFloat(Pointer<TtfText> text) => ffi.using((arena) {
+  final rPointer = arena<Float>();
+  final gPointer = arena<Float>();
+  final bPointer = arena<Float>();
+  final aPointer = arena<Float>();
+
+  final success = ttfGetTextColorFloat(
+    text,
+    rPointer,
+    gPointer,
+    bPointer,
+    aPointer,
+  );
+
+  if (!success) {
+    return null;
   }
-  rPointer.callocFree();
-  gPointer.callocFree();
-  bPointer.callocFree();
-  aPointer.callocFree();
-  return result;
-}
+
+  return SdlxFColor(
+    rPointer.value,
+    gPointer.value,
+    bPointer.value,
+    aPointer.value,
+  );
+});
 
 ///
 /// Set the position of a text object.
@@ -1366,18 +1308,17 @@ bool ttfxSetTextPosition(Pointer<TtfText> text, SdlxPoint position) =>
 /// - [TTF_GetTextPosition - SDL3 Wiki](https://wiki.libsdl.org/SDL3/TTF_GetTextPosition)
 ///
 /// {@category ttf}
-SdlxPoint? ttfxGetTextPosition(Pointer<TtfText> text) {
-  SdlxPoint? result;
-  final xPointer = ffi.calloc<Int32>();
-  final yPointer = ffi.calloc<Int32>();
-  final bl = ttfGetTextPosition(text, xPointer, yPointer);
-  if (bl) {
-    result = SdlxPoint(xPointer.value, yPointer.value);
+SdlxPoint? ttfxGetTextPosition(Pointer<TtfText> text) => ffi.using((arena) {
+  final xPointer = arena<Int32>();
+  final yPointer = arena<Int32>();
+  final success = ttfGetTextPosition(text, xPointer, yPointer);
+
+  if (!success) {
+    return null;
   }
-  xPointer.callocFree();
-  yPointer.callocFree();
-  return result;
-}
+
+  return SdlxPoint(xPointer.value, yPointer.value);
+});
 
 ///
 /// Get whether wrapping is enabled on a text object.
@@ -1403,16 +1344,16 @@ SdlxPoint? ttfxGetTextPosition(Pointer<TtfText> text) {
 /// - [TTF_GetTextWrapWidth - SDL3 Wiki](https://wiki.libsdl.org/SDL3/TTF_GetTextWrapWidth)
 ///
 /// {@category ttf}
-int? ttfxGetTextWrapWidth(Pointer<TtfText> text) {
-  int? result;
-  final wrapWidthPointer = ffi.calloc<Int32>();
-  final bl = ttfGetTextWrapWidth(text, wrapWidthPointer);
-  if (bl) {
-    result = wrapWidthPointer.value;
+int? ttfxGetTextWrapWidth(Pointer<TtfText> text) => ffi.using((arena) {
+  final wrapWidthPointer = arena<Int32>();
+  final success = ttfGetTextWrapWidth(text, wrapWidthPointer);
+
+  if (!success) {
+    return null;
   }
-  wrapWidthPointer.callocFree();
-  return result;
-}
+
+  return wrapWidthPointer.value;
+});
 
 ///
 /// Get the size of a text object.
@@ -1441,18 +1382,17 @@ int? ttfxGetTextWrapWidth(Pointer<TtfText> text) {
 /// - [TTF_GetTextSize - SDL3 Wiki](https://wiki.libsdl.org/SDL3/TTF_GetTextSize)
 ///
 /// {@category ttf}
-SdlxPoint? ttfxGetTextSize(Pointer<TtfText> text) {
-  SdlxPoint? result;
-  final wPointer = ffi.calloc<Int32>();
-  final hPointer = ffi.calloc<Int32>();
-  final bl = ttfGetTextSize(text, wPointer, hPointer);
-  if (bl) {
-    result = SdlxPoint(wPointer.value, hPointer.value);
+SdlxPoint? ttfxGetTextSize(Pointer<TtfText> text) => ffi.using((arena) {
+  final wPointer = arena<Int32>();
+  final hPointer = arena<Int32>();
+  final success = ttfGetTextSize(text, wPointer, hPointer);
+
+  if (!success) {
+    return null;
   }
-  wPointer.callocFree();
-  hPointer.callocFree();
-  return result;
-}
+
+  return SdlxPoint(wPointer.value, hPointer.value);
+});
 
 ///
 /// Get the substring of a text object that surrounds a text offset.
@@ -1567,24 +1507,26 @@ List<TtfxSubString> ttfxGetTextSubStringsForRange(
   Pointer<TtfText> text,
   int offset,
   int length,
-) {
+) => ffi.using((arena) {
   final result = <TtfxSubString>[];
-  final countPointer = ffi.calloc<Int32>();
+  final countPointer = arena<Int32>();
+
   final subStringsPointer = ttfGetTextSubStringsForRange(
     text,
     offset,
     length,
     countPointer,
   );
+
   if (subStringsPointer != nullptr) {
     for (var i = 0; i < countPointer.value; i++) {
       result.add(TtfxSubString.fromPointer(subStringsPointer[i]));
     }
     sdlFree(subStringsPointer.cast<Void>());
   }
-  countPointer.callocFree();
+
   return result;
-}
+});
 
 ///
 /// Get the portion of a text string that is closest to a point.
@@ -1618,16 +1560,18 @@ TtfxSubString? ttfxGetTextSubStringForPoint(
   Pointer<TtfText> text,
   int x,
   int y,
-) {
-  TtfxSubString? result;
-  final subStringPointer = ffi.calloc<TtfSubString>();
+) => ffi.using((arena) {
+  // 構造体のポインターを arena で確保
+  final subStringPointer = arena<TtfSubString>();
+
   final bl = ttfGetTextSubStringForPoint(text, x, y, subStringPointer);
-  if (bl) {
-    result = TtfxSubString.fromPointer(subStringPointer);
+
+  if (!bl) {
+    return null;
   }
-  subStringPointer.callocFree();
-  return result;
-}
+
+  return TtfxSubString.fromPointer(subStringPointer);
+});
 
 ///
 /// Get the previous substring in a text object
@@ -1658,18 +1602,15 @@ TtfxSubString? ttfxGetTextSubStringForPoint(
 TtfxSubString? ttfxGetPreviousTextSubString(
   Pointer<TtfText> text,
   TtfxSubString subString,
-) {
-  TtfxSubString? result;
-  final subStringPointer = subString.calloc();
-  final resultPointer = ffi.calloc<TtfSubString>();
-  final bl = ttfGetPreviousTextSubString(text, subStringPointer, resultPointer);
-  if (bl) {
-    result = TtfxSubString.fromPointer(resultPointer);
+) => ffi.using((arena) {
+  final subStringPointer = subString.toNative(arena);
+  final resultPointer = arena<TtfSubString>();
+
+  if (ttfGetPreviousTextSubString(text, subStringPointer, resultPointer)) {
+    return TtfxSubString.fromPointer(resultPointer);
   }
-  subStringPointer.callocFree();
-  resultPointer.callocFree();
-  return result;
-}
+  return null;
+});
 
 ///
 /// Get the next substring in a text object
@@ -1699,15 +1640,12 @@ TtfxSubString? ttfxGetPreviousTextSubString(
 TtfxSubString? ttfxGetNextTextSubString(
   Pointer<TtfText> text,
   TtfxSubString subString,
-) {
-  TtfxSubString? result;
-  final subStringPointer = subString.calloc();
-  final resultPointer = ffi.calloc<TtfSubString>();
-  final bl = ttfGetNextTextSubString(text, subStringPointer, resultPointer);
-  if (bl) {
-    result = TtfxSubString.fromPointer(resultPointer);
+) => ffi.using((arena) {
+  final subStringPointer = subString.toNative(arena);
+  final resultPointer = arena<TtfSubString>();
+
+  if (ttfGetNextTextSubString(text, subStringPointer, resultPointer)) {
+    return TtfxSubString.fromPointer(resultPointer);
   }
-  subStringPointer.callocFree();
-  resultPointer.callocFree();
-  return result;
-}
+  return null;
+});

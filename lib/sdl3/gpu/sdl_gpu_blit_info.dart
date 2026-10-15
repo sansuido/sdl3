@@ -38,8 +38,8 @@ class SdlxGpuBlitInfo {
   final int filter;
   final bool cycle;
 
-  Pointer<SdlGpuBlitInfo> calloc() {
-    final pointer = ffi.calloc<SdlGpuBlitInfo>();
+  Pointer<SdlGpuBlitInfo> toNative([Allocator allocator = ffi.calloc]) {
+    final pointer = allocator<SdlGpuBlitInfo>();
     pointer.ref.source.texture = source.texture;
     pointer.ref.source.mipLevel = source.mipLevel;
     pointer.ref.source.layerOrDepthPlane = source.layerOrDepthPlane;

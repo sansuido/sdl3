@@ -225,13 +225,10 @@ part of '../sdl_gpu.dart';
 Pointer<SdlGpuComputePipeline> sdlxCreateGpuComputePipeline(
   Pointer<SdlGpuDevice> device,
   SdlxGpuComputePipelineCreateInfo createinfo,
-) {
-  Pointer<SdlGpuComputePipeline> result;
-  final pointer = createinfo.calloc();
-  result = sdlCreateGpuComputePipeline(device, pointer);
-  pointer.callocAllFree();
-  return result;
-}
+) => ffi.using((arena) {
+  final pointer = createinfo.toNative(arena);
+  return sdlCreateGpuComputePipeline(device, pointer);
+});
 
 ///
 /// Creates a pipeline object to be used in a graphics workflow.
@@ -265,13 +262,10 @@ Pointer<SdlGpuComputePipeline> sdlxCreateGpuComputePipeline(
 Pointer<SdlGpuGraphicsPipeline> sdlxCreateGpuGraphicsPipeline(
   Pointer<SdlGpuDevice> device,
   SdlxGpuGraphicsPipelineCreateInfo createinfo,
-) {
-  Pointer<SdlGpuGraphicsPipeline> result;
-  final pointer = createinfo.calloc();
-  result = sdlCreateGpuGraphicsPipeline(device, pointer);
-  pointer.callocAllFree();
-  return result;
-}
+) => ffi.using((arena) {
+  final pointer = createinfo.toNative(arena);
+  return sdlCreateGpuGraphicsPipeline(device, pointer);
+});
 
 ///
 /// Creates a sampler object to be used when binding textures in a graphics
@@ -305,13 +299,9 @@ Pointer<SdlGpuGraphicsPipeline> sdlxCreateGpuGraphicsPipeline(
 Pointer<SdlGpuSampler> sdlxCreateGpuSampler(
   Pointer<SdlGpuDevice> device,
   SdlxGpuSamplerCreateInfo createinfo,
-) {
-  Pointer<SdlGpuSampler> result;
-  final pointer = createinfo.calloc();
-  result = sdlCreateGpuSampler(device, pointer);
-  pointer.callocFree();
-  return result;
-}
+) => ffi.using(
+  (arena) => sdlCreateGpuSampler(device, createinfo.toNative(arena)),
+);
 
 ///
 /// Creates a shader to be used when creating a graphics pipeline.
@@ -514,13 +504,9 @@ Pointer<SdlGpuSampler> sdlxCreateGpuSampler(
 Pointer<SdlGpuShader> sdlxCreateGpuShader(
   Pointer<SdlGpuDevice> device,
   SdlxGpuShaderCreateInfo createinfo,
-) {
-  Pointer<SdlGpuShader> result;
-  final pointer = createinfo.calloc();
-  result = sdlCreateGpuShader(device, pointer);
-  pointer.callocAllFree();
-  return result;
-}
+) => ffi.using(
+  (arena) => sdlCreateGpuShader(device, createinfo.toNative(arena)),
+);
 
 ///
 /// Creates a texture object to be used in graphics or compute workflows.
@@ -591,13 +577,9 @@ Pointer<SdlGpuShader> sdlxCreateGpuShader(
 Pointer<SdlGpuTexture> sdlxCreateGpuTexture(
   Pointer<SdlGpuDevice> device,
   SdlxGpuTextureCreateInfo createinfo,
-) {
-  Pointer<SdlGpuTexture> result;
-  final pointer = createinfo.calloc();
-  result = sdlCreateGpuTexture(device, pointer);
-  pointer.callocFree();
-  return result;
-}
+) => ffi.using(
+  (arena) => sdlCreateGpuTexture(device, createinfo.toNative(arena)),
+);
 
 ///
 /// Creates a buffer object to be used in graphics or compute workflows.
@@ -654,13 +636,9 @@ Pointer<SdlGpuTexture> sdlxCreateGpuTexture(
 Pointer<SdlGpuBuffer> sdlxCreateGpuBuffer(
   Pointer<SdlGpuDevice> device,
   SdlxGpuBufferCreateInfo createinfo,
-) {
-  Pointer<SdlGpuBuffer> result;
-  final pointer = createinfo.calloc();
-  result = sdlCreateGpuBuffer(device, pointer);
-  pointer.callocFree();
-  return result;
-}
+) => ffi.using(
+  (arena) => sdlCreateGpuBuffer(device, createinfo.toNative(arena)),
+);
 
 ///
 /// Creates a transfer buffer to be used when uploading to or downloading from
@@ -702,13 +680,10 @@ Pointer<SdlGpuBuffer> sdlxCreateGpuBuffer(
 Pointer<SdlGpuTransferBuffer> sdlxCreateGpuTransferBuffer(
   Pointer<SdlGpuDevice> device,
   SdlxGpuTransferBufferCreateInfo createinfo,
-) {
-  Pointer<SdlGpuTransferBuffer> result;
-  final pointer = createinfo.calloc();
-  result = sdlCreateGpuTransferBuffer(device, pointer);
-  pointer.callocFree();
-  return result;
-}
+) => ffi.using((arena) {
+  final pointer = createinfo.toNative(arena);
+  return sdlCreateGpuTransferBuffer(device, pointer);
+});
 
 ///
 /// Begins a render pass on a command buffer.
@@ -756,25 +731,20 @@ Pointer<SdlGpuRenderPass> sdlxBeginGpuRenderPass(
   List<SdlxGpuColorTargetInfo> colorTargetInfo, {
   SdlxGpuDepthStencilTargetInfo? depthStencilTargetInfo,
 }) {
-  Pointer<SdlGpuRenderPass> result = nullptr;
-  Pointer<SdlGpuDepthStencilTargetInfo> depthStencilTargetInfoPointer = nullptr;
-  if (colorTargetInfo.isNotEmpty) {
-    final infosPointer = colorTargetInfo.calloc();
-    if (depthStencilTargetInfo != null) {
-      depthStencilTargetInfoPointer = depthStencilTargetInfo.calloc();
-    }
-    result = sdlBeginGpuRenderPass(
-      commandBuffer,
-      infosPointer,
-      colorTargetInfo.length,
-      depthStencilTargetInfoPointer,
-    );
-    infosPointer.callocFree();
-    if (depthStencilTargetInfoPointer != nullptr) {
-      depthStencilTargetInfoPointer.callocFree();
-    }
+  if (colorTargetInfo.isEmpty) {
+    return nullptr;
   }
-  return result;
+
+  return ffi.using(
+    (arena) => sdlBeginGpuRenderPass(
+      commandBuffer,
+      colorTargetInfo.toNative(arena),
+      colorTargetInfo.length,
+      depthStencilTargetInfo != null
+          ? depthStencilTargetInfo.toNative(arena)
+          : nullptr,
+    ),
+  );
 }
 
 ///
@@ -796,11 +766,9 @@ Pointer<SdlGpuRenderPass> sdlxBeginGpuRenderPass(
 void sdlxSetGpuViewport(
   Pointer<SdlGpuRenderPass> renderPass,
   SdlxGpuViewport viewport,
-) {
-  final pointer = viewport.calloc();
-  sdlSetGpuViewport(renderPass, pointer);
-  pointer.callocFree();
-}
+) => ffi.using(
+  (arena) => sdlSetGpuViewport(renderPass, viewport.toNative(arena)),
+);
 
 ///
 /// Sets the current scissor state on a command buffer.
@@ -818,11 +786,11 @@ void sdlxSetGpuViewport(
 /// - [SDL_SetGPUScissor - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SetGPUScissor)
 ///
 /// {@category gpu}
-void sdlxSetGpuScissor(Pointer<SdlGpuRenderPass> renderPass, SdlxRect scissor) {
-  final pointer = scissor.calloc();
-  sdlSetGpuScissor(renderPass, pointer);
-  pointer.callocFree();
-}
+void sdlxSetGpuScissor(
+  Pointer<SdlGpuRenderPass> renderPass,
+  SdlxRect scissor,
+) =>
+    ffi.using((arena) => sdlSetGpuScissor(renderPass, scissor.toNative(arena)));
 
 ///
 /// Sets the current blend constants on a command buffer.
@@ -846,11 +814,9 @@ void sdlxSetGpuScissor(Pointer<SdlGpuRenderPass> renderPass, SdlxRect scissor) {
 void sdlxSetGpuBlendConstants(
   Pointer<SdlGpuRenderPass> renderPass,
   SdlxFColor blendAnts,
-) {
-  final pointer = blendAnts.calloc();
-  sdlSetGpuBlendConstants(renderPass, pointer.ref);
-  pointer.callocFree();
-}
+) => ffi.using(
+  (arena) => sdlSetGpuBlendConstants(renderPass, blendAnts.toNative(arena).ref),
+);
 
 ///
 /// Binds vertex buffers on a command buffer for use with subsequent draw
@@ -877,16 +843,16 @@ void sdlxBindGpuVertexBuffers(
   List<SdlxGpuBufferBinding> bindings, {
   int firstSlot = 0,
 }) {
-  if (bindings.isNotEmpty) {
-    final bindingsPointer = bindings.calloc();
+  if (bindings.isEmpty) return;
+
+  ffi.using((arena) {
     sdlBindGpuVertexBuffers(
       renderPass,
       firstSlot,
-      bindingsPointer,
+      bindings.toNative(arena),
       bindings.length,
     );
-    bindingsPointer.callocFree();
-  }
+  });
 }
 
 ///
@@ -912,11 +878,13 @@ void sdlxBindGpuIndexBuffer(
   Pointer<SdlGpuRenderPass> renderPass,
   SdlxGpuBufferBinding binding,
   int indexElementSize,
-) {
-  final bindingPointer = binding.calloc();
-  sdlBindGpuIndexBuffer(renderPass, bindingPointer, indexElementSize);
-  bindingPointer.callocFree();
-}
+) => ffi.using(
+  (arena) => sdlBindGpuIndexBuffer(
+    renderPass,
+    binding.toNative(arena),
+    indexElementSize,
+  ),
+);
 
 ///
 /// Binds texture-sampler pairs for use on the vertex shader.
@@ -953,16 +921,17 @@ void sdlxBindGpuVertexSamplers(
   List<SdlxGpuTextureSamplerBinding> bindings, {
   int firstSlot = 0,
 }) {
-  if (bindings.isNotEmpty) {
-    final bindingsPointer = bindings.calloc();
+  if (bindings.isEmpty) return;
+
+  ffi.using((arena) {
+    final bindingsPointer = bindings.toNative(arena);
     sdlBindGpuVertexSamplers(
       renderPass,
       firstSlot,
       bindingsPointer,
       bindings.length,
     );
-    bindingsPointer.callocFree();
-  }
+  });
 }
 
 ///
@@ -998,19 +967,20 @@ void sdlxBindGpuVertexStorageTextures(
   Pointer<SdlGpuRenderPass> renderPass,
   List<Pointer<SdlGpuTexture>> storageTextures, {
   int firstSlot = 0,
-}) {
-  final pointer = ffi.calloc<Pointer<SdlGpuTexture>>(storageTextures.length);
+}) => ffi.using((arena) {
+  final pointer = arena<Pointer<SdlGpuTexture>>(storageTextures.length);
+
   for (var i = 0; i < storageTextures.length; i++) {
     pointer[i] = storageTextures[i];
   }
+
   sdlBindGpuVertexStorageTextures(
     renderPass,
     firstSlot,
     pointer,
     storageTextures.length,
   );
-  pointer.callocFree();
-}
+});
 
 ///
 /// Binds storage buffers for use on the vertex shader.
@@ -1042,19 +1012,20 @@ void sdlxBindGpuVertexStorageBuffers(
   Pointer<SdlGpuRenderPass> renderPass,
   List<Pointer<SdlGpuBuffer>> storageBuffers, {
   int firstSlot = 0,
-}) {
-  final pointer = ffi.calloc<Pointer<SdlGpuBuffer>>(storageBuffers.length);
+}) => ffi.using((arena) {
+  final pointer = arena<Pointer<SdlGpuBuffer>>(storageBuffers.length);
+
   for (var i = 0; i < storageBuffers.length; i++) {
     pointer[i] = storageBuffers[i];
   }
+
   sdlBindGpuVertexStorageBuffers(
     renderPass,
     firstSlot,
     pointer,
     storageBuffers.length,
   );
-  pointer.callocFree();
-}
+});
 
 ///
 /// Binds texture-sampler pairs for use on the fragment shader.
@@ -1091,16 +1062,17 @@ void sdlxBindGpuFragmentSamplers(
   List<SdlxGpuTextureSamplerBinding> bindings, {
   int firstSlot = 0,
 }) {
-  if (bindings.isNotEmpty) {
-    final bindingsPointer = bindings.calloc();
+  if (bindings.isEmpty) return;
+
+  ffi.using((arena) {
+    final bindingsPointer = bindings.toNative(arena);
     sdlBindGpuFragmentSamplers(
       renderPass,
       firstSlot,
       bindingsPointer,
       bindings.length,
     );
-    bindingsPointer.callocFree();
-  }
+  });
 }
 
 ///
@@ -1136,19 +1108,20 @@ void sdlxBindGpuFragmentStorageTextures(
   Pointer<SdlGpuRenderPass> renderPass,
   List<Pointer<SdlGpuTexture>> storageTextures, {
   int firstSlot = 0,
-}) {
-  final pointer = ffi.calloc<Pointer<SdlGpuTexture>>(storageTextures.length);
+}) => ffi.using((arena) {
+  final pointer = arena<Pointer<SdlGpuTexture>>(storageTextures.length);
+
   for (var i = 0; i < storageTextures.length; i++) {
     pointer[i] = storageTextures[i];
   }
+
   sdlBindGpuFragmentStorageTextures(
     renderPass,
     firstSlot,
     pointer,
     storageTextures.length,
   );
-  pointer.callocFree();
-}
+});
 
 ///
 /// Binds storage buffers for use on the fragment shader.
@@ -1180,19 +1153,20 @@ void sdlxBindGpuFragmentStorageBuffers(
   Pointer<SdlGpuRenderPass> renderPass,
   List<Pointer<SdlGpuBuffer>> storageBuffers, {
   int firstSlot = 0,
-}) {
-  final pointer = ffi.calloc<Pointer<SdlGpuBuffer>>(storageBuffers.length);
+}) => ffi.using((arena) {
+  final pointer = arena<Pointer<SdlGpuBuffer>>(storageBuffers.length);
+
   for (var i = 0; i < storageBuffers.length; i++) {
     pointer[i] = storageBuffers[i];
   }
+
   sdlBindGpuFragmentStorageBuffers(
     renderPass,
     firstSlot,
     pointer,
     storageBuffers.length,
   );
-  pointer.callocFree();
-}
+});
 
 ///
 /// Begins a compute pass on a command buffer.
@@ -1243,37 +1217,25 @@ Pointer<SdlGpuComputePass> sdlxBeginGpuComputePass(
   Pointer<SdlGpuCommandBuffer> commandBuffer, {
   List<SdlxGpuStorageTextureReadWriteBinding>? textures,
   List<SdlxGpuStorageBufferReadWriteBinding>? buffers,
-}) {
-  Pointer<SdlGpuComputePass> result = nullptr;
-  if (textures != null || buffers != null) {
-    Pointer<SdlGpuStorageTextureReadWriteBinding> texturesPointer = nullptr;
-    var texturesLength = 0;
-    Pointer<SdlGpuStorageBufferReadWriteBinding> buffersPointer = nullptr;
-    var buffersLength = 0;
-    if (textures != null) {
-      texturesLength = textures.length;
-      texturesPointer = textures.calloc();
-    }
-    if (buffers != null) {
-      buffersLength = buffers.length;
-      buffersPointer = buffers.calloc();
-    }
-    result = sdlBeginGpuComputePass(
-      commandBuffer,
-      texturesPointer,
-      texturesLength,
-      buffersPointer,
-      buffersLength,
-    );
-    if (texturesPointer != nullptr) {
-      texturesPointer.callocFree();
-    }
-    if (buffersPointer != nullptr) {
-      buffersPointer.callocFree();
-    }
-  }
-  return result;
-}
+}) => ffi.using((arena) {
+  final texturesPtr = textures?.isNotEmpty == true
+      ? textures!.toNative(arena)
+      : nullptr;
+  final texturesLen = textures?.length ?? 0;
+
+  final buffersPtr = buffers?.isNotEmpty == true
+      ? buffers!.toNative(arena)
+      : nullptr;
+  final buffersLen = buffers?.length ?? 0;
+
+  return sdlBeginGpuComputePass(
+    commandBuffer,
+    texturesPtr,
+    texturesLen,
+    buffersPtr,
+    buffersLen,
+  );
+});
 
 ///
 /// Binds texture-sampler pairs for use on the compute shader.
@@ -1310,16 +1272,17 @@ void sdlxBindGpuComputeSamplers(
   List<SdlxGpuTextureSamplerBinding> bindings, {
   int firstSlot = 0,
 }) {
-  if (bindings.isNotEmpty) {
-    final bindingsPointer = bindings.calloc();
+  if (bindings.isEmpty) return;
+
+  ffi.using((arena) {
+    final bindingsPointer = bindings.toNative(arena);
     sdlBindGpuComputeSamplers(
       computePass,
       firstSlot,
       bindingsPointer,
       bindings.length,
     );
-    bindingsPointer.callocFree();
-  }
+  });
 }
 
 ///
@@ -1355,19 +1318,20 @@ void sdlxBindGpuComputeStorageTextures(
   Pointer<SdlGpuComputePass> computePass,
   List<Pointer<SdlGpuTexture>> storageTextures, {
   int firstSlot = 0,
-}) {
-  final pointer = ffi.calloc<Pointer<SdlGpuTexture>>(storageTextures.length);
+}) => ffi.using((arena) {
+  final pointer = arena<Pointer<SdlGpuTexture>>(storageTextures.length);
+
   for (var i = 0; i < storageTextures.length; i++) {
     pointer[i] = storageTextures[i];
   }
+
   sdlBindGpuComputeStorageTextures(
     computePass,
     firstSlot,
     pointer,
     storageTextures.length,
   );
-  pointer.callocFree();
-}
+});
 
 ///
 /// Binds storage buffers as readonly for use on the compute pipeline.
@@ -1399,19 +1363,20 @@ void sdlxBindGpuComputeStorageBuffers(
   Pointer<SdlGpuComputePass> computePass,
   List<Pointer<SdlGpuBuffer>> storageBuffers, {
   int firstSlot = 0,
-}) {
-  final pointer = ffi.calloc<Pointer<SdlGpuBuffer>>(storageBuffers.length);
+}) => ffi.using((arena) {
+  final pointer = arena<Pointer<SdlGpuBuffer>>(storageBuffers.length);
+
   for (var i = 0; i < storageBuffers.length; i++) {
     pointer[i] = storageBuffers[i];
   }
+
   sdlBindGpuComputeStorageBuffers(
     computePass,
     firstSlot,
     pointer,
     storageBuffers.length,
   );
-  pointer.callocFree();
-}
+});
 
 ///
 /// Uploads data from a transfer buffer to a texture.
@@ -1443,13 +1408,14 @@ void sdlxUploadToGpuTexture(
   SdlxGpuTextureTransferInfo source,
   SdlxGpuTextureRegion destination, {
   bool cycle = false,
-}) {
-  final sourcePointer = source.calloc();
-  final destinationPointer = destination.calloc();
-  sdlUploadToGpuTexture(copyPass, sourcePointer, destinationPointer, cycle);
-  sourcePointer.callocFree();
-  destinationPointer.callocFree();
-}
+}) => ffi.using(
+  (arena) => sdlUploadToGpuTexture(
+    copyPass,
+    source.toNative(arena),
+    destination.toNative(arena),
+    cycle,
+  ),
+);
 
 ///
 /// Uploads data from a transfer buffer to a buffer.
@@ -1478,13 +1444,14 @@ void sdlxUploadToGpuBuffer(
   SdlxGpuTransferBufferLocation source,
   SdlxGpuBufferRegion destination, {
   bool cycle = false,
-}) {
-  final sourcePointer = source.calloc();
-  final destinationPointer = destination.calloc();
-  sdlUploadToGpuBuffer(copyPass, sourcePointer, destinationPointer, cycle);
-  sourcePointer.callocFree();
-  destinationPointer.callocFree();
-}
+}) => ffi.using(
+  (arena) => sdlUploadToGpuBuffer(
+    copyPass,
+    source.toNative(arena),
+    destination.toNative(arena),
+    cycle,
+  ),
+);
 
 ///
 /// Performs a texture-to-texture copy.
@@ -1523,21 +1490,17 @@ void sdlxCopyGpuTextureToTexture(
   int h,
   int d, {
   bool cycle = false,
-}) {
-  final sourcePointer = source.calloc();
-  final destinationPointer = destination.calloc();
-  sdlCopyGpuTextureToTexture(
+}) => ffi.using(
+  (arena) => sdlCopyGpuTextureToTexture(
     copyPass,
-    sourcePointer,
-    destinationPointer,
+    source.toNative(arena),
+    destination.toNative(arena),
     w,
     h,
     d,
     cycle,
-  );
-  sourcePointer.callocFree();
-  destinationPointer.callocFree();
-}
+  ),
+);
 
 ///
 /// Performs a buffer-to-buffer copy.
@@ -1568,19 +1531,15 @@ void sdlxCopyGpuBufferToBuffer(
   SdlxGpuBufferLocation destination,
   int size, {
   bool cycle = false,
-}) {
-  final sourcePointer = source.calloc();
-  final destinationPointer = destination.calloc();
-  sdlCopyGpuBufferToBuffer(
+}) => ffi.using(
+  (arena) => sdlCopyGpuBufferToBuffer(
     copyPass,
-    sourcePointer,
-    destinationPointer,
+    source.toNative(arena),
+    destination.toNative(arena),
     size,
     cycle,
-  );
-  sourcePointer.callocFree();
-  destinationPointer.callocFree();
-}
+  ),
+);
 
 ///
 /// Copies data from a texture to a transfer buffer on the GPU timeline.
@@ -1608,13 +1567,13 @@ void sdlxDownloadFromGpuTexture(
   Pointer<SdlGpuCopyPass> copyPass,
   SdlxGpuTextureRegion source,
   SdlxGpuTextureTransferInfo destination,
-) {
-  final sourcePointer = source.calloc();
-  final destinationPointer = destination.calloc();
-  sdlDownloadFromGpuTexture(copyPass, sourcePointer, destinationPointer);
-  sourcePointer.callocFree();
-  destinationPointer.callocFree();
-}
+) => ffi.using(
+  (arena) => sdlDownloadFromGpuTexture(
+    copyPass,
+    source.toNative(arena),
+    destination.toNative(arena),
+  ),
+);
 
 ///
 /// Copies data from a buffer to a transfer buffer on the GPU timeline.
@@ -1640,13 +1599,13 @@ void sdlxDownloadFromGpuBuffer(
   Pointer<SdlGpuCopyPass> copyPass,
   SdlxGpuBufferRegion source,
   SdlxGpuTransferBufferLocation destination,
-) {
-  final sourcePointer = source.calloc();
-  final destinationPointer = destination.calloc();
-  sdlDownloadFromGpuBuffer(copyPass, sourcePointer, destinationPointer);
-  sourcePointer.callocFree();
-  destinationPointer.callocFree();
-}
+) => ffi.using(
+  (arena) => sdlDownloadFromGpuBuffer(
+    copyPass,
+    source.toNative(arena),
+    destination.toNative(arena),
+  ),
+);
 
 ///
 /// Blits from a source texture region to a destination texture region.
@@ -1669,11 +1628,9 @@ void sdlxDownloadFromGpuBuffer(
 void sdlxBlitGpuTexture(
   Pointer<SdlGpuCommandBuffer> commandBuffer,
   SdlxGpuBlitInfo info,
-) {
-  final pointer = info.calloc();
-  sdlBlitGpuTexture(commandBuffer, pointer);
-  pointer.callocFree();
-}
+) => ffi.using(
+  (arena) => sdlBlitGpuTexture(commandBuffer, info.toNative(arena)),
+);
 
 ///
 /// Acquire a texture to use in presentation.
@@ -1738,33 +1695,29 @@ void sdlxBlitGpuTexture(
 sdlxAcquireGpuSwapchainTexture(
   Pointer<SdlGpuCommandBuffer> commandBuffer,
   Pointer<SdlWindow> window,
-) {
-  Pointer<SdlGpuTexture> texture = nullptr;
-  var width = 0;
-  var height = 0;
-  final texturePointer = ffi.calloc<Pointer<SdlGpuTexture>>();
-  final widthPointer = ffi.calloc<Uint32>();
-  final heightPointer = ffi.calloc<Uint32>();
-  final bl = sdlAcquireGpuSwapchainTexture(
+) => ffi.using((arena) {
+  final texturePointer = arena<Pointer<SdlGpuTexture>>();
+  final widthPointer = arena<Uint32>();
+  final heightPointer = arena<Uint32>();
+
+  final success = sdlAcquireGpuSwapchainTexture(
     commandBuffer,
     window,
     texturePointer,
     widthPointer,
     heightPointer,
   );
-  if (bl) {
-    texture = texturePointer.value;
-    width = widthPointer.value;
-    height = heightPointer.value;
-  }
-  texturePointer.callocFree();
-  widthPointer.callocFree();
-  heightPointer.callocFree();
-  if (!bl) {
+
+  if (!success) {
     return null;
   }
-  return (texture: texture, width: width, height: height);
-}
+
+  return (
+    texture: texturePointer.value,
+    width: widthPointer.value,
+    height: heightPointer.value,
+  );
+});
 
 ///
 /// Blocks the thread until a swapchain texture is available to be acquired,
@@ -1820,33 +1773,29 @@ sdlxAcquireGpuSwapchainTexture(
 sdlxWaitAndAcquireGpuSwapchainTexture(
   Pointer<SdlGpuCommandBuffer> commandBuffer,
   Pointer<SdlWindow> window,
-) {
-  Pointer<SdlGpuTexture> texture = nullptr;
-  var width = 0;
-  var height = 0;
-  final texturePointer = ffi.calloc<Pointer<SdlGpuTexture>>();
-  final widthPointer = ffi.calloc<Uint32>();
-  final heightPointer = ffi.calloc<Uint32>();
-  final bl = sdlWaitAndAcquireGpuSwapchainTexture(
+) => ffi.using((arena) {
+  final texturePointer = arena<Pointer<SdlGpuTexture>>();
+  final widthPointer = arena<Uint32>();
+  final heightPointer = arena<Uint32>();
+
+  final success = sdlWaitAndAcquireGpuSwapchainTexture(
     commandBuffer,
     window,
     texturePointer,
     widthPointer,
     heightPointer,
   );
-  if (bl) {
-    texture = texturePointer.value;
-    width = widthPointer.value;
-    height = heightPointer.value;
-  }
-  texturePointer.callocFree();
-  widthPointer.callocFree();
-  heightPointer.callocFree();
-  if (!bl) {
+
+  if (!success) {
     return null;
   }
-  return (texture: texture, width: width, height: height);
-}
+
+  return (
+    texture: texturePointer.value,
+    width: widthPointer.value,
+    height: heightPointer.value,
+  );
+});
 
 ///
 /// Blocks the thread until the given fences are signaled.
@@ -1876,13 +1825,12 @@ bool sdlxWaitForGpuFences(
   Pointer<SdlGpuDevice> device,
   List<Pointer<SdlGpuFence>> fences, {
   bool waitAll = true,
-}) {
-  bool result;
-  final pointer = ffi.calloc<Pointer<SdlGpuFence>>(fences.length);
+}) => ffi.using((arena) {
+  final pointer = arena<Pointer<SdlGpuFence>>(fences.length);
+
   for (var i = 0; i < fences.length; i++) {
     pointer[i] = fences[i];
   }
-  result = sdlWaitForGpuFences(device, waitAll, pointer, fences.length);
-  pointer.callocFree();
-  return result;
-}
+
+  return sdlWaitForGpuFences(device, waitAll, pointer, fences.length);
+});

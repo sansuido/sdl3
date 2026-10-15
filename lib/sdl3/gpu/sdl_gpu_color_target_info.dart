@@ -29,8 +29,8 @@ class SdlxGpuColorTargetInfo {
   final bool cycle;
   final bool cycleResolveTexture;
 
-  Pointer<SdlGpuColorTargetInfo> calloc() {
-    final pointer = ffi.calloc<SdlGpuColorTargetInfo>();
+  Pointer<SdlGpuColorTargetInfo> toNative([Allocator allocator = ffi.calloc]) {
+    final pointer = allocator<SdlGpuColorTargetInfo>();
     pointer.ref.texture = texture;
     pointer.ref.mipLevel = mipLevel;
     pointer.ref.layerOrDepthPlane = layerOrDepthPlane;
@@ -50,8 +50,8 @@ class SdlxGpuColorTargetInfo {
 }
 
 extension SdlxGpuColorTargetInfoListExtension on List<SdlxGpuColorTargetInfo> {
-  Pointer<SdlGpuColorTargetInfo> calloc() {
-    final buffersPointer = ffi.calloc<SdlGpuColorTargetInfo>(length);
+  Pointer<SdlGpuColorTargetInfo> toNative([Allocator allocator = ffi.calloc]) {
+    final buffersPointer = allocator<SdlGpuColorTargetInfo>(length);
     for (var n = 0; n < length; n++) {
       final bufferPointer = buffersPointer + n;
       bufferPointer.ref.texture = this[n].texture;

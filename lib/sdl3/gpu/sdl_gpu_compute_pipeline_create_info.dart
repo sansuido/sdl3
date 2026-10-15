@@ -31,10 +31,12 @@ class SdlxGpuComputePipelineCreateInfo {
   final int threadcountZ;
   final int props;
 
-  Pointer<SdlGpuComputePipelineCreateInfo> calloc() {
-    final pointer = ffi.calloc<SdlGpuComputePipelineCreateInfo>();
+  Pointer<SdlGpuComputePipelineCreateInfo> toNative([
+    Allocator allocator = ffi.calloc,
+  ]) {
+    final pointer = allocator<SdlGpuComputePipelineCreateInfo>();
     if (code.isNotEmpty) {
-      final codePointer = ffi.calloc<Uint8>(code.length)
+      final codePointer = allocator<Uint8>(code.length)
         ..asTypedList(code.length).setAll(0, code);
       pointer.ref.codeSize = code.length;
       pointer.ref.code = codePointer;
@@ -58,15 +60,15 @@ class SdlxGpuComputePipelineCreateInfo {
   }
 }
 
-extension SdlGpuComputePipelineCreateInfoCallocAllFreeExtension
-    on Pointer<SdlGpuComputePipelineCreateInfo> {
-  void callocAllFree() {
-    if (ref.code != nullptr) {
-      ref.code.callocFree();
-    }
-    if (ref.entrypoint != nullptr) {
-      ref.entrypoint.callocFree();
-    }
-    callocFree();
-  }
-}
+//extension SdlGpuComputePipelineCreateInfoCallocAllFreeExtension
+//    on Pointer<SdlGpuComputePipelineCreateInfo> {
+//  void callocAllFree() {
+//    if (ref.code != nullptr) {
+//      ref.code.callocFree();
+//    }
+//    if (ref.entrypoint != nullptr) {
+//      ref.entrypoint.callocFree();
+//    }
+//    callocFree();
+//  }
+//}

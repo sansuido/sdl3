@@ -46,14 +46,14 @@ class SdlxTextEditingCandidatesEvent extends SdlxEvent {
       windowId == targetId;
 
   @override
-  Pointer<SdlEvent> calloc() {
-    final pointer = ffi.calloc<SdlEvent>();
+  Pointer<SdlEvent> toNative([Allocator allocator = ffi.calloc]) {
+    final pointer = allocator<SdlEvent>();
     pointer.ref.editCandidates.type = type;
     pointer.ref.editCandidates.reserved = reserved;
     pointer.ref.editCandidates.timestamp = timestamp;
     pointer.ref.editCandidates.windowId = windowId;
     if (candidates.isNotEmpty) {
-      final candidatesPointer = ffi.calloc<Pointer<Int8>>(candidates.length);
+      final candidatesPointer = allocator<Pointer<Int8>>(candidates.length);
       for (var i = 0; i < candidates.length; i++) {
         candidatesPointer[i] = candidates[i].toNativeUtf8().cast<Int8>();
       }

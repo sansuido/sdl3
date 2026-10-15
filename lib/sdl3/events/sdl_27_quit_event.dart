@@ -14,8 +14,8 @@ class SdlxQuitEvent extends SdlxEvent {
   );
 
   @override
-  Pointer<SdlEvent> calloc() {
-    final pointer = ffi.calloc<SdlEvent>();
+  Pointer<SdlEvent> toNative([Allocator allocator = ffi.calloc]) {
+    final pointer = allocator<SdlEvent>();
     pointer.ref.quit.type = type;
     pointer.ref.quit.reserved = reserved;
     pointer.ref.quit.timestamp = timestamp;

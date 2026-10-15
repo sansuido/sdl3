@@ -31,25 +31,17 @@ int sdlxShowNotification(
   String? message,
   Pointer<SdlSurface> image, [
   List<SdlxNotificationAction>? actions,
-]) {
-  final numActions = actions != null ? actions.length : 0;
+]) => ffi.using((arena) {
+  final numActions = actions?.length ?? 0;
   Pointer<SdlNotificationAction> actionsPointer = nullptr;
+
   if (numActions > 0) {
-    actionsPointer = ffi.calloc<SdlNotificationAction>(numActions);
+    actionsPointer = arena<SdlNotificationAction>(numActions);
     for (var i = 0; i < numActions; i++) {
       final actionPointer = actionsPointer + i;
       actions![i].toPointer(actionPointer);
     }
   }
-  final result = sdlShowNotification(
-    title,
-    message,
-    image,
-    actionsPointer,
-    numActions,
-  );
-  if (actionsPointer != nullptr) {
-    actionsPointer.callocAllFree(numActions);
-  }
-  return result;
-}
+
+  return sdlShowNotification(title, message, image, actionsPointer, numActions);
+});

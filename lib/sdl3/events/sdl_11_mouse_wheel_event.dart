@@ -47,8 +47,8 @@ class SdlxMouseWheelEvent extends SdlxEvent {
       windowId == targetId;
 
   @override
-  Pointer<SdlEvent> calloc() {
-    final pointer = ffi.calloc<SdlEvent>();
+  Pointer<SdlEvent> toNative([Allocator allocator = ffi.calloc]) {
+    final pointer = allocator<SdlEvent>();
     pointer.ref.wheel.type = type;
     pointer.ref.wheel.reserved = reserved;
     pointer.ref.wheel.timestamp = timestamp;

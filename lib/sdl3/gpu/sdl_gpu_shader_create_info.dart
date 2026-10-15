@@ -23,10 +23,10 @@ class SdlxGpuShaderCreateInfo {
   final int numUniformBuffers;
   final int props;
 
-  Pointer<SdlGpuShaderCreateInfo> calloc() {
-    final pointer = ffi.calloc<SdlGpuShaderCreateInfo>();
+  Pointer<SdlGpuShaderCreateInfo> toNative([Allocator allocator = ffi.calloc]) {
+    final pointer = allocator<SdlGpuShaderCreateInfo>();
     if (code.isNotEmpty) {
-      final codePointer = ffi.calloc<Uint8>(code.length)
+      final codePointer = allocator<Uint8>(code.length)
         ..asTypedList(code.length).setAll(0, code);
       pointer.ref.codeSize = code.length;
       pointer.ref.code = codePointer;
@@ -45,15 +45,15 @@ class SdlxGpuShaderCreateInfo {
   }
 }
 
-extension SdlGpuShaderCreateInfoCallocAllFreeExtension
-    on Pointer<SdlGpuShaderCreateInfo> {
-  void callocAllFree() {
-    if (ref.code != nullptr) {
-      ref.code.callocFree();
-    }
-    if (ref.entrypoint != nullptr) {
-      ref.entrypoint.callocFree();
-    }
-    callocFree();
-  }
-}
+//extension SdlGpuShaderCreateInfoCallocAllFreeExtension
+//    on Pointer<SdlGpuShaderCreateInfo> {
+//  void callocAllFree() {
+//    if (ref.code != nullptr) {
+//      ref.code.callocFree();
+//    }
+//    if (ref.entrypoint != nullptr) {
+//      ref.entrypoint.callocFree();
+//    }
+//    callocFree();
+//  }
+//}

@@ -13,8 +13,10 @@ class SdlxGpuStorageTextureReadWriteBinding {
   final int layer;
   final bool cycle;
 
-  Pointer<SdlGpuStorageTextureReadWriteBinding> calloc() {
-    final pointer = ffi.calloc<SdlGpuStorageTextureReadWriteBinding>();
+  Pointer<SdlGpuStorageTextureReadWriteBinding> toNative([
+    Allocator allocator = ffi.calloc,
+  ]) {
+    final pointer = allocator<SdlGpuStorageTextureReadWriteBinding>();
     pointer.ref.texture = texture;
     pointer.ref.mipLevel = mipLevel;
     pointer.ref.layer = layer;
@@ -25,8 +27,10 @@ class SdlxGpuStorageTextureReadWriteBinding {
 
 extension SdlxGpuStorageTextureReadWriteBindingListExtension
     on List<SdlxGpuStorageTextureReadWriteBinding> {
-  Pointer<SdlGpuStorageTextureReadWriteBinding> calloc() {
-    final buffersPointer = ffi.calloc<SdlGpuStorageTextureReadWriteBinding>(
+  Pointer<SdlGpuStorageTextureReadWriteBinding> toNative([
+    Allocator allocator = ffi.calloc,
+  ]) {
+    final buffersPointer = allocator<SdlGpuStorageTextureReadWriteBinding>(
       length,
     );
     for (var n = 0; n < length; n++) {

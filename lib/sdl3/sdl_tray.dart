@@ -4,7 +4,6 @@ import 'package:ffi/ffi.dart' as ffi;
 
 import 'dylib.dart' as dylib;
 import 'sdl.dart';
-import 'sdl_dart.dart';
 
 part 'tray/lib_sdl_tray.dart';
 part 'tray/sdl_tray.dart';

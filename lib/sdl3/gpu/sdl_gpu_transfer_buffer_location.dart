@@ -9,8 +9,10 @@ class SdlxGpuTransferBufferLocation {
   final Pointer<SdlGpuTransferBuffer> transferBuffer;
   final int offset;
 
-  Pointer<SdlGpuTransferBufferLocation> calloc() {
-    final pointer = ffi.calloc<SdlGpuTransferBufferLocation>();
+  Pointer<SdlGpuTransferBufferLocation> toNative([
+    Allocator allocator = ffi.calloc,
+  ]) {
+    final pointer = allocator<SdlGpuTransferBufferLocation>();
     pointer.ref.transferBuffer = transferBuffer;
     pointer.ref.offset = offset;
     return pointer;

@@ -3,7 +3,6 @@ import 'dart:ffi';
 import 'package:ffi/ffi.dart' as ffi;
 
 import 'dylib.dart' as dylib;
-import 'sdl_dart.dart';
 
 part 'power/lib_sdl_power.dart';
 

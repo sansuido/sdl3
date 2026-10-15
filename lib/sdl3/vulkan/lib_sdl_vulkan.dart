@@ -30,14 +30,16 @@ part of '../sdl_vulkan.dart';
 /// - [SDL_Vulkan_GetInstanceExtensions - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_Vulkan_GetInstanceExtensions)
 ///
 /// {@category vulkan}
-List<String> sdlxVulkanGetInstanceExtensions() {
-  final result = <String>[];
-  final countPointer = ffi.calloc<Uint32>();
+List<String> sdlxVulkanGetInstanceExtensions() => ffi.using((arena) {
+  final countPointer = arena<Uint32>();
   final rowsPointer = sdlVulkanGetInstanceExtensions(countPointer);
-  for (var i = 0; i < countPointer.value; i++) {
-    final rowPointer = rowsPointer[i];
-    result.add(rowPointer.cast<ffi.Utf8>().toDartString());
+
+  if (rowsPointer == nullptr) {
+    return [];
   }
-  countPointer.callocFree();
-  return result;
-}
+
+  return [
+    for (var i = 0; i < countPointer.value; i++)
+      rowsPointer[i].cast<ffi.Utf8>().toDartString(),
+  ];
+});

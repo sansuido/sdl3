@@ -11,8 +11,8 @@ class SdlxGpuBufferRegion {
   final int offset;
   final int size;
 
-  Pointer<SdlGpuBufferRegion> calloc() {
-    final pointer = ffi.calloc<SdlGpuBufferRegion>();
+  Pointer<SdlGpuBufferRegion> toNative([Allocator allocator = ffi.calloc]) {
+    final pointer = allocator<SdlGpuBufferRegion>();
     pointer.ref.buffer = buffer;
     pointer.ref.offset = offset;
     pointer.ref.size = size;

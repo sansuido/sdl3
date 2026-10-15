@@ -42,7 +42,7 @@ class SdlxShaderCrossGraphicsShaderResourceInfo {
       ..numUniformBuffers = numUniformBuffers;
   }
 
-  Pointer<SdlShaderCrossGraphicsShaderResourceInfo> calloc([
+  Pointer<SdlShaderCrossGraphicsShaderResourceInfo> toNative([
     Allocator allocator = ffi.calloc,
   ]) {
     final pointer = allocator<SdlShaderCrossGraphicsShaderResourceInfo>();

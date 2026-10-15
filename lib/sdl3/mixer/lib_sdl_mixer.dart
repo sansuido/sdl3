@@ -53,17 +53,13 @@ part of '../sdl_mixer.dart';
 /// - [MIX_CreateMixerDevice - SDL3 Wiki](https://wiki.libsdl.org/SDL3/MIX_CreateMixerDevice)
 ///
 /// {@category mixer}
-Pointer<MixMixer> mixxCreateMixerDevice(int devid, SdlxAudioSpec? spec) {
-  Pointer<SdlAudioSpec> specPointer = nullptr;
-  if (spec != null) {
-    specPointer = spec.calloc();
-  }
-  final result = mixCreateMixerDevice(devid, specPointer);
-  if (specPointer != nullptr) {
-    specPointer.callocFree();
-  }
-  return result;
-}
+Pointer<MixMixer> mixxCreateMixerDevice(int devid, SdlxAudioSpec? spec) =>
+    ffi.using(
+      (arena) => mixCreateMixerDevice(
+        devid,
+        spec != null ? spec.toNative(arena) : nullptr,
+      ),
+    );
 
 ///
 /// Create a mixer that generates audio to a memory buffer.
@@ -100,12 +96,8 @@ Pointer<MixMixer> mixxCreateMixerDevice(int devid, SdlxAudioSpec? spec) {
 /// - [MIX_CreateMixer - SDL3 Wiki](https://wiki.libsdl.org/SDL3/MIX_CreateMixer)
 ///
 /// {@category mixer}
-Pointer<MixMixer> mixxCreateMixer(SdlxAudioSpec spec) {
-  final specPointer = spec.calloc();
-  final result = mixCreateMixer(specPointer);
-  specPointer.callocFree();
-  return result;
-}
+Pointer<MixMixer> mixxCreateMixer(SdlxAudioSpec spec) =>
+    ffi.using((arena) => mixCreateMixer(spec.toNative(arena)));
 
 ///
 /// Get the audio format a mixer is generating.
@@ -197,12 +189,9 @@ Pointer<MixAudio> mixxLoadRawAudioIo(
   Pointer<SdlIoStream> io,
   SdlxAudioSpec spec, {
   bool closeio = false,
-}) {
-  final specPointer = spec.calloc();
-  final result = mixLoadRawAudioIo(mixer, io, specPointer, closeio);
-  specPointer.callocFree();
-  return result;
-}
+}) => ffi.using(
+  (arena) => mixLoadRawAudioIo(mixer, io, spec.toNative(arena), closeio),
+);
 
 ///
 /// Load raw PCM data from a memory buffer.
@@ -251,17 +240,10 @@ Pointer<MixAudio> mixxLoadRawAudio(
   Pointer<Void> data,
   int datalen,
   SdlxAudioSpec spec,
-) {
-  final specPointer = spec.calloc();
-  final result = mixLoadRawAudio(
-    mixer,
-    data.cast<Void>(),
-    datalen,
-    specPointer,
-  );
-  specPointer.callocFree();
-  return result;
-}
+) => ffi.using(
+  (arena) =>
+      mixLoadRawAudio(mixer, data.cast<Void>(), datalen, spec.toNative(arena)),
+);
 
 ///
 /// Load raw PCM data from a memory buffer without making a copy.
@@ -317,18 +299,15 @@ Pointer<MixAudio> mixxLoadRawAudioNoCopy(
   int datalen,
   SdlxAudioSpec spec, {
   bool freeWhenDone = false,
-}) {
-  final specPointer = spec.calloc();
-  final result = mixLoadRawAudioNoCopy(
+}) => ffi.using(
+  (arena) => mixLoadRawAudioNoCopy(
     mixer,
     data,
     datalen,
-    specPointer,
+    spec.toNative(arena),
     freeWhenDone,
-  );
-  specPointer.callocFree();
-  return result;
-}
+  ),
+);
 
 ///
 /// Query the initial audio format of a MIX_Audio.
@@ -423,12 +402,9 @@ bool mixxSetTrackRawIoStream(
   Pointer<SdlIoStream> io,
   SdlxAudioSpec spec, {
   bool closeio = false,
-}) {
-  final specPointer = spec.calloc();
-  final result = mixSetTrackRawIoStream(track, io, specPointer, closeio);
-  specPointer.callocFree();
-  return result;
-}
+}) => ffi.using(
+  (arena) => mixSetTrackRawIoStream(track, io, spec.toNative(arena), closeio),
+);
 
 ///
 /// Get the tags currently associated with a track.
@@ -454,19 +430,23 @@ bool mixxSetTrackRawIoStream(
 /// - [MIX_GetTrackTags - SDL3 Wiki](https://wiki.libsdl.org/SDL3/MIX_GetTrackTags)
 ///
 /// {@category mixer}
-List<String> mixxGetTrackTags(Pointer<MixTrack> track) {
-  final result = <String>[];
-  final countPointer = ffi.calloc<Int32>();
+List<String> mixxGetTrackTags(Pointer<MixTrack> track) => ffi.using((arena) {
+  final countPointer = arena<Int32>();
   final tagsPointer = mixGetTrackTags(track, countPointer);
-  if (tagsPointer != nullptr) {
-    for (var i = 0; i < countPointer.value; i++) {
-      result.add(tagsPointer[i].cast<ffi.Utf8>().toDartString());
-    }
+
+  if (tagsPointer == nullptr) {
+    return [];
+  }
+
+  try {
+    return [
+      for (var i = 0; i < countPointer.value; i++)
+        tagsPointer[i].cast<ffi.Utf8>().toDartString(),
+    ];
+  } finally {
     sdlFree(tagsPointer.cast<Void>());
   }
-  countPointer.callocFree();
-  return result;
-}
+});
 
 ///
 /// Get all tracks with a specific tag.
@@ -496,19 +476,20 @@ List<String> mixxGetTrackTags(Pointer<MixTrack> track) {
 List<Pointer<MixTrack>> mixxGetTaggedTracks(
   Pointer<MixMixer> mixer,
   String tag,
-) {
-  final result = <Pointer<MixTrack>>[];
-  final countPointer = ffi.calloc<Int32>();
+) => ffi.using((arena) {
+  final countPointer = arena<Int32>();
   final tracksPointer = mixGetTaggedTracks(mixer, tag, countPointer);
-  if (tracksPointer != nullptr) {
-    for (var i = 0; i < countPointer.value; i++) {
-      result.add(tracksPointer[i]);
-    }
+
+  if (tracksPointer == nullptr) {
+    return [];
+  }
+
+  try {
+    return [for (var i = 0; i < countPointer.value; i++) tracksPointer[i]];
+  } finally {
     sdlFree(tracksPointer.cast<Void>());
   }
-  countPointer.callocFree();
-  return result;
-}
+});
 
 ///
 /// Set the current output channel map of a track.
@@ -555,20 +536,19 @@ List<Pointer<MixTrack>> mixxGetTaggedTracks(
 /// - [MIX_SetTrackOutputChannelMap - SDL3 Wiki](https://wiki.libsdl.org/SDL3/MIX_SetTrackOutputChannelMap)
 ///
 /// {@category mixer}
-bool mixxSetTrackOutputChannelMap(Pointer<MixTrack> track, List<int>? chmap) {
-  Pointer<Int32> chmapPointer = nullptr;
-  var count = 0;
-  if (chmap != null) {
-    count = chmap.length;
-    chmapPointer = ffi.calloc<Int32>(count);
-    chmapPointer.asTypedList(count).setAll(0, chmap);
-  }
-  final result = mixSetTrackOutputChannelMap(track, chmapPointer, count);
-  if (chmapPointer != nullptr) {
-    chmapPointer.callocFree();
-  }
-  return result;
-}
+bool mixxSetTrackOutputChannelMap(Pointer<MixTrack> track, List<int>? chmap) =>
+    ffi.using((arena) {
+      Pointer<Int32> chmapPointer = nullptr;
+      var count = 0;
+
+      if (chmap != null) {
+        count = chmap.length;
+        chmapPointer = arena<Int32>(count);
+        chmapPointer.asTypedList(count).setAll(0, chmap);
+      }
+
+      return mixSetTrackOutputChannelMap(track, chmapPointer, count);
+    });
 
 ///
 /// Force a track to stereo output, with optionally left/right panning.
@@ -609,17 +589,13 @@ bool mixxSetTrackOutputChannelMap(Pointer<MixTrack> track, List<int>? chmap) {
 /// - [MIX_SetTrackStereo - SDL3 Wiki](https://wiki.libsdl.org/SDL3/MIX_SetTrackStereo)
 ///
 /// {@category mixer}
-bool mixxSetTrackStereo(Pointer<MixTrack> track, MixxStereoGains? gains) {
-  Pointer<MixStereoGains> gainsPointer = nullptr;
-  if (gains != null) {
-    gainsPointer = gains.calloc();
-  }
-  final result = mixSetTrackStereo(track, gainsPointer);
-  if (gainsPointer != nullptr) {
-    gainsPointer.callocFree();
-  }
-  return result;
-}
+bool mixxSetTrackStereo(Pointer<MixTrack> track, MixxStereoGains? gains) =>
+    ffi.using(
+      (arena) => mixSetTrackStereo(
+        track,
+        gains != null ? gains.toNative(arena) : nullptr,
+      ),
+    );
 
 ///
 /// Set a track's position in 3D space.
@@ -673,17 +649,13 @@ bool mixxSetTrackStereo(Pointer<MixTrack> track, MixxStereoGains? gains) {
 /// - [MIX_SetTrack3DPosition - SDL3 Wiki](https://wiki.libsdl.org/SDL3/MIX_SetTrack3DPosition)
 ///
 /// {@category mixer}
-bool mixxSetTrack3DPosition(Pointer<MixTrack> track, MixxPoint3D? position) {
-  Pointer<MixPoint3D> positionPointer = nullptr;
-  if (position != null) {
-    positionPointer = position.calloc();
-  }
-  final result = mixSetTrack3DPosition(track, positionPointer);
-  if (positionPointer != nullptr) {
-    positionPointer.callocFree();
-  }
-  return result;
-}
+bool mixxSetTrack3DPosition(Pointer<MixTrack> track, MixxPoint3D? position) =>
+    ffi.using(
+      (arena) => mixSetTrack3DPosition(
+        track,
+        position != null ? position.toNative(arena) : nullptr,
+      ),
+    );
 
 ///
 /// Get a track's current position in 3D space.
@@ -866,28 +838,25 @@ int mixxDecodeAudio(
   Pointer<MixAudioDecoder> audiodecoder,
   TypedData buffer,
   SdlxAudioSpec spec,
-) {
+) => ffi.using((arena) {
   final byteView = buffer.buffer.asUint8List(
     buffer.offsetInBytes,
     buffer.lengthInBytes,
   );
   final buflen = byteView.length;
-  final specPointer = spec.calloc();
-  final bufferPointer = sdlMalloc(buflen).cast<Uint8>();
-  if (bufferPointer == nullptr) {
-    specPointer.callocFree();
-    return 0;
-  }
+
+  final bufferPointer = arena.allocate<Uint8>(buflen);
+
   final bytesWritten = mixDecodeAudio(
     audiodecoder,
     bufferPointer.cast(),
     buflen,
-    specPointer,
+    spec.toNative(arena),
   );
+
   if (bytesWritten > 0) {
     byteView.setAll(0, bufferPointer.asTypedList(bytesWritten));
   }
-  sdlFree(bufferPointer.cast<Void>());
-  specPointer.callocFree();
+
   return bytesWritten;
-}
+});

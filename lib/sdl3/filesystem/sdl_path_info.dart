@@ -24,8 +24,8 @@ class SdlxPathInfo {
   final int modifyTime;
   final int accessTime;
 
-  Pointer<SdlPathInfo> calloc() {
-    final pointer = ffi.calloc<SdlPathInfo>();
+  Pointer<SdlPathInfo> toNative([Allocator allocator = ffi.calloc]) {
+    final pointer = allocator<SdlPathInfo>();
     pointer.ref.type = type;
     pointer.ref.size = size;
     pointer.ref.createTime = createTime;

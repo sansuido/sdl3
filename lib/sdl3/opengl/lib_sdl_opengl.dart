@@ -1,29 +1,23 @@
 part of '../sdl_opengl.dart';
 
-void glxDeleteTextures(List<int> textures) {
-  final texture = ffi.calloc<Uint32>();
+void glxDeleteTextures(List<int> textures) => ffi.using((arena) {
+  final texture = arena<Uint32>();
   for (final id in textures) {
     texture.value = id;
     glDeleteTextures(1, texture);
   }
-  ffi.calloc.free(texture);
-}
+});
 
 void glxDrawElements(int mode, int count, int type, int indices) {
   final indicesPointer = Pointer<Void>.fromAddress(indices);
   glDrawElements(mode, count, type, indicesPointer);
 }
 
-List<int> glxGenTextures(int n) {
-  final result = <int>[];
-  final textures = ffi.calloc<Uint32>(n);
+List<int> glxGenTextures(int n) => ffi.using((arena) {
+  final textures = arena<Uint32>(n);
   glGenTextures(n, textures);
-  for (var i = 0; i < n; i++) {
-    result.add((textures + i).value);
-  }
-  ffi.calloc.free(textures);
-  return result;
-}
+  return [for (var i = 0; i < n; i++) textures[i]];
+});
 
 void glxTexImage2D(
   int target,
@@ -35,30 +29,28 @@ void glxTexImage2D(
   int format,
   Uint8List pixels, {
   bool inverted = true,
-}) {
-  Pointer<Uint8> callocPixelsPointer(
-    Uint8List pixels,
-    int height, {
-    bool inverted = true,
-  }) {
-    final pixelsPointer = ffi.calloc<Uint8>(pixels.length);
+}) => ffi.using((arena) {
+  if (pixels.isEmpty) {
+    return;
+  }
+
+  Pointer<Uint8> allocatePixelsPointer() {
+    final pixelsPointer = arena<Uint8>(pixels.length);
     final radix = pixels.length ~/ height;
     var index = 0;
     for (var h = 0; h < height; h++) {
-      var pos = h;
-      if (inverted) {
-        pos = height - h - 1;
-      }
+      final pos = inverted ? height - h - 1 : h;
       final values = pixels.getRange(pos * radix, (pos + 1) * radix);
       for (final value in values) {
-        (pixelsPointer + index).value = value;
+        pixelsPointer[index] = value;
         index++;
       }
     }
     return pixelsPointer;
   }
 
-  final pixelsPointer = callocPixelsPointer(pixels, height, inverted: inverted);
+  final pixelsPointer = allocatePixelsPointer();
+
   glTexImage2D(
     target,
     level,
@@ -70,189 +62,220 @@ void glxTexImage2D(
     GL_UNSIGNED_BYTE,
     pixelsPointer.cast<Void>(),
   );
-  ffi.calloc.free(pixelsPointer);
-}
+});
 
-void glxDeleteBuffers(List<int> buffers) {
-  final buffer = ffi.calloc<Uint32>();
+void glxDeleteBuffers(List<int> buffers) => ffi.using((arena) {
+  final buffer = arena<Uint32>();
   for (final id in buffers) {
     buffer.value = id;
     glDeleteBuffers(1, buffer);
   }
-  ffi.calloc.free(buffer);
-}
+});
 
-void glxBufferUint16(int target, List<int> list, int usage) {
-  final bufferData = ffi.calloc<Uint16>(list.length);
-  for (var i = 0; i < list.length; i++) {
-    (bufferData + i).value = list[i];
+void glxBufferUint16(int target, List<int> list, int usage) =>
+    ffi.using((arena) {
+      final bufferData = arena<Uint16>(list.length);
+
+      for (var i = 0; i < list.length; i++) {
+        bufferData[i] = list[i];
+      }
+
+      glBufferData(
+        target,
+        sizeOf<Uint16>() * list.length,
+        bufferData.cast<Void>(),
+        usage,
+      );
+    });
+
+void glxBufferUint32(int target, List<int> list, int usage) =>
+    ffi.using((arena) {
+      if (list.isEmpty) {
+        return;
+      }
+
+      final bufferData = arena<Uint32>(list.length);
+      for (var i = 0; i < list.length; i++) {
+        bufferData[i] = list[i];
+      }
+
+      glBufferData(
+        target,
+        sizeOf<Uint32>() * list.length,
+        bufferData.cast<Void>(),
+        usage,
+      );
+    });
+
+void glxBufferFloat(int target, List<double> buffer, int usage) =>
+    ffi.using((arena) {
+      if (buffer.isEmpty) {
+        return;
+      }
+
+      final bufferData = arena<Float>(buffer.length);
+      for (var i = 0; i < buffer.length; i++) {
+        bufferData[i] = buffer[i];
+      }
+
+      glBufferData(
+        target,
+        sizeOf<Float>() * buffer.length,
+        bufferData.cast<Void>(),
+        usage,
+      );
+    });
+
+List<int> glxGenBuffers(int n) => ffi.using((arena) {
+  if (n <= 0) {
+    return [];
   }
-  glBufferData(
-    target,
-    sizeOf<Uint16>() * list.length,
-    bufferData.cast<Void>(),
-    usage,
-  );
-  ffi.calloc.free(bufferData);
-}
 
-void glxBufferUint32(int target, List<int> list, int usage) {
-  final bufferData = ffi.calloc<Uint32>(list.length);
-  for (var i = 0; i < list.length; i++) {
-    (bufferData + i).value = list[i];
-  }
-  glBufferData(
-    target,
-    sizeOf<Uint32>() * list.length,
-    bufferData.cast<Void>(),
-    usage,
-  );
-  ffi.calloc.free(bufferData);
-}
-
-void glxBufferFloat(int target, List<double> buffer, int usage) {
-  final bufferData = ffi.calloc<Float>(buffer.length);
-  for (var i = 0; i < buffer.length; i++) {
-    (bufferData + i).value = buffer[i];
-  }
-  glBufferData(
-    target,
-    sizeOf<Float>() * buffer.length,
-    bufferData.cast<Void>(),
-    usage,
-  );
-  ffi.calloc.free(bufferData);
-}
-
-List<int> glxGenBuffers(int n) {
-  final result = <int>[];
-  final buffers = ffi.calloc<Uint32>(n);
+  final buffers = arena<Uint32>(n);
   glGenBuffers(n, buffers);
-  for (var i = 0; i < n; i++) {
-    result.add((buffers + i).value);
-  }
-  ffi.calloc.free(buffers);
-  return result;
-}
 
-String glxGetProgramInfoLog(int program, int bufSize) {
-  String result;
-  final infoLog = ffi.calloc<Int8>(bufSize);
-  final length = ffi.calloc<Int32>();
+  return [for (var i = 0; i < n; i++) buffers[i]];
+});
+
+String glxGetProgramInfoLog(int program, int bufSize) => ffi.using((arena) {
+  final infoLog = arena<Int8>(bufSize);
+  final length = arena<Int32>();
+
   glGetProgramInfoLog(program, bufSize, length, infoLog);
-  result = infoLog.cast<ffi.Utf8>().toDartString();
-  infoLog.callocFree();
-  length.callocFree();
-  return result;
-}
 
-int glxGetProgramiv(int program, int pname) {
-  final paramPtr = ffi.calloc<Int32>();
-  int result;
+  return infoLog.cast<ffi.Utf8>().toDartString();
+});
+
+int glxGetProgramiv(int program, int pname) => ffi.using((arena) {
+  final paramPtr = arena<Int32>();
+
   glGetProgramiv(program, pname, paramPtr);
-  result = paramPtr.value;
-  ffi.calloc.free(paramPtr);
-  return result;
-}
 
-String glxGetShaderInfoLog(int shader, int bufSize) {
-  String result;
-  final infoLog = ffi.calloc<Int8>(bufSize);
-  final length = ffi.calloc<Int32>();
+  return paramPtr.value;
+});
+
+String glxGetShaderInfoLog(int shader, int bufSize) => ffi.using((arena) {
+  final infoLog = arena<Int8>(bufSize);
+  final length = arena<Int32>();
+
   glGetShaderInfoLog(shader, bufSize, length, infoLog);
-  result = infoLog.cast<ffi.Utf8>().toDartString();
-  length.callocFree();
-  infoLog.callocFree();
-  return result;
-}
 
-int glxGetShaderiv(int shader, int pname) {
-  int result;
-  final params = ffi.calloc<Int32>();
+  return infoLog.cast<ffi.Utf8>().toDartString();
+});
+
+int glxGetShaderiv(int shader, int pname) => ffi.using((arena) {
+  final params = arena<Int32>();
+
   glGetShaderiv(shader, pname, params);
-  result = params.value;
-  params.callocFree();
-  return result;
-}
 
-void glxShaderSource(int shader, String source) {
-  final sourceNative = source.toNativeUtf8();
-  final string = ffi.calloc<Pointer<Int8>>()..value = sourceNative.cast<Int8>();
-  final length = ffi.calloc<Int32>()..value = sourceNative.length;
+  return params.value;
+});
+
+void glxShaderSource(int shader, String source) => ffi.using((arena) {
+  final sourceNative = source.toNativeUtf8(allocator: arena);
+
+  final string = arena<Pointer<Int8>>()..value = sourceNative.cast<Int8>();
+
+  final length = arena<Int32>()..value = sourceNative.length;
+
   glShaderSource(shader, 1, string, length);
-  length.callocFree();
-  string.callocFree();
-  sourceNative.callocFree();
-}
+});
 
-void glxUniform2fv(int location, int count, Float32List value) {
-  final valuePointer = ffi.calloc<Float>(value.length);
-  for (var i = 0; i < value.length; i++) {
-    (valuePointer + i).value = value[i];
-  }
-  glUniform2fv(location, count, valuePointer);
-  valuePointer.callocFree();
-}
+void glxUniform2fv(int location, int count, Float32List value) =>
+    ffi.using((arena) {
+      if (value.isEmpty) {
+        return;
+      }
 
-void glxUniform3fv(int location, int count, Float32List value) {
-  final valuePointer = ffi.calloc<Float>(value.length);
-  for (var i = 0; i < value.length; i++) {
-    (valuePointer + i).value = value[i];
-  }
-  glUniform3fv(location, count, valuePointer);
-  ffi.calloc.free(valuePointer);
-}
+      final valuePointer = arena<Float>(value.length);
+      for (var i = 0; i < value.length; i++) {
+        valuePointer[i] = value[i];
+      }
 
-void glxUniform4fv(int location, int count, Float32List value) {
-  final valuePointer = ffi.calloc<Float>(value.length);
-  for (var i = 0; i < value.length; i++) {
-    (valuePointer + i).value = value[i];
-  }
-  glUniform4fv(location, count, valuePointer);
-  valuePointer.callocFree();
-}
+      glUniform2fv(location, count, valuePointer);
+    });
+
+void glxUniform3fv(int location, int count, Float32List value) =>
+    ffi.using((arena) {
+      if (value.isEmpty) {
+        return;
+      }
+
+      final valuePointer = arena<Float>(value.length);
+      for (var i = 0; i < value.length; i++) {
+        valuePointer[i] = value[i];
+      }
+
+      glUniform3fv(location, count, valuePointer);
+    });
+
+void glxUniform4fv(int location, int count, Float32List value) =>
+    ffi.using((arena) {
+      if (value.isEmpty) {
+        return;
+      }
+
+      final valuePointer = arena<Float>(value.length);
+      for (var i = 0; i < value.length; i++) {
+        valuePointer[i] = value[i];
+      }
+
+      glUniform4fv(location, count, valuePointer);
+    });
 
 void glxUniformMatrix2fv(
   int location,
   int count,
   int transpose,
   Float32List value,
-) {
-  final valuePointer = ffi.calloc<Float>(value.length);
-  for (var i = 0; i < value.length; i++) {
-    (valuePointer + i).value = value[i];
+) => ffi.using((arena) {
+  if (value.isEmpty) {
+    return;
   }
+
+  final valuePointer = arena<Float>(value.length);
+  for (var i = 0; i < value.length; i++) {
+    valuePointer[i] = value[i];
+  }
+
   glUniformMatrix2fv(location, count, transpose, valuePointer);
-  valuePointer.callocFree();
-}
+});
 
 void glxUniformMatrix3fv(
   int location,
   int count,
   int transpose,
   Float32List value,
-) {
-  final valuePointer = ffi.calloc<Float>(value.length);
-  for (var i = 0; i < value.length; i++) {
-    (valuePointer + i).value = value[i];
+) => ffi.using((arena) {
+  if (value.isEmpty) {
+    return;
   }
+
+  final valuePointer = arena<Float>(value.length);
+  for (var i = 0; i < value.length; i++) {
+    valuePointer[i] = value[i];
+  }
+
   glUniformMatrix3fv(location, count, transpose, valuePointer);
-  valuePointer.callocFree();
-}
+});
 
 void glxUniformMatrix4fv(
   int location,
   int count,
   int transpose,
   Float32List value,
-) {
-  final valuePointer = ffi.calloc<Float>(value.length);
-  for (var i = 0; i < value.length; i++) {
-    (valuePointer + i).value = value[i];
+) => ffi.using((arena) {
+  if (value.isEmpty) {
+    return;
   }
+
+  final valuePointer = arena<Float>(value.length);
+  for (var i = 0; i < value.length; i++) {
+    valuePointer[i] = value[i];
+  }
+
   glUniformMatrix4fv(location, count, transpose, valuePointer);
-  valuePointer.callocFree();
-}
+});
 
 void glxVertexAttribPointer(
   int index,
@@ -272,22 +295,26 @@ void glxVertexAttribPointer(
   );
 }
 
-void glxDeleteVertexArrays(List<int> arrays) {
-  final array = ffi.calloc<Uint32>();
-  for (final id in arrays) {
-    array.value = id;
-    glDeleteVertexArrays(1, array);
+void glxDeleteVertexArrays(List<int> arrays) => ffi.using((arena) {
+  if (arrays.isEmpty) {
+    return;
   }
-  ffi.calloc.free(array);
-}
 
-List<int> glxGenVertexArrays(int n) {
-  final result = <int>[];
-  final arrays = ffi.calloc<Uint32>(n);
-  glGenVertexArrays(n, arrays);
-  for (var i = 0; i < n; i++) {
-    result.add((arrays + i).value);
+  final arrayPointer = arena<Uint32>(arrays.length);
+  for (var i = 0; i < arrays.length; i++) {
+    arrayPointer[i] = arrays[i];
   }
-  arrays.callocFree();
-  return result;
-}
+
+  glDeleteVertexArrays(arrays.length, arrayPointer);
+});
+
+List<int> glxGenVertexArrays(int n) => ffi.using((arena) {
+  if (n <= 0) {
+    return [];
+  }
+
+  final arrays = arena<Uint32>(n);
+  glGenVertexArrays(n, arrays);
+
+  return [for (var i = 0; i < n; i++) arrays[i]];
+});

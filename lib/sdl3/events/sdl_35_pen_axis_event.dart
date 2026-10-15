@@ -44,8 +44,8 @@ class SdlxPenAxisEvent extends SdlxEvent {
       windowId == targetId;
 
   @override
-  Pointer<SdlEvent> calloc() {
-    final pointer = ffi.calloc<SdlEvent>();
+  Pointer<SdlEvent> toNative([Allocator allocator = ffi.calloc]) {
+    final pointer = allocator<SdlEvent>();
     pointer.ref.paxis.type = type;
     pointer.ref.paxis.reserved = reserved;
     pointer.ref.paxis.timestamp = timestamp;

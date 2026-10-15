@@ -11,8 +11,10 @@ class SdlxGpuTransferBufferCreateInfo {
   final int size;
   final int props;
 
-  Pointer<SdlGpuTransferBufferCreateInfo> calloc() {
-    final pointer = ffi.calloc<SdlGpuTransferBufferCreateInfo>();
+  Pointer<SdlGpuTransferBufferCreateInfo> toNative([
+    Allocator allocator = ffi.calloc,
+  ]) {
+    final pointer = allocator<SdlGpuTransferBufferCreateInfo>();
     pointer.ref.usage = usage;
     pointer.ref.size = size;
     pointer.ref.props = props;

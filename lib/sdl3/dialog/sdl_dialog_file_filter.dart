@@ -6,8 +6,8 @@ class SdlxDialogFileFilter {
   final String name;
   final String pattern;
 
-  Pointer<SdlDialogFileFilter> calloc() {
-    final pointer = ffi.calloc<SdlDialogFileFilter>();
+  Pointer<SdlDialogFileFilter> toNative([Allocator allocator = ffi.calloc]) {
+    final pointer = allocator<SdlDialogFileFilter>();
     if (name.isNotEmpty) {
       pointer.ref.name = name.toNativeUtf8();
     }
@@ -19,8 +19,8 @@ class SdlxDialogFileFilter {
 }
 
 extension SdlxDialogFileFilterListExtension on List<SdlxDialogFileFilter> {
-  Pointer<SdlDialogFileFilter> calloc() {
-    final filtersPointer = ffi.calloc<SdlDialogFileFilter>(length);
+  Pointer<SdlDialogFileFilter> toNative([Allocator allocator = ffi.calloc]) {
+    final filtersPointer = allocator<SdlDialogFileFilter>(length);
     for (var n = 0; n < length; n++) {
       final filterPointer = filtersPointer + n;
       if (this[n].name.isNotEmpty) {
@@ -34,18 +34,18 @@ extension SdlxDialogFileFilterListExtension on List<SdlxDialogFileFilter> {
   }
 }
 
-extension SdlDialogFileFilterCallocAllFreeExtension
-    on Pointer<SdlDialogFileFilter> {
-  void callocAllFree([int length = 1]) {
-    for (var n = 0; n < length; n++) {
-      final ref = (this + n).ref;
-      if (ref.name != nullptr) {
-        ref.name.callocFree();
-      }
-      if (ref.pattern != nullptr) {
-        ref.pattern.callocFree();
-      }
-    }
-    callocFree();
-  }
-}
+//extension SdlDialogFileFilterCallocAllFreeExtension
+//    on Pointer<SdlDialogFileFilter> {
+//  void callocAllFree([int length = 1]) {
+//    for (var n = 0; n < length; n++) {
+//      final ref = (this + n).ref;
+//      if (ref.name != nullptr) {
+//        ref.name.callocFree();
+//      }
+//      if (ref.pattern != nullptr) {
+//        ref.pattern.callocFree();
+//      }
+//    }
+//    callocFree();
+//  }
+//}

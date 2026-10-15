@@ -25,8 +25,8 @@ class SdlxJoyHatEvent extends SdlxEvent {
   final int value;
 
   @override
-  Pointer<SdlEvent> calloc() {
-    final pointer = ffi.calloc<SdlEvent>();
+  Pointer<SdlEvent> toNative([Allocator allocator = ffi.calloc]) {
+    final pointer = allocator<SdlEvent>();
     pointer.ref.jhat.type = type;
     pointer.ref.jhat.reserved = reserved;
     pointer.ref.jhat.timestamp = timestamp;

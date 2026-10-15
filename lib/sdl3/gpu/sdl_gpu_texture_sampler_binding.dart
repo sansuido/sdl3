@@ -10,8 +10,10 @@ class SdlxGpuTextureSamplerBinding {
   final Pointer<SdlGpuTexture> texture;
   final Pointer<SdlGpuSampler> sampler;
 
-  Pointer<SdlGpuTextureSamplerBinding> calloc() {
-    final pointer = ffi.calloc<SdlGpuTextureSamplerBinding>();
+  Pointer<SdlGpuTextureSamplerBinding> toNative([
+    Allocator allocator = ffi.calloc,
+  ]) {
+    final pointer = allocator<SdlGpuTextureSamplerBinding>();
     pointer.ref.texture = texture;
     pointer.ref.sampler = sampler;
     return pointer;
@@ -20,8 +22,10 @@ class SdlxGpuTextureSamplerBinding {
 
 extension SdlxGpuTextureSamplerBindingListExtension
     on List<SdlxGpuTextureSamplerBinding> {
-  Pointer<SdlGpuTextureSamplerBinding> calloc() {
-    final buffersPointer = ffi.calloc<SdlGpuTextureSamplerBinding>(length);
+  Pointer<SdlGpuTextureSamplerBinding> toNative([
+    Allocator allocator = ffi.calloc,
+  ]) {
+    final buffersPointer = allocator<SdlGpuTextureSamplerBinding>(length);
     for (var n = 0; n < length; n++) {
       final bufferPointer = buffersPointer + n;
       bufferPointer.ref.texture = this[n].texture;

@@ -61,8 +61,8 @@ class SdlxAudioDeviceEvent extends SdlxEvent {
   final bool recording;
 
   @override
-  Pointer<SdlEvent> calloc() {
-    final pointer = ffi.calloc<SdlEvent>();
+  Pointer<SdlEvent> toNative([Allocator allocator = ffi.calloc]) {
+    final pointer = allocator<SdlEvent>();
     pointer.ref.adevice.type = type;
     pointer.ref.adevice.reserved = reserved;
     pointer.ref.adevice.timestamp = timestamp;

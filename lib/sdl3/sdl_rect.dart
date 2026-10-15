@@ -5,7 +5,6 @@ import 'package:ffi/ffi.dart' as ffi;
 
 import 'dylib.dart' as dylib;
 import 'sdl.dart';
-import 'sdl_dart.dart';
 
 part 'rect/lib_sdl_rect.dart';
 part 'rect/sdl_fpoint.dart';

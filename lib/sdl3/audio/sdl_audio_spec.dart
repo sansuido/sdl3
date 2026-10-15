@@ -14,8 +14,8 @@ class SdlxAudioSpec {
   final int channels;
   final int freq;
 
-  Pointer<SdlAudioSpec> calloc() {
-    final pointer = ffi.calloc<SdlAudioSpec>();
+  Pointer<SdlAudioSpec> toNative([Allocator allocator = ffi.calloc]) {
+    final pointer = allocator<SdlAudioSpec>();
     pointer.ref.format = format;
     pointer.ref.channels = channels;
     pointer.ref.freq = freq;

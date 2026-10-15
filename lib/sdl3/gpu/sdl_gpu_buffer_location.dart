@@ -7,8 +7,8 @@ class SdlxGpuBufferLocation {
   final Pointer<SdlGpuBuffer> buffer;
   final int offset;
 
-  Pointer<SdlGpuBufferLocation> calloc() {
-    final pointer = ffi.calloc<SdlGpuBufferLocation>();
+  Pointer<SdlGpuBufferLocation> toNative([Allocator allocator = ffi.calloc]) {
+    final pointer = allocator<SdlGpuBufferLocation>();
     pointer.ref.buffer = buffer;
     pointer.ref.offset = offset;
     return pointer;

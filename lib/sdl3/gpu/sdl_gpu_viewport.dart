@@ -17,8 +17,8 @@ class SdlxGpuViewport {
   final double minDepth;
   final double maxDepth;
 
-  Pointer<SdlGpuViewport> calloc() {
-    final pointer = ffi.calloc<SdlGpuViewport>();
+  Pointer<SdlGpuViewport> toNative([Allocator allocator = ffi.calloc]) {
+    final pointer = allocator<SdlGpuViewport>();
     pointer.ref.x = x;
     pointer.ref.y = y;
     pointer.ref.w = w;

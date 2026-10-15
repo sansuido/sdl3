@@ -23,8 +23,8 @@ class SdlxGpuTextureRegion {
   final int h;
   final int d;
 
-  Pointer<SdlGpuTextureRegion> calloc() {
-    final pointer = ffi.calloc<SdlGpuTextureRegion>();
+  Pointer<SdlGpuTextureRegion> toNative([Allocator allocator = ffi.calloc]) {
+    final pointer = allocator<SdlGpuTextureRegion>();
     pointer.ref.texture = texture;
     pointer.ref.mipLevel = mipLevel;
     pointer.ref.layer = layer;

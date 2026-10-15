@@ -55,8 +55,8 @@ class SdlxGamepadButtonEvent extends SdlxEvent {
   final bool down;
 
   @override
-  Pointer<SdlEvent> calloc() {
-    final pointer = ffi.calloc<SdlEvent>();
+  Pointer<SdlEvent> toNative([Allocator allocator = ffi.calloc]) {
+    final pointer = allocator<SdlEvent>();
     pointer.ref.gbutton.type = type;
     pointer.ref.gbutton.reserved = reserved;
     pointer.ref.gbutton.timestamp = timestamp;

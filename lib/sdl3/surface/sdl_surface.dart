@@ -365,15 +365,15 @@ extension SdlSurfacePointerEx on Pointer<SdlSurface> {
   /// - [SDL_GetSurfaceColorKey - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetSurfaceColorKey)
   ///
   /// {@category surface}
-  int? getColorKey() {
-    int? result;
-    final keyPointer = ffi.calloc<Uint32>();
-    if (sdlGetSurfaceColorKey(this, keyPointer)) {
-      result = keyPointer.value;
+  int? getColorKey() => ffi.using((arena) {
+    final keyPointer = arena<Uint32>();
+
+    if (!sdlGetSurfaceColorKey(this, keyPointer)) {
+      return null;
     }
-    ffi.calloc.free(keyPointer);
-    return result;
-  }
+
+    return keyPointer.value;
+  });
 
   ///
   /// Set an additional color value multiplied into blit operations.
@@ -435,23 +435,17 @@ extension SdlSurfacePointerEx on Pointer<SdlSurface> {
   /// - [SDL_GetSurfaceColorMod - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetSurfaceColorMod)
   ///
   /// {@category surface}
-  int? getColorMod() {
-    int? result;
-    final rPointer = ffi.calloc<Uint8>();
-    final gPointer = ffi.calloc<Uint8>();
-    final bPointer = ffi.calloc<Uint8>();
-    if (sdlGetSurfaceColorMod(this, rPointer, gPointer, bPointer)) {
-      result = 0;
-      result += rPointer.value << 16;
-      result += gPointer.value << 8;
-      result += bPointer.value << 0;
+  ({int r, int g, int b})? getColorMod() => ffi.using((arena) {
+    final rPointer = arena<Uint8>();
+    final gPointer = arena<Uint8>();
+    final bPointer = arena<Uint8>();
+
+    if (!sdlGetSurfaceColorMod(this, rPointer, gPointer, bPointer)) {
+      return null;
     }
-    ffi.calloc
-      ..free(rPointer)
-      ..free(gPointer)
-      ..free(bPointer);
-    return result;
-  }
+
+    return (r: rPointer.value, g: gPointer.value, b: bPointer.value);
+  });
 
   ///
   /// Set an additional alpha value used in blit operations.
@@ -507,15 +501,15 @@ extension SdlSurfacePointerEx on Pointer<SdlSurface> {
   /// - [SDL_GetSurfaceAlphaMod - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetSurfaceAlphaMod)
   ///
   /// {@category surface}
-  int? getAlphaMod() {
-    int? result;
-    final alphaPointer = ffi.calloc<Uint8>();
-    if (sdlGetSurfaceAlphaMod(this, alphaPointer)) {
-      result = alphaPointer.value;
+  int? getAlphaMod() => ffi.using((arena) {
+    final alphaPointer = arena<Uint8>();
+
+    if (!sdlGetSurfaceAlphaMod(this, alphaPointer)) {
+      return null;
     }
-    ffi.calloc.free(alphaPointer);
-    return result;
-  }
+
+    return alphaPointer.value;
+  });
 
   ///
   /// Set the blend mode used for blit operations.
@@ -568,15 +562,15 @@ extension SdlSurfacePointerEx on Pointer<SdlSurface> {
   /// - [SDL_GetSurfaceBlendMode - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetSurfaceBlendMode)
   ///
   /// {@category surface}
-  int? getBlendMode() {
-    int? result;
-    final blendModePointer = ffi.calloc<Uint32>();
-    if (sdlGetSurfaceBlendMode(this, blendModePointer)) {
-      result = blendModePointer.value;
+  int? getBlendMode() => ffi.using((arena) {
+    final blendModePointer = arena<Uint32>();
+
+    if (!sdlGetSurfaceBlendMode(this, blendModePointer)) {
+      return null;
     }
-    ffi.calloc.free(blendModePointer);
-    return result;
-  }
+
+    return blendModePointer.value;
+  });
 
   ///
   /// Set the clipping rectangle for a surface.

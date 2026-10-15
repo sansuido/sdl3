@@ -28,8 +28,8 @@ class SdlxJoyBallEvent extends SdlxEvent {
   final int yrel;
 
   @override
-  Pointer<SdlEvent> calloc() {
-    final pointer = ffi.calloc<SdlEvent>();
+  Pointer<SdlEvent> toNative([Allocator allocator = ffi.calloc]) {
+    final pointer = allocator<SdlEvent>();
     pointer.ref.jball.type = type;
     pointer.ref.jball.reserved = reserved;
     pointer.ref.jball.timestamp = timestamp;

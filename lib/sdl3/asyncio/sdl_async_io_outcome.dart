@@ -35,8 +35,8 @@ class SdlxAsyncIoOutcome {
   final int bytesTransferred;
   final Pointer<Void> userdata;
 
-  Pointer<SdlAsyncIoOutcome> calloc() {
-    final pointer = ffi.calloc<SdlAsyncIoOutcome>();
+  Pointer<SdlAsyncIoOutcome> toNative([Allocator allocator = ffi.calloc]) {
+    final pointer = allocator<SdlAsyncIoOutcome>();
     pointer.ref.asyncio = asyncio;
     pointer.ref.type = type;
     pointer.ref.result = result;

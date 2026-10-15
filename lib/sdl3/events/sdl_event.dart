@@ -394,48 +394,48 @@ extension SdlEventPointerEx on Pointer<SdlEvent> {
   /// {@category events}
   bool push() => sdlPushEvent(this);
 
-  void callocAllFree() {
-    switch (ref.type) {
-      case SDL_EVENT_TEXT_EDITING:
-        if (ref.edit.text != nullptr) {
-          ref.edit.text.callocFree();
-        }
-      case SDL_EVENT_TEXT_EDITING_CANDIDATES:
-        if (ref.editCandidates.candidates != nullptr) {
-          for (var i = 0; i < ref.editCandidates.numCandidates; i++) {
-            ref.editCandidates.candidates[i].callocFree();
-          }
-          ref.editCandidates.candidates.callocFree();
-        }
-      case SDL_EVENT_TEXT_INPUT:
-        if (ref.text.text != nullptr) {
-          ref.text.text.callocFree();
-        }
-      case SDL_EVENT_NOTIFICATION_ACTION_INVOKED:
-        if (ref.notification.actionId != nullptr) {
-          ref.notification.actionId.callocFree();
-        }
-      case SDL_EVENT_DROP_BEGIN:
-      case SDL_EVENT_DROP_FILE:
-      case SDL_EVENT_DROP_TEXT:
-      case SDL_EVENT_DROP_COMPLETE:
-      case SDL_EVENT_DROP_POSITION:
-        if (ref.drop.source != nullptr) {
-          ref.drop.source.callocFree();
-        }
-        if (ref.drop.data != nullptr) {
-          ref.drop.data.callocFree();
-        }
-      case SDL_EVENT_CLIPBOARD_UPDATE:
-        if (ref.clipboard.mimeTypes != nullptr) {
-          for (var i = 0; i < ref.clipboard.numMimeTypes; i++) {
-            ref.clipboard.mimeTypes[i].callocFree();
-          }
-          ref.clipboard.mimeTypes.callocFree();
-        }
-    }
-    callocFree();
-  }
+  //  void callocAllFree() {
+  //    switch (ref.type) {
+  //      case SDL_EVENT_TEXT_EDITING:
+  //        if (ref.edit.text != nullptr) {
+  //          ref.edit.text.callocFree();
+  //        }
+  //      case SDL_EVENT_TEXT_EDITING_CANDIDATES:
+  //        if (ref.editCandidates.candidates != nullptr) {
+  //          for (var i = 0; i < ref.editCandidates.numCandidates; i++) {
+  //            ref.editCandidates.candidates[i].callocFree();
+  //          }
+  //          ref.editCandidates.candidates.callocFree();
+  //        }
+  //      case SDL_EVENT_TEXT_INPUT:
+  //        if (ref.text.text != nullptr) {
+  //          ref.text.text.callocFree();
+  //        }
+  //      case SDL_EVENT_NOTIFICATION_ACTION_INVOKED:
+  //        if (ref.notification.actionId != nullptr) {
+  //          ref.notification.actionId.callocFree();
+  //        }
+  //      case SDL_EVENT_DROP_BEGIN:
+  //      case SDL_EVENT_DROP_FILE:
+  //      case SDL_EVENT_DROP_TEXT:
+  //      case SDL_EVENT_DROP_COMPLETE:
+  //      case SDL_EVENT_DROP_POSITION:
+  //        if (ref.drop.source != nullptr) {
+  //          ref.drop.source.callocFree();
+  //        }
+  //        if (ref.drop.data != nullptr) {
+  //          ref.drop.data.callocFree();
+  //        }
+  //      case SDL_EVENT_CLIPBOARD_UPDATE:
+  //        if (ref.clipboard.mimeTypes != nullptr) {
+  //          for (var i = 0; i < ref.clipboard.numMimeTypes; i++) {
+  //            ref.clipboard.mimeTypes[i].callocFree();
+  //          }
+  //          ref.clipboard.mimeTypes.callocFree();
+  //        }
+  //    }
+  //    callocFree();
+  //  }
 }
 
 abstract class SdlxEvent {
@@ -577,6 +577,4 @@ abstract class SdlxEvent {
     pointer.ref.common.timestamp = timestamp;
     return pointer;
   }
-
-  Pointer<SdlEvent> calloc() => toNative();
 }

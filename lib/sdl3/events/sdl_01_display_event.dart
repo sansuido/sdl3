@@ -25,8 +25,8 @@ class SdlxDisplayEvent extends SdlxEvent {
   final int data2;
 
   @override
-  Pointer<SdlEvent> calloc() {
-    final pointer = ffi.calloc<SdlEvent>();
+  Pointer<SdlEvent> toNative([Allocator allocator = ffi.calloc]) {
+    final pointer = allocator<SdlEvent>();
     pointer.ref.display.type = type;
     pointer.ref.display.reserved = reserved;
     pointer.ref.display.timestamp = timestamp;

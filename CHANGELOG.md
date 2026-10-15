@@ -1,5 +1,14 @@
 # Changelog
 
+## [3.1.0] - 2026-10-15
+- SDL3-2026-10-11
+### Changed
+- **Arena Memory Migration**: Migrated remaining manual FFI memory management (`calloc`/`callocFree`) across GPU samplers, compute passes, render states, HID devices, and the main loop to scope-based `ffi.using((arena) { ... })` and `toNative(arena)` patterns.
+  - *Note: Manual `callocFree` is retained strictly for non-deterministic external callbacks (such as `memoryCloseCallback`) where the lifecycle extends beyond the caller's scope.*
+### Fixed
+- example/events/event_filter.dart
+- example/ttf/text_engine_demo.dart
+
 ## [3.0.0] - 2026-10-08
 - SDL3-2026-10-04
 ### Changed

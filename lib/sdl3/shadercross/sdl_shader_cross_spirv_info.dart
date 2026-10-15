@@ -13,10 +13,12 @@ class SdlxShaderCrossSpirvInfo {
   final int shaderStage;
   final int props;
 
-  Pointer<SdlShaderCrossSpirvInfo> calloc() {
-    final pointer = ffi.calloc<SdlShaderCrossSpirvInfo>();
+  Pointer<SdlShaderCrossSpirvInfo> toNative([
+    Allocator allocator = ffi.calloc,
+  ]) {
+    final pointer = allocator<SdlShaderCrossSpirvInfo>();
     if (bytecode.isNotEmpty) {
-      pointer.ref.bytecode = ffi.calloc<Uint8>(bytecode.length)
+      pointer.ref.bytecode = allocator<Uint8>(bytecode.length)
         ..asTypedList(bytecode.length).setAll(0, bytecode);
       pointer.ref.bytecodeSize = bytecode.length;
     }
@@ -29,15 +31,15 @@ class SdlxShaderCrossSpirvInfo {
   }
 }
 
-extension SdlShaderCrossSpirvInfoCallocAllFreeExtension
-    on Pointer<SdlShaderCrossSpirvInfo> {
-  void callocAllFree() {
-    if (ref.bytecode != nullptr) {
-      ref.bytecode.callocFree();
-    }
-    if (ref.entrypoint != nullptr) {
-      ref.entrypoint.callocFree();
-    }
-    callocFree();
-  }
-}
+//extension SdlShaderCrossSpirvInfoCallocAllFreeExtension
+//    on Pointer<SdlShaderCrossSpirvInfo> {
+//  void callocAllFree() {
+//    if (ref.bytecode != nullptr) {
+//      ref.bytecode.callocFree();
+//    }
+//    if (ref.entrypoint != nullptr) {
+//      ref.entrypoint.callocFree();
+//    }
+//    callocFree();
+//  }
+//}

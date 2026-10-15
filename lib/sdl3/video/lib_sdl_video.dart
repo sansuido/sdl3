@@ -21,19 +21,21 @@ part of '../sdl_video.dart';
 /// - [SDL_GetDisplays - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetDisplays)
 ///
 /// {@category video}
-List<int> sdlxGetDisplays() {
+List<int> sdlxGetDisplays() => ffi.using((arena) {
   final result = <int>[];
-  final countPointer = ffi.calloc<Int32>();
+  final countPointer = arena<Int32>();
+
   final displaysPointer = sdlGetDisplays(countPointer);
+
   if (displaysPointer != nullptr) {
     for (var i = 0; i < countPointer.value; i++) {
       result.add(displaysPointer[i]);
     }
     sdlFree(displaysPointer.cast<Void>());
   }
-  countPointer.callocFree();
+
   return result;
-}
+});
 
 ///
 /// Get the desktop area represented by a display.
@@ -329,15 +331,14 @@ SdlxDisplayMode? sdlxGetCurrentDisplayMode(int displayId) {
 /// - [SDL_GetDisplayForPoint - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetDisplayForPoint)
 ///
 /// {@category video}
-int sdlxGetDisplayForPoint(SdlxPoint point) {
-  final pointPointer = ffi.calloc<SdlPoint>();
+int sdlxGetDisplayForPoint(SdlxPoint point) => ffi.using((arena) {
+  final pointPointer = arena<SdlPoint>();
   pointPointer.ref
     ..x = point.x
     ..y = point.y;
-  final result = sdlGetDisplayForPoint(pointPointer);
-  pointPointer.callocFree();
-  return result;
-}
+
+  return sdlGetDisplayForPoint(pointPointer);
+});
 
 ///
 /// Get the display primarily containing a rect.
@@ -362,17 +363,16 @@ int sdlxGetDisplayForPoint(SdlxPoint point) {
 /// - [SDL_GetDisplayForRect - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetDisplayForRect)
 ///
 /// {@category video}
-int sdlxGetDisplayForRect(SdlxRect rect) {
-  final rectPointer = ffi.calloc<SdlRect>();
+int sdlxGetDisplayForRect(SdlxRect rect) => ffi.using((arena) {
+  final rectPointer = arena<SdlRect>();
   rectPointer.ref
     ..x = rect.x
     ..y = rect.y
     ..w = rect.w
     ..h = rect.h;
-  final result = sdlGetDisplayForRect(rectPointer);
-  rectPointer.callocFree();
-  return result;
-}
+
+  return sdlGetDisplayForRect(rectPointer);
+});
 
 ///
 /// Set the display mode to use when a window is visible and fullscreen.
@@ -418,12 +418,9 @@ int sdlxGetDisplayForRect(SdlxRect rect) {
 bool sdlxSetWindowFullscreenMode(
   Pointer<SdlWindow> window,
   SdlxDisplayMode mode,
-) {
-  final modePointer = mode.calloc();
-  final result = sdlSetWindowFullscreenMode(window, modePointer);
-  modePointer.callocFree();
-  return result;
-}
+) => ffi.using(
+  (arena) => sdlSetWindowFullscreenMode(window, mode.toNative(arena)),
+);
 
 ///
 /// Query the display mode to use when a window is visible at fullscreen.
@@ -478,19 +475,17 @@ SdlxDisplayMode? sdlxGetWindowFullscreenMode(Pointer<SdlWindow> window) {
 /// {@category video}
 ({Pointer<Void> profile, int size})? sdlxGetWindowIccProfile(
   Pointer<SdlWindow> window,
-) {
-  var size = 0;
-  final sizePointer = ffi.calloc<Size>();
+) => ffi.using((arena) {
+  final sizePointer = arena<Size>();
+
   final profile = sdlGetWindowIccProfile(window, sizePointer);
-  if (profile != nullptr) {
-    size = sizePointer.value;
-  }
-  sizePointer.callocFree();
+
   if (profile == nullptr) {
     return null;
   }
-  return (profile: profile, size: size);
-}
+
+  return (profile: profile, size: sizePointer.value);
+});
 
 ///
 /// Get a list of valid windows.
@@ -514,21 +509,17 @@ SdlxDisplayMode? sdlxGetWindowFullscreenMode(Pointer<SdlWindow> window) {
 /// - [SDL_GetWindows - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetWindows)
 ///
 /// {@category video}
-List<Pointer<SdlWindow>>? sdlxGetWindows() {
-  final countPointer = ffi.calloc<Int32>();
+List<Pointer<SdlWindow>>? sdlxGetWindows() => ffi.using((arena) {
+  final countPointer = arena<Int32>();
   final resultPointer = sdlGetWindows(countPointer);
+
   if (resultPointer == nullptr) {
-    countPointer.callocFree();
     return null;
   }
+
   final count = countPointer.value;
-  final result = <Pointer<SdlWindow>>[];
-  for (var i = 0; i < count; i++) {
-    result.add((resultPointer + i).value);
-  }
-  countPointer.callocFree();
-  return result;
-}
+  return [for (var i = 0; i < count; i++) (resultPointer + i).value];
+});
 
 ///
 /// Get the position of a window.
@@ -561,24 +552,19 @@ List<Pointer<SdlWindow>>? sdlxGetWindows() {
 /// - [SDL_GetWindowPosition - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetWindowPosition)
 ///
 /// {@category video}
-({int x, int y})? sdlxGetWindowPosition(Pointer<SdlWindow> window) {
-  var result = false;
-  var x = 0;
-  var y = 0;
-  final xPointer = ffi.calloc<Int32>();
-  final yPointer = ffi.calloc<Int32>();
-  result = sdlGetWindowPosition(window, xPointer, yPointer);
-  if (result) {
-    x = xPointer.value;
-    y = yPointer.value;
-  }
-  xPointer.callocFree();
-  yPointer.callocFree();
-  if (!result) {
-    return null;
-  }
-  return (x: x, y: y);
-}
+({int x, int y})? sdlxGetWindowPosition(Pointer<SdlWindow> window) =>
+    ffi.using((arena) {
+      final xPointer = arena<Int32>();
+      final yPointer = arena<Int32>();
+
+      final result = sdlGetWindowPosition(window, xPointer, yPointer);
+
+      if (!result) {
+        return null;
+      }
+
+      return (x: xPointer.value, y: yPointer.value);
+    });
 
 ///
 /// Request that the size of a window's client area be set.
@@ -656,24 +642,19 @@ bool sdlxSetWindowSize(Pointer<SdlWindow> window, SdlxPoint size) =>
 /// - [SDL_GetWindowSize - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetWindowSize)
 ///
 /// {@category video}
-({int w, int h})? sdlxGetWindowSize(Pointer<SdlWindow> window) {
-  var result = false;
-  var w = 0;
-  var h = 0;
-  final wPointer = ffi.calloc<Int32>();
-  final hPointer = ffi.calloc<Int32>();
-  result = sdlGetWindowSize(window, wPointer, hPointer);
-  if (result) {
-    w = wPointer.value;
-    h = hPointer.value;
-  }
-  wPointer.callocFree();
-  hPointer.callocFree();
-  if (!result) {
-    return null;
-  }
-  return (w: w, h: h);
-}
+({int w, int h})? sdlxGetWindowSize(Pointer<SdlWindow> window) =>
+    ffi.using((arena) {
+      final wPointer = arena<Int32>();
+      final hPointer = arena<Int32>();
+
+      final result = sdlGetWindowSize(window, wPointer, hPointer);
+
+      if (!result) {
+        return null;
+      }
+
+      return (w: wPointer.value, h: hPointer.value);
+    });
 
 ///
 /// Get the safe area for this window.
@@ -742,27 +723,22 @@ SdlxRect? sdlxGetWindowSafeArea(Pointer<SdlWindow> window) =>
 /// {@category video}
 ({double minAspect, double maxAspect})? sdlxGetWindowAspectRatio(
   Pointer<SdlWindow> window,
-) {
-  var minAspect = 0.0;
-  var maxAspect = 0.0;
-  final minAspectPointer = ffi.calloc<Float>();
-  final maxAspectPointer = ffi.calloc<Float>();
+) => ffi.using((arena) {
+  final minAspectPointer = arena<Float>();
+  final maxAspectPointer = arena<Float>();
+
   final result = sdlGetWindowAspectRatio(
     window,
     minAspectPointer,
     maxAspectPointer,
   );
-  if (result) {
-    minAspect = minAspectPointer.value;
-    maxAspect = maxAspectPointer.value;
-  }
-  minAspectPointer.callocFree();
-  maxAspectPointer.callocFree();
+
   if (!result) {
     return null;
   }
-  return (minAspect: minAspect, maxAspect: maxAspect);
-}
+
+  return (minAspect: minAspectPointer.value, maxAspect: maxAspectPointer.value);
+});
 
 ///
 /// Get the size of a window's borders (decorations) around the client area.
@@ -809,38 +785,31 @@ SdlxRect? sdlxGetWindowSafeArea(Pointer<SdlWindow> window) =>
 /// {@category video}
 ({int top, int left, int bottom, int right})? sdlxGetWindowBordersSize(
   Pointer<SdlWindow> window,
-) {
-  var result = false;
-  var top = 0;
-  var left = 0;
-  var bottom = 0;
-  var right = 0;
-  final topPointer = ffi.calloc<Int32>();
-  final leftPointer = ffi.calloc<Int32>();
-  final bottomPointer = ffi.calloc<Int32>();
-  final rightPointer = ffi.calloc<Int32>();
-  result = sdlGetWindowBordersSize(
+) => ffi.using((arena) {
+  final topPointer = arena<Int32>();
+  final leftPointer = arena<Int32>();
+  final bottomPointer = arena<Int32>();
+  final rightPointer = arena<Int32>();
+
+  final result = sdlGetWindowBordersSize(
     window,
     topPointer,
     leftPointer,
     bottomPointer,
     rightPointer,
   );
-  if (result) {
-    top = topPointer.value;
-    left = leftPointer.value;
-    right = rightPointer.value;
-    bottom = bottomPointer.value;
-  }
-  topPointer.callocFree();
-  leftPointer.callocFree();
-  bottomPointer.callocFree();
-  rightPointer.callocFree();
+
   if (!result) {
     return null;
   }
-  return (top: top, left: left, bottom: bottom, right: right);
-}
+
+  return (
+    top: topPointer.value,
+    left: leftPointer.value,
+    bottom: bottomPointer.value,
+    right: rightPointer.value,
+  );
+});
 
 ///
 /// Get the size of a window's client area, in pixels.
@@ -868,23 +837,19 @@ SdlxRect? sdlxGetWindowSafeArea(Pointer<SdlWindow> window) =>
 /// - [SDL_GetWindowSizeInPixels - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetWindowSizeInPixels)
 ///
 /// {@category video}
-({int w, int h})? sdlxGetWindowSizeInPixels(Pointer<SdlWindow> window) {
-  var w = 0;
-  var h = 0;
-  final wPointer = ffi.calloc<Int32>();
-  final hPointer = ffi.calloc<Int32>();
-  final result = sdlGetWindowSizeInPixels(window, wPointer, hPointer);
-  if (result) {
-    w = wPointer.value;
-    h = hPointer.value;
-  }
-  wPointer.callocFree();
-  hPointer.callocFree();
-  if (!result) {
-    return null;
-  }
-  return (w: w, h: h);
-}
+({int w, int h})? sdlxGetWindowSizeInPixels(Pointer<SdlWindow> window) =>
+    ffi.using((arena) {
+      final wPointer = arena<Int32>();
+      final hPointer = arena<Int32>();
+
+      final result = sdlGetWindowSizeInPixels(window, wPointer, hPointer);
+
+      if (!result) {
+        return null;
+      }
+
+      return (w: wPointer.value, h: hPointer.value);
+    });
 
 ///
 /// Set the minimum size of a window's client area.
@@ -939,23 +904,19 @@ bool sdlxSetWindowMinimumSize(Pointer<SdlWindow> window, SdlxPoint minSize) =>
 /// - [SDL_GetWindowMinimumSize - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetWindowMinimumSize)
 ///
 /// {@category video}
-({int w, int h})? sdlxGetWindowMinimumSize(Pointer<SdlWindow> window) {
-  var w = 0;
-  var h = 0;
-  final wPointer = ffi.calloc<Int32>();
-  final hPointer = ffi.calloc<Int32>();
-  final result = sdlGetWindowMinimumSize(window, wPointer, hPointer);
-  if (result) {
-    w = wPointer.value;
-    h = hPointer.value;
-  }
-  wPointer.callocFree();
-  hPointer.callocFree();
-  if (!result) {
-    return null;
-  }
-  return (w: w, h: h);
-}
+({int w, int h})? sdlxGetWindowMinimumSize(Pointer<SdlWindow> window) =>
+    ffi.using((arena) {
+      final wPointer = arena<Int32>();
+      final hPointer = arena<Int32>();
+
+      final result = sdlGetWindowMinimumSize(window, wPointer, hPointer);
+
+      if (!result) {
+        return null;
+      }
+
+      return (w: wPointer.value, h: hPointer.value);
+    });
 
 ///
 /// Set the maximum size of a window's client area.
@@ -1010,23 +971,19 @@ bool sdlxSetWindowMaximumSize(Pointer<SdlWindow> window, SdlxPoint maxSize) =>
 /// - [SDL_GetWindowMaximumSize - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetWindowMaximumSize)
 ///
 /// {@category video}
-({int w, int h})? sdlxGetWindowMaximumSize(Pointer<SdlWindow> window) {
-  var w = 0;
-  var h = 0;
-  final wPointer = ffi.calloc<Int32>();
-  final hPointer = ffi.calloc<Int32>();
-  final result = sdlGetWindowMaximumSize(window, wPointer, hPointer);
-  if (result) {
-    w = wPointer.value;
-    h = hPointer.value;
-  }
-  wPointer.callocFree();
-  hPointer.callocFree();
-  if (!result) {
-    return null;
-  }
-  return (w: w, h: h);
-}
+({int w, int h})? sdlxGetWindowMaximumSize(Pointer<SdlWindow> window) =>
+    ffi.using((arena) {
+      final wPointer = arena<Int32>();
+      final hPointer = arena<Int32>();
+
+      final result = sdlGetWindowMaximumSize(window, wPointer, hPointer);
+
+      if (!result) {
+        return null;
+      }
+
+      return (w: wPointer.value, h: hPointer.value);
+    });
 
 ///
 /// Get VSync for the window surface.
@@ -1051,19 +1008,17 @@ bool sdlxSetWindowMaximumSize(Pointer<SdlWindow> window, SdlxPoint maxSize) =>
 /// - [SDL_GetWindowSurfaceVSync - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetWindowSurfaceVSync)
 ///
 /// {@category video}
-int? sdlxGetWindowSurfaceVSync(Pointer<SdlWindow> window) {
-  var vsync = 0;
-  final vsyncPointer = ffi.calloc<Int32>();
+int? sdlxGetWindowSurfaceVSync(Pointer<SdlWindow> window) => ffi.using((arena) {
+  final vsyncPointer = arena<Int32>();
+
   final result = sdlGetWindowSurfaceVSync(window, vsyncPointer);
-  if (result) {
-    vsync = vsyncPointer.value;
-  }
-  vsyncPointer.callocFree();
+
   if (!result) {
     return null;
   }
-  return vsync;
-}
+
+  return vsyncPointer.value;
+});
 
 ///
 /// Copy areas of the window surface to the screen.
@@ -1103,16 +1058,10 @@ int? sdlxGetWindowSurfaceVSync(Pointer<SdlWindow> window) {
 bool sdlxUpdateWindowSurfaceRects(
   Pointer<SdlWindow> window,
   List<SdlxRect> rects,
-) {
-  final rectsPointer = rects.calloc();
-  final result = sdlUpdateWindowSurfaceRects(
-    window,
-    rectsPointer,
-    rects.length,
-  );
-  rectsPointer.callocFree();
-  return result;
-}
+) => ffi.using((arena) {
+  final rectsPointer = rects.toNative(arena);
+  return sdlUpdateWindowSurfaceRects(window, rectsPointer, rects.length);
+});
 
 ///
 /// Confines the cursor to the specified area of a window.
@@ -1142,12 +1091,8 @@ bool sdlxUpdateWindowSurfaceRects(
 /// - [SDL_SetWindowMouseRect - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SetWindowMouseRect)
 ///
 /// {@category video}
-bool sdlxSetWindowMouseRect(Pointer<SdlWindow> window, SdlxRect rect) {
-  final rectPointer = rect.calloc();
-  final result = sdlSetWindowMouseRect(window, rectPointer);
-  rectPointer.callocFree();
-  return result;
-}
+bool sdlxSetWindowMouseRect(Pointer<SdlWindow> window, SdlxRect rect) =>
+    ffi.using((arena) => sdlSetWindowMouseRect(window, rect.toNative(arena)));
 
 ///
 /// Get the mouse confinement rectangle of a window.
@@ -1239,14 +1184,14 @@ bool sdlxShowWindowSystemMenu(Pointer<SdlWindow> window, SdlxPoint position) =>
 /// - [SDL_GL_GetAttribute - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GL_GetAttribute)
 ///
 /// {@category video}
-int? sdlxGlGetAttribute(int attr) {
-  final valuePointer = ffi.calloc<Int32>();
+int? sdlxGlGetAttribute(int attr) => ffi.using((arena) {
+  final valuePointer = arena<Int32>();
+
   final result = sdlGlGetAttribute(attr, valuePointer);
+
   if (!result) {
-    valuePointer.callocFree();
     return null;
   }
-  final value = valuePointer.value;
-  valuePointer.callocFree();
-  return value;
-}
+
+  return valuePointer.value;
+});

@@ -94,8 +94,8 @@ class SdlxPenButtonEvent extends SdlxEvent {
       windowId == targetId;
 
   @override
-  Pointer<SdlEvent> calloc() {
-    final pointer = ffi.calloc<SdlEvent>();
+  Pointer<SdlEvent> toNative([Allocator allocator = ffi.calloc]) {
+    final pointer = allocator<SdlEvent>();
     pointer.ref.pbutton.type = type;
     pointer.ref.pbutton.reserved = reserved;
     pointer.ref.pbutton.timestamp = timestamp;

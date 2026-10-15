@@ -37,8 +37,10 @@ class SdlxShaderCrossComputePipelineMetadata {
   final int threadcountY;
   final int threadcountZ;
 
-  Pointer<SdlShaderCrossComputePipelineMetadata> calloc() {
-    final pointer = ffi.calloc<SdlShaderCrossComputePipelineMetadata>();
+  Pointer<SdlShaderCrossComputePipelineMetadata> toNative([
+    Allocator allocator = ffi.calloc,
+  ]) {
+    final pointer = allocator<SdlShaderCrossComputePipelineMetadata>();
     pointer.ref.numSamplers = numSamplers;
     pointer.ref.numReadonlyStorageTextures = numReadonlyStorageTextures;
     pointer.ref.numReadonlyStorageBuffers = numReadonlyStorageBuffers;

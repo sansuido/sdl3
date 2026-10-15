@@ -21,19 +21,22 @@ part of '../sdl_haptic.dart';
 /// - [SDL_GetHaptics - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetHaptics)
 ///
 /// {@category haptic}
-List<int> sdlxGetHaptics() {
-  final result = <int>[];
-  final countPointer = ffi.calloc<Int32>();
+List<int> sdlxGetHaptics() => ffi.using((arena) {
+  final countPointer = arena<Int32>();
   final hapticsPointer = sdlGetHaptics(countPointer);
-  if (hapticsPointer != nullptr) {
-    for (var i = 0; i < countPointer.value; i++) {
-      result.add(hapticsPointer[i]);
-    }
-    sdlFree(hapticsPointer.cast<Void>());
+
+  if (hapticsPointer == nullptr) {
+    return [];
   }
-  countPointer.callocFree();
+
+  final result = [
+    for (var i = 0; i < countPointer.value; i++) hapticsPointer[i],
+  ];
+
+  sdlFree(hapticsPointer.cast<Void>());
+
   return result;
-}
+});
 
 ///
 /// Check to see if an effect is supported by a haptic device.
@@ -58,12 +61,9 @@ List<int> sdlxGetHaptics() {
 bool sdlxHapticEffectSupported(
   Pointer<SdlHaptic> haptic,
   SdlxHapticEffect effect,
-) {
-  final effectPointer = effect.calloc();
-  final result = sdlHapticEffectSupported(haptic, effectPointer);
-  effectPointer.callocFree();
-  return result;
-}
+) => ffi.using(
+  (arena) => sdlHapticEffectSupported(haptic, effect.toNative(arena)),
+);
 
 ///
 /// Create a new haptic effect on a specified device.
@@ -88,12 +88,11 @@ bool sdlxHapticEffectSupported(
 /// - [SDL_CreateHapticEffect - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_CreateHapticEffect)
 ///
 /// {@category haptic}
-int sdlxCreateHapticEffect(Pointer<SdlHaptic> haptic, SdlxHapticEffect effect) {
-  final effectPointer = effect.calloc();
-  final result = sdlCreateHapticEffect(haptic, effectPointer);
-  effectPointer.callocFree();
-  return result;
-}
+int sdlxCreateHapticEffect(
+  Pointer<SdlHaptic> haptic,
+  SdlxHapticEffect effect,
+) =>
+    ffi.using((arena) => sdlCreateHapticEffect(haptic, effect.toNative(arena)));
 
 ///
 /// Update the properties of an effect.
@@ -127,9 +126,6 @@ bool sdlxUpdateHapticEffect(
   Pointer<SdlHaptic> haptic,
   int effect,
   SdlxHapticEffect data,
-) {
-  final dataPointer = data.calloc();
-  final result = sdlUpdateHapticEffect(haptic, effect, dataPointer);
-  dataPointer.callocFree();
-  return result;
-}
+) => ffi.using(
+  (arena) => sdlUpdateHapticEffect(haptic, effect, data.toNative(arena)),
+);

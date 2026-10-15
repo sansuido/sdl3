@@ -23,14 +23,9 @@ part of '../sdl_rect.dart';
 /// - [SDL_HasRectIntersection - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_HasRectIntersection)
 ///
 /// {@category rect}
-bool sdlxHasRectIntersection(SdlxRect a, SdlxRect b) {
-  final aPointer = a.calloc();
-  final bPointer = b.calloc();
-  final bl = sdlHasRectIntersection(aPointer, bPointer);
-  aPointer.callocFree();
-  bPointer.callocFree();
-  return bl;
-}
+bool sdlxHasRectIntersection(SdlxRect a, SdlxRect b) => ffi.using(
+  (arena) => sdlHasRectIntersection(a.toNative(arena), b.toNative(arena)),
+);
 
 ///
 /// Calculate the intersection of two rectangles.
@@ -273,14 +268,9 @@ SdlxRect? sdlxGetRectEnclosingPoints(
 /// - [SDL_HasRectIntersectionFloat - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_HasRectIntersectionFloat)
 ///
 /// {@category rect}
-bool sdlxHasRectIntersectionFloat(SdlxFRect a, SdlxFRect b) {
-  final aPointer = a.calloc();
-  final bPointer = b.calloc();
-  final bl = sdlHasRectIntersectionFloat(aPointer, bPointer);
-  aPointer.callocFree();
-  bPointer.callocFree();
-  return bl;
-}
+bool sdlxHasRectIntersectionFloat(SdlxFRect a, SdlxFRect b) => ffi.using(
+  (arena) => sdlHasRectIntersectionFloat(a.toNative(arena), b.toNative(arena)),
+);
 
 ///
 /// Calculate the intersection of two rectangles with float precision.
@@ -480,14 +470,12 @@ SdlxFRect? sdlxGetRectEnclosingPointsFloat(
   SdlxFPoint p1,
   SdlxFPoint p2,
 ) => ffi.using((arena) {
-  // SdlFRect æ§é ä½ãã¤ã³ã¿ã®ç¢ºä¿ã¨å¤ã®ã»ãã
   final rectPointer = arena<SdlFRect>()
     ..ref.x = rect.x
     ..ref.y = rect.y
     ..ref.w = rect.w
     ..ref.h = rect.h;
 
-  // Out ãã©ã¡ã¼ã¿å¼ Initial Value ãã¤ã³ã¿ã®ç¢ºä¿
   final x1Pointer = arena<Float>()..value = p1.x;
   final y1Pointer = arena<Float>()..value = p1.y;
   final x2Pointer = arena<Float>()..value = p2.x;
@@ -504,8 +492,6 @@ SdlxFRect? sdlxGetRectEnclosingPointsFloat(
   if (!intersects) {
     return null;
   }
-
-  // ã¯ãªããï¼åæ­ï¼ãããæ°ããäº¤ç¹2ã¤ã Record ã§è¿å´
   return (
     p1: SdlxFPoint(x1Pointer.value, y1Pointer.value),
     p2: SdlxFPoint(x2Pointer.value, y2Pointer.value),

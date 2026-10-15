@@ -32,8 +32,8 @@ class TtfxSubString {
   final int clusterIndex;
   final SdlxRect rect;
 
-  Pointer<TtfSubString> calloc() {
-    final pointer = ffi.calloc<TtfSubString>();
+  Pointer<TtfSubString> toNative([Allocator allocator = ffi.calloc]) {
+    final pointer = allocator<TtfSubString>();
     pointer.ref.flags = flags;
     pointer.ref.offset = offset;
     pointer.ref.length = length;

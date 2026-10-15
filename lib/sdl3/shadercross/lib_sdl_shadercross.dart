@@ -20,20 +20,20 @@ part of '../sdl_shadercross.dart';
 /// - [SDL_ShaderCross_TranspileMSLFromSPIRV - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_ShaderCross_TranspileMSLFromSPIRV)
 ///
 /// {@category shadercross}
-String? sdlxShaderCrossTranspileMslFromSpirv(SdlxShaderCrossSpirvInfo info) {
-  String? hlsl;
-  final infoPointer = info.calloc();
-  final result = sdlShaderCrossTranspileMslFromSpirv(infoPointer).cast<Uint8>();
-  if (result != nullptr) {
-    hlsl = result.cast<ffi.Utf8>().toDartString();
-  }
-  infoPointer.callocAllFree();
-  if (result == nullptr) {
-    return null;
-  }
-  sdlFree(result.cast<Void>());
-  return hlsl;
-}
+String? sdlxShaderCrossTranspileMslFromSpirv(SdlxShaderCrossSpirvInfo info) =>
+    ffi.using((arena) {
+      final infoPointer = info.toNative(arena);
+      final result = sdlShaderCrossTranspileMslFromSpirv(infoPointer)
+          .cast<Uint8>();
+
+      if (result == nullptr) {
+        return null;
+      }
+
+      final hlsl = result.cast<ffi.Utf8>().toDartString();
+      sdlFree(result.cast<Void>());
+      return hlsl;
+    });
 
 ///
 /// Transpile to HLSL code from SPIRV code.
@@ -55,21 +55,20 @@ String? sdlxShaderCrossTranspileMslFromSpirv(SdlxShaderCrossSpirvInfo info) {
 /// - [SDL_ShaderCross_TranspileHLSLFromSPIRV - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_ShaderCross_TranspileHLSLFromSPIRV)
 ///
 /// {@category shadercross}
-String? sdlxShaderCrossTranspileHlslFromSpirv(SdlxShaderCrossSpirvInfo info) {
-  String? hlsl;
-  final infoPointer = info.calloc();
-  final result = sdlShaderCrossTranspileHlslFromSpirv(infoPointer)
-      .cast<Uint8>();
-  if (result != nullptr) {
-    hlsl = result.cast<ffi.Utf8>().toDartString();
-  }
-  infoPointer.callocAllFree();
-  if (result == nullptr) {
-    return null;
-  }
-  sdlFree(result.cast<Void>());
-  return hlsl;
-}
+String? sdlxShaderCrossTranspileHlslFromSpirv(SdlxShaderCrossSpirvInfo info) =>
+    ffi.using((arena) {
+      final infoPointer = info.toNative(arena);
+      final result = sdlShaderCrossTranspileHlslFromSpirv(infoPointer)
+          .cast<Uint8>();
+
+      if (result == nullptr) {
+        return null;
+      }
+
+      final hlsl = result.cast<ffi.Utf8>().toDartString();
+      sdlFree(result.cast<Void>());
+      return hlsl;
+    });
 
 ///
 /// Compile DXBC bytecode from SPIRV code.
@@ -88,24 +87,26 @@ String? sdlxShaderCrossTranspileHlslFromSpirv(SdlxShaderCrossSpirvInfo info) {
 /// - [SDL_ShaderCross_CompileDXBCFromSPIRV - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_ShaderCross_CompileDXBCFromSPIRV)
 ///
 /// {@category shadercross}
-Uint8List? sdlxShaderCrossCompileDxbcFromSpirv(SdlxShaderCrossSpirvInfo info) {
-  var shader = Uint8List(0);
-  var size = 0;
-  final infoPointer = info.calloc();
-  final sizePointer = ffi.calloc<Size>();
-  final result = sdlShaderCrossCompileDxbcFromSpirv(infoPointer, sizePointer);
-  if (result != nullptr) {
-    size = sizePointer.value;
-    shader = Uint8List.fromList(result.cast<Uint8>().asTypedList(size));
-  }
-  sizePointer.callocFree();
-  infoPointer.callocAllFree();
-  if (result == nullptr) {
-    return null;
-  }
-  sdlFree(result.cast<Void>());
-  return shader;
-}
+Uint8List? sdlxShaderCrossCompileDxbcFromSpirv(SdlxShaderCrossSpirvInfo info) =>
+    ffi.using((arena) {
+      final infoPointer = info.toNative(arena);
+      final sizePointer = arena<Size>();
+
+      final result = sdlShaderCrossCompileDxbcFromSpirv(
+        infoPointer,
+        sizePointer,
+      );
+
+      if (result == nullptr) {
+        return null;
+      }
+
+      final size = sizePointer.value;
+      final shader = Uint8List.fromList(result.cast<Uint8>().asTypedList(size));
+
+      sdlFree(result.cast<Void>());
+      return shader;
+    });
 
 ///
 /// Compile DXIL bytecode from SPIRV code.
@@ -124,24 +125,26 @@ Uint8List? sdlxShaderCrossCompileDxbcFromSpirv(SdlxShaderCrossSpirvInfo info) {
 /// - [SDL_ShaderCross_CompileDXILFromSPIRV - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_ShaderCross_CompileDXILFromSPIRV)
 ///
 /// {@category shadercross}
-Uint8List? sdlxShaderCrossCompileDxilFromSpirv(SdlxShaderCrossSpirvInfo info) {
-  var shader = Uint8List(0);
-  var size = 0;
-  final infoPointer = info.calloc();
-  final sizePointer = ffi.calloc<Size>();
-  final result = sdlShaderCrossCompileDxilFromSpirv(infoPointer, sizePointer);
-  if (result != nullptr) {
-    size = sizePointer.value;
-    shader = Uint8List.fromList(result.cast<Uint8>().asTypedList(size));
-  }
-  sizePointer.callocFree();
-  infoPointer.callocAllFree();
-  if (result == nullptr) {
-    return null;
-  }
-  sdlFree(result.cast<Void>());
-  return shader;
-}
+Uint8List? sdlxShaderCrossCompileDxilFromSpirv(SdlxShaderCrossSpirvInfo info) =>
+    ffi.using((arena) {
+      final infoPointer = info.toNative(arena);
+      final sizePointer = arena<Size>();
+
+      final result = sdlShaderCrossCompileDxilFromSpirv(
+        infoPointer,
+        sizePointer,
+      );
+
+      if (result == nullptr) {
+        return null;
+      }
+
+      final size = sizePointer.value;
+      final shader = Uint8List.fromList(result.cast<Uint8>().asTypedList(size));
+
+      sdlFree(result.cast<Void>());
+      return shader;
+    });
 
 ///
 /// Compile an SDL GPU shader from SPIRV code. If your shader source is HLSL, you should obtain SPIR-V bytecode from SDL_ShaderCross_CompileSPIRVFromHLSL().
@@ -168,22 +171,23 @@ Pointer<SdlGpuShader> sdlxShaderCrossCompileGraphicsShaderFromSpirv(
   SdlxShaderCrossGraphicsShaderMetadata? metadata,
   int props = 0,
 }) {
-  Pointer<SdlGpuShader> result = nullptr;
   final metadata0 =
       metadata ?? sdlxShaderCrossReflectGraphicsSpirv(info.bytecode);
-  if (metadata0 != null) {
-    final infoPointer = info.calloc();
-    final resourceInfoPointer = metadata0.resourceInfo.calloc();
-    result = sdlShaderCrossCompileGraphicsShaderFromSpirv(
+  if (metadata0 == null) {
+    return nullptr;
+  }
+
+  return ffi.using((arena) {
+    final infoPointer = info.toNative(arena);
+    final resourceInfoPointer = metadata0.resourceInfo.toNative(arena);
+
+    return sdlShaderCrossCompileGraphicsShaderFromSpirv(
       device,
       infoPointer,
       resourceInfoPointer,
       props,
     );
-    resourceInfoPointer.callocFree();
-    infoPointer.callocFree();
-  }
-  return result;
+  });
 }
 
 ///
@@ -211,22 +215,23 @@ Pointer<SdlGpuComputePipeline> sdlxShaderCrossCompileComputePipelineFromSpirv(
   SdlxShaderCrossComputePipelineMetadata? metadata,
   int props = 0,
 }) {
-  Pointer<SdlGpuComputePipeline> result = nullptr;
   final metadata0 =
       metadata ?? sdlxShaderCrossReflectComputeSpirv(info.bytecode);
-  if (metadata0 != null) {
-    final infoPointer = info.calloc();
-    final metadataPointer = metadata0.calloc();
-    result = sdlShaderCrossCompileComputePipelineFromSpirv(
+  if (metadata0 == null) {
+    return nullptr;
+  }
+
+  return ffi.using((arena) {
+    final infoPointer = info.toNative(arena);
+    final metadataPointer = metadata0.toNative(arena);
+
+    return sdlShaderCrossCompileComputePipelineFromSpirv(
       device,
       infoPointer,
       metadataPointer,
       props,
     );
-    metadataPointer.callocFree();
-    infoPointer.callocFree();
-  }
-  return result;
+  });
 }
 
 ///
@@ -339,27 +344,26 @@ SdlxShaderCrossComputePipelineMetadata? sdlxShaderCrossReflectComputeSpirv(
 /// - [SDL_ShaderCross_CompileDXBCFromHLSL - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_ShaderCross_CompileDXBCFromHLSL)
 ///
 /// {@category shadercross}
-Uint8List? sdlxShaderCrossCompileDxbcFromHlsl(SdlxShaderCrossHlslInfo info) {
-  var shader = Uint8List(0);
-  var size = 0;
-  final infoPointer = info.calloc();
-  final sizePointer = ffi.calloc<Size>();
-  final result = sdlShaderCrossCompileDxbcFromHlsl(
-    infoPointer,
-    sizePointer,
-  ).cast<Uint8>();
-  if (result != nullptr) {
-    size = sizePointer.value;
-    shader = Uint8List.fromList(result.cast<Uint8>().asTypedList(size));
-  }
-  sizePointer.callocFree();
-  infoPointer.callocAllFree(info.defines.length);
-  if (result == nullptr) {
-    return null;
-  }
-  sdlFree(result.cast<Void>());
-  return shader;
-}
+Uint8List? sdlxShaderCrossCompileDxbcFromHlsl(SdlxShaderCrossHlslInfo info) =>
+    ffi.using((arena) {
+      final infoPointer = info.toNative(arena);
+      final sizePointer = arena<Size>();
+
+      final result = sdlShaderCrossCompileDxbcFromHlsl(
+        infoPointer,
+        sizePointer,
+      );
+
+      if (result == nullptr) {
+        return null;
+      }
+
+      final size = sizePointer.value;
+      final shader = Uint8List.fromList(result.cast<Uint8>().asTypedList(size));
+
+      sdlFree(result.cast<Void>());
+      return shader;
+    });
 
 ///
 /// Compile to DXIL bytecode from HLSL code via a SPIRV-Cross round trip.
@@ -387,27 +391,26 @@ Uint8List? sdlxShaderCrossCompileDxbcFromHlsl(SdlxShaderCrossHlslInfo info) {
 /// - [SDL_ShaderCross_CompileDXILFromHLSL - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_ShaderCross_CompileDXILFromHLSL)
 ///
 /// {@category shadercross}
-Uint8List? sdlxShaderCrossCompileDxilFromHlsl(SdlxShaderCrossHlslInfo info) {
-  var shader = Uint8List(0);
-  var size = 0;
-  final infoPointer = info.calloc();
-  final sizePointer = ffi.calloc<Size>();
-  final result = sdlShaderCrossCompileDxilFromHlsl(
-    infoPointer,
-    sizePointer,
-  ).cast<Uint8>();
-  if (result != nullptr) {
-    size = sizePointer.value;
-    shader = Uint8List.fromList(result.cast<Uint8>().asTypedList(size));
-  }
-  sizePointer.callocFree();
-  infoPointer.callocAllFree(info.defines.length);
-  if (result == nullptr) {
-    return null;
-  }
-  sdlFree(result.cast<Void>());
-  return shader;
-}
+Uint8List? sdlxShaderCrossCompileDxilFromHlsl(SdlxShaderCrossHlslInfo info) =>
+    ffi.using((arena) {
+      final infoPointer = info.toNative(arena);
+      final sizePointer = arena<Size>();
+
+      final result = sdlShaderCrossCompileDxilFromHlsl(
+        infoPointer,
+        sizePointer,
+      );
+
+      if (result == nullptr) {
+        return null;
+      }
+
+      final size = sizePointer.value;
+      final shader = Uint8List.fromList(result.cast<Uint8>().asTypedList(size));
+
+      sdlFree(result.cast<Void>());
+      return shader;
+    });
 
 ///
 /// Compile to SPIRV bytecode from HLSL code.
@@ -434,27 +437,26 @@ Uint8List? sdlxShaderCrossCompileDxilFromHlsl(SdlxShaderCrossHlslInfo info) {
 /// - [SDL_ShaderCross_CompileSPIRVFromHLSL - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_ShaderCross_CompileSPIRVFromHLSL)
 ///
 /// {@category shadercross}
-Uint8List? sdlxShaderCrossCompileSpirvFromHlsl(SdlxShaderCrossHlslInfo info) {
-  var shader = Uint8List(0);
-  var size = 0;
-  final infoPointer = info.calloc();
-  final sizePointer = ffi.calloc<Size>();
-  final result = sdlShaderCrossCompileSpirvFromHlsl(
-    infoPointer,
-    sizePointer,
-  ).cast<Uint8>();
-  if (result != nullptr) {
-    size = sizePointer.value;
-    shader = Uint8List.fromList(result.cast<Uint8>().asTypedList(size));
-  }
-  sizePointer.callocFree();
-  infoPointer.callocAllFree(info.defines.length);
-  if (result == nullptr) {
-    return null;
-  }
-  sdlFree(result.cast<Void>());
-  return shader;
-}
+Uint8List? sdlxShaderCrossCompileSpirvFromHlsl(SdlxShaderCrossHlslInfo info) =>
+    ffi.using((arena) {
+      final infoPointer = info.toNative(arena);
+      final sizePointer = arena<Size>();
+
+      final result = sdlShaderCrossCompileSpirvFromHlsl(
+        infoPointer,
+        sizePointer,
+      );
+
+      if (result == nullptr) {
+        return null;
+      }
+
+      final size = sizePointer.value;
+      final shader = Uint8List.fromList(result.cast<Uint8>().asTypedList(size));
+
+      sdlFree(result.cast<Void>());
+      return shader;
+    });
 
 Uint8List? _compileCodeFromHlsl({
   required int format,

@@ -26,15 +26,16 @@ part of '../sdl_tray.dart';
 /// - [SDL_GetTrayEntries - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetTrayEntries)
 ///
 /// {@category tray}
-List<Pointer<SdlTrayEntry>> sdlxGetTrayEntries(Pointer<SdlTrayMenu> menu) {
-  final result = <Pointer<SdlTrayEntry>>[];
-  final countPointer = ffi.calloc<Int32>();
-  final trayEntriesPointer = sdlGetTrayEntries(menu, countPointer);
-  if (trayEntriesPointer != nullptr) {
-    for (var i = 0; i < countPointer.value; i++) {
-      result.add(trayEntriesPointer[i]);
-    }
-  }
-  countPointer.callocFree();
-  return result;
-}
+List<Pointer<SdlTrayEntry>> sdlxGetTrayEntries(Pointer<SdlTrayMenu> menu) =>
+    ffi.using((arena) {
+      final countPointer = arena<Int32>();
+      final trayEntriesPointer = sdlGetTrayEntries(menu, countPointer);
+
+      if (trayEntriesPointer == nullptr) {
+        return [];
+      }
+
+      return [
+        for (var i = 0; i < countPointer.value; i++) trayEntriesPointer[i],
+      ];
+    });

@@ -23,19 +23,20 @@ part of '../sdl_touch.dart';
 /// - [SDL_GetTouchDevices - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetTouchDevices)
 ///
 /// {@category touch}
-List<int> sdlxGetTouchDevices() {
-  final result = <int>[];
-  final countPointer = ffi.calloc<Int32>();
+List<int> sdlxGetTouchDevices() => ffi.using((arena) {
+  final countPointer = arena<Int32>();
   final devicesPointer = sdlGetTouchDevices(countPointer);
-  if (devicesPointer != nullptr) {
-    for (var i = 0; i < countPointer.value; i++) {
-      result.add(devicesPointer[i]);
-    }
+
+  if (devicesPointer == nullptr) {
+    return [];
+  }
+
+  try {
+    return [for (var i = 0; i < countPointer.value; i++) devicesPointer[i]];
+  } finally {
     sdlFree(devicesPointer.cast<Void>());
   }
-  countPointer.callocFree();
-  return result;
-}
+});
 
 ///
 /// Get a list of active fingers for a given touch device.

@@ -51,18 +51,17 @@ part of '../sdl_process.dart';
 Pointer<SdlProcess> sdlxCreateProcess(
   List<String> args, {
   bool pipeStdio = false,
-}) {
-  final argsPointer = ffi.calloc<Pointer<Int8>>(args.length + 1);
-  for (var i = 0; i < args.length; i++) {
-    argsPointer[i] = args[i].toNativeUtf8().cast<Int8>();
+}) => ffi.using((arena) {
+  final count = args.length;
+  final argsPointer = arena<Pointer<Int8>>(count + 1);
+
+  for (var i = 0; i < count; i++) {
+    argsPointer[i] = args[i].toNativeUtf8(allocator: arena).cast<Int8>();
   }
-  final result = sdlCreateProcess(argsPointer, pipeStdio);
-  for (var i = 0; i < args.length; i++) {
-    argsPointer[i].cast<ffi.Utf8>().callocFree();
-  }
-  argsPointer.callocFree();
-  return result;
-}
+  argsPointer[count] = nullptr; // 終端のNULLポインタ
+
+  return sdlCreateProcess(argsPointer, pipeStdio);
+});
 
 ///
 /// Read all the output from a process.
@@ -103,25 +102,26 @@ Pointer<SdlProcess> sdlxCreateProcess(
 /// {@category process}
 ({Uint8List data, int datasize, int exitcode})? sdlxReadProcess(
   Pointer<SdlProcess> process,
-) {
-  var exitcode = 0;
-  var datasize = 0;
-  final datasizePointer = ffi.calloc<Size>();
-  final exitcodePointer = ffi.calloc<Int32>();
+) => ffi.using((arena) {
+  final datasizePointer = arena<Size>();
+  final exitcodePointer = arena<Int32>();
+
   final dataPointer = sdlReadProcess(process, datasizePointer, exitcodePointer);
-  exitcode = exitcodePointer.value;
-  datasize = datasizePointer.value;
-  datasizePointer.callocFree();
-  exitcodePointer.callocFree();
+
+  final exitcode = exitcodePointer.value;
+  final datasize = datasizePointer.value;
+
   if (dataPointer == nullptr) {
     return null;
   }
+
   final data = Uint8List.fromList(
     dataPointer.cast<Uint8>().asTypedList(datasize),
   );
   sdlFree(dataPointer.cast<Void>());
-  return (data: data, exitcode: exitcode, datasize: datasize);
-}
+
+  return (data: data, datasize: datasize, exitcode: exitcode);
+});
 
 ///
 /// Wait for a process to finish.
@@ -162,13 +162,13 @@ Pointer<SdlProcess> sdlxCreateProcess(
 /// - [SDL_WaitProcess - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_WaitProcess)
 ///
 /// {@category process}
-int? sdlxWaitProcess(Pointer<SdlProcess> process, {bool block = false}) {
-  int? result;
-  final exitcodePointer = ffi.calloc<Int32>();
-  final bl = sdlWaitProcess(process, block, exitcodePointer);
-  if (bl) {
-    result = exitcodePointer.value;
-  }
-  exitcodePointer.callocFree();
-  return result;
-}
+int? sdlxWaitProcess(Pointer<SdlProcess> process, {bool block = false}) =>
+    ffi.using((arena) {
+      final exitcodePointer = arena<Int32>();
+
+      if (!sdlWaitProcess(process, block, exitcodePointer)) {
+        return null;
+      }
+
+      return exitcodePointer.value;
+    });

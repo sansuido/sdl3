@@ -9,8 +9,10 @@ class SdlxGpuStorageBufferReadWriteBinding {
   final Pointer<SdlGpuBuffer> buffer;
   final bool cycle;
 
-  Pointer<SdlGpuStorageBufferReadWriteBinding> calloc() {
-    final pointer = ffi.calloc<SdlGpuStorageBufferReadWriteBinding>();
+  Pointer<SdlGpuStorageBufferReadWriteBinding> toNative([
+    Allocator allocator = ffi.calloc,
+  ]) {
+    final pointer = allocator<SdlGpuStorageBufferReadWriteBinding>();
     pointer.ref.buffer = buffer;
     pointer.ref.cycle = cycle;
     return pointer;
@@ -19,8 +21,10 @@ class SdlxGpuStorageBufferReadWriteBinding {
 
 extension SdlxGpuStorageBufferReadWriteBindingListExtension
     on List<SdlxGpuStorageBufferReadWriteBinding> {
-  Pointer<SdlGpuStorageBufferReadWriteBinding> calloc() {
-    final buffersPointer = ffi.calloc<SdlGpuStorageBufferReadWriteBinding>(
+  Pointer<SdlGpuStorageBufferReadWriteBinding> toNative([
+    Allocator allocator = ffi.calloc,
+  ]) {
+    final buffersPointer = allocator<SdlGpuStorageBufferReadWriteBinding>(
       length,
     );
     for (var n = 0; n < length; n++) {

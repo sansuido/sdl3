@@ -5,7 +5,6 @@ import 'package:ffi/ffi.dart' as ffi;
 import 'dylib.dart' as dylib;
 
 import 'sdl.dart';
-import 'sdl_dart.dart';
 
 part 'events/lib_sdl_events.dart';
 part 'events/sdl_00_common_event.dart';

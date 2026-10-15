@@ -1043,6 +1043,7 @@ const SDL_HINT_PS2_GS_WIDTH = 'SDL_PS2_GS_WIDTH';
 const SDL_HINT_PS2_GS_HEIGHT = 'SDL_PS2_GS_HEIGHT';
 const SDL_HINT_PS2_GS_PROGRESSIVE = 'SDL_PS2_GS_PROGRESSIVE';
 const SDL_HINT_PS2_GS_MODE = 'SDL_PS2_GS_MODE';
+const SDL_HINT_PS2_GS_COLOR_DEPTH = 'SDL_PS2_GS_COLOR_DEPTH';
 const SDL_HINT_RPI_VIDEO_LAYER = 'SDL_RPI_VIDEO_LAYER';
 const SDL_HINT_SCREENSAVER_INHIBIT_ACTIVITY_NAME =
     'SDL_SCREENSAVER_INHIBIT_ACTIVITY_NAME';
@@ -2182,6 +2183,8 @@ const SDL_PROP_TEXTURE_CREATE_VULKAN_TEXTURE_NUMBER =
     'SDL.texture.create.vulkan.texture';
 const SDL_PROP_TEXTURE_CREATE_VULKAN_TEXTURE_U_NUMBER =
     'SDL.texture.create.vulkan.texture_u';
+const SDL_PROP_TEXTURE_CREATE_VULKAN_TEXTURE_UV_NUMBER =
+    'SDL.texture.create.vulkan.texture_uv';
 const SDL_PROP_TEXTURE_CREATE_VULKAN_TEXTURE_V_NUMBER =
     'SDL.texture.create.vulkan.texture_v';
 const SDL_PROP_TEXTURE_CREATE_VULKAN_LAYOUT_NUMBER =
@@ -2236,6 +2239,8 @@ const SDL_PROP_TEXTURE_OPENGLES2_TEXTURE_V_NUMBER =
 const SDL_PROP_TEXTURE_OPENGLES2_TEXTURE_TARGET_NUMBER =
     'SDL.texture.opengles2.target';
 const SDL_PROP_TEXTURE_VULKAN_TEXTURE_NUMBER = 'SDL.texture.vulkan.texture';
+const SDL_PROP_TEXTURE_VULKAN_TEXTURE_UV_NUMBER =
+    'SDL.texture.vulkan.texture_uv';
 const SDL_PROP_TEXTURE_VULKAN_TEXTURE_U_NUMBER = 'SDL.texture.vulkan.texture_u';
 const SDL_PROP_TEXTURE_VULKAN_TEXTURE_V_NUMBER = 'SDL.texture.vulkan.texture_v';
 const SDL_PROP_TEXTURE_GPU_TEXTURE_POINTER = 'SDL.texture.gpu.texture';
@@ -2247,7 +2252,7 @@ const SDL_RENDERER_VSYNC_ADAPTIVE = -1;
 const SDL_DEBUG_TEXT_FONT_CHARACTER_SIZE = 8;
 //const SDL_revision_h_ = ;
 const SDL_REVISION =
-    'SDL-3.5.0-release-3.4.0-1513-gf48181fd3 (" SDL_VENDOR_INFO ")';
+    'SDL-3.5.0-release-3.4.0-1550-gea3042350 (" SDL_VENDOR_INFO ")';
 //const SDL_scancode_h_ = ;
 const SDL_SCANCODE_UNKNOWN = 0;
 const SDL_SCANCODE_A = 4;
@@ -4139,6 +4144,7 @@ class SdlkHint {
   static const ps2GsHeight = SDL_HINT_PS2_GS_HEIGHT;
   static const ps2GsProgressive = SDL_HINT_PS2_GS_PROGRESSIVE;
   static const ps2GsMode = SDL_HINT_PS2_GS_MODE;
+  static const ps2GsColorDepth = SDL_HINT_PS2_GS_COLOR_DEPTH;
   static const rpiVideoLayer = SDL_HINT_RPI_VIDEO_LAYER;
   static const screensaverInhibitActivityName =
       SDL_HINT_SCREENSAVER_INHIBIT_ACTIVITY_NAME;
@@ -5284,6 +5290,8 @@ class SdlkPropTexture {
       SDL_PROP_TEXTURE_CREATE_VULKAN_TEXTURE_NUMBER;
   static const createVulkanTextureUNumber =
       SDL_PROP_TEXTURE_CREATE_VULKAN_TEXTURE_U_NUMBER;
+  static const createVulkanTextureUvNumber =
+      SDL_PROP_TEXTURE_CREATE_VULKAN_TEXTURE_UV_NUMBER;
   static const createVulkanTextureVNumber =
       SDL_PROP_TEXTURE_CREATE_VULKAN_TEXTURE_V_NUMBER;
   static const createVulkanLayoutNumber =
@@ -5338,6 +5346,8 @@ class SdlkPropTexture {
   static const opengles2TextureTargetNumber =
       SDL_PROP_TEXTURE_OPENGLES2_TEXTURE_TARGET_NUMBER;
   static const vulkanTextureNumber = SDL_PROP_TEXTURE_VULKAN_TEXTURE_NUMBER;
+  static const vulkanTextureUvNumber =
+      SDL_PROP_TEXTURE_VULKAN_TEXTURE_UV_NUMBER;
   static const vulkanTextureUNumber = SDL_PROP_TEXTURE_VULKAN_TEXTURE_U_NUMBER;
   static const vulkanTextureVNumber = SDL_PROP_TEXTURE_VULKAN_TEXTURE_V_NUMBER;
   static const gpuTexturePointer = SDL_PROP_TEXTURE_GPU_TEXTURE_POINTER;

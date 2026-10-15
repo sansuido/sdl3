@@ -4,7 +4,6 @@ import 'dart:typed_data';
 import 'package:ffi/ffi.dart' as ffi;
 
 import 'sdl.dart';
-import 'sdl_dart.dart';
 import 'sdl_video.dart';
 
 part 'generated/const_sdl_opengl.dart';

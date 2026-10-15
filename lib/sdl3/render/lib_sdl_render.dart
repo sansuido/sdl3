@@ -34,30 +34,23 @@ sdlxCreateWindowAndRenderer(
   int width,
   int height,
   int windowFlags,
-) {
-  Pointer<SdlWindow> window = nullptr;
-  Pointer<SdlRenderer> renderer = nullptr;
-  final windowPointer = ffi.calloc<Pointer<SdlWindow>>();
-  final rendererPointer = ffi.calloc<Pointer<SdlRenderer>>();
-  final result = sdlCreateWindowAndRenderer(
+) => ffi.using((arena) {
+  final windowPointer = arena<Pointer<SdlWindow>>();
+  final rendererPointer = arena<Pointer<SdlRenderer>>();
+
+  if (!sdlCreateWindowAndRenderer(
     title,
     width,
     height,
     windowFlags,
     windowPointer,
     rendererPointer,
-  );
-  if (result) {
-    window = windowPointer.value;
-    renderer = rendererPointer.value;
-  }
-  windowPointer.callocFree();
-  rendererPointer.callocFree();
-  if (!result) {
+  )) {
     return null;
   }
-  return (window: window, renderer: renderer);
-}
+
+  return (window: windowPointer.value, renderer: rendererPointer.value);
+});
 
 ///
 /// Get the output size in pixels of a rendering context.
@@ -88,23 +81,19 @@ sdlxCreateWindowAndRenderer(
 /// - [SDL_GetRenderOutputSize - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetRenderOutputSize)
 ///
 /// {@category render}
-({int w, int h})? sdlxGetRenderOutputSize(Pointer<SdlRenderer> renderer) {
-  var w = 0;
-  var h = 0;
-  final wPointer = ffi.calloc<Int32>();
-  final hPointer = ffi.calloc<Int32>();
-  final result = sdlGetRenderOutputSize(renderer, wPointer, hPointer);
-  if (result) {
-    w = wPointer.value;
-    h = hPointer.value;
-  }
-  wPointer.callocFree();
-  hPointer.callocFree();
-  if (!result) {
-    return null;
-  }
-  return (w: w, h: h);
-}
+({int h, int w})? sdlxGetRenderOutputSize(Pointer<SdlRenderer> renderer) =>
+    ffi.using((arena) {
+      final wPointer = arena<Int32>();
+      final hPointer = arena<Int32>();
+
+      final result = sdlGetRenderOutputSize(renderer, wPointer, hPointer);
+
+      if (!result) {
+        return null;
+      }
+
+      return (w: wPointer.value, h: hPointer.value);
+    });
 
 ///
 /// Get the current output size in pixels of a rendering context.
@@ -135,25 +124,20 @@ sdlxCreateWindowAndRenderer(
 /// - [SDL_GetCurrentRenderOutputSize - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetCurrentRenderOutputSize)
 ///
 /// {@category render}
-({int w, int h})? sdlxGetCurrentRenderOutputSize(
+({int h, int w})? sdlxGetCurrentRenderOutputSize(
   Pointer<SdlRenderer> renderer,
-) {
-  var w = 0;
-  var h = 0;
-  final wPointer = ffi.calloc<Int32>();
-  final hPointer = ffi.calloc<Int32>();
+) => ffi.using((arena) {
+  final wPointer = arena<Int32>();
+  final hPointer = arena<Int32>();
+
   final result = sdlGetCurrentRenderOutputSize(renderer, wPointer, hPointer);
-  if (result) {
-    w = wPointer.value;
-    h = hPointer.value;
-  }
-  wPointer.callocFree();
-  hPointer.callocFree();
+
   if (!result) {
     return null;
   }
-  return (w: w, h: h);
-}
+
+  return (w: wPointer.value, h: hPointer.value);
+});
 
 ///
 /// Get the size of a texture, as floating point values.
@@ -178,23 +162,19 @@ sdlxCreateWindowAndRenderer(
 /// - [SDL_GetTextureSize - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetTextureSize)
 ///
 /// {@category render}
-({double w, double h})? sdlxGetTextureSize(Pointer<SdlTexture> texture) {
-  var w = 0.0;
-  var h = 0.0;
-  final wPointer = ffi.calloc<Float>();
-  final hPointer = ffi.calloc<Float>();
-  final result = sdlGetTextureSize(texture, wPointer, hPointer);
-  if (result) {
-    w = wPointer.value;
-    h = hPointer.value;
-  }
-  wPointer.callocFree();
-  hPointer.callocFree();
-  if (!result) {
-    return null;
-  }
-  return (w: w, h: h);
-}
+({double h, double w})? sdlxGetTextureSize(Pointer<SdlTexture> texture) =>
+    ffi.using((arena) {
+      final wPointer = arena<Float>();
+      final hPointer = arena<Float>();
+
+      final result = sdlGetTextureSize(texture, wPointer, hPointer);
+
+      if (!result) {
+        return null;
+      }
+
+      return (w: wPointer.value, h: hPointer.value);
+    });
 
 ///
 /// Set an additional color value multiplied into render copy operations.
@@ -311,27 +291,25 @@ bool sdlxSetTextureColorModFloat(
 /// - [SDL_GetTextureColorMod - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetTextureColorMod)
 ///
 /// {@category render}
-({int r, int g, int b})? sdlxGetTextureColorMod(Pointer<SdlTexture> texture) {
-  var r = 0;
-  var g = 0;
-  var b = 0;
-  final rPointer = ffi.calloc<Uint8>();
-  final gPointer = ffi.calloc<Uint8>();
-  final bPointer = ffi.calloc<Uint8>();
-  final result = sdlGetTextureColorMod(texture, rPointer, gPointer, bPointer);
-  if (result) {
-    r = rPointer.value;
-    g = gPointer.value;
-    b = bPointer.value;
-  }
-  rPointer.callocFree();
-  gPointer.callocFree();
-  bPointer.callocFree();
-  if (!result) {
-    return null;
-  }
-  return (r: r, g: g, b: b);
-}
+({int b, int g, int r})? sdlxGetTextureColorMod(Pointer<SdlTexture> texture) =>
+    ffi.using((arena) {
+      final rPointer = arena<Uint8>();
+      final gPointer = arena<Uint8>();
+      final bPointer = arena<Uint8>();
+
+      final result = sdlGetTextureColorMod(
+        texture,
+        rPointer,
+        gPointer,
+        bPointer,
+      );
+
+      if (!result) {
+        return null;
+      }
+
+      return (r: rPointer.value, g: gPointer.value, b: bPointer.value);
+    });
 
 ///
 /// Get the additional color value multiplied into render copy operations.
@@ -359,34 +337,26 @@ bool sdlxSetTextureColorModFloat(
 /// - [SDL_GetTextureColorModFloat - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetTextureColorModFloat)
 ///
 /// {@category render}
-({double r, double g, double b})? sdlxGetTextureColorModFloat(
+({double b, double g, double r})? sdlxGetTextureColorModFloat(
   Pointer<SdlTexture> texture,
-) {
-  var r = 0.0;
-  var g = 0.0;
-  var b = 0.0;
-  final rPointer = ffi.calloc<Float>();
-  final gPointer = ffi.calloc<Float>();
-  final bPointer = ffi.calloc<Float>();
+) => ffi.using((arena) {
+  final rPointer = arena<Float>();
+  final gPointer = arena<Float>();
+  final bPointer = arena<Float>();
+
   final result = sdlGetTextureColorModFloat(
     texture,
     rPointer,
     gPointer,
     bPointer,
   );
-  if (result) {
-    r = rPointer.value;
-    g = gPointer.value;
-    b = bPointer.value;
-  }
-  rPointer.callocFree();
-  gPointer.callocFree();
-  bPointer.callocFree();
+
   if (!result) {
     return null;
   }
-  return (r: r, g: g, b: b);
-}
+
+  return (r: rPointer.value, g: gPointer.value, b: bPointer.value);
+});
 
 ///
 /// Get the additional alpha value multiplied into render copy operations.
@@ -412,16 +382,17 @@ bool sdlxSetTextureColorModFloat(
 /// - [SDL_GetTextureAlphaMod - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetTextureAlphaMod)
 ///
 /// {@category render}
-int? sdlxGetTextureAlphaMod(Pointer<SdlTexture> texture) {
-  int? result;
-  final alphaPointer = ffi.calloc<Uint8>();
+int? sdlxGetTextureAlphaMod(Pointer<SdlTexture> texture) => ffi.using((arena) {
+  final alphaPointer = arena<Uint8>();
+
   final bl = sdlGetTextureAlphaMod(texture, alphaPointer);
-  if (bl) {
-    result = alphaPointer.value;
+
+  if (!bl) {
+    return null;
   }
-  alphaPointer.callocFree();
-  return result;
-}
+
+  return alphaPointer.value;
+});
 
 ///
 /// Get the additional alpha value multiplied into render copy operations.
@@ -447,16 +418,18 @@ int? sdlxGetTextureAlphaMod(Pointer<SdlTexture> texture) {
 /// - [SDL_GetTextureAlphaModFloat - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetTextureAlphaModFloat)
 ///
 /// {@category render}
-double? sdlxGetTextureAlphaModFloat(Pointer<SdlTexture> texture) {
-  double? result;
-  final alphaPointer = ffi.calloc<Float>();
-  final bl = sdlGetTextureAlphaModFloat(texture, alphaPointer);
-  if (bl) {
-    result = alphaPointer.value;
-  }
-  alphaPointer.callocFree();
-  return result;
-}
+double? sdlxGetTextureAlphaModFloat(Pointer<SdlTexture> texture) =>
+    ffi.using((arena) {
+      final alphaPointer = arena<Float>();
+
+      final bl = sdlGetTextureAlphaModFloat(texture, alphaPointer);
+
+      if (!bl) {
+        return null;
+      }
+
+      return alphaPointer.value;
+    });
 
 ///
 /// Get the blend mode used for texture copy operations.
@@ -480,16 +453,17 @@ double? sdlxGetTextureAlphaModFloat(Pointer<SdlTexture> texture) {
 /// - [SDL_GetTextureBlendMode - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetTextureBlendMode)
 ///
 /// {@category render}
-int? sdlxGetTextureBlendMode(Pointer<SdlTexture> texture) {
-  int? result;
-  final blendModePointer = ffi.calloc<Uint32>();
+int? sdlxGetTextureBlendMode(Pointer<SdlTexture> texture) => ffi.using((arena) {
+  final blendModePointer = arena<Uint32>();
+
   final bl = sdlGetTextureBlendMode(texture, blendModePointer);
-  if (bl) {
-    result = blendModePointer.value;
+
+  if (!bl) {
+    return null;
   }
-  blendModePointer.callocFree();
-  return result;
-}
+
+  return blendModePointer.value;
+});
 
 ///
 /// Get the scale mode used for texture scale operations.
@@ -513,16 +487,17 @@ int? sdlxGetTextureBlendMode(Pointer<SdlTexture> texture) {
 /// - [SDL_GetTextureScaleMode - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetTextureScaleMode)
 ///
 /// {@category render}
-int? sdlxGetTextureScaleMode(Pointer<SdlTexture> texture) {
-  int? result;
-  final scaleModePointer = ffi.calloc<Int32>();
+int? sdlxGetTextureScaleMode(Pointer<SdlTexture> texture) => ffi.using((arena) {
+  final scaleModePointer = arena<Int32>();
+
   final bl = sdlGetTextureScaleMode(texture, scaleModePointer);
-  if (bl) {
-    result = scaleModePointer.value;
+
+  if (!bl) {
+    return null;
   }
-  scaleModePointer.callocFree();
-  return result;
-}
+
+  return scaleModePointer.value;
+});
 
 ///
 /// Update the given texture rectangle with new pixel data.
@@ -569,17 +544,14 @@ bool sdlxUpdateTexture(
   Pointer<Void> pixels,
   int pitch, {
   SdlxRect? rect,
-}) {
-  Pointer<SdlRect> rectPointer = nullptr;
-  if (rect != null) {
-    rectPointer = rect.calloc();
-  }
-  final result = sdlUpdateTexture(texture, rectPointer, pixels, pitch);
-  if (rectPointer != nullptr) {
-    rectPointer.callocFree();
-  }
-  return result;
-}
+}) => ffi.using(
+  (arena) => sdlUpdateTexture(
+    texture,
+    rect?.toNative(arena) ?? nullptr,
+    pixels,
+    pitch,
+  ),
+);
 
 ///
 /// Update a rectangle within a planar YV12 or IYUV texture with new pixel
@@ -625,41 +597,40 @@ bool sdlxUpdateYuvTexture(
   List<int>? yplane,
   List<int>? uplane,
   List<int>? vplane,
-}) {
-  Pointer<SdlRect> rectPointer = nullptr;
+}) => ffi.using((arena) {
   Pointer<Uint8> yplanePointer = nullptr;
   var yplanePitch = 0;
-  Pointer<Uint8> uplanePointer = nullptr;
-  var uplanePitch = 0;
-  Pointer<Uint8> vplanePointer = nullptr;
-  var vplanePitch = 0;
-  if (rect != null) {
-    rectPointer = rect.calloc();
-  }
   if (yplane != null) {
-    yplanePointer = ffi.calloc<Uint8>(yplane.length);
+    yplanePointer = arena<Uint8>(yplane.length);
     for (var i = 0; i < yplane.length; i++) {
       yplanePointer[i] = yplane[i];
     }
     yplanePitch = yplane.length;
   }
+
+  Pointer<Uint8> uplanePointer = nullptr;
+  var uplanePitch = 0;
   if (uplane != null) {
-    uplanePointer = ffi.calloc<Uint8>(uplane.length);
+    uplanePointer = arena<Uint8>(uplane.length);
     for (var i = 0; i < uplane.length; i++) {
       uplanePointer[i] = uplane[i];
     }
     uplanePitch = uplane.length;
   }
+
+  Pointer<Uint8> vplanePointer = nullptr;
+  var vplanePitch = 0;
   if (vplane != null) {
-    vplanePointer = ffi.calloc<Uint8>(vplane.length);
+    vplanePointer = arena<Uint8>(vplane.length);
     for (var i = 0; i < vplane.length; i++) {
       vplanePointer[i] = vplane[i];
     }
     vplanePitch = vplane.length;
   }
-  final result = sdlUpdateYuvTexture(
+
+  return sdlUpdateYuvTexture(
     texture,
-    rectPointer,
+    rect?.toNative(arena) ?? nullptr,
     yplanePointer,
     yplanePitch,
     uplanePointer,
@@ -667,20 +638,7 @@ bool sdlxUpdateYuvTexture(
     vplanePointer,
     vplanePitch,
   );
-  if (rectPointer != nullptr) {
-    rectPointer.callocFree();
-  }
-  if (yplanePointer != nullptr) {
-    yplanePointer.callocFree();
-  }
-  if (uplanePointer != nullptr) {
-    uplanePointer.callocFree();
-  }
-  if (vplanePointer != nullptr) {
-    vplanePointer.callocFree();
-  }
-  return result;
-}
+});
 
 ///
 /// Update a rectangle within a planar NV12 or NV21 texture with new pixels.
@@ -721,48 +679,36 @@ bool sdlxUpdateNvTexture(
   SdlxRect? rect,
   List<int>? yplane,
   List<int>? uVplane,
-}) {
-  Pointer<SdlRect> rectPointer = nullptr;
+}) => ffi.using((arena) {
   Pointer<Uint8> yplanePointer = nullptr;
   var yplanePitch = 0;
-  Pointer<Uint8> uVplanePointer = nullptr;
-  var uVplanePitch = 0;
-  if (rect != null) {
-    rectPointer = rect.calloc();
-  }
   if (yplane != null) {
-    yplanePointer = ffi.calloc<Uint8>(yplane.length);
+    yplanePointer = arena<Uint8>(yplane.length);
     for (var i = 0; i < yplane.length; i++) {
       yplanePointer[i] = yplane[i];
     }
     yplanePitch = yplane.length;
   }
+
+  Pointer<Uint8> uVplanePointer = nullptr;
+  var uVplanePitch = 0;
   if (uVplane != null) {
-    uVplanePointer = ffi.calloc<Uint8>(uVplane.length);
+    uVplanePointer = arena<Uint8>(uVplane.length);
     for (var i = 0; i < uVplane.length; i++) {
       uVplanePointer[i] = uVplane[i];
     }
     uVplanePitch = uVplane.length;
   }
-  final result = sdlUpdateNvTexture(
+
+  return sdlUpdateNvTexture(
     texture,
-    rectPointer,
+    rect?.toNative(arena) ?? nullptr,
     yplanePointer,
     yplanePitch,
     uVplanePointer,
     uVplanePitch,
   );
-  if (rectPointer != nullptr) {
-    rectPointer.callocFree();
-  }
-  if (yplanePointer != nullptr) {
-    yplanePointer.callocFree();
-  }
-  if (uVplanePointer != nullptr) {
-    uVplanePointer.callocFree();
-  }
-  return result;
-}
+});
 
 ///
 /// Lock a portion of the texture for **write-only** pixel access.
@@ -805,32 +751,23 @@ bool sdlxUpdateNvTexture(
 ({Pointer<Void> pixels, int pitch})? sdlxLockTexture(
   Pointer<SdlTexture> texture, {
   SdlxRect? rect,
-}) {
-  Pointer<Void> pixels = nullptr;
-  var pitch = 0;
-  Pointer<SdlRect> rectPointer = nullptr;
-  final pixelsPointer = ffi.calloc<Pointer<Void>>();
-  final pitchPointer = ffi.calloc<Int32>();
-  if (rect != null) {
-    rectPointer = rect.calloc();
-  }
+}) => ffi.using((arena) {
+  final pixelsPointer = arena<Pointer<Void>>();
+  final pitchPointer = arena<Int32>();
+
   final result = sdlLockTexture(
     texture,
-    rectPointer,
+    rect?.toNative(arena) ?? nullptr,
     pixelsPointer,
     pitchPointer,
   );
-  if (result) {
-    pixels = pixelsPointer.value;
-    pitch = pitchPointer.value;
+
+  if (!result) {
+    return null;
   }
-  if (rectPointer != nullptr) {
-    rectPointer.callocFree();
-  }
-  pixelsPointer.callocFree();
-  pitchPointer.callocFree();
-  return (pixels: pixels, pitch: pitch);
-}
+
+  return (pixels: pixelsPointer.value, pitch: pitchPointer.value);
+});
 
 ///
 /// Get device independent resolution and presentation mode for rendering.
@@ -863,34 +800,26 @@ bool sdlxUpdateNvTexture(
 /// - [SDL_GetRenderLogicalPresentation - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetRenderLogicalPresentation)
 ///
 /// {@category render}
-({int w, int h, int mode})? sdlxGetRenderLogicalPresentation(
+({int h, int mode, int w})? sdlxGetRenderLogicalPresentation(
   Pointer<SdlRenderer> renderer,
-) {
-  var w = 0;
-  var h = 0;
-  var mode = 0;
-  final wPointer = ffi.calloc<Int32>();
-  final hPointer = ffi.calloc<Int32>();
-  final modePointer = ffi.calloc<Int32>();
+) => ffi.using((arena) {
+  final wPointer = arena<Int32>();
+  final hPointer = arena<Int32>();
+  final modePointer = arena<Int32>();
+
   final result = sdlGetRenderLogicalPresentation(
     renderer,
     wPointer,
     hPointer,
     modePointer,
   );
-  if (result) {
-    w = wPointer.value;
-    h = hPointer.value;
-    mode = modePointer.value;
-  }
-  wPointer.callocFree();
-  hPointer.callocFree();
-  modePointer.callocFree();
+
   if (!result) {
     return null;
   }
-  return (w: w, h: h, mode: mode);
-}
+
+  return (w: wPointer.value, h: hPointer.value, mode: modePointer.value);
+});
 
 ///
 /// Get the final presentation rectangle for rendering.
@@ -923,16 +852,19 @@ bool sdlxUpdateNvTexture(
 /// - [SDL_GetRenderLogicalPresentationRect - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetRenderLogicalPresentationRect)
 ///
 /// {@category render}
-SdlxFRect? sdlxGetRenderLogicalPresentationRect(Pointer<SdlRenderer> renderer) {
-  SdlxFRect? rect;
-  final rectPointer = ffi.calloc<SdlFRect>();
+SdlxFRect? sdlxGetRenderLogicalPresentationRect(
+  Pointer<SdlRenderer> renderer,
+) => ffi.using((arena) {
+  final rectPointer = arena<SdlFRect>();
+
   final result = sdlGetRenderLogicalPresentationRect(renderer, rectPointer);
-  if (result) {
-    rect = SdlxFRect.fromPointer(rectPointer);
+
+  if (!result) {
+    return null;
   }
-  rectPointer.callocFree();
-  return rect;
-}
+
+  return SdlxFRect.fromPointer(rectPointer);
+});
 
 ///
 /// Get a point in render coordinates when given a point in window coordinates.
@@ -971,11 +903,10 @@ SdlxFRect? sdlxGetRenderLogicalPresentationRect(Pointer<SdlRenderer> renderer) {
   Pointer<SdlRenderer> renderer,
   double windowX,
   double windowY,
-) {
-  var x = 0.0;
-  var y = 0.0;
-  final xPointer = ffi.calloc<Float>();
-  final yPointer = ffi.calloc<Float>();
+) => ffi.using((arena) {
+  final xPointer = arena<Float>();
+  final yPointer = arena<Float>();
+
   final result = sdlRenderCoordinatesFromWindow(
     renderer,
     windowX,
@@ -983,17 +914,13 @@ SdlxFRect? sdlxGetRenderLogicalPresentationRect(Pointer<SdlRenderer> renderer) {
     xPointer,
     yPointer,
   );
-  if (result) {
-    x = xPointer.value;
-    y = yPointer.value;
-  }
-  xPointer.callocFree();
-  yPointer.callocFree();
+
   if (!result) {
     return null;
   }
-  return (x: x, y: y);
-}
+
+  return (x: xPointer.value, y: yPointer.value);
+});
 
 ///
 /// Get a point in window coordinates when given a point in render coordinates.
@@ -1035,11 +962,10 @@ SdlxFRect? sdlxGetRenderLogicalPresentationRect(Pointer<SdlRenderer> renderer) {
   Pointer<SdlRenderer> renderer,
   double x,
   double y,
-) {
-  var windowX = 0.0;
-  var windowY = 0.0;
-  final windowXPointer = ffi.calloc<Float>();
-  final windowYPointer = ffi.calloc<Float>();
+) => ffi.using((arena) {
+  final windowXPointer = arena<Float>();
+  final windowYPointer = arena<Float>();
+
   final result = sdlRenderCoordinatesToWindow(
     renderer,
     x,
@@ -1047,17 +973,13 @@ SdlxFRect? sdlxGetRenderLogicalPresentationRect(Pointer<SdlRenderer> renderer) {
     windowXPointer,
     windowYPointer,
   );
-  if (result) {
-    windowX = windowXPointer.value;
-    windowY = windowYPointer.value;
-  }
-  windowXPointer.callocFree();
-  windowYPointer.callocFree();
+
   if (!result) {
     return null;
   }
-  return (windowX: windowX, windowY: windowY);
-}
+
+  return (windowX: windowXPointer.value, windowY: windowYPointer.value);
+});
 
 ///
 /// Convert the coordinates in an event to render coordinates.
@@ -1148,17 +1070,11 @@ SdlxEvent? sdlxConvertEventToRenderCoordinates(
 /// - [SDL_SetRenderViewport - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SetRenderViewport)
 ///
 /// {@category render}
-bool sdlxSetRenderViewport(Pointer<SdlRenderer> renderer, SdlxRect? rect) {
-  Pointer<SdlRect> rectPointer = nullptr;
-  if (rect != null) {
-    rectPointer = rect.calloc();
-  }
-  final result = sdlSetRenderViewport(renderer, rectPointer);
-  if (rectPointer != nullptr) {
-    rectPointer.callocFree();
-  }
-  return result;
-}
+bool sdlxSetRenderViewport(Pointer<SdlRenderer> renderer, SdlxRect? rect) =>
+    ffi.using(
+      (arena) =>
+          sdlSetRenderViewport(renderer, rect?.toNative(arena) ?? nullptr),
+    );
 
 ///
 /// Get the drawing area for the current target.
@@ -1235,17 +1151,10 @@ SdlxRect? sdlxGetRenderViewport(Pointer<SdlRenderer> renderer) =>
 bool sdlxSetRenderViewportFloat(
   Pointer<SdlRenderer> renderer,
   SdlxFRect? rect,
-) {
-  Pointer<SdlFRect> rectPointer = nullptr;
-  if (rect != null) {
-    rectPointer = rect.calloc();
-  }
-  final result = sdlSetRenderViewportFloat(renderer, rectPointer);
-  if (rectPointer != nullptr) {
-    rectPointer.callocFree();
-  }
-  return result;
-}
+) => ffi.using(
+  (arena) =>
+      sdlSetRenderViewportFloat(renderer, rect?.toNative(arena) ?? nullptr),
+);
 
 ///
 /// Get the drawing area for the current target.
@@ -1273,16 +1182,18 @@ bool sdlxSetRenderViewportFloat(
 /// - [SDL_GetRenderViewportFloat - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetRenderViewportFloat)
 ///
 /// {@category render}
-SdlxFRect? sdlxGetRenderViewportFloat(Pointer<SdlRenderer> renderer) {
-  SdlxFRect? rect;
-  final rectPointer = ffi.calloc<SdlFRect>();
-  final result = sdlGetRenderViewportFloat(renderer, rectPointer);
-  if (result) {
-    rect = SdlxFRect.fromPointer(rectPointer);
-  }
-  rectPointer.callocFree();
-  return rect;
-}
+SdlxFRect? sdlxGetRenderViewportFloat(Pointer<SdlRenderer> renderer) =>
+    ffi.using((arena) {
+      final rectPointer = arena<SdlFRect>();
+
+      final result = sdlGetRenderViewportFloat(renderer, rectPointer);
+
+      if (!result) {
+        return null;
+      }
+
+      return SdlxFRect.fromPointer(rectPointer);
+    });
 
 ///
 /// Get the safe area for rendering within the current viewport.
@@ -1352,17 +1263,11 @@ SdlxRect? sdlxGetRenderSafeArea(Pointer<SdlRenderer> renderer) =>
 /// - [SDL_SetRenderClipRect - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SetRenderClipRect)
 ///
 /// {@category render}
-bool sdlxSetRenderClipRect(Pointer<SdlRenderer> renderer, SdlxRect? rect) {
-  Pointer<SdlRect> rectPointer = nullptr;
-  if (rect != null) {
-    rectPointer = rect.calloc();
-  }
-  final result = sdlSetRenderClipRect(renderer, rectPointer);
-  if (rectPointer != nullptr) {
-    rectPointer.callocFree();
-  }
-  return result;
-}
+bool sdlxSetRenderClipRect(Pointer<SdlRenderer> renderer, SdlxRect? rect) =>
+    ffi.using(
+      (arena) =>
+          sdlSetRenderClipRect(renderer, rect?.toNative(arena) ?? nullptr),
+    );
 
 ///
 /// Get the clip rectangle for the current target.
@@ -1434,17 +1339,10 @@ SdlxRect? sdlxGetRenderClipRect(Pointer<SdlRenderer> renderer) =>
 bool sdlxSetRenderClipRectFloat(
   Pointer<SdlRenderer> renderer,
   SdlxFRect? rect,
-) {
-  Pointer<SdlFRect> rectPointer = nullptr;
-  if (rect != null) {
-    rectPointer = rect.calloc();
-  }
-  final result = sdlSetRenderClipRectFloat(renderer, rectPointer);
-  if (rectPointer != nullptr) {
-    rectPointer.callocFree();
-  }
-  return result;
-}
+) => ffi.using(
+  (arena) =>
+      sdlSetRenderClipRectFloat(renderer, rect?.toNative(arena) ?? nullptr),
+);
 
 ///
 /// Get the clip rectangle for the current target.
@@ -1473,16 +1371,18 @@ bool sdlxSetRenderClipRectFloat(
 /// - [SDL_GetRenderClipRectFloat - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetRenderClipRectFloat)
 ///
 /// {@category render}
-SdlxFRect? sdlxGetRenderClipRectFloat(Pointer<SdlRenderer> renderer) {
-  SdlxFRect? rect;
-  final rectPointer = ffi.calloc<SdlFRect>();
-  final result = sdlGetRenderClipRectFloat(renderer, rectPointer);
-  if (result) {
-    rect = SdlxFRect.fromPointer(rectPointer);
-  }
-  rectPointer.callocFree();
-  return rect;
-}
+SdlxFRect? sdlxGetRenderClipRectFloat(Pointer<SdlRenderer> renderer) =>
+    ffi.using((arena) {
+      final rectPointer = arena<SdlFRect>();
+
+      final result = sdlGetRenderClipRectFloat(renderer, rectPointer);
+
+      if (!result) {
+        return null;
+      }
+
+      return SdlxFRect.fromPointer(rectPointer);
+    });
 
 ///
 /// Get the drawing scale for the current target.
@@ -1512,23 +1412,18 @@ SdlxFRect? sdlxGetRenderClipRectFloat(Pointer<SdlRenderer> renderer) {
 /// {@category render}
 ({double scaleX, double scaleY})? sdlxGetRenderScale(
   Pointer<SdlRenderer> renderer,
-) {
-  var scaleX = 0.0;
-  var scaleY = 0.0;
-  final scaleXPointer = ffi.calloc<Float>();
-  final scaleYPointer = ffi.calloc<Float>();
+) => ffi.using((arena) {
+  final scaleXPointer = arena<Float>();
+  final scaleYPointer = arena<Float>();
+
   final result = sdlGetRenderScale(renderer, scaleXPointer, scaleYPointer);
-  if (result) {
-    scaleX = scaleXPointer.value;
-    scaleY = scaleYPointer.value;
-  }
-  scaleXPointer.callocFree();
-  scaleYPointer.callocFree();
+
   if (!result) {
     return null;
   }
-  return (scaleX: scaleX, scaleY: scaleY);
-}
+
+  return (scaleX: scaleXPointer.value, scaleY: scaleYPointer.value);
+});
 
 ///
 /// Set the color used for drawing operations.
@@ -1736,16 +1631,18 @@ SdlxFColor? sdlxGetRenderDrawColorFloat(Pointer<SdlRenderer> renderer) =>
 /// - [SDL_GetRenderColorScale - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetRenderColorScale)
 ///
 /// {@category render}
-double? sdlxGetRenderColorScale(Pointer<SdlRenderer> renderer) {
-  double? result;
-  final scalePointer = ffi.calloc<Float>();
-  final bl = sdlGetRenderColorScale(renderer, scalePointer);
-  if (bl) {
-    result = scalePointer.value;
-  }
-  scalePointer.callocFree();
-  return result;
-}
+double? sdlxGetRenderColorScale(Pointer<SdlRenderer> renderer) =>
+    ffi.using((arena) {
+      final scalePointer = arena<Float>();
+
+      final bl = sdlGetRenderColorScale(renderer, scalePointer);
+
+      if (!bl) {
+        return null;
+      }
+
+      return scalePointer.value;
+    });
 
 ///
 /// Get the blend mode used for drawing operations.
@@ -1769,16 +1666,18 @@ double? sdlxGetRenderColorScale(Pointer<SdlRenderer> renderer) {
 /// - [SDL_GetRenderDrawBlendMode - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetRenderDrawBlendMode)
 ///
 /// {@category render}
-int? sdlxGetRenderDrawBlendMode(Pointer<SdlRenderer> renderer) {
-  int? result;
-  final blendModePointer = ffi.calloc<Uint32>();
-  final bl = sdlGetRenderDrawBlendMode(renderer, blendModePointer);
-  if (bl) {
-    result = blendModePointer.value;
-  }
-  blendModePointer.callocFree();
-  return result;
-}
+int? sdlxGetRenderDrawBlendMode(Pointer<SdlRenderer> renderer) =>
+    ffi.using((arena) {
+      final blendModePointer = arena<Uint32>();
+
+      final bl = sdlGetRenderDrawBlendMode(renderer, blendModePointer);
+
+      if (!bl) {
+        return null;
+      }
+
+      return blendModePointer.value;
+    });
 
 ///
 /// Draw a point on the current rendering target at subpixel precision.
@@ -1829,12 +1728,11 @@ bool sdlxRenderPoint(Pointer<SdlRenderer> renderer, SdlxFPoint point) =>
 /// - [SDL_RenderPoints - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_RenderPoints)
 ///
 /// {@category render}
-bool sdlxRenderPoints(Pointer<SdlRenderer> renderer, List<SdlxFPoint> points) {
-  final pointsPointer = points.calloc();
-  final result = sdlRenderPoints(renderer, pointsPointer, points.length);
-  pointsPointer.callocFree();
-  return result;
-}
+bool sdlxRenderPoints(Pointer<SdlRenderer> renderer, List<SdlxFPoint> points) =>
+    ffi.using(
+      (arena) =>
+          sdlRenderPoints(renderer, points.toNative(arena), points.length),
+    );
 
 ///
 /// Draw a line on the current rendering target at subpixel precision.
@@ -1891,12 +1789,11 @@ bool sdlxRenderLine(
 /// - [SDL_RenderLines - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_RenderLines)
 ///
 /// {@category render}
-bool sdlxRenderLines(Pointer<SdlRenderer> renderer, List<SdlxFPoint> points) {
-  final pointsPointer = points.calloc();
-  final result = sdlRenderLines(renderer, pointsPointer, points.length);
-  pointsPointer.callocFree();
-  return result;
-}
+bool sdlxRenderLines(Pointer<SdlRenderer> renderer, List<SdlxFPoint> points) =>
+    ffi.using(
+      (arena) =>
+          sdlRenderLines(renderer, points.toNative(arena), points.length),
+    );
 
 ///
 /// Draw a rectangle on the current rendering target at subpixel precision.
@@ -1921,17 +1818,10 @@ bool sdlxRenderLines(Pointer<SdlRenderer> renderer, List<SdlxFPoint> points) {
 /// - [SDL_RenderRect - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_RenderRect)
 ///
 /// {@category render}
-bool sdlxRenderRect(Pointer<SdlRenderer> renderer, SdlxFRect? rect) {
-  Pointer<SdlFRect> rectPointer = nullptr;
-  if (rect != null) {
-    rectPointer = rect.calloc();
-  }
-  final result = sdlRenderRect(renderer, rectPointer);
-  if (rectPointer != nullptr) {
-    rectPointer.callocFree();
-  }
-  return result;
-}
+bool sdlxRenderRect(Pointer<SdlRenderer> renderer, SdlxFRect? rect) =>
+    ffi.using(
+      (arena) => sdlRenderRect(renderer, rect?.toNative(arena) ?? nullptr),
+    );
 
 ///
 /// Draw some number of rectangles on the current rendering target at subpixel
@@ -1957,12 +1847,10 @@ bool sdlxRenderRect(Pointer<SdlRenderer> renderer, SdlxFRect? rect) {
 /// - [SDL_RenderRects - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_RenderRects)
 ///
 /// {@category render}
-bool sdlxRenderRects(Pointer<SdlRenderer> renderer, List<SdlxFRect> rects) {
-  final rectsPointer = rects.calloc();
-  final result = sdlRenderRects(renderer, rectsPointer, rects.length);
-  rectsPointer.callocFree();
-  return result;
-}
+bool sdlxRenderRects(Pointer<SdlRenderer> renderer, List<SdlxFRect> rects) =>
+    ffi.using(
+      (arena) => sdlRenderRects(renderer, rects.toNative(arena), rects.length),
+    );
 
 ///
 /// Fill a rectangle on the current rendering target with the drawing color at
@@ -1988,17 +1876,10 @@ bool sdlxRenderRects(Pointer<SdlRenderer> renderer, List<SdlxFRect> rects) {
 /// - [SDL_RenderFillRect - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_RenderFillRect)
 ///
 /// {@category render}
-bool sdlxRenderFillRect(Pointer<SdlRenderer> renderer, SdlxFRect? rect) {
-  Pointer<SdlFRect> rectPointer = nullptr;
-  if (rect != null) {
-    rectPointer = rect.calloc();
-  }
-  final result = sdlRenderFillRect(renderer, rectPointer);
-  if (rectPointer != nullptr) {
-    rectPointer.callocFree();
-  }
-  return result;
-}
+bool sdlxRenderFillRect(Pointer<SdlRenderer> renderer, SdlxFRect? rect) =>
+    ffi.using(
+      (arena) => sdlRenderFillRect(renderer, rect?.toNative(arena) ?? nullptr),
+    );
 
 ///
 /// Fill some number of rectangles on the current rendering target with the
@@ -2024,12 +1905,12 @@ bool sdlxRenderFillRect(Pointer<SdlRenderer> renderer, SdlxFRect? rect) {
 /// - [SDL_RenderFillRects - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_RenderFillRects)
 ///
 /// {@category render}
-bool sdlxRenderFillRects(Pointer<SdlRenderer> renderer, List<SdlxFRect> rects) {
-  final rectsPointer = rects.calloc();
-  final result = sdlRenderFillRects(renderer, rectsPointer, rects.length);
-  rectsPointer.callocFree();
-  return result;
-}
+bool sdlxRenderFillRects(
+  Pointer<SdlRenderer> renderer,
+  List<SdlxFRect> rects,
+) => ffi.using(
+  (arena) => sdlRenderFillRects(renderer, rects.toNative(arena), rects.length),
+);
 
 ///
 /// Copy a portion of the texture to the current rendering target at subpixel
@@ -2064,29 +1945,14 @@ bool sdlxRenderTexture(
   Pointer<SdlTexture> texture, {
   SdlxFRect? srcrect,
   SdlxFRect? dstrect,
-}) {
-  Pointer<SdlFRect> srcrectPointer = nullptr;
-  Pointer<SdlFRect> dstrectPointer = nullptr;
-  if (srcrect != null) {
-    srcrectPointer = srcrect.calloc();
-  }
-  if (dstrect != null) {
-    dstrectPointer = dstrect.calloc();
-  }
-  final result = sdlRenderTexture(
+}) => ffi.using(
+  (arena) => sdlRenderTexture(
     renderer,
     texture,
-    srcrectPointer,
-    dstrectPointer,
-  );
-  if (srcrectPointer != nullptr) {
-    srcrectPointer.callocFree();
-  }
-  if (dstrectPointer != nullptr) {
-    dstrectPointer.callocFree();
-  }
-  return result;
-}
+    srcrect?.toNative(arena) ?? nullptr,
+    dstrect?.toNative(arena) ?? nullptr,
+  ),
+);
 
 ///
 /// Copy a portion of the source texture to the current rendering target, with
@@ -2130,39 +1996,17 @@ bool sdlxRenderTextureRotated(
   double angle = 0,
   SdlxFPoint? center,
   int flip = SdlkFlip.none,
-}) {
-  Pointer<SdlFRect> srcrectPointer = nullptr;
-  Pointer<SdlFRect> dstrectPointer = nullptr;
-  Pointer<SdlFPoint> centerPointer = nullptr;
-  if (srcrect != null) {
-    srcrectPointer = srcrect.calloc();
-  }
-  if (dstrect != null) {
-    dstrectPointer = dstrect.calloc();
-  }
-  if (center != null) {
-    centerPointer = center.calloc();
-  }
-  final result = sdlRenderTextureRotated(
+}) => ffi.using(
+  (arena) => sdlRenderTextureRotated(
     renderer,
     texture,
-    srcrectPointer,
-    dstrectPointer,
+    srcrect?.toNative(arena) ?? nullptr,
+    dstrect?.toNative(arena) ?? nullptr,
     angle,
-    centerPointer,
+    center?.toNative(arena) ?? nullptr,
     flip,
-  );
-  if (srcrectPointer != nullptr) {
-    srcrectPointer.callocFree();
-  }
-  if (dstrectPointer != nullptr) {
-    dstrectPointer.callocFree();
-  }
-  if (centerPointer != nullptr) {
-    centerPointer.callocFree();
-  }
-  return result;
-}
+  ),
+);
 
 ///
 /// Copy a portion of the source texture to the current rendering target, with
@@ -2205,45 +2049,16 @@ bool sdlxRenderTextureAffine(
   SdlxFPoint? origin,
   SdlxFPoint? right,
   SdlxFPoint? down,
-}) {
-  Pointer<SdlFRect> srcrectPointer = nullptr;
-  Pointer<SdlFPoint> originPointer = nullptr;
-  Pointer<SdlFPoint> rightPointer = nullptr;
-  Pointer<SdlFPoint> downPointer = nullptr;
-  if (srcrect != null) {
-    srcrectPointer = srcrect.calloc();
-  }
-  if (origin != null) {
-    originPointer = origin.calloc();
-  }
-  if (right != null) {
-    rightPointer = right.calloc();
-  }
-  if (down != null) {
-    downPointer = down.calloc();
-  }
-  final result = sdlRenderTextureAffine(
+}) => ffi.using(
+  (arena) => sdlRenderTextureAffine(
     renderer,
     texture,
-    srcrectPointer,
-    originPointer,
-    rightPointer,
-    downPointer,
-  );
-  if (srcrectPointer != nullptr) {
-    srcrectPointer.callocFree();
-  }
-  if (originPointer != nullptr) {
-    originPointer.callocFree();
-  }
-  if (rightPointer != nullptr) {
-    rightPointer.callocFree();
-  }
-  if (downPointer != nullptr) {
-    downPointer.callocFree();
-  }
-  return result;
-}
+    srcrect?.toNative(arena) ?? nullptr,
+    origin?.toNative(arena) ?? nullptr,
+    right?.toNative(arena) ?? nullptr,
+    down?.toNative(arena) ?? nullptr,
+  ),
+);
 
 ///
 /// Tile a portion of the texture to the current rendering target at subpixel
@@ -2284,30 +2099,15 @@ bool sdlxRenderTextureTiled(
   SdlxFRect? srcrect,
   double scale = 1,
   SdlxFRect? dstrect,
-}) {
-  Pointer<SdlFRect> srcrectPointer = nullptr;
-  Pointer<SdlFRect> dstrectPointer = nullptr;
-  if (srcrect != null) {
-    srcrectPointer = srcrect.calloc();
-  }
-  if (dstrect != null) {
-    dstrectPointer = dstrect.calloc();
-  }
-  final result = sdlRenderTextureTiled(
+}) => ffi.using(
+  (arena) => sdlRenderTextureTiled(
     renderer,
     texture,
-    srcrectPointer,
+    srcrect?.toNative(arena) ?? nullptr,
     scale,
-    dstrectPointer,
-  );
-  if (srcrectPointer != nullptr) {
-    srcrectPointer.callocFree();
-  }
-  if (dstrectPointer != nullptr) {
-    dstrectPointer.callocFree();
-  }
-  return result;
-}
+    dstrect?.toNative(arena) ?? nullptr,
+  ),
+);
 
 ///
 /// Perform a scaled copy using the 9-grid algorithm to the current rendering
@@ -2360,35 +2160,28 @@ bool sdlxRenderTexture9Grid(
   SdlxFRect? srcrect,
   double scale = 1,
   SdlxFRect? dstrect,
-}) {
-  Pointer<SdlFRect> srcrectPointer = nullptr;
-  Pointer<SdlFRect> dstrectPointer = nullptr;
-  if (srcrect != null) {
-    srcrectPointer = srcrect.calloc();
-  }
-  if (dstrect != null) {
-    dstrectPointer = dstrect.calloc();
-  }
-  final result = sdlRenderTexture9Grid(
+}) => ffi.using(
+  (arena) => sdlRenderTexture9Grid(
     renderer,
     texture,
-    srcrectPointer,
+    srcrect?.toNative(arena) ?? nullptr,
     leftWidth,
     rightWidth,
     topHeight,
     bottomHeight,
     scale,
-    dstrectPointer,
-  );
-  if (srcrectPointer != nullptr) {
-    srcrectPointer.callocFree();
-  }
-  if (dstrectPointer != nullptr) {
-    dstrectPointer.callocFree();
-  }
-  return result;
-}
+    dstrect?.toNative(arena) ?? nullptr,
+  ),
+);
 
+/// ```c
+/// extern SDL_DECLSPEC bool SDLCALL SDL_RenderTexture9GridTiled(SDL_Renderer *renderer, SDL_Texture *texture, const SDL_FRect *srcrect, float left_width, float right_width, float top_height, float bottom_height, float scale, const SDL_FRect *dstrect, float tileScale)
+/// ```
+///
+/// See also:
+/// - [SDL_RenderTexture9GridTiled - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_RenderTexture9GridTiled)
+///
+/// {@category render}
 bool sdlxRenderTexture9GridTiled(
   Pointer<SdlRenderer> renderer,
   Pointer<SdlTexture> texture, {
@@ -2400,35 +2193,20 @@ bool sdlxRenderTexture9GridTiled(
   double scale = 1,
   SdlxFRect? dstrect,
   double tileScale = 1,
-}) {
-  Pointer<SdlFRect> srcrectPointer = nullptr;
-  Pointer<SdlFRect> dstrectPointer = nullptr;
-  if (srcrect != null) {
-    srcrectPointer = srcrect.calloc();
-  }
-  if (dstrect != null) {
-    dstrectPointer = dstrect.calloc();
-  }
-  final result = sdlRenderTexture9GridTiled(
+}) => ffi.using(
+  (arena) => sdlRenderTexture9GridTiled(
     renderer,
     texture,
-    srcrectPointer,
+    srcrect?.toNative(arena) ?? nullptr,
     leftWidth,
     rightWidth,
     topHeight,
     bottomHeight,
     scale,
-    dstrectPointer,
+    dstrect?.toNative(arena) ?? nullptr,
     tileScale,
-  );
-  if (srcrectPointer != nullptr) {
-    srcrectPointer.callocFree();
-  }
-  if (dstrectPointer != nullptr) {
-    dstrectPointer.callocFree();
-  }
-  return result;
-}
+  ),
+);
 
 ///
 /// Render a list of triangles, optionally using a texture and indices into the
@@ -2472,32 +2250,29 @@ bool sdlxRenderGeometry(
   if (vertices.isEmpty) {
     return true;
   }
-  Pointer<SdlVertex> verticesPointer = nullptr;
-  var numVertices = 0;
-  Pointer<Int32> indicesPointer = nullptr;
-  var numIndices = 0;
-  verticesPointer = vertices.calloc();
-  numVertices = vertices.length;
-  if (indices != null) {
-    indicesPointer = ffi.calloc<Int32>(indices.length);
-    for (var i = 0; i < indices.length; i++) {
-      indicesPointer[i] = indices[i];
+
+  return ffi.using((arena) {
+    final verticesPointer = vertices.toNative(arena);
+
+    Pointer<Int32> indicesPointer = nullptr;
+    var numIndices = 0;
+    if (indices != null) {
+      indicesPointer = arena<Int32>(indices.length);
+      for (var i = 0; i < indices.length; i++) {
+        indicesPointer[i] = indices[i];
+      }
+      numIndices = indices.length;
     }
-    numIndices = indices.length;
-  }
-  final result = sdlRenderGeometry(
-    renderer,
-    texture ?? nullptr,
-    verticesPointer,
-    numVertices,
-    indicesPointer,
-    numIndices,
-  );
-  verticesPointer.callocFree();
-  if (indicesPointer != nullptr) {
-    indicesPointer.callocFree();
-  }
-  return result;
+
+    return sdlRenderGeometry(
+      renderer,
+      texture ?? nullptr,
+      verticesPointer,
+      vertices.length,
+      indicesPointer,
+      numIndices,
+    );
+  });
 }
 
 ///
@@ -2549,47 +2324,36 @@ bool sdlxRenderGeometryRaw(
   if (positions.isEmpty) {
     return true;
   }
-  final positionsPointer = positions.callocXy();
-  Pointer<SdlFColor> colorsPointer = nullptr;
-  Pointer<Float> texCoordsPointer = nullptr;
-  Pointer<Int32> indicesPointer = nullptr;
-  var numIndices = 0;
-  if (colors != null) {
-    colorsPointer = colors.calloc();
-  }
-  if (texCoords != null) {
-    texCoordsPointer = texCoords.callocXy();
-  }
-  if (indices != null) {
-    numIndices = indices.length;
-    indicesPointer = ffi.calloc<Int32>(numIndices);
-    indicesPointer.asTypedList(numIndices).setAll(0, indices);
-  }
-  final result = sdlRenderGeometryRaw(
-    renderer,
-    texture ?? nullptr,
-    positionsPointer,
-    sizeOf<Float>() * 2,
-    colorsPointer,
-    sizeOf<SdlFColor>(),
-    texCoordsPointer,
-    sizeOf<Float>() * 2,
-    positions.length,
-    indicesPointer.cast<Void>(),
-    numIndices,
-    sizeOf<Int32>(),
-  );
-  positionsPointer.callocFree();
-  if (colorsPointer != nullptr) {
-    colorsPointer.callocFree();
-  }
-  if (texCoordsPointer != nullptr) {
-    texCoordsPointer.callocFree();
-  }
-  if (indicesPointer != nullptr) {
-    indicesPointer.callocFree();
-  }
-  return result;
+  return ffi.using((arena) {
+    // 各ポインタを arena で一括管理
+    final positionsPointer = positions.toNativeXy(arena);
+    final colorsPointer = colors?.toNative(arena) ?? nullptr;
+    final texCoordsPointer = texCoords?.toNativeXy(arena) ?? nullptr;
+
+    Pointer<Void> indicesPointer = nullptr;
+    var numIndices = 0;
+    if (indices != null) {
+      numIndices = indices.length;
+      final nativeIndices = arena<Int32>(numIndices);
+      nativeIndices.asTypedList(numIndices).setAll(0, indices);
+      indicesPointer = nativeIndices.cast<Void>();
+    }
+
+    return sdlRenderGeometryRaw(
+      renderer,
+      texture ?? nullptr,
+      positionsPointer,
+      sizeOf<Float>() * 2,
+      colorsPointer,
+      sizeOf<SdlFColor>(),
+      texCoordsPointer,
+      sizeOf<Float>() * 2,
+      positions.length,
+      indicesPointer,
+      numIndices,
+      sizeOf<Int32>(),
+    );
+  });
 }
 
 ///
@@ -2621,27 +2385,22 @@ bool sdlxRenderGeometryRaw(
 /// {@category render}
 ({int uMode, int vMode})? sdlxGetRenderTextureAddressMode(
   Pointer<SdlRenderer> renderer,
-) {
-  var uMode = 0;
-  var vMode = 0;
-  final uModePointer = ffi.calloc<Int32>();
-  final vModePointer = ffi.calloc<Int32>();
+) => ffi.using((arena) {
+  final uModePointer = arena<Int32>();
+  final vModePointer = arena<Int32>();
+
   final result = sdlGetRenderTextureAddressMode(
     renderer,
     uModePointer,
     vModePointer,
   );
-  if (result) {
-    uMode = uModePointer.value;
-    vMode = vModePointer.value;
-  }
-  uModePointer.callocFree();
-  vModePointer.callocFree();
+
   if (!result) {
     return null;
   }
-  return (uMode: uMode, vMode: vMode);
-}
+
+  return (uMode: uModePointer.value, vMode: vModePointer.value);
+});
 
 ///
 /// Read pixels from the current rendering target.
@@ -2679,17 +2438,9 @@ bool sdlxRenderGeometryRaw(
 Pointer<SdlSurface> sdlxRenderReadPixels(
   Pointer<SdlRenderer> renderer,
   SdlxRect? rect,
-) {
-  Pointer<SdlRect> rectPointer = nullptr;
-  if (rect != null) {
-    rectPointer = rect.calloc();
-  }
-  final result = sdlRenderReadPixels(renderer, rectPointer);
-  if (rectPointer != nullptr) {
-    rectPointer.callocFree();
-  }
-  return result;
-}
+) => ffi.using(
+  (arena) => sdlRenderReadPixels(renderer, rect?.toNative(arena) ?? nullptr),
+);
 
 ///
 /// Get VSync of the given renderer.
@@ -2714,19 +2465,17 @@ Pointer<SdlSurface> sdlxRenderReadPixels(
 /// - [SDL_GetRenderVSync - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetRenderVSync)
 ///
 /// {@category render}
-int? sdlxGetRenderVSync(Pointer<SdlRenderer> renderer) {
-  var vsync = 0;
-  final vsyncPointer = ffi.calloc<Int32>();
+int? sdlxGetRenderVSync(Pointer<SdlRenderer> renderer) => ffi.using((arena) {
+  final vsyncPointer = arena<Int32>();
+
   final result = sdlGetRenderVSync(renderer, vsyncPointer);
-  if (result) {
-    vsync = vsyncPointer.value;
-  }
-  vsyncPointer.callocFree();
+
   if (!result) {
     return null;
   }
-  return vsync;
-}
+
+  return vsyncPointer.value;
+});
 
 ///
 /// Get default texture scale mode of the given renderer.
@@ -2752,19 +2501,18 @@ int? sdlxGetRenderVSync(Pointer<SdlRenderer> renderer) {
 /// - [SDL_GetDefaultTextureScaleMode - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetDefaultTextureScaleMode)
 ///
 /// {@category render}
-int? sdlxGetDefaultTextureScaleMode(Pointer<SdlRenderer> renderer) {
-  var scaleMode = 0;
-  final scaleModePointer = ffi.calloc<Int32>();
-  final result = sdlGetDefaultTextureScaleMode(renderer, scaleModePointer);
-  if (result) {
-    scaleMode = scaleModePointer.value;
-  }
-  scaleModePointer.callocFree();
-  if (!result) {
-    return null;
-  }
-  return scaleMode;
-}
+int? sdlxGetDefaultTextureScaleMode(Pointer<SdlRenderer> renderer) =>
+    ffi.using((arena) {
+      final scaleModePointer = arena<Int32>();
+
+      final result = sdlGetDefaultTextureScaleMode(renderer, scaleModePointer);
+
+      if (!result) {
+        return null;
+      }
+
+      return scaleModePointer.value;
+    });
 
 ///
 /// Create custom GPU render state.
@@ -2794,12 +2542,10 @@ int? sdlxGetDefaultTextureScaleMode(Pointer<SdlRenderer> renderer) {
 Pointer<SdlGpuRenderState> sdlxCreateGpuRenderState(
   Pointer<SdlRenderer> renderer,
   SdlxGpuRenderStateCreateInfo createinfo,
-) {
-  final createInfoPointer = createinfo.calloc();
-  final result = sdlCreateGpuRenderState(renderer, createInfoPointer);
-  createInfoPointer.callocAllFree();
-  return result;
-}
+) => ffi.using((arena) {
+  final createInfoPointer = createinfo.toNative(arena);
+  return sdlCreateGpuRenderState(renderer, createInfoPointer);
+});
 
 ///
 /// Set sampler bindings variables in a custom GPU render state.
@@ -2831,17 +2577,16 @@ bool sdlxSetGpuRenderStateSamplerBindings(
   Pointer<SdlGpuRenderState> state,
   List<SdlxGpuTextureSamplerBinding> samplerBindings,
 ) {
-  var result = false;
-  if (samplerBindings.isNotEmpty) {
-    final samplerBindingsPointer = samplerBindings.calloc();
-    result = sdlSetGpuRenderStateSamplerBindings(
+  if (samplerBindings.isEmpty) return false;
+
+  return ffi.using((arena) {
+    final samplerBindingsPointer = samplerBindings.toNative(arena);
+    return sdlSetGpuRenderStateSamplerBindings(
       state,
       samplerBindings.length,
       samplerBindingsPointer,
     );
-    samplerBindingsPointer.callocFree();
-  }
-  return result;
+  });
 }
 
 ///
@@ -2872,24 +2617,25 @@ bool sdlxSetGpuRenderStateSamplerBindings(
 bool sdlxSetGpuRenderStateStorageTextures(
   Pointer<SdlGpuRenderState> state,
   List<Pointer<SdlGpuTexture>> storageTextures,
-) {
-  var result = false;
-  if (storageTextures.isNotEmpty) {
-    final storageTexturesPointer = ffi.calloc<Pointer<SdlGpuTexture>>(
-      storageTextures.length,
-    );
-    for (var i = 0; i < storageTextures.length; i++) {
-      storageTexturesPointer[i] = storageTextures[i];
-    }
-    result = sdlSetGpuRenderStateStorageTextures(
-      state,
-      storageTextures.length,
-      storageTexturesPointer,
-    );
-    storageTexturesPointer.callocFree();
+) => ffi.using((arena) {
+  if (storageTextures.isEmpty) {
+    return false;
   }
-  return result;
-}
+
+  final storageTexturesPointer = arena<Pointer<SdlGpuTexture>>(
+    storageTextures.length,
+  );
+
+  for (var i = 0; i < storageTextures.length; i++) {
+    storageTexturesPointer[i] = storageTextures[i];
+  }
+
+  return sdlSetGpuRenderStateStorageTextures(
+    state,
+    storageTextures.length,
+    storageTexturesPointer,
+  );
+});
 
 ///
 /// Set storage buffers variables in a custom GPU render state.
@@ -2919,21 +2665,22 @@ bool sdlxSetGpuRenderStateStorageTextures(
 bool sdlxSetGpuRenderStateStorageBuffers(
   Pointer<SdlGpuRenderState> state,
   List<Pointer<SdlGpuBuffer>> storageBuffers,
-) {
-  var result = false;
-  if (storageBuffers.isNotEmpty) {
-    final storageBuffersPointer = ffi.calloc<Pointer<SdlGpuBuffer>>(
-      storageBuffers.length,
-    );
-    for (var i = 0; i < storageBuffers.length; i++) {
-      storageBuffersPointer[i] = storageBuffers[i];
-    }
-    result = sdlSetGpuRenderStateStorageBuffers(
-      state,
-      storageBuffers.length,
-      storageBuffersPointer,
-    );
-    storageBuffersPointer.callocFree();
+) => ffi.using((arena) {
+  if (storageBuffers.isEmpty) {
+    return false;
   }
-  return result;
-}
+
+  final storageBuffersPointer = arena<Pointer<SdlGpuBuffer>>(
+    storageBuffers.length,
+  );
+
+  for (var i = 0; i < storageBuffers.length; i++) {
+    storageBuffersPointer[i] = storageBuffers[i];
+  }
+
+  return sdlSetGpuRenderStateStorageBuffers(
+    state,
+    storageBuffers.length,
+    storageBuffersPointer,
+  );
+});

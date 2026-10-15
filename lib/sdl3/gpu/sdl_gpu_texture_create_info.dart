@@ -23,8 +23,10 @@ class SdlxGpuTextureCreateInfo {
   final int sampleCount;
   final int props;
 
-  Pointer<SdlGpuTextureCreateInfo> calloc() {
-    final pointer = ffi.calloc<SdlGpuTextureCreateInfo>();
+  Pointer<SdlGpuTextureCreateInfo> toNative([
+    Allocator allocator = ffi.calloc,
+  ]) {
+    final pointer = allocator<SdlGpuTextureCreateInfo>();
     pointer.ref.type = type;
     pointer.ref.format = format;
     pointer.ref.usage = usage;

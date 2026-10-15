@@ -19,19 +19,20 @@ part of '../sdl_sensor.dart';
 /// - [SDL_GetSensors - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetSensors)
 ///
 /// {@category sensor}
-List<int> sdlxGetSensors() {
-  final result = <int>[];
-  final countPointer = ffi.calloc<Int32>();
+List<int> sdlxGetSensors() => ffi.using((arena) {
+  final countPointer = arena<Int32>();
   final sensorsPointer = sdlGetSensors(countPointer);
-  if (sensorsPointer != nullptr) {
-    for (var i = 0; i < countPointer.value; i++) {
-      result.add(sensorsPointer[i]);
-    }
+
+  if (sensorsPointer == nullptr) {
+    return [];
+  }
+
+  try {
+    return [for (var i = 0; i < countPointer.value; i++) sensorsPointer[i]];
+  } finally {
     sdlFree(sensorsPointer.cast<Void>());
   }
-  countPointer.callocFree();
-  return result;
-}
+});
 
 ///
 /// Get the current state of an opened sensor.
@@ -58,14 +59,13 @@ bool sdlxGetSensorData(
   Pointer<SdlSensor> sensor,
   SdlxSensorData data, {
   int numValues = 6,
-}) {
-  final dataPointer = ffi.calloc<Float>(numValues);
+}) => ffi.using((arena) {
+  final dataPointer = arena<Float>(numValues);
   final result = sdlGetSensorData(sensor, dataPointer, numValues);
   if (result) {
     for (var i = 0; i < numValues; i++) {
       data.data.add(dataPointer[i]);
     }
   }
-  dataPointer.callocFree();
   return result;
-}
+});

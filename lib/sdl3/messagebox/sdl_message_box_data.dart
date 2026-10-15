@@ -15,8 +15,10 @@ class SdlxMessageBoxColorScheme {
   final SdlxColor buttonBackground;
   final SdlxColor buttonSelected;
 
-  Pointer<SdlMessageBoxColorScheme> calloc() {
-    final pointer = ffi.calloc<SdlMessageBoxColorScheme>();
+  Pointer<SdlMessageBoxColorScheme> toNative([
+    Allocator allocator = ffi.calloc,
+  ]) {
+    final pointer = allocator<SdlMessageBoxColorScheme>();
     final colorsPointer = pointer.cast<SdlMessageBoxColor>();
     colorsPointer[SdlkMessageboxColor.background].r = background.r;
     colorsPointer[SdlkMessageboxColor.background].g = background.g;
@@ -66,8 +68,8 @@ class SdlxMessageBoxData {
   final List<SdlxMessageBoxButtonData> buttons;
   final SdlxMessageBoxColorScheme? colorScheme;
 
-  Pointer<SdlMessageBoxData> calloc() {
-    final pointer = ffi.calloc<SdlMessageBoxData>();
+  Pointer<SdlMessageBoxData> toNative([Allocator allocator = ffi.calloc]) {
+    final pointer = allocator<SdlMessageBoxData>();
     pointer.ref.flags = flags;
     pointer.ref.window = window;
     if (title.isNotEmpty) {
@@ -77,9 +79,7 @@ class SdlxMessageBoxData {
       pointer.ref.message = message.toNativeUtf8();
     }
     if (buttons.isNotEmpty) {
-      final buttonsPointer = ffi.calloc<SdlMessageBoxButtonData>(
-        buttons.length,
-      );
+      final buttonsPointer = allocator<SdlMessageBoxButtonData>(buttons.length);
       for (var i = 0; i < buttons.length; i++) {
         final buttonPointer = buttonsPointer + i;
         buttonPointer.ref.flags = buttons[i].flags;
@@ -92,30 +92,30 @@ class SdlxMessageBoxData {
       pointer.ref.numbuttons = buttons.length;
     }
     if (colorScheme != null) {
-      pointer.ref.colorScheme = colorScheme!.calloc();
+      pointer.ref.colorScheme = colorScheme!.toNative(allocator);
     }
     return pointer;
   }
 }
 
-extension SdlMessageBoxDataCallocAllFreeExtension
-    on Pointer<SdlMessageBoxData> {
-  void callocAllFree() {
-    if (ref.title != nullptr) {
-      ref.title.callocFree();
-    }
-    if (ref.message != nullptr) {
-      ref.message.callocFree();
-    }
-    for (var i = 0; i < ref.numbuttons; i++) {
-      final buttonPointer = ref.buttons + i;
-      if (buttonPointer.ref.text != nullptr) {
-        buttonPointer.ref.text.callocFree();
-      }
-    }
-    if (ref.colorScheme != nullptr) {
-      ref.colorScheme.callocFree();
-    }
-    callocFree();
-  }
-}
+//extension SdlMessageBoxDataCallocAllFreeExtension
+//    on Pointer<SdlMessageBoxData> {
+//  void callocAllFree() {
+//    if (ref.title != nullptr) {
+//      ref.title.callocFree();
+//    }
+//    if (ref.message != nullptr) {
+//      ref.message.callocFree();
+//    }
+//    for (var i = 0; i < ref.numbuttons; i++) {
+//      final buttonPointer = ref.buttons + i;
+//      if (buttonPointer.ref.text != nullptr) {
+//        buttonPointer.ref.text.callocFree();
+//      }
+//    }
+//    if (ref.colorScheme != nullptr) {
+//      ref.colorScheme.callocFree();
+//    }
+//    callocFree();
+//  }
+//}

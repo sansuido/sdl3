@@ -63,8 +63,8 @@ class SdlxCameraDeviceEvent extends SdlxEvent {
   final int which;
 
   @override
-  Pointer<SdlEvent> calloc() {
-    final pointer = ffi.calloc<SdlEvent>();
+  Pointer<SdlEvent> toNative([Allocator allocator = ffi.calloc]) {
+    final pointer = allocator<SdlEvent>();
     pointer.ref.cdevice.type = type;
     pointer.ref.cdevice.reserved = reserved;
     pointer.ref.cdevice.timestamp = timestamp;

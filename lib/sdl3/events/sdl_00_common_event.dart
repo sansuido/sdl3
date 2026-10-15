@@ -15,8 +15,8 @@ class SdlxCommonEvent extends SdlxEvent {
       );
 
   @override
-  Pointer<SdlEvent> calloc() {
-    final pointer = ffi.calloc<SdlEvent>();
+  Pointer<SdlEvent> toNative([Allocator allocator = ffi.calloc]) {
+    final pointer = allocator<SdlEvent>();
     pointer.ref.common.type = type;
     pointer.ref.common.reserved = reserved;
     pointer.ref.common.timestamp = timestamp;

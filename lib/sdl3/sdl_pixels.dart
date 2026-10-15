@@ -4,7 +4,6 @@ import 'package:ffi/ffi.dart' as ffi;
 
 import 'dylib.dart' as dylib;
 import 'sdl.dart';
-import 'sdl_dart.dart';
 
 part 'pixels/lib_sdl_pixels.dart';
 part 'pixels/sdl_color.dart';

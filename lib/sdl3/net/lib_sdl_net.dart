@@ -50,20 +50,23 @@ part of '../sdl_net.dart';
 /// - [NET_GetAddressBytes - SDL3 Wiki](https://wiki.libsdl.org/SDL3/NET_GetAddressBytes)
 ///
 /// {@category net}
-Uint8List? netxGetAddressBytes(Pointer<NetAddress> address) {
-  Uint8List? result;
-  var numBytes = 0;
-  final numBytesPointer = ffi.calloc<Int32>();
+Uint8List? netxGetAddressBytes(Pointer<NetAddress> address) => ffi.using((
+  arena,
+) {
+  final numBytesPointer = arena<Int32>();
   final bytesPointer = netGetAddressBytes(address, numBytesPointer);
-  numBytes = numBytesPointer.value;
-  if (bytesPointer != nullptr && numBytes > 0) {
-    result = Uint8List.fromList(
-      bytesPointer.cast<Uint8>().asTypedList(numBytes),
-    );
+
+  if (bytesPointer == nullptr) {
+    return null;
   }
-  numBytesPointer.callocFree();
-  return result;
-}
+
+  final numBytes = numBytesPointer.value;
+  if (numBytes <= 0) {
+    return null;
+  }
+
+  return Uint8List.fromList(bytesPointer.cast<Uint8>().asTypedList(numBytes));
+});
 
 ///
 /// Obtain a list of local addresses on the system.
@@ -106,23 +109,29 @@ Uint8List? netxGetAddressBytes(Pointer<NetAddress> address) {
 /// - [NET_GetLocalAddresses - SDL3 Wiki](https://wiki.libsdl.org/SDL3/NET_GetLocalAddresses)
 ///
 /// {@category net}
-List<String> netxGetLocalAddresses() {
-  final result = <String>[];
-  final numAddressesPointer = ffi.calloc<Int32>();
+List<String> netxGetLocalAddresses() => ffi.using((arena) {
+  final numAddressesPointer = arena<Int32>();
   final addressesPointer = netGetLocalAddresses(numAddressesPointer);
-  if (addressesPointer != nullptr) {
-    for (var i = 0; i < numAddressesPointer.value; i++) {
+
+  if (addressesPointer == nullptr) {
+    return [];
+  }
+
+  try {
+    final count = numAddressesPointer.value;
+    final result = <String>[];
+    for (var i = 0; i < count; i++) {
       final addressPointer = addressesPointer[i];
       final addressString = netGetAddressString(addressPointer);
       if (addressString != null) {
         result.add(addressString);
       }
     }
+    return result;
+  } finally {
     netFreeLocalAddresses(addressesPointer);
   }
-  numAddressesPointer.callocFree();
-  return result;
-}
+});
 
 ///
 /// Create a stream socket for the next pending client connection.
@@ -172,16 +181,16 @@ List<String> netxGetLocalAddresses() {
 /// - [NET_AcceptClient - SDL3 Wiki](https://wiki.libsdl.org/SDL3/NET_AcceptClient)
 ///
 /// {@category net}
-Pointer<NetStreamSocket>? netxAcceptClient(Pointer<NetServer> server) {
-  Pointer<NetStreamSocket>? result;
-  final clientStreamPointer = ffi.calloc<Pointer<NetStreamSocket>>();
-  final bl = netAcceptClient(server, clientStreamPointer);
-  if (bl) {
-    result = clientStreamPointer.value;
-  }
-  clientStreamPointer.callocFree();
-  return result;
-}
+Pointer<NetStreamSocket>? netxAcceptClient(Pointer<NetServer> server) =>
+    ffi.using((arena) {
+      final clientStreamPointer = arena<Pointer<NetStreamSocket>>();
+
+      if (!netAcceptClient(server, clientStreamPointer)) {
+        return null;
+      }
+
+      return clientStreamPointer.value;
+    });
 
 ///
 /// Send bytes over a stream socket to a remote system.
@@ -240,15 +249,14 @@ bool netxWriteToStreamSocket(Pointer<NetStreamSocket> sock, Uint8List buf) {
   if (buf.isEmpty) {
     return false;
   }
-  final bufPointer = ffi.calloc<Uint8>(buf.length);
-  bufPointer.asTypedList(buf.length).setAll(0, buf);
-  final result = netWriteToStreamSocket(
-    sock,
-    bufPointer.cast<Void>(),
-    buf.length,
-  );
-  bufPointer.callocFree();
-  return result;
+
+  return ffi.using((arena) {
+    final count = buf.length;
+    final bufPointer = arena<Uint8>(count);
+    bufPointer.asTypedList(count).setAll(0, buf);
+
+    return netWriteToStreamSocket(sock, bufPointer.cast<Void>(), count);
+  });
 }
 
 ///
@@ -307,20 +315,23 @@ bool netxWriteToStreamSocket(Pointer<NetStreamSocket> sock, Uint8List buf) {
 /// - [NET_ReadFromStreamSocket - SDL3 Wiki](https://wiki.libsdl.org/SDL3/NET_ReadFromStreamSocket)
 ///
 /// {@category net}
-Uint8List? netxReadFromStreamSocket(Pointer<NetStreamSocket> sock, int buflen) {
-  Uint8List? result;
-  final bufPointer = ffi.calloc<Uint8>(buflen);
+Uint8List? netxReadFromStreamSocket(
+  Pointer<NetStreamSocket> sock,
+  int buflen,
+) => ffi.using((arena) {
+  final bufPointer = arena<Uint8>(buflen);
   final numBytes = netReadFromStreamSocket(
     sock,
     bufPointer.cast<Void>(),
     buflen,
   );
-  if (bufPointer != nullptr && numBytes > 0) {
-    result = Uint8List.fromList(bufPointer.cast<Uint8>().asTypedList(numBytes));
+
+  if (numBytes <= 0) {
+    return null;
   }
-  bufPointer.callocFree();
-  return result;
-}
+
+  return Uint8List.fromList(bufPointer.asTypedList(numBytes));
+});
 
 ///
 /// Send a new packet over a datagram socket to a remote system.
@@ -420,17 +431,14 @@ bool netxSendDatagram(
   if (buf.isEmpty) {
     return false;
   }
-  final bufPointer = ffi.calloc<Uint8>(buf.length);
-  bufPointer.asTypedList(buf.length).setAll(0, buf);
-  final result = netSendDatagram(
-    sock,
-    address,
-    port,
-    bufPointer.cast<Void>(),
-    buf.length,
-  );
-  bufPointer.callocFree();
-  return result;
+
+  return ffi.using((arena) {
+    final count = buf.length;
+    final bufPointer = arena<Uint8>(count);
+    bufPointer.asTypedList(count).setAll(0, buf);
+
+    return netSendDatagram(sock, address, port, bufPointer.cast<Void>(), count);
+  });
 }
 
 ///
@@ -564,16 +572,14 @@ NetxDatagram? netxReceiveDatagram(
 /// - [NET_WaitUntilInputAvailable - SDL3 Wiki](https://wiki.libsdl.org/SDL3/NET_WaitUntilInputAvailable)
 ///
 /// {@category net}
-int netxWaitUntilInputAvailable(List<Pointer<Void>> vsockets, int timeout) {
-  final vsocketsPointer = ffi.calloc<Pointer<Void>>(vsockets.length);
-  for (var i = 0; i < vsockets.length; i++) {
-    vsocketsPointer[i] = vsockets[i];
-  }
-  final result = netWaitUntilInputAvailable(
-    vsocketsPointer,
-    vsockets.length,
-    timeout,
-  );
-  vsocketsPointer.callocFree();
-  return result;
-}
+int netxWaitUntilInputAvailable(List<Pointer<Void>> vsockets, int timeout) =>
+    ffi.using((arena) {
+      final count = vsockets.length;
+      final vsocketsPointer = arena<Pointer<Void>>(count);
+
+      for (var i = 0; i < count; i++) {
+        vsocketsPointer[i] = vsockets[i];
+      }
+
+      return netWaitUntilInputAvailable(vsocketsPointer, count, timeout);
+    });

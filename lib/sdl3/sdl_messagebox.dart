@@ -4,7 +4,6 @@ import 'package:ffi/ffi.dart' as ffi;
 
 import 'dylib.dart' as dylib;
 import 'sdl.dart';
-import 'sdl_dart.dart';
 import 'sdl_pixels.dart';
 
 part 'messagebox/lib_sdl_messagebox.dart';

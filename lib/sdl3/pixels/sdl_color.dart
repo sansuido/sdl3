@@ -8,8 +8,8 @@ class SdlxColor {
   final int b;
   final int a;
 
-  Pointer<SdlColor> calloc() {
-    final pointer = ffi.calloc<SdlColor>();
+  Pointer<SdlColor> toNative([Allocator allocator = ffi.calloc]) {
+    final pointer = allocator<SdlColor>();
     pointer.ref.r = r;
     pointer.ref.g = g;
     pointer.ref.b = b;

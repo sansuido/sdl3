@@ -56,8 +56,8 @@ class SdlxRenderEvent extends SdlxEvent {
       windowId == targetId;
 
   @override
-  Pointer<SdlEvent> calloc() {
-    final pointer = ffi.calloc<SdlEvent>();
+  Pointer<SdlEvent> toNative([Allocator allocator = ffi.calloc]) {
+    final pointer = allocator<SdlEvent>();
     pointer.ref.render.type = type;
     pointer.ref.render.reserved = reserved;
     pointer.ref.render.timestamp = timestamp;

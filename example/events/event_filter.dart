@@ -14,7 +14,7 @@
 
 import 'dart:ffi';
 
-import 'package:ffi/ffi.dart';
+import 'package:ffi/ffi.dart' as ffi;
 import 'package:sdl3/sdl3.dart';
 
 bool myEventFilter(Pointer<Void> bluePrev, Pointer<SdlEvent> event) {
@@ -52,27 +52,29 @@ int main() {
     sdlQuit();
     return -1;
   }
-  final blue = calloc<Uint8>();
-  sdlSetEventFilter(
-    Pointer.fromFunction(myEventFilter, false),
-    blue.cast<Void>(),
-  );
-  var running = true;
-  while (running) {
-    SdlxEvent? event;
-    while ((event = sdlxPollEvent()) != null) {
-      if (event is SdlxQuitEvent) {
-        running = false;
+
+  return ffi.using((arena) {
+    final blue = arena<Uint8>();
+    sdlSetEventFilter(
+      Pointer.fromFunction(myEventFilter, false),
+      blue.cast<Void>(),
+    );
+    var running = true;
+    while (running) {
+      SdlxEvent? event;
+      while ((event = sdlxPollEvent()) != null) {
+        if (event is SdlxQuitEvent) {
+          running = false;
+        }
       }
+      renderer
+        ..setDrawColor(SdlxColor(0, 0, blue.value))
+        ..clear()
+        ..present();
     }
-    renderer
-      ..setDrawColor(SdlxColor(0, 0, blue.value))
-      ..clear()
-      ..present();
-  }
-  blue.callocFree();
-  renderer.destroy();
-  window.destroy();
-  sdlQuit();
-  return 0;
+    renderer.destroy();
+    window.destroy();
+    sdlQuit();
+    return 0;
+  });
 }

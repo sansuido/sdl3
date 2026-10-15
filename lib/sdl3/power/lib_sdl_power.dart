@@ -42,15 +42,16 @@ part of '../sdl_power.dart';
 /// - [SDL_GetPowerInfo - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetPowerInfo)
 ///
 /// {@category power}
-({int percent, int seconds, int state}) sdlxGetPowerInfo() {
-  var seconds = 0;
-  var percent = 0;
-  final secondsPointer = ffi.calloc<Int32>();
-  final percentPointer = ffi.calloc<Int32>();
-  final state = sdlGetPowerInfo(secondsPointer, percentPointer);
-  seconds = secondsPointer.value;
-  percent = percentPointer.value;
-  secondsPointer.callocFree();
-  percentPointer.callocFree();
-  return (percent: percent, seconds: seconds, state: state);
-}
+({int percent, int seconds, int state}) sdlxGetPowerInfo() =>
+    ffi.using((arena) {
+      final secondsPointer = arena<Int32>();
+      final percentPointer = arena<Int32>();
+
+      final state = sdlGetPowerInfo(secondsPointer, percentPointer);
+
+      return (
+        percent: percentPointer.value,
+        seconds: secondsPointer.value,
+        state: state,
+      );
+    });

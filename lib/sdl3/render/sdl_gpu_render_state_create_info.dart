@@ -15,16 +15,18 @@ class SdlxGpuRenderStateCreateInfo {
   final List<Pointer<SdlGpuBuffer>> storageBuffers;
   final int props;
 
-  Pointer<SdlGpuRenderStateCreateInfo> calloc() {
-    final pointer = ffi.calloc<SdlGpuRenderStateCreateInfo>();
+  Pointer<SdlGpuRenderStateCreateInfo> toNative([
+    Allocator allocator = ffi.calloc,
+  ]) {
+    final pointer = allocator<SdlGpuRenderStateCreateInfo>();
     pointer.ref.fragmentShader = fragmentShader;
     if (samplerBindings.isNotEmpty) {
       pointer.ref.numSamplerBindings = samplerBindings.length;
-      pointer.ref.samplerBindings = samplerBindings.calloc();
+      pointer.ref.samplerBindings = samplerBindings.toNative(allocator);
     }
     if (storageTextures.isNotEmpty) {
       pointer.ref.numStorageTextures = storageTextures.length;
-      pointer.ref.storageTextures = ffi.calloc<Pointer<SdlGpuTexture>>(
+      pointer.ref.storageTextures = allocator<Pointer<SdlGpuTexture>>(
         storageTextures.length,
       );
       for (var i = 0; i < storageTextures.length; i++) {
@@ -33,7 +35,7 @@ class SdlxGpuRenderStateCreateInfo {
     }
     if (storageBuffers.isNotEmpty) {
       pointer.ref.numStorageBuffers = storageBuffers.length;
-      pointer.ref.storageBuffers = ffi.calloc<Pointer<SdlGpuBuffer>>(
+      pointer.ref.storageBuffers = allocator<Pointer<SdlGpuBuffer>>(
         storageBuffers.length,
       );
       for (var i = 0; i < storageBuffers.length; i++) {
@@ -45,18 +47,18 @@ class SdlxGpuRenderStateCreateInfo {
   }
 }
 
-extension SdlGpuRenderStateCreateInfoPointerEx
-    on Pointer<SdlGpuRenderStateCreateInfo> {
-  void callocAllFree() {
-    if (ref.samplerBindings != nullptr) {
-      ref.samplerBindings.callocFree();
-    }
-    if (ref.storageTextures != nullptr) {
-      ref.storageTextures.callocFree();
-    }
-    if (ref.storageBuffers != nullptr) {
-      ref.storageBuffers.callocFree();
-    }
-    callocFree();
-  }
-}
+//extension SdlGpuRenderStateCreateInfoPointerEx
+//    on Pointer<SdlGpuRenderStateCreateInfo> {
+//  void callocAllFree() {
+//    if (ref.samplerBindings != nullptr) {
+//      ref.samplerBindings.callocFree();
+//    }
+//    if (ref.storageTextures != nullptr) {
+//      ref.storageTextures.callocFree();
+//    }
+//    if (ref.storageBuffers != nullptr) {
+//      ref.storageBuffers.callocFree();
+//    }
+//    callocFree();
+//  }
+//}

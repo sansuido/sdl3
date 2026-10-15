@@ -369,8 +369,11 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   ///
   /// - `SDL_PROP_TEXTURE_CREATE_VULKAN_TEXTURE_NUMBER`: the VkImage associated
   /// with the texture, if you want to wrap an existing texture. For NV12 style
-  /// textures this is the single two plane VkImage holding both the Y and UV
+  /// textures this can be a single two plane VkImage holding both the Y and UV
   /// planes, and for YUV style textures it is the VkImage holding the Y plane.
+  /// - `SDL_PROP_TEXTURE_CREATE_VULKAN_TEXTURE_UV_NUMBER`: the VkImage
+  /// associated with the UV plane of an NV12 texture, if you want to wrap an
+  /// existing texture.
   /// - `SDL_PROP_TEXTURE_CREATE_VULKAN_TEXTURE_U_NUMBER`: the VkImage associated
   /// with the U plane of a YUV texture, if you want to wrap an existing
   /// texture.
@@ -2254,13 +2257,11 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// - [SDL_GetRenderVSync - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetRenderVSync)
   ///
   /// {@category render}
-  int getVSync() {
-    final vSyncPointer = ffi.calloc<Int32>();
+  int getVSync() => ffi.using((arena) {
+    final vSyncPointer = arena<Int32>();
     sdlGetRenderVSync(this, vSyncPointer);
-    final result = vSyncPointer.value;
-    ffi.calloc.free(vSyncPointer);
-    return result;
-  }
+    return vSyncPointer.value;
+  });
 
   ///
   /// Draw debug text to an SDL_Renderer.

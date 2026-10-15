@@ -79,8 +79,8 @@ class SdlxFRect {
     double h = 0,
   }) => SdlxFRect(x, y, w, h);
 
-  Pointer<SdlFRect> calloc() {
-    final pointer = ffi.calloc<SdlFRect>();
+  Pointer<SdlFRect> toNative([Allocator allocator = ffi.calloc]) {
+    final pointer = allocator<SdlFRect>();
     pointer.ref.x = x;
     pointer.ref.y = y;
     pointer.ref.w = w;
@@ -103,8 +103,8 @@ class SdlxFRect {
 }
 
 extension SdlxFRectListExtension on List<SdlxFRect> {
-  Pointer<SdlFRect> calloc() {
-    final buffersPointer = ffi.calloc<SdlFRect>(length);
+  Pointer<SdlFRect> toNative([Allocator allocator = ffi.calloc]) {
+    final buffersPointer = allocator<SdlFRect>(length);
     for (var n = 0; n < length; n++) {
       final bufferPointer = buffersPointer + n;
       bufferPointer.ref.x = this[n].x;

@@ -138,8 +138,8 @@ class SdlxDropEvent extends SdlxEvent {
       windowId == targetId;
 
   @override
-  Pointer<SdlEvent> calloc() {
-    final pointer = ffi.calloc<SdlEvent>();
+  Pointer<SdlEvent> toNative([Allocator allocator = ffi.calloc]) {
+    final pointer = allocator<SdlEvent>();
     pointer.ref.drop.type = type;
     pointer.ref.drop.reserved = reserved;
     pointer.ref.drop.timestamp = timestamp;

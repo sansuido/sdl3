@@ -38,12 +38,7 @@ part of '../sdl_iostream.dart';
 Pointer<SdlIoStream> sdlxOpenIo(
   SdlxIoStreamInterface iface,
   Pointer<Void> userdata,
-) {
-  final ifacePointer = iface.calloc();
-  final result = sdlOpenIo(ifacePointer, userdata);
-  ifacePointer.callocFree();
-  return result;
-}
+) => ffi.using((arena) => sdlOpenIo(iface.toNative(arena), userdata));
 
 ///
 /// Read from a data source.
@@ -81,16 +76,17 @@ Pointer<SdlIoStream> sdlxOpenIo(
 /// - [SDL_ReadIO - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_ReadIO)
 ///
 /// {@category iostream}
-Uint8List? sdlxReadUint8List(Pointer<SdlIoStream> context, int size) {
-  Uint8List? result;
-  final buffer = ffi.calloc<Uint8>(size);
-  final bufferSize = sdlReadIo(context, buffer.cast<Void>(), size);
-  if (bufferSize > 0) {
-    result = Uint8List.fromList(buffer.asTypedList(bufferSize));
-  }
-  buffer.callocFree();
-  return result;
-}
+Uint8List? sdlxReadUint8List(Pointer<SdlIoStream> context, int size) =>
+    ffi.using((arena) {
+      final buffer = arena<Uint8>(size);
+      final bufferSize = sdlReadIo(context, buffer.cast<Void>(), size);
+
+      if (bufferSize <= 0) {
+        return null;
+      }
+
+      return Uint8List.fromList(buffer.asTypedList(bufferSize));
+    });
 
 ///
 /// Read from a data source.
@@ -178,13 +174,13 @@ String? sdlxReadString(Pointer<SdlIoStream> context, int size) {
 /// - [SDL_WriteIO - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_WriteIO)
 ///
 /// {@category iostream}
-int sdlxWriteUint8List(Pointer<SdlIoStream> context, Uint8List data) {
-  final bufferPointer = ffi.calloc<Uint8>(data.length);
-  bufferPointer.asTypedList(data.length).setAll(0, data);
-  final result = sdlWriteIo(context, bufferPointer.cast<Void>(), data.length);
-  bufferPointer.callocFree();
-  return result;
-}
+int sdlxWriteUint8List(Pointer<SdlIoStream> context, Uint8List data) =>
+    ffi.using((arena) {
+      final bufferPointer = arena<Uint8>(data.length);
+      bufferPointer.asTypedList(data.length).setAll(0, data);
+
+      return sdlWriteIo(context, bufferPointer.cast<Void>(), data.length);
+    });
 
 ///
 /// Write to an SDL_IOStream data stream.
@@ -266,21 +262,23 @@ int sdlxWriteString(Pointer<SdlIoStream> context, String str) =>
 ({Uint8List data, int datasize})? sdlxLoadFileIo(
   Pointer<SdlIoStream> src, {
   bool closeio = false,
-}) {
-  var datasize = 0;
-  final datasizePointer = ffi.calloc<Size>();
+}) => ffi.using((arena) {
+  final datasizePointer = arena<Size>();
   final dataPointer = sdlLoadFileIo(src, datasizePointer, closeio);
-  datasize = datasizePointer.value;
-  datasizePointer.callocFree();
+
   if (dataPointer == nullptr) {
     return null;
   }
+
+  final datasize = datasizePointer.value;
   final data = Uint8List.fromList(
     dataPointer.cast<Uint8>().asTypedList(datasize),
   );
+
   sdlFree(dataPointer.cast<Void>());
+
   return (data: data, datasize: datasize);
-}
+});
 
 ///
 /// Load all the data from a file path.
@@ -311,21 +309,24 @@ int sdlxWriteString(Pointer<SdlIoStream> context, String str) =>
 /// - [SDL_LoadFile - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_LoadFile)
 ///
 /// {@category iostream}
-({Uint8List data, int datasize})? sdlxLoadFile(String file) {
-  var datasize = 0;
-  final datasizePointer = ffi.calloc<Size>();
-  final dataPointer = sdlLoadFile(file, datasizePointer);
-  datasize = datasizePointer.value;
-  datasizePointer.callocFree();
-  if (dataPointer == nullptr) {
-    return null;
-  }
-  final data = Uint8List.fromList(
-    dataPointer.cast<Uint8>().asTypedList(datasize),
-  );
-  sdlFree(dataPointer.cast<Void>());
-  return (data: data, datasize: datasize);
-}
+({Uint8List data, int datasize})? sdlxLoadFile(String file) =>
+    ffi.using((arena) {
+      final datasizePointer = arena<Size>();
+      final dataPointer = sdlLoadFile(file, datasizePointer);
+
+      if (dataPointer == nullptr) {
+        return null;
+      }
+
+      final datasize = datasizePointer.value;
+      final data = Uint8List.fromList(
+        dataPointer.cast<Uint8>().asTypedList(datasize),
+      );
+
+      sdlFree(dataPointer.cast<Void>());
+
+      return (data: data, datasize: datasize);
+    });
 
 ///
 /// Save all the data into an SDL data stream.
@@ -358,18 +359,12 @@ bool sdlxSaveFileIo(
   Pointer<SdlIoStream> src,
   Uint8List data, {
   bool closeio = false,
-}) {
-  final dataPointer = ffi.calloc<Uint8>(data.length);
+}) => ffi.using((arena) {
+  final dataPointer = arena<Uint8>(data.length);
   dataPointer.asTypedList(data.length).setAll(0, data);
-  final result = sdlSaveFileIo(
-    src,
-    dataPointer.cast<Void>(),
-    data.length,
-    closeio,
-  );
-  dataPointer.callocFree();
-  return result;
-}
+
+  return sdlSaveFileIo(src, dataPointer.cast<Void>(), data.length, closeio);
+});
 
 ///
 /// Save all the data into a file path.
@@ -396,13 +391,12 @@ bool sdlxSaveFileIo(
 /// - [SDL_SaveFile - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SaveFile)
 ///
 /// {@category iostream}
-bool sdlxSaveFile(String file, Uint8List data) {
-  final dataPointer = ffi.calloc<Uint8>(data.length);
+bool sdlxSaveFile(String file, Uint8List data) => ffi.using((arena) {
+  final dataPointer = arena<Uint8>(data.length);
   dataPointer.asTypedList(data.length).setAll(0, data);
-  final result = sdlSaveFile(file, dataPointer.cast<Void>(), data.length);
-  dataPointer.callocFree();
-  return result;
-}
+
+  return sdlSaveFile(file, dataPointer.cast<Void>(), data.length);
+});
 
 ///
 /// Use this function to read a byte from an SDL_IOStream.
@@ -429,16 +423,13 @@ bool sdlxSaveFile(String file, Uint8List data) {
 /// - [SDL_ReadU8 - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_ReadU8)
 ///
 /// {@category iostream}
-int? sdlxReadU8(Pointer<SdlIoStream> src) {
-  int? result;
-  final pointer = ffi.calloc<Uint8>();
-  final bl = sdlReadU8(src, pointer);
-  if (bl) {
-    result = pointer.value;
+int? sdlxReadU8(Pointer<SdlIoStream> src) => ffi.using((arena) {
+  final pointer = arena<Uint8>();
+  if (!sdlReadU8(src, pointer)) {
+    return null;
   }
-  pointer.callocFree();
-  return result;
-}
+  return pointer.value;
+});
 
 ///
 /// Use this function to read a signed byte from an SDL_IOStream.
@@ -465,16 +456,13 @@ int? sdlxReadU8(Pointer<SdlIoStream> src) {
 /// - [SDL_ReadS8 - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_ReadS8)
 ///
 /// {@category iostream}
-int? sdlxReadS8(Pointer<SdlIoStream> src) {
-  int? result;
-  final pointer = ffi.calloc<Int8>();
-  final bl = sdlReadS8(src, pointer);
-  if (bl) {
-    result = pointer.value;
+int? sdlxReadS8(Pointer<SdlIoStream> src) => ffi.using((arena) {
+  final pointer = arena<Int8>();
+  if (!sdlReadS8(src, pointer)) {
+    return null;
   }
-  pointer.callocFree();
-  return result;
-}
+  return pointer.value;
+});
 
 ///
 /// Use this function to read 16 bits of little-endian data from an
@@ -505,16 +493,13 @@ int? sdlxReadS8(Pointer<SdlIoStream> src) {
 /// - [SDL_ReadU16LE - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_ReadU16LE)
 ///
 /// {@category iostream}
-int? sdlxReadU16Le(Pointer<SdlIoStream> src) {
-  int? result;
-  final pointer = ffi.calloc<Uint16>();
-  final bl = sdlReadU16Le(src, pointer);
-  if (bl) {
-    result = pointer.value;
+int? sdlxReadU16Le(Pointer<SdlIoStream> src) => ffi.using((arena) {
+  final pointer = arena<Uint16>();
+  if (!sdlReadU16Le(src, pointer)) {
+    return null;
   }
-  pointer.callocFree();
-  return result;
-}
+  return pointer.value;
+});
 
 ///
 /// Use this function to read 16 bits of little-endian data from an
@@ -545,16 +530,13 @@ int? sdlxReadU16Le(Pointer<SdlIoStream> src) {
 /// - [SDL_ReadS16LE - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_ReadS16LE)
 ///
 /// {@category iostream}
-int? sdlxReadS16Le(Pointer<SdlIoStream> src) {
-  int? result;
-  final pointer = ffi.calloc<Int16>();
-  final bl = sdlReadS16Le(src, pointer);
-  if (bl) {
-    result = pointer.value;
+int? sdlxReadS16Le(Pointer<SdlIoStream> src) => ffi.using((arena) {
+  final pointer = arena<Int16>();
+  if (!sdlReadS16Le(src, pointer)) {
+    return null;
   }
-  pointer.callocFree();
-  return result;
-}
+  return pointer.value;
+});
 
 ///
 /// Use this function to read 16 bits of big-endian data from an SDL_IOStream
@@ -585,16 +567,13 @@ int? sdlxReadS16Le(Pointer<SdlIoStream> src) {
 /// - [SDL_ReadU16BE - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_ReadU16BE)
 ///
 /// {@category iostream}
-int? sdlxReadU16Be(Pointer<SdlIoStream> src) {
-  int? result;
-  final pointer = ffi.calloc<Uint16>();
-  final bl = sdlReadU16Be(src, pointer);
-  if (bl) {
-    result = pointer.value;
+int? sdlxReadU16Be(Pointer<SdlIoStream> src) => ffi.using((arena) {
+  final pointer = arena<Uint16>();
+  if (!sdlReadU16Be(src, pointer)) {
+    return null;
   }
-  pointer.callocFree();
-  return result;
-}
+  return pointer.value;
+});
 
 ///
 /// Use this function to read 16 bits of big-endian data from an SDL_IOStream
@@ -625,16 +604,13 @@ int? sdlxReadU16Be(Pointer<SdlIoStream> src) {
 /// - [SDL_ReadS16BE - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_ReadS16BE)
 ///
 /// {@category iostream}
-int? sdlxReadS16Be(Pointer<SdlIoStream> src) {
-  int? result;
-  final pointer = ffi.calloc<Int16>();
-  final bl = sdlReadS16Be(src, pointer);
-  if (bl) {
-    result = pointer.value;
+int? sdlxReadS16Be(Pointer<SdlIoStream> src) => ffi.using((arena) {
+  final pointer = arena<Int16>();
+  if (!sdlReadS16Be(src, pointer)) {
+    return null;
   }
-  pointer.callocFree();
-  return result;
-}
+  return pointer.value;
+});
 
 ///
 /// Use this function to read 32 bits of little-endian data from an
@@ -665,16 +641,13 @@ int? sdlxReadS16Be(Pointer<SdlIoStream> src) {
 /// - [SDL_ReadU32LE - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_ReadU32LE)
 ///
 /// {@category iostream}
-int? sdlxReadU32Le(Pointer<SdlIoStream> src) {
-  int? result;
-  final pointer = ffi.calloc<Uint32>();
-  final bl = sdlReadU32Le(src, pointer);
-  if (bl) {
-    result = pointer.value;
+int? sdlxReadU32Le(Pointer<SdlIoStream> src) => ffi.using((arena) {
+  final pointer = arena<Uint32>();
+  if (!sdlReadU32Le(src, pointer)) {
+    return null;
   }
-  pointer.callocFree();
-  return result;
-}
+  return pointer.value;
+});
 
 ///
 /// Use this function to read 32 bits of little-endian data from an
@@ -705,16 +678,13 @@ int? sdlxReadU32Le(Pointer<SdlIoStream> src) {
 /// - [SDL_ReadS32LE - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_ReadS32LE)
 ///
 /// {@category iostream}
-int? sdlxReadS32Le(Pointer<SdlIoStream> src) {
-  int? result;
-  final pointer = ffi.calloc<Int32>();
-  final bl = sdlReadS32Le(src, pointer);
-  if (bl) {
-    result = pointer.value;
+int? sdlxReadS32Le(Pointer<SdlIoStream> src) => ffi.using((arena) {
+  final pointer = arena<Int32>();
+  if (!sdlReadS32Le(src, pointer)) {
+    return null;
   }
-  pointer.callocFree();
-  return result;
-}
+  return pointer.value;
+});
 
 ///
 /// Use this function to read 32 bits of big-endian data from an SDL_IOStream
@@ -745,16 +715,13 @@ int? sdlxReadS32Le(Pointer<SdlIoStream> src) {
 /// - [SDL_ReadU32BE - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_ReadU32BE)
 ///
 /// {@category iostream}
-int? sdlxReadU32Be(Pointer<SdlIoStream> src) {
-  int? result;
-  final pointer = ffi.calloc<Uint32>();
-  final bl = sdlReadU32Be(src, pointer);
-  if (bl) {
-    result = pointer.value;
+int? sdlxReadU32Be(Pointer<SdlIoStream> src) => ffi.using((arena) {
+  final pointer = arena<Uint32>();
+  if (!sdlReadU32Be(src, pointer)) {
+    return null;
   }
-  pointer.callocFree();
-  return result;
-}
+  return pointer.value;
+});
 
 ///
 /// Use this function to read 32 bits of big-endian data from an SDL_IOStream
@@ -785,16 +752,13 @@ int? sdlxReadU32Be(Pointer<SdlIoStream> src) {
 /// - [SDL_ReadS32BE - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_ReadS32BE)
 ///
 /// {@category iostream}
-int? sdlxReadS32Be(Pointer<SdlIoStream> src) {
-  int? result;
-  final pointer = ffi.calloc<Int32>();
-  final bl = sdlReadS32Be(src, pointer);
-  if (bl) {
-    result = pointer.value;
+int? sdlxReadS32Be(Pointer<SdlIoStream> src) => ffi.using((arena) {
+  final pointer = arena<Int32>();
+  if (!sdlReadS32Be(src, pointer)) {
+    return null;
   }
-  pointer.callocFree();
-  return result;
-}
+  return pointer.value;
+});
 
 ///
 /// Use this function to read 64 bits of little-endian data from an
@@ -825,16 +789,13 @@ int? sdlxReadS32Be(Pointer<SdlIoStream> src) {
 /// - [SDL_ReadU64LE - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_ReadU64LE)
 ///
 /// {@category iostream}
-int? sdlxReadU64Le(Pointer<SdlIoStream> src) {
-  int? result;
-  final pointer = ffi.calloc<Uint64>();
-  final bl = sdlReadU64Le(src, pointer);
-  if (bl) {
-    result = pointer.value;
+int? sdlxReadU64Le(Pointer<SdlIoStream> src) => ffi.using((arena) {
+  final pointer = arena<Uint64>();
+  if (!sdlReadU64Le(src, pointer)) {
+    return null;
   }
-  pointer.callocFree();
-  return result;
-}
+  return pointer.value;
+});
 
 ///
 /// Use this function to read 64 bits of little-endian data from an
@@ -865,16 +826,13 @@ int? sdlxReadU64Le(Pointer<SdlIoStream> src) {
 /// - [SDL_ReadS64LE - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_ReadS64LE)
 ///
 /// {@category iostream}
-int? sdlxReadS64Le(Pointer<SdlIoStream> src) {
-  int? result;
-  final pointer = ffi.calloc<Int64>();
-  final bl = sdlReadS64Le(src, pointer);
-  if (bl) {
-    result = pointer.value;
+int? sdlxReadS64Le(Pointer<SdlIoStream> src) => ffi.using((arena) {
+  final pointer = arena<Int64>();
+  if (!sdlReadS64Le(src, pointer)) {
+    return null;
   }
-  pointer.callocFree();
-  return result;
-}
+  return pointer.value;
+});
 
 ///
 /// Use this function to read 64 bits of big-endian data from an SDL_IOStream
@@ -905,16 +863,13 @@ int? sdlxReadS64Le(Pointer<SdlIoStream> src) {
 /// - [SDL_ReadU64BE - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_ReadU64BE)
 ///
 /// {@category iostream}
-int? sdlxReadU64Be(Pointer<SdlIoStream> src) {
-  int? result;
-  final pointer = ffi.calloc<Uint64>();
-  final bl = sdlReadU64Be(src, pointer);
-  if (bl) {
-    result = pointer.value;
+int? sdlxReadU64Be(Pointer<SdlIoStream> src) => ffi.using((arena) {
+  final pointer = arena<Uint64>();
+  if (!sdlReadU64Be(src, pointer)) {
+    return null;
   }
-  pointer.callocFree();
-  return result;
-}
+  return pointer.value;
+});
 
 ///
 /// Use this function to read 64 bits of big-endian data from an SDL_IOStream
@@ -945,13 +900,10 @@ int? sdlxReadU64Be(Pointer<SdlIoStream> src) {
 /// - [SDL_ReadS64BE - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_ReadS64BE)
 ///
 /// {@category iostream}
-int? sdlxReadS64Be(Pointer<SdlIoStream> src) {
-  int? result;
-  final pointer = ffi.calloc<Int64>();
-  final bl = sdlReadS64Be(src, pointer);
-  if (bl) {
-    result = pointer.value;
+int? sdlxReadS64Be(Pointer<SdlIoStream> src) => ffi.using((arena) {
+  final pointer = arena<Int64>();
+  if (!sdlReadS64Be(src, pointer)) {
+    return null;
   }
-  pointer.callocFree();
-  return result;
-}
+  return pointer.value;
+});

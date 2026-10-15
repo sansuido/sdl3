@@ -22,23 +22,23 @@ part of '../sdl_gamepad.dart';
 /// - [SDL_GetGamepadMappings - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetGamepadMappings)
 ///
 /// {@category gamepad}
-List<String> sdlxGetGamepadMappings() {
-  final result = <String>[];
-  final countPointer = ffi.calloc<Int32>();
+List<String> sdlxGetGamepadMappings() => ffi.using((arena) {
+  final countPointer = arena<Int32>();
   final stringsPointer = sdlGetGamepadMappings(countPointer);
-  if (stringsPointer != nullptr) {
-    final count = countPointer.value;
-    for (var i = 0; i < count; i++) {
-      final stringPointer = stringsPointer[i].cast<ffi.Utf8>();
-      if (stringPointer != nullptr) {
-        result.add(stringPointer.toDartString());
-      }
-    }
-    sdlFree(stringsPointer.cast<Void>());
+
+  if (stringsPointer == nullptr) {
+    return [];
   }
-  ffi.calloc.free(countPointer);
+
+  final result = [
+    for (var i = 0; i < countPointer.value; i++)
+      if (stringsPointer[i] != nullptr)
+        stringsPointer[i].cast<ffi.Utf8>().toDartString(),
+  ];
+
+  sdlFree(stringsPointer.cast<Void>());
   return result;
-}
+});
 
 ///
 /// Get the gamepad mapping string for a given GUID.
@@ -134,19 +134,19 @@ String? sdlxGetGamepadMapping(Pointer<SdlGamepad> gamepad) {
 /// - [SDL_GetGamepads - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetGamepads)
 ///
 /// {@category gamepad}
-List<int> sdlxGetGamepads() {
-  final result = <int>[];
-  final countPointer = ffi.calloc<Int32>();
+List<int> sdlxGetGamepads() => ffi.using((arena) {
+  final countPointer = arena<Int32>();
   final idsPointer = sdlGetGamepads(countPointer);
-  if (idsPointer != nullptr) {
-    for (var i = 0; i < countPointer.value; i++) {
-      result.add(idsPointer[i]);
-    }
-    sdlFree(idsPointer.cast<Void>());
+
+  if (idsPointer == nullptr) {
+    return [];
   }
-  countPointer.callocFree();
+
+  final result = [for (var i = 0; i < countPointer.value; i++) idsPointer[i]];
+
+  sdlFree(idsPointer.cast<Void>());
   return result;
-}
+});
 
 ///
 /// Get the mapping of a gamepad.
@@ -212,13 +212,12 @@ String? sdlxGetGamepadMappingForId(int instanceId) {
 /// {@category gamepad}
 ({int percent, int state}) sdlxGetGamepadPowerInfo(
   Pointer<SdlGamepad> gamepad,
-) {
-  var percent = 0;
-  final percentPointer = ffi.calloc<Int32>();
+) => ffi.using((arena) {
+  final percentPointer = arena<Int32>();
   final state = sdlGetGamepadPowerInfo(gamepad, percentPointer);
-  percent = percentPointer.value;
-  return (percent: percent, state: state);
-}
+
+  return (percent: percentPointer.value, state: state);
+});
 
 ///
 /// Get the SDL joystick layer bindings for a gamepad.
@@ -303,16 +302,13 @@ sdlxGetGamepadTouchpadFinger(
   Pointer<SdlGamepad> gamepad,
   int touchpad,
   int finger,
-) {
-  late bool down;
-  late double x;
-  late double y;
-  late double pressure;
-  final downPointer = ffi.calloc<Bool>();
-  final xPointer = ffi.calloc<Float>();
-  final yPointer = ffi.calloc<Float>();
-  final pressurePointer = ffi.calloc<Float>();
-  final result = sdlGetGamepadTouchpadFinger(
+) => ffi.using((arena) {
+  final downPointer = arena<Bool>();
+  final xPointer = arena<Float>();
+  final yPointer = arena<Float>();
+  final pressurePointer = arena<Float>();
+
+  final success = sdlGetGamepadTouchpadFinger(
     gamepad,
     touchpad,
     finger,
@@ -321,21 +317,18 @@ sdlxGetGamepadTouchpadFinger(
     yPointer,
     pressurePointer,
   );
-  if (result) {
-    down = downPointer.value;
-    x = xPointer.value;
-    y = yPointer.value;
-    pressure = pressurePointer.value;
-  }
-  downPointer.callocFree();
-  xPointer.callocFree();
-  yPointer.callocFree();
-  pressurePointer.callocFree();
-  if (!result) {
+
+  if (!success) {
     return null;
   }
-  return (down: down, x: x, y: y, pressure: pressure);
-}
+
+  return (
+    down: downPointer.value,
+    x: xPointer.value,
+    y: yPointer.value,
+    pressure: pressurePointer.value,
+  );
+});
 
 ///
 /// Get the current state of a gamepad sensor.
@@ -367,14 +360,22 @@ bool sdlxGetGamepadSensorData(
   int type,
   SdlxSensorData data, {
   int numValues = 3,
-}) {
-  final dataPointer = ffi.calloc<Float>(numValues);
-  final result = sdlGetGamepadSensorData(gamepad, type, dataPointer, numValues);
-  if (result) {
-    for (var i = 0; i < numValues; i++) {
-      data.data.add(dataPointer[i]);
-    }
+}) => ffi.using((arena) {
+  final dataPointer = arena<Float>(numValues);
+  final success = sdlGetGamepadSensorData(
+    gamepad,
+    type,
+    dataPointer,
+    numValues,
+  );
+
+  if (!success) {
+    return false;
   }
-  dataPointer.callocFree();
-  return result;
-}
+
+  for (var i = 0; i < numValues; i++) {
+    data.data.add(dataPointer[i]);
+  }
+
+  return true;
+});

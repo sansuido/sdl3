@@ -152,8 +152,9 @@ extension SdlAsyncIoQueuePointerEx on Pointer<SdlAsyncIoQueue> {
   /// - [SDL_WaitAsyncIOResult - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_WaitAsyncIOResult)
   ///
   /// {@category asyncio}
-  bool waitResult(SdlxAsyncIoOutcome outcome, int timeoutMS) =>
-      sdlWaitAsyncIoResult(this, outcome.calloc(), timeoutMS);
+  bool waitResult(SdlxAsyncIoOutcome outcome, int timeoutMS) => ffi.using(
+    (arena) => sdlWaitAsyncIoResult(this, outcome.toNative(arena), timeoutMS),
+  );
 
   ///
   /// Wake up any threads that are blocking in SDL_WaitAsyncIOResult().

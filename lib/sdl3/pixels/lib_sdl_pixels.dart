@@ -118,23 +118,21 @@ bool sdlxSetPaletteColors(
   Pointer<SdlPalette> palette,
   List<SdlxColor> colors,
   int firstcolor,
-) {
-  final colorsPointer = ffi.calloc<SdlColor>(colors.length);
-  for (var i = 0; i < colors.length; i++) {
-    colorsPointer[i].r = colors[i].r;
-    colorsPointer[i].g = colors[i].g;
-    colorsPointer[i].b = colors[i].b;
-    colorsPointer[i].a = colors[i].a;
+) => ffi.using((arena) {
+  final count = colors.length;
+  final colorsPointer = arena<SdlColor>(count);
+
+  for (var i = 0; i < count; i++) {
+    final color = colors[i];
+    colorsPointer[i]
+      ..r = color.r
+      ..g = color.g
+      ..b = color.b
+      ..a = color.a;
   }
-  final result = sdlSetPaletteColors(
-    palette,
-    colorsPointer,
-    firstcolor,
-    colors.length,
-  );
-  colorsPointer.callocFree();
-  return result;
-}
+
+  return sdlSetPaletteColors(palette, colorsPointer, firstcolor, count);
+});
 
 ///
 /// Get RGB values from a pixel in the specified format.

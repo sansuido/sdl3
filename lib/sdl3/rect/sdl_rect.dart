@@ -14,8 +14,8 @@ class SdlxRect {
   SdlxFRect toFloat() =>
       SdlxFRect(x.toDouble(), y.toDouble(), w.toDouble(), h.toDouble());
 
-  Pointer<SdlRect> calloc() {
-    final pointer = ffi.calloc<SdlRect>();
+  Pointer<SdlRect> toNative([Allocator allocator = ffi.calloc]) {
+    final pointer = allocator<SdlRect>();
     pointer.ref.x = x;
     pointer.ref.y = y;
     pointer.ref.w = w;
@@ -25,8 +25,8 @@ class SdlxRect {
 }
 
 extension SdlxRectListExtension on List<SdlxRect> {
-  Pointer<SdlRect> calloc() {
-    final buffersPointer = ffi.calloc<SdlRect>(length);
+  Pointer<SdlRect> toNative([Allocator allocator = ffi.calloc]) {
+    final buffersPointer = allocator<SdlRect>(length);
     for (var n = 0; n < length; n++) {
       final bufferPointer = buffersPointer + n;
       bufferPointer.ref.x = this[n].x;

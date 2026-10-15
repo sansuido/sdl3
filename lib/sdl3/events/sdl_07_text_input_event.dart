@@ -30,8 +30,8 @@ class SdlxTextInputEvent extends SdlxEvent {
       windowId == targetId;
 
   @override
-  Pointer<SdlEvent> calloc() {
-    final pointer = ffi.calloc<SdlEvent>();
+  Pointer<SdlEvent> toNative([Allocator allocator = ffi.calloc]) {
+    final pointer = allocator<SdlEvent>();
     pointer.ref.text.type = type;
     pointer.ref.text.reserved = reserved;
     pointer.ref.text.timestamp = timestamp;

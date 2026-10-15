@@ -55,8 +55,8 @@ class SdlxJoyButtonEvent extends SdlxEvent {
   final bool down;
 
   @override
-  Pointer<SdlEvent> calloc() {
-    final pointer = ffi.calloc<SdlEvent>();
+  Pointer<SdlEvent> toNative([Allocator allocator = ffi.calloc]) {
+    final pointer = allocator<SdlEvent>();
     pointer.ref.jbutton.type = type;
     pointer.ref.jbutton.reserved = reserved;
     pointer.ref.jbutton.timestamp = timestamp;

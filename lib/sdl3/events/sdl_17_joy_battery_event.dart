@@ -25,8 +25,8 @@ class SdlxJoyBatteryEvent extends SdlxEvent {
   final int percent;
 
   @override
-  Pointer<SdlEvent> calloc() {
-    final pointer = ffi.calloc<SdlEvent>();
+  Pointer<SdlEvent> toNative([Allocator allocator = ffi.calloc]) {
+    final pointer = allocator<SdlEvent>();
     pointer.ref.jbattery.type = type;
     pointer.ref.jbattery.reserved = reserved;
     pointer.ref.jbattery.timestamp = timestamp;

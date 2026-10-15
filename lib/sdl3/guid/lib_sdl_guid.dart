@@ -21,11 +21,11 @@ part of '../sdl_guid.dart';
 /// - [SDL_GUIDToString - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GUIDToString)
 ///
 /// {@category guid}
-String sdlxGuidToString(SdlGuid guid) {
+String sdlxGuidToString(SdlGuid guid) => ffi.using((arena) {
   const bufferSize = 64;
-  final pszGuidPointer = ffi.calloc<Int8>(bufferSize);
+  final pszGuidPointer = arena<Int8>(bufferSize);
+
   sdlGuidToString(guid, pszGuidPointer, bufferSize);
-  final result = pszGuidPointer.cast<ffi.Utf8>().toDartString();
-  pszGuidPointer.callocFree();
-  return result;
-}
+
+  return pszGuidPointer.cast<ffi.Utf8>().toDartString();
+});

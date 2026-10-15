@@ -23,24 +23,21 @@ part of '../sdl_system.dart';
 /// - [SDL_GetDXGIOutputInfo - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetDXGIOutputInfo)
 ///
 /// {@category system}
-({int adapterIndex, int outputIndex})? sdlxGetDxgiOutputInfo(int displayId) {
-  var adapterIndex = 0;
-  var outputIndex = 0;
-  final adapterIndexPointer = ffi.calloc<Int32>();
-  final outputIndexPointer = ffi.calloc<Int32>();
-  final bl = sdlGetDxgiOutputInfo(
-    displayId,
-    adapterIndexPointer,
-    outputIndexPointer,
-  );
-  if (bl) {
-    adapterIndex = adapterIndexPointer.value;
-    outputIndex = outputIndexPointer.value;
-  }
-  adapterIndexPointer.callocFree();
-  outputIndexPointer.callocFree();
-  if (!bl) {
-    return null;
-  }
-  return (adapterIndex: adapterIndex, outputIndex: outputIndex);
-}
+({int adapterIndex, int outputIndex})? sdlxGetDxgiOutputInfo(int displayId) =>
+    ffi.using((arena) {
+      final adapterIndexPointer = arena<Int32>();
+      final outputIndexPointer = arena<Int32>();
+
+      if (!sdlGetDxgiOutputInfo(
+        displayId,
+        adapterIndexPointer,
+        outputIndexPointer,
+      )) {
+        return null;
+      }
+
+      return (
+        adapterIndex: adapterIndexPointer.value,
+        outputIndex: outputIndexPointer.value,
+      );
+    });

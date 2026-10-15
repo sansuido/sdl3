@@ -61,8 +61,8 @@ class SdlxStorageInterface {
   final Pointer<NativeFunction<SdlStorageInterfaceSpaceRemaining>>
   spaceRemaining;
 
-  Pointer<SdlStorageInterface> calloc() {
-    final pointer = ffi.calloc<SdlStorageInterface>();
+  Pointer<SdlStorageInterface> toNative([Allocator allocator = ffi.calloc]) {
+    final pointer = allocator<SdlStorageInterface>();
     pointer.ref.version = version;
     pointer.ref.close = close;
     pointer.ref.ready = ready;

@@ -45,81 +45,54 @@ no scanning or interpolation takes place. Input surface must be 8/16/24/32 bit.
 Pointer<SdlSurface> rotateSurface90Degrees(
   Pointer<SdlSurface> src,
   int numClockwiseTurns,
-) {
-  int row;
-  int col;
-  int newWidth;
-  int newHeight;
-  int bpp;
-  int bpr;
-  Pointer<SdlSurface> dst;
-  int normalizedClockwiseTurns;
+) => ffi.using((arena) {
   /* Has to be a valid surface pointer and be a Nbit surface where n is divisible by 8 */
   if (src == nullptr) {
     print('NULL source surface');
     return nullptr;
   }
+
   final details = sdlGetPixelFormatDetails(src.ref.format);
   if (details == nullptr) {
     print('NULL source surface format');
     return nullptr;
   }
+
   if ((details.ref.bitsPerPixel % 8) != 0) {
-    //  if ((src.ref.format.ref.bitsPerPixel % 8) != 0) {
     print('Invalid source surface bit depth');
     return nullptr;
   }
 
   /* normalize numClockwiseTurns */
-  normalizedClockwiseTurns = numClockwiseTurns % 4;
+  var normalizedClockwiseTurns = numClockwiseTurns % 4;
   if (normalizedClockwiseTurns < 0) {
     normalizedClockwiseTurns += 4;
   }
 
   /* If turns are even, our new width/height will be the same as the source surface */
-  if (normalizedClockwiseTurns % 2 != 0) {
-    newWidth = src.ref.h;
-    newHeight = src.ref.w;
-  } else {
-    newWidth = src.ref.w;
-    newHeight = src.ref.h;
-  }
-  dst = sdlCreateSurface(newWidth, newHeight, 0);
-  //dst = sdlCreateRgbSurface(
-  //    src.ref.flags,
-  //    newWidth,
-  //    newHeight,
-  //    src.ref.format.ref.bitsPerPixel,
-  //    src.ref.format.ref.rmask,
-  //    src.ref.format.ref.gmask,
-  //    src.ref.format.ref.bmask,
-  //    src.ref.format.ref.amask);
+  final isOddTurn = normalizedClockwiseTurns % 2 != 0;
+  final newWidth = isOddTurn ? src.ref.h : src.ref.w;
+  final newHeight = isOddTurn ? src.ref.w : src.ref.h;
+
+  final dst = sdlCreateSurface(newWidth, newHeight, 0);
   if (dst == nullptr) {
     print('Could not create destination surface');
     return nullptr;
   }
 
-  //if (SDL_MUSTLOCK(src)) {
   sdlLockSurface(src);
-  //}
-  //if (SDL_MUSTLOCK(dst)) {
   sdlLockSurface(dst);
-  //}
 
   /* Calculate byte-per-pixel */
-  bpp = details.ref.bitsPerPixel ~/ 8;
-  //  bpp = src.ref.format.ref.bitsPerPixel ~/ 8;
+  final bpp = details.ref.bitsPerPixel ~/ 8;
 
-  final srcBuf = ffi.calloc<Pointer<Uint8>>();
-  final dstBuf = ffi.calloc<Pointer<Uint8>>();
+  final srcBuf = arena<Pointer<Uint8>>();
+  final dstBuf = arena<Pointer<Uint8>>();
 
   print(normalizedClockwiseTurns);
   switch (normalizedClockwiseTurns) {
     case 0: /* Make a copy of the surface */
       {
-        /* Unfortunately SDL_BlitSurface cannot be used to make a copy of the surface
-			since it does not preserve alpha. */
-
         if (src.ref.pitch == dst.ref.pitch) {
           /* If the pitch is the same for both surfaces, the memory can be copied all at once. */
           sdlMemcpy(dst.ref.pixels, src.ref.pixels, src.ref.h * src.ref.pitch);
@@ -127,8 +100,8 @@ Pointer<SdlSurface> rotateSurface90Degrees(
           /* If the pitch differs, copy each row separately */
           srcBuf.value = src.ref.pixels.cast<Uint8>();
           dstBuf.value = dst.ref.pixels.cast<Uint8>();
-          bpr = src.ref.w * bpp;
-          for (row = 0; row < src.ref.h; row++) {
+          final bpr = src.ref.w * bpp;
+          for (var row = 0; row < src.ref.h; row++) {
             sdlMemcpy(
               dstBuf.value.cast<Void>(),
               srcBuf.value.cast<Void>(),
@@ -143,14 +116,14 @@ Pointer<SdlSurface> rotateSurface90Degrees(
     /* rotate clockwise */
     case 1: /* rotated 90 degrees clockwise */
       {
-        for (row = 0; row < src.ref.h; ++row) {
+        for (var row = 0; row < src.ref.h; ++row) {
           srcBuf
             ..value = src.ref.pixels.cast<Uint8>()
             ..value = srcBuf.value + row * src.ref.pitch;
           dstBuf
             ..value = dst.ref.pixels.cast<Uint8>()
             ..value = dstBuf.value + (dst.ref.w - row - 1) * bpp;
-          for (col = 0; col < src.ref.w; ++col) {
+          for (var col = 0; col < src.ref.w; ++col) {
             sdlMemcpy(
               dstBuf.value.cast<Void>(),
               srcBuf.value.cast<Void>(),
@@ -164,7 +137,7 @@ Pointer<SdlSurface> rotateSurface90Degrees(
 
     case 2: /* rotated 180 degrees clockwise */
       {
-        for (row = 0; row < src.ref.h; ++row) {
+        for (var row = 0; row < src.ref.h; ++row) {
           srcBuf
             ..value = src.ref.pixels.cast<Uint8>()
             ..value = srcBuf.value + row * src.ref.pitch;
@@ -174,7 +147,7 @@ Pointer<SdlSurface> rotateSurface90Degrees(
                 dstBuf.value +
                 (dst.ref.h - row - 1) * dst.ref.pitch +
                 (dst.ref.w - 1) * bpp;
-          for (col = 0; col < src.ref.w; ++col) {
+          for (var col = 0; col < src.ref.w; ++col) {
             sdlMemcpy(
               dstBuf.value.cast<Void>(),
               srcBuf.value.cast<Void>(),
@@ -188,7 +161,7 @@ Pointer<SdlSurface> rotateSurface90Degrees(
 
     case 3: /* rotated 270 degrees clockwise */
       {
-        for (row = 0; row < src.ref.h; ++row) {
+        for (var row = 0; row < src.ref.h; ++row) {
           srcBuf
             ..value = src.ref.pixels.cast<Uint8>()
             ..value = srcBuf.value + row * src.ref.pitch;
@@ -196,7 +169,7 @@ Pointer<SdlSurface> rotateSurface90Degrees(
             ..value = dst.ref.pixels.cast<Uint8>()
             ..value =
                 dstBuf.value + (row * bpp) + ((dst.ref.h - 1) * dst.ref.pitch);
-          for (col = 0; col < src.ref.w; ++col) {
+          for (var col = 0; col < src.ref.w; ++col) {
             sdlMemcpy(
               dstBuf.value.cast<Void>(),
               srcBuf.value.cast<Void>(),
@@ -210,14 +183,8 @@ Pointer<SdlSurface> rotateSurface90Degrees(
   }
   /* end switch */
 
-  //if (SDL_MUSTLOCK(src)) {
   sdlUnlockSurface(src);
-  //}
-  //if (SDL_MUSTLOCK(dst)) {
   sdlUnlockSurface(dst);
-  //}
-  ffi.calloc
-    ..free(srcBuf)
-    ..free(dstBuf);
+
   return dst;
-}
+});

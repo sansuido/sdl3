@@ -390,8 +390,7 @@ Pointer<SdlGpuDevice> sdlGetGpuRendererDevice(Pointer<SdlRenderer> renderer) {
 /// create a software renderer, but they are intended to be used with an
 /// SDL_Window as the final destination and not an SDL_Surface.
 ///
-/// \param surface the SDL_Surface structure representing the surface where
-/// rendering is done.
+/// \param surface the surface where rendering is done, may be NULL.
 /// \returns a valid rendering context or NULL if there was an error; call
 /// SDL_GetError() for more information.
 ///
@@ -400,6 +399,8 @@ Pointer<SdlGpuDevice> sdlGetGpuRendererDevice(Pointer<SdlRenderer> renderer) {
 /// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_DestroyRenderer
+/// \sa SDL_SetSoftwareRendererSurface
+/// \sa SDL_SetSoftwareRendererWindow
 ///
 /// ```c
 /// extern SDL_DECLSPEC SDL_Renderer * SDLCALL SDL_CreateSoftwareRenderer(SDL_Surface *surface)
@@ -416,6 +417,82 @@ Pointer<SdlRenderer> sdlCreateSoftwareRenderer(Pointer<SdlSurface> surface) {
         Pointer<SdlRenderer> Function(Pointer<SdlSurface> surface)
       >('SDL_CreateSoftwareRenderer');
   return sdlCreateSoftwareRendererLookupFunction(surface);
+}
+
+///
+/// Associate a software renderer with a window.
+///
+/// \param renderer the rendering context.
+/// \param window the window where rendering is displayed.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
+///
+/// \threadsafety This function should be called on the thread that created the
+/// renderer.
+///
+/// \since This function is available since SDL 3.6.0.
+///
+/// \sa SDL_CreateSoftwareRenderer
+///
+/// ```c
+/// extern SDL_DECLSPEC bool SDLCALL SDL_SetSoftwareRendererWindow(SDL_Renderer *renderer, SDL_Window *window)
+/// ```
+///
+/// See also:
+/// - [SDL_SetSoftwareRendererWindow - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SetSoftwareRendererWindow)
+///
+/// {@category render}
+bool sdlSetSoftwareRendererWindow(
+  Pointer<SdlRenderer> renderer,
+  Pointer<SdlWindow> window,
+) {
+  final sdlSetSoftwareRendererWindowLookupFunction = _libSdl
+      .lookupFunction<
+        Bool Function(Pointer<SdlRenderer> renderer, Pointer<SdlWindow> window),
+        bool Function(Pointer<SdlRenderer> renderer, Pointer<SdlWindow> window)
+      >('SDL_SetSoftwareRendererWindow');
+  return sdlSetSoftwareRendererWindowLookupFunction(renderer, window);
+}
+
+///
+/// Associate a software renderer with a surface.
+///
+/// \param renderer the rendering context.
+/// \param surface the surface where rendering is done.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
+///
+/// \threadsafety This function should be called on the thread that created the
+/// renderer.
+///
+/// \since This function is available since SDL 3.6.0.
+///
+/// \sa SDL_CreateSoftwareRenderer
+///
+/// ```c
+/// extern SDL_DECLSPEC bool SDLCALL SDL_SetSoftwareRendererSurface(SDL_Renderer *renderer, SDL_Surface *surface)
+/// ```
+///
+/// See also:
+/// - [SDL_SetSoftwareRendererSurface - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SetSoftwareRendererSurface)
+///
+/// {@category render}
+bool sdlSetSoftwareRendererSurface(
+  Pointer<SdlRenderer> renderer,
+  Pointer<SdlSurface> surface,
+) {
+  final sdlSetSoftwareRendererSurfaceLookupFunction = _libSdl
+      .lookupFunction<
+        Bool Function(
+          Pointer<SdlRenderer> renderer,
+          Pointer<SdlSurface> surface,
+        ),
+        bool Function(
+          Pointer<SdlRenderer> renderer,
+          Pointer<SdlSurface> surface,
+        )
+      >('SDL_SetSoftwareRendererSurface');
+  return sdlSetSoftwareRendererSurfaceLookupFunction(renderer, surface);
 }
 
 ///
@@ -937,8 +1014,11 @@ Pointer<SdlTexture> sdlCreateTextureFromSurface(
 ///
 /// - `SDL_PROP_TEXTURE_CREATE_VULKAN_TEXTURE_NUMBER`: the VkImage associated
 /// with the texture, if you want to wrap an existing texture. For NV12 style
-/// textures this is the single two plane VkImage holding both the Y and UV
+/// textures this can be a single two plane VkImage holding both the Y and UV
 /// planes, and for YUV style textures it is the VkImage holding the Y plane.
+/// - `SDL_PROP_TEXTURE_CREATE_VULKAN_TEXTURE_UV_NUMBER`: the VkImage
+/// associated with the UV plane of an NV12 texture, if you want to wrap an
+/// existing texture.
 /// - `SDL_PROP_TEXTURE_CREATE_VULKAN_TEXTURE_U_NUMBER`: the VkImage associated
 /// with the U plane of a YUV texture, if you want to wrap an existing
 /// texture.
@@ -1072,6 +1152,8 @@ Pointer<SdlTexture> sdlCreateTextureWithProperties(
 /// texture. For NV12 style textures this is the single two plane VkImage
 /// holding both the Y and UV planes, and for YUV style textures it is the
 /// VkImage holding the Y plane.
+/// - `SDL_PROP_TEXTURE_VULKAN_TEXTURE_UV_NUMBER`: the VkImage associated with
+/// the UV plane of an NV12 texture, if it was created with separate planes.
 /// - `SDL_PROP_TEXTURE_VULKAN_TEXTURE_U_NUMBER`: the VkImage associated with
 /// the U plane of a YUV texture
 /// - `SDL_PROP_TEXTURE_VULKAN_TEXTURE_V_NUMBER`: the VkImage associated with

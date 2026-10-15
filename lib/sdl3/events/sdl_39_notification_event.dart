@@ -26,8 +26,8 @@ class SdlxNotificationEvent extends SdlxEvent {
   final String actionId;
 
   @override
-  Pointer<SdlEvent> calloc() {
-    final pointer = ffi.calloc<SdlEvent>();
+  Pointer<SdlEvent> toNative([Allocator allocator = ffi.calloc]) {
+    final pointer = allocator<SdlEvent>();
     pointer.ref.notification.type = type;
     pointer.ref.notification.reserved = reserved;
     pointer.ref.notification.timestamp = timestamp;

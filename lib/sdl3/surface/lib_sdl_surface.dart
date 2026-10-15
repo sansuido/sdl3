@@ -34,18 +34,21 @@ part of '../sdl_surface.dart';
 /// - [SDL_GetSurfaceImages - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetSurfaceImages)
 ///
 /// {@category surface}
-List<Pointer<SdlSurface>> sdlxGetSurfaceImages(Pointer<SdlSurface> surface) {
-  final countPointer = ffi.calloc<Int32>();
-  final images = <Pointer<SdlSurface>>[];
-  final imagesPointer = sdlGetSurfaceImages(surface, countPointer);
-  if (countPointer.value > 0) {
-    for (var i = 0; i < countPointer.value; i++) {
-      images.add(imagesPointer[i]);
-    }
-  }
-  countPointer.callocFree();
-  return images;
-}
+List<Pointer<SdlSurface>> sdlxGetSurfaceImages(Pointer<SdlSurface> surface) =>
+    ffi.using((arena) {
+      final countPointer = arena<Int32>();
+      final imagesPointer = sdlGetSurfaceImages(surface, countPointer);
+
+      if (imagesPointer == nullptr || countPointer.value <= 0) {
+        return [];
+      }
+
+      try {
+        return [for (var i = 0; i < countPointer.value; i++) imagesPointer[i]];
+      } finally {
+        sdlFree(imagesPointer.cast<Void>());
+      }
+    });
 
 ///
 /// Get the color key (transparent pixel) for a surface.
@@ -75,16 +78,15 @@ List<Pointer<SdlSurface>> sdlxGetSurfaceImages(Pointer<SdlSurface> surface) {
 /// - [SDL_GetSurfaceColorKey - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetSurfaceColorKey)
 ///
 /// {@category surface}
-int? sdlxGetSurfaceColorKey(Pointer<SdlSurface> surface) {
-  int? result;
-  final keyPointer = ffi.calloc<Uint32>();
-  final bl = sdlGetSurfaceColorKey(surface, keyPointer);
-  if (bl) {
-    result = keyPointer.value;
+int? sdlxGetSurfaceColorKey(Pointer<SdlSurface> surface) => ffi.using((arena) {
+  final keyPointer = arena<Uint32>();
+
+  if (!sdlGetSurfaceColorKey(surface, keyPointer)) {
+    return null;
   }
-  keyPointer.callocFree();
-  return result;
-}
+
+  return keyPointer.value;
+});
 
 ///
 /// Set an additional color value multiplied into blit operations.
@@ -197,16 +199,15 @@ SdlxColor? sdlxGetSurfaceColorMod(Pointer<SdlSurface> surface) =>
 /// - [SDL_GetSurfaceBlendMode - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetSurfaceBlendMode)
 ///
 /// {@category surface}
-int? sdlxGetSurfaceBlendMode(Pointer<SdlSurface> surface) {
-  int? result;
-  final blendModePointer = ffi.calloc<Uint32>();
-  final bl = sdlGetSurfaceBlendMode(surface, blendModePointer);
-  if (bl) {
-    result = blendModePointer.value;
+int? sdlxGetSurfaceBlendMode(Pointer<SdlSurface> surface) => ffi.using((arena) {
+  final blendModePointer = arena<Uint32>();
+
+  if (!sdlGetSurfaceBlendMode(surface, blendModePointer)) {
+    return null;
   }
-  blendModePointer.callocFree();
-  return result;
-}
+
+  return blendModePointer.value;
+});
 
 ///
 /// Set the clipping rectangle for a surface.
@@ -238,17 +239,11 @@ int? sdlxGetSurfaceBlendMode(Pointer<SdlSurface> surface) {
 /// - [SDL_SetSurfaceClipRect - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SetSurfaceClipRect)
 ///
 /// {@category surface}
-bool sdlxSetSurfaceClipRect(Pointer<SdlSurface> surface, SdlxRect? rect) {
-  Pointer<SdlRect> rectPointer = nullptr;
-  if (rect != null) {
-    rectPointer = rect.calloc();
-  }
-  final result = sdlSetSurfaceClipRect(surface, rectPointer);
-  if (rectPointer != nullptr) {
-    rectPointer.callocFree();
-  }
-  return result;
-}
+bool sdlxSetSurfaceClipRect(Pointer<SdlSurface> surface, SdlxRect? rect) =>
+    ffi.using(
+      (arena) =>
+          sdlSetSurfaceClipRect(surface, rect?.toNative(arena) ?? nullptr),
+    );
 
 ///
 /// Get the clipping rectangle for a surface.
@@ -356,17 +351,11 @@ bool sdlxClearSurface(Pointer<SdlSurface> surface, SdlxFColor color) =>
 /// - [SDL_FillSurfaceRect - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_FillSurfaceRect)
 ///
 /// {@category surface}
-bool sdlxFillSurfaceRect(Pointer<SdlSurface> dst, SdlxRect? rect, int color) {
-  Pointer<SdlRect> rectPointer = nullptr;
-  if (rect != null) {
-    rectPointer = rect.calloc();
-  }
-  final result = sdlFillSurfaceRect(dst, rectPointer, color);
-  if (rectPointer != nullptr) {
-    rectPointer.callocFree();
-  }
-  return result;
-}
+bool sdlxFillSurfaceRect(Pointer<SdlSurface> dst, SdlxRect? rect, int color) =>
+    ffi.using(
+      (arena) =>
+          sdlFillSurfaceRect(dst, rect?.toNative(arena) ?? nullptr, color),
+    );
 
 ///
 /// Perform a fast fill of a set of rectangles with a specific color.
@@ -406,20 +395,21 @@ bool sdlxFillSurfaceRects(
   Pointer<SdlSurface> dst,
   List<SdlxRect> rects,
   int color,
-) {
+) => ffi.using((arena) {
   final count = rects.length;
-  final rectsPointer = ffi.calloc<SdlRect>(count);
+  final rectsPointer = arena<SdlRect>(count);
+
   for (var i = 0; i < count; i++) {
-    final _ = rectsPointer[i]
-      ..x = rects[i].x
-      ..y = rects[i].y
-      ..w = rects[i].w
-      ..h = rects[i].h;
+    final rect = rects[i];
+    rectsPointer[i]
+      ..x = rect.x
+      ..y = rect.y
+      ..w = rect.w
+      ..h = rect.h;
   }
-  final result = sdlFillSurfaceRects(dst, rectsPointer, count, color);
-  rectsPointer.callocFree();
-  return result;
-}
+
+  return sdlFillSurfaceRects(dst, rectsPointer, count, color);
+});
 
 ///
 /// Performs a fast blit from the source surface to the destination surface
@@ -505,24 +495,14 @@ bool sdlxBlitSurface(
   SdlxRect? srcrect,
   Pointer<SdlSurface> dst,
   SdlxRect? dstrect,
-) {
-  Pointer<SdlRect> srcrectPointer = nullptr;
-  Pointer<SdlRect> dstrectPointer = nullptr;
-  if (srcrect != null) {
-    srcrectPointer = srcrect.calloc();
-  }
-  if (dstrect != null) {
-    dstrectPointer = dstrect.calloc();
-  }
-  final result = sdlBlitSurface(src, srcrectPointer, dst, dstrectPointer);
-  if (srcrectPointer != nullptr) {
-    srcrectPointer.callocFree();
-  }
-  if (dstrectPointer != nullptr) {
-    dstrectPointer.callocFree();
-  }
-  return result;
-}
+) => ffi.using(
+  (arena) => sdlBlitSurface(
+    src,
+    srcrect?.toNative(arena) ?? nullptr,
+    dst,
+    dstrect?.toNative(arena) ?? nullptr,
+  ),
+);
 
 ///
 /// Perform low-level surface blitting only.
@@ -559,19 +539,14 @@ bool sdlxBlitSurfaceUnchecked(
   SdlxRect srcrect,
   Pointer<SdlSurface> dst,
   SdlxRect dstrect,
-) {
-  final srcrectPointer = srcrect.calloc();
-  final dstrectPointer = dstrect.calloc();
-  final result = sdlBlitSurfaceUnchecked(
+) => ffi.using(
+  (arena) => sdlBlitSurfaceUnchecked(
     src,
-    srcrectPointer,
+    srcrect.toNative(arena),
     dst,
-    dstrectPointer,
-  );
-  srcrectPointer.callocFree();
-  dstrectPointer.callocFree();
-  return result;
-}
+    dstrect.toNative(arena),
+  ),
+);
 
 ///
 /// Perform a scaled blit to a destination surface, which may be of a different
@@ -609,30 +584,15 @@ bool sdlxBlitSurfaceScaled(
   Pointer<SdlSurface> dst,
   SdlxRect? dstrect, {
   int scaleMode = SdlkScalemode.invalid,
-}) {
-  Pointer<SdlRect> srcrectPointer = nullptr;
-  Pointer<SdlRect> dstrectPointer = nullptr;
-  if (srcrect != null) {
-    srcrectPointer = srcrect.calloc();
-  }
-  if (dstrect != null) {
-    dstrectPointer = dstrect.calloc();
-  }
-  final result = sdlBlitSurfaceScaled(
+}) => ffi.using(
+  (arena) => sdlBlitSurfaceScaled(
     src,
-    srcrectPointer,
+    srcrect?.toNative(arena) ?? nullptr,
     dst,
-    dstrectPointer,
+    dstrect?.toNative(arena) ?? nullptr,
     scaleMode,
-  );
-  if (srcrectPointer != nullptr) {
-    srcrectPointer.callocFree();
-  }
-  if (dstrectPointer != nullptr) {
-    dstrectPointer.callocFree();
-  }
-  return result;
-}
+  ),
+);
 
 ///
 /// Perform low-level surface scaled blitting only.
@@ -671,20 +631,15 @@ bool sdlxBlitSurfaceUncheckedScaled(
   Pointer<SdlSurface> dst,
   SdlxRect dstrect, {
   int scaleMode = SdlkScalemode.invalid,
-}) {
-  final srcrectPointer = srcrect.calloc();
-  final dstrectPointer = dstrect.calloc();
-  final result = sdlBlitSurfaceUncheckedScaled(
+}) => ffi.using(
+  (arena) => sdlBlitSurfaceUncheckedScaled(
     src,
-    srcrectPointer,
+    srcrect.toNative(arena),
     dst,
-    dstrectPointer,
+    dstrect.toNative(arena),
     scaleMode,
-  );
-  srcrectPointer.callocFree();
-  dstrectPointer.callocFree();
-  return result;
-}
+  ),
+);
 
 ///
 /// Perform a stretched pixel copy from one surface to another.
@@ -721,30 +676,15 @@ bool sdlxStretchSurface(
   Pointer<SdlSurface> dst,
   SdlxRect? dstrect, {
   int scaleMode = SdlkScalemode.invalid,
-}) {
-  Pointer<SdlRect> srcrectPointer = nullptr;
-  Pointer<SdlRect> dstrectPointer = nullptr;
-  if (srcrect != null) {
-    srcrectPointer = srcrect.calloc();
-  }
-  if (dstrect != null) {
-    dstrectPointer = dstrect.calloc();
-  }
-  final result = sdlStretchSurface(
+}) => ffi.using(
+  (arena) => sdlStretchSurface(
     src,
-    srcrectPointer,
+    srcrect?.toNative(arena) ?? nullptr,
     dst,
-    dstrectPointer,
+    dstrect?.toNative(arena) ?? nullptr,
     scaleMode,
-  );
-  if (srcrectPointer != nullptr) {
-    srcrectPointer.callocFree();
-  }
-  if (dstrectPointer != nullptr) {
-    dstrectPointer.callocFree();
-  }
-  return result;
-}
+  ),
+);
 
 ///
 /// Perform a tiled blit to a destination surface, which may be of a different
@@ -782,24 +722,14 @@ bool sdlxBlitSurfaceTiled(
   SdlxRect? srcrect,
   Pointer<SdlSurface> dst,
   SdlxRect? dstrect,
-) {
-  Pointer<SdlRect> srcrectPointer = nullptr;
-  Pointer<SdlRect> dstrectPointer = nullptr;
-  if (srcrect != null) {
-    srcrectPointer = srcrect.calloc();
-  }
-  if (dstrect != null) {
-    dstrectPointer = dstrect.calloc();
-  }
-  final result = sdlBlitSurface(src, srcrectPointer, dst, dstrectPointer);
-  if (srcrectPointer != nullptr) {
-    srcrectPointer.callocFree();
-  }
-  if (dstrectPointer != nullptr) {
-    dstrectPointer.callocFree();
-  }
-  return result;
-}
+) => ffi.using(
+  (arena) => sdlBlitSurfaceTiled(
+    src,
+    srcrect?.toNative(arena) ?? nullptr,
+    dst,
+    dstrect?.toNative(arena) ?? nullptr,
+  ),
+);
 
 ///
 /// Perform a scaled and tiled blit to a destination surface, which may be of a
@@ -843,31 +773,16 @@ bool sdlxBlitSurfaceTiledWithScale(
   SdlxRect? dstrect, {
   double scale = 1.0,
   int scaleMode = SdlkScalemode.invalid,
-}) {
-  Pointer<SdlRect> srcrectPointer = nullptr;
-  Pointer<SdlRect> dstrectPointer = nullptr;
-  if (srcrect != null) {
-    srcrectPointer = srcrect.calloc();
-  }
-  if (dstrect != null) {
-    dstrectPointer = dstrect.calloc();
-  }
-  final result = sdlBlitSurfaceTiledWithScale(
+}) => ffi.using(
+  (arena) => sdlBlitSurfaceTiledWithScale(
     src,
-    srcrectPointer,
+    srcrect?.toNative(arena) ?? nullptr,
     scale,
     scaleMode,
     dst,
-    dstrectPointer,
-  );
-  if (srcrectPointer != nullptr) {
-    srcrectPointer.callocFree();
-  }
-  if (dstrectPointer != nullptr) {
-    dstrectPointer.callocFree();
-  }
-  return result;
-}
+    dstrect?.toNative(arena) ?? nullptr,
+  ),
+);
 
 ///
 /// Perform a scaled blit using the 9-grid algorithm to a destination surface,
@@ -922,18 +837,10 @@ bool sdlxBlitSurface9Grid(
   required int bottomHeight,
   double scale = 1.0,
   int scaleMode = SdlkScalemode.invalid,
-}) {
-  Pointer<SdlRect> srcrectPointer = nullptr;
-  Pointer<SdlRect> dstrectPointer = nullptr;
-  if (srcrect != null) {
-    srcrectPointer = srcrect.calloc();
-  }
-  if (dstrect != null) {
-    dstrectPointer = dstrect.calloc();
-  }
-  final result = sdlBlitSurface9Grid(
+}) => ffi.using(
+  (arena) => sdlBlitSurface9Grid(
     src,
-    srcrectPointer,
+    srcrect?.toNative(arena) ?? nullptr,
     leftWidth,
     rightWidth,
     topHeight,
@@ -941,16 +848,9 @@ bool sdlxBlitSurface9Grid(
     scale,
     scaleMode,
     dst,
-    dstrectPointer,
-  );
-  if (srcrectPointer != nullptr) {
-    srcrectPointer.callocFree();
-  }
-  if (dstrectPointer != nullptr) {
-    dstrectPointer.callocFree();
-  }
-  return result;
-}
+    dstrect?.toNative(arena) ?? nullptr,
+  ),
+);
 
 ///
 /// Map an RGB triple to an opaque pixel value for a surface.

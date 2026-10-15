@@ -20,8 +20,8 @@ class SdlxFinger {
   final double y;
   final double pressure;
 
-  Pointer<SdlFinger> calloc() {
-    final pointer = ffi.calloc<SdlFinger>();
+  Pointer<SdlFinger> toNative([Allocator allocator = ffi.calloc]) {
+    final pointer = allocator<SdlFinger>();
     pointer.ref.id = id;
     pointer.ref.x = x;
     pointer.ref.y = y;

@@ -4,10 +4,10 @@ import 'package:ffi/ffi.dart' as ffi;
 
 import 'dylib.dart' as dylib;
 import 'sdl.dart';
-import 'sdl_dart.dart';
 import 'sdl_mouse.dart';
 import 'sdl_pixels.dart';
 import 'sdl_rect.dart';
+import 'sdl_stdinc.dart';
 
 part 'surface/lib_sdl_surface.dart';
 part 'surface/sdl_surface.dart';

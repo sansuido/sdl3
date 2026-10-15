@@ -32,8 +32,8 @@ class SdlxSensorEvent extends SdlxEvent {
   final int sensorTimestamp;
 
   @override
-  Pointer<SdlEvent> calloc() {
-    final pointer = ffi.calloc<SdlEvent>();
+  Pointer<SdlEvent> toNative([Allocator allocator = ffi.calloc]) {
+    final pointer = allocator<SdlEvent>();
     pointer.ref.sensor.type = type;
     pointer.ref.sensor.reserved = reserved;
     pointer.ref.sensor.timestamp = timestamp;

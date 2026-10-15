@@ -36,8 +36,8 @@ class SdlxDateTime {
   final int dayOfWeek;
   final int utcOffset;
 
-  Pointer<SdlDateTime> calloc() {
-    final pointer = ffi.calloc<SdlDateTime>();
+  Pointer<SdlDateTime> toNative([Allocator allocator = ffi.calloc]) {
+    final pointer = allocator<SdlDateTime>();
     pointer.ref.year = year;
     pointer.ref.month = month;
     pointer.ref.day = day;

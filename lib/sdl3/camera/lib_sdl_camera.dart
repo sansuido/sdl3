@@ -23,19 +23,21 @@ part of '../sdl_camera.dart';
 /// - [SDL_GetCameras - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetCameras)
 ///
 /// {@category camera}
-List<int> sdlxGetCameras() {
-  final result = <int>[];
-  final countPointer = ffi.calloc<Int32>();
+List<int> sdlxGetCameras() => ffi.using((arena) {
+  final countPointer = arena<Int32>();
   final camerasPointer = sdlGetCameras(countPointer);
-  if (camerasPointer != nullptr) {
-    for (var i = 0; i < countPointer.value; i++) {
-      result.add(camerasPointer[i]);
-    }
-    sdlFree(camerasPointer.cast<Void>());
+
+  if (camerasPointer == nullptr) {
+    return [];
   }
-  countPointer.callocFree();
+
+  final result = [
+    for (var i = 0; i < countPointer.value; i++) camerasPointer[i],
+  ];
+
+  sdlFree(camerasPointer.cast<Void>());
   return result;
-}
+});
 
 ///
 /// Get the list of native formats/sizes a camera supports.
@@ -162,14 +164,13 @@ List<SdlxCameraSpec> sdlxGetCameraSupportedFormats(int instanceId) => ffi.using(
 /// - [SDL_OpenCamera - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_OpenCamera)
 ///
 /// {@category camera}
-Pointer<SdlCamera> sdlxOpenCamera(int instanceId, [SdlxCameraSpec? spec]) {
-  final specPointer = spec != null ? spec.calloc() : nullptr;
-  final result = sdlOpenCamera(instanceId, specPointer);
-  if (specPointer != nullptr) {
-    specPointer.callocFree();
-  }
-  return result;
-}
+Pointer<SdlCamera> sdlxOpenCamera(int instanceId, [SdlxCameraSpec? spec]) =>
+    ffi.using(
+      (arena) => sdlOpenCamera(
+        instanceId,
+        spec != null ? spec.toNative(arena) : nullptr,
+      ),
+    );
 
 ///
 /// Get the spec that a camera is using when generating images.
@@ -264,14 +265,13 @@ SdlxCameraSpec? sdlxGetCameraFormat(Pointer<SdlCamera> camera) =>
 /// {@category camera}
 ({Pointer<SdlSurface> surface, int timestampNs})? sdlxAcquireCameraFrame(
   Pointer<SdlCamera> camera,
-) {
-  final timestampNsPointer = ffi.calloc<Uint64>();
+) => ffi.using((arena) {
+  final timestampNsPointer = arena<Uint64>();
   final surfacePointer = sdlAcquireCameraFrame(camera, timestampNsPointer);
+
   if (surfacePointer == nullptr) {
-    timestampNsPointer.callocFree();
     return null;
   }
-  final timestampNs = timestampNsPointer.value;
-  timestampNsPointer.callocFree();
-  return (surface: surfacePointer, timestampNs: timestampNs);
-}
+
+  return (surface: surfacePointer, timestampNs: timestampNsPointer.value);
+});

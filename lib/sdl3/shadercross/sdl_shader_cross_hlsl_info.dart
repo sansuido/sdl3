@@ -37,8 +37,8 @@ class SdlxShaderCrossHlslInfo {
     shaderStage: shaderStage ?? this.shaderStage,
   );
 
-  Pointer<SdlShaderCrossHlslInfo> calloc() {
-    final pointer = ffi.calloc<SdlShaderCrossHlslInfo>();
+  Pointer<SdlShaderCrossHlslInfo> toNative([Allocator allocator = ffi.calloc]) {
+    final pointer = allocator<SdlShaderCrossHlslInfo>();
     if (source.isNotEmpty) {
       pointer.ref.source = source.toNativeUtf8();
     }
@@ -49,7 +49,7 @@ class SdlxShaderCrossHlslInfo {
       pointer.ref.includeDir = includeDir.toNativeUtf8();
     }
     if (defines.isNotEmpty) {
-      final definesPointer = ffi.calloc<SdlShaderCrossHlslDefine>(
+      final definesPointer = allocator<SdlShaderCrossHlslDefine>(
         defines.length,
       );
       for (var i = 0; i < defines.length; i++) {
@@ -70,30 +70,30 @@ class SdlxShaderCrossHlslInfo {
   }
 }
 
-extension SdlShaderCrossHlslInfoCallocAllFreeExtension
-    on Pointer<SdlShaderCrossHlslInfo> {
-  void callocAllFree(int definesLength) {
-    if (ref.source != nullptr) {
-      ref.source.callocFree();
-    }
-    if (ref.entrypoint != nullptr) {
-      ref.entrypoint.callocFree();
-    }
-    if (ref.includeDir != nullptr) {
-      ref.includeDir.callocFree();
-    }
-    if (ref.defines != nullptr) {
-      for (var i = 0; i < definesLength; i++) {
-        final define = ref.defines + i;
-        if (define.ref.name != nullptr) {
-          define.ref.name.callocFree();
-        }
-        if (define.ref.value != nullptr) {
-          define.ref.value.callocFree();
-        }
-      }
-      ref.defines.callocFree();
-    }
-    callocFree();
-  }
-}
+//extension SdlShaderCrossHlslInfoCallocAllFreeExtension
+//    on Pointer<SdlShaderCrossHlslInfo> {
+//  void callocAllFree(int definesLength) {
+//    if (ref.source != nullptr) {
+//      ref.source.callocFree();
+//    }
+//    if (ref.entrypoint != nullptr) {
+//      ref.entrypoint.callocFree();
+//    }
+//    if (ref.includeDir != nullptr) {
+//      ref.includeDir.callocFree();
+//    }
+//    if (ref.defines != nullptr) {
+//      for (var i = 0; i < definesLength; i++) {
+//        final define = ref.defines + i;
+//        if (define.ref.name != nullptr) {
+//          define.ref.name.callocFree();
+//        }
+//        if (define.ref.value != nullptr) {
+//          define.ref.value.callocFree();
+//        }
+//      }
+//      ref.defines.callocFree();
+//    }
+//    callocFree();
+//  }
+//}

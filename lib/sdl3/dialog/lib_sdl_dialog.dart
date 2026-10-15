@@ -64,11 +64,12 @@ void sdlxShowOpenFileDialog({
   List<SdlxDialogFileFilter>? filters,
   String? defaultLocation,
   bool allowMany = false,
-}) {
+}) => ffi.using((arena) {
   Pointer<SdlDialogFileFilter> filtersPointer = nullptr;
   if (filters != null && filters.isNotEmpty) {
-    filtersPointer = filters.calloc();
+    filtersPointer = filters.toNative(arena);
   }
+
   sdlShowOpenFileDialog(
     callback ?? nullptr,
     userdata ?? nullptr,
@@ -78,10 +79,7 @@ void sdlxShowOpenFileDialog({
     defaultLocation,
     allowMany,
   );
-  if (filtersPointer != nullptr) {
-    filtersPointer.callocAllFree(filters!.length);
-  }
-}
+});
 
 ///
 /// Displays a dialog that lets the user choose a new or existing file on their
@@ -144,11 +142,12 @@ void sdlxShowSaveFileDialog({
   Pointer<Void>? userdata,
   List<SdlxDialogFileFilter>? filters,
   String? defaultLocation,
-}) {
+}) => ffi.using((arena) {
   Pointer<SdlDialogFileFilter> filtersPointer = nullptr;
   if (filters != null && filters.isNotEmpty) {
-    filtersPointer = filters.calloc();
+    filtersPointer = filters.toNative(arena);
   }
+
   sdlShowSaveFileDialog(
     callback ?? nullptr,
     userdata ?? nullptr,
@@ -157,10 +156,7 @@ void sdlxShowSaveFileDialog({
     filters?.length ?? 0,
     defaultLocation,
   );
-  if (filtersPointer != nullptr) {
-    filtersPointer.callocAllFree(filters!.length);
-  }
-}
+});
 
 ///
 /// Displays a dialog that lets the user select a folder on their filesystem.
