@@ -140,3 +140,42 @@ List<String> sdlxGlobDirectory(String path, {String? pattern, int flags = 0}) =>
       sdlFree(stringsPointer.cast<Void>());
       return result;
     });
+
+///
+/// Get what the system believes is the "current working directory."
+///
+/// For systems without a concept of a current working directory, this will
+/// still attempt to provide something reasonable.
+///
+/// SDL does not provide a means to _change_ the current working directory; for
+/// platforms without this concept, this would cause surprises with file access
+/// outside of SDL.
+///
+/// The returned path is guaranteed to end with a path separator ('\\' on
+/// Windows, '/' on most other platforms).
+///
+/// \returns a UTF-8 string of the current working directory in
+/// platform-dependent notation. NULL if there's a problem. This
+/// should be freed with SDL_free() when it is no longer needed.
+///
+/// \threadsafety It is safe to call this function from any thread.
+///
+/// \since This function is available since SDL 3.2.0.
+///
+/// ```c
+/// extern SDL_DECLSPEC char * SDLCALL SDL_GetCurrentDirectory(void)
+/// ```
+///
+/// See also:
+/// - [SDL_GetCurrentDirectory - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetCurrentDirectory)
+///
+/// {@category filesystem}
+String? sdlxGetCurrentDirectory() {
+  final result = sdlGetCurrentDirectory();
+  if (result == nullptr) {
+    return null;
+  }
+  final text = result.cast<ffi.Utf8>().toDartString();
+  sdlFree(result.cast<Void>());
+  return text;
+}

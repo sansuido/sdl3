@@ -91,13 +91,14 @@ class SdlxGpuStencilOpState {
 class SdlxGpuDepthStencilState {
   const SdlxGpuDepthStencilState({
     this.compareOp = 0,
+    this.backStencilState = const SdlxGpuStencilOpState(),
+    this.frontStencilState = const SdlxGpuStencilOpState(),
     this.compareMask = 0,
     this.writeMask = 0,
     this.enableDepthTest = false,
     this.enableDepthWrite = false,
     this.enableStencilTest = false,
-  }) : backStencilState = const SdlxGpuStencilOpState(),
-       frontStencilState = const SdlxGpuStencilOpState();
+  });
 
   final int compareOp;
   final SdlxGpuStencilOpState backStencilState;
@@ -134,8 +135,10 @@ class SdlxGpuColorTargetBlendState {
 }
 
 class SdlxGpuColorTargetDescription {
-  const SdlxGpuColorTargetDescription({this.format = 0})
-    : blendState = const SdlxGpuColorTargetBlendState();
+  const SdlxGpuColorTargetDescription({
+    this.format = 0,
+    this.blendState = const SdlxGpuColorTargetBlendState(),
+  });
 
   final int format;
   final SdlxGpuColorTargetBlendState blendState;
@@ -158,14 +161,15 @@ class SdlxGpuGraphicsPipelineCreateInfo {
     Pointer<SdlGpuShader>? vertexShader,
     Pointer<SdlGpuShader>? fragmentShader,
     this.primitiveType = 0,
+    this.vertexInputState = const SdlxGpuVertexInputState(),
+    this.rasterizerState = const SdlxGpuRasterizerState(),
+    this.multisampleState = const SdlxGpuMultisampleState(),
+    this.depthStencilState = const SdlxGpuDepthStencilState(),
+    SdlxGpuGraphicsPipelineTargetInfo? targetInfo,
     this.props = 0,
   }) : vertexShader = vertexShader ?? nullptr,
        fragmentShader = fragmentShader ?? nullptr,
-       vertexInputState = const SdlxGpuVertexInputState(),
-       rasterizerState = const SdlxGpuRasterizerState(),
-       multisampleState = const SdlxGpuMultisampleState(),
-       depthStencilState = const SdlxGpuDepthStencilState(),
-       targetInfo = SdlxGpuGraphicsPipelineTargetInfo();
+       targetInfo = targetInfo ?? SdlxGpuGraphicsPipelineTargetInfo();
 
   final Pointer<SdlGpuShader> vertexShader;
   final Pointer<SdlGpuShader> fragmentShader;

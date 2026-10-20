@@ -5,7 +5,7 @@ class SdlxGpuColorTargetInfo {
     Pointer<SdlGpuTexture>? texture,
     this.mipLevel = 0,
     this.layerOrDepthPlane = 0,
-    SdlxFColor? clearColor,
+    this.clearColor = const SdlxFColor(0, 0, 0),
     this.loadOp = 0,
     this.storeOp = 0,
     Pointer<SdlGpuTexture>? resolveTexture,
@@ -14,7 +14,6 @@ class SdlxGpuColorTargetInfo {
     this.cycle = false,
     this.cycleResolveTexture = false,
   }) : texture = texture ?? nullptr,
-       clearColor = clearColor ?? const SdlxFColor(0, 0, 0),
        resolveTexture = resolveTexture ?? nullptr;
 
   final Pointer<SdlGpuTexture> texture;

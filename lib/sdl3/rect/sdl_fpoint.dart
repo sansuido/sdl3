@@ -13,6 +13,11 @@ class SdlxFPoint {
 
   SdlxPoint toInt() => SdlxPoint(x.toInt(), y.toInt());
 
+  SdlxFPoint moveBy(SdlxFPoint offset) => this + offset;
+  SdlxFPoint moveTo(SdlxFPoint position) => position;
+  SdlxFPoint copyWith({double? x, double? y}) =>
+      SdlxFPoint(x ?? this.x, y ?? this.y);
+
   SdlxFPoint lerpTo(SdlxFPoint other, double t) =>
       SdlxFPoint(x + (other.x - x) * t, y + (other.y - y) * t);
 

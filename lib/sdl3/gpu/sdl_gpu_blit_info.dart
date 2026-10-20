@@ -22,13 +22,15 @@ class SdlxGpuBlitRegion {
 
 class SdlxGpuBlitInfo {
   SdlxGpuBlitInfo({
+    SdlxGpuBlitRegion? source,
+    SdlxGpuBlitRegion? destination,
     this.loadOp = 0,
+    this.clearColor = const SdlxFColor(0, 0, 0),
     this.flipMode = 0,
     this.filter = 0,
     this.cycle = false,
-  }) : source = SdlxGpuBlitRegion(),
-       destination = SdlxGpuBlitRegion(),
-       clearColor = const SdlxFColor(0, 0, 0);
+  }) : source = source ?? SdlxGpuBlitRegion(),
+       destination = destination ?? SdlxGpuBlitRegion();
 
   final SdlxGpuBlitRegion source;
   final SdlxGpuBlitRegion destination;

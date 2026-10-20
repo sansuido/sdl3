@@ -58,7 +58,7 @@ Pointer<SdlProcess> sdlxCreateProcess(
   for (var i = 0; i < count; i++) {
     argsPointer[i] = args[i].toNativeUtf8(allocator: arena).cast<Int8>();
   }
-  argsPointer[count] = nullptr; // 終端のNULLポインタ
+  argsPointer[count] = nullptr;
 
   return sdlCreateProcess(argsPointer, pipeStdio);
 });

@@ -1,5 +1,14 @@
 # Changelog
 
+## [3.1.1] - 2026-10-20
+- SDL3-2026-10-18
+### Fixed
+- Fixed constructor initialization bugs in SdlxGpuBlitInfo and other helper classes.
+### Added
+- Added official functions. (sdlEncodeUrl, sdlSetRenderHdrHeadroom)
+- Added helper functions. (sdlxGetCurrentDirectory, sdlxEncodeUrl)
+
+
 ## [3.1.0] - 2026-10-15
 - SDL3-2026-10-11
 ### Changed

@@ -1561,7 +1561,6 @@ TtfxSubString? ttfxGetTextSubStringForPoint(
   int x,
   int y,
 ) => ffi.using((arena) {
-  // 構造体のポインターを arena で確保
   final subStringPointer = arena<TtfSubString>();
 
   final bl = ttfGetTextSubStringForPoint(text, x, y, subStringPointer);
