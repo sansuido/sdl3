@@ -2361,7 +2361,6 @@ bool sdlxRenderGeometryRaw(
     return true;
   }
   return ffi.using((arena) {
-    // Ã¥ÂÂÃ£ÂÂÃ£ÂÂ¤Ã£ÂÂ³Ã£ÂÂ¿Ã£ÂÂ arena Ã£ÂÂ§Ã¤Â¸ÂÃ¦ÂÂ¬Ã§Â®Â¡Ã§ÂÂ
     final positionsPointer = positions.toNativeXy(arena);
     final colorsPointer = colors?.toNative(arena) ?? nullptr;
     final texCoordsPointer = texCoords?.toNativeXy(arena) ?? nullptr;

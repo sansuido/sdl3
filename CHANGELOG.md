@@ -1,5 +1,10 @@
 # Changelog
 
+## [3.1.2] - 2026-10-28
+- SDL3-2026-10-25
+### Updated
+- Updated `sdl3_gpu_examples` (external repository).
+
 ## [3.1.1] - 2026-10-20
 - SDL3-2026-10-18
 ### Fixed
